@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.fissionlabs.trucksfirst"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.Design">
+        <activity
+            android:name=".home.TFHomeActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".TFSplashActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".singup.TFLoginActivity"
+            android:label="@string/title_activity_tflogin">
+        </activity>
+    </application>
+
+</manifest>

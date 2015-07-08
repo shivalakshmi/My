@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TrucksFirst/TrucksFirst.iml" filepath="$PROJECT_DIR$/TrucksFirst/TrucksFirst.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TrucksFirst_Android.iml" filepath="$PROJECT_DIR$/TrucksFirst_Android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Volley/Volley.iml" filepath="$PROJECT_DIR$/Volley/Volley.iml" />
+    </modules>
+  </component>
+</project>
