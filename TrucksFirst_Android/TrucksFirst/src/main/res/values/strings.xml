@@ -9,6 +9,7 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="error_msg">This input requires a value!</string>
@@ -19,4 +20,23 @@
     <string name="pilots">Pilots</string>
     <string name="fetch_location">Fetch Your Location</string>
     <string name="last_login">Your last login: %1$s</string>
+
+    <string name="vehicle_number">Vehicle No.</string>
+    <string name="vehicle_route">Vehicle Route</string>
+    <string name="eta">ETA</string>
+    <string name="assigned_pilots">Assigned Pilot</string>
+    <string name="pilot_in_hub">Pilot In Hub</string>
+    <string name="vehicle_in_hub">Vehicle In Hub</string>
+    <string name="checklist">Checklist</string>
+    <string name="checklist_item">Checklist item</string>
+    <string name="status">Status</string>
+    <string name="driving_licence">Driving Licence</string>
+    <string name="uniform">Uniform</string>
+    <string name="non_alcoholic">Non Alcoholic</string>
+
+    <string name="pilot_availability">Pilot Availability</string>
+    <string name="assign_pilots">Assign Pilot</string>
+
+
+
 </resources>

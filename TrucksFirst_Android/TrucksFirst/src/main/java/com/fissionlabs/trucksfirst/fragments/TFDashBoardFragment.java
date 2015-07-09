@@ -54,10 +54,8 @@ public class TFDashBoardFragment extends Fragment implements View.OnClickListene
         return rootview;
     }
 
-    public void FetchLocation(){
-        final Animation myRotation = AnimationUtils.loadAnimation(getActivity(), R.anim.rotation);
-        gps = new GPSTracker(getActivity());
-        mIvFetchLocationIcon.startAnimation(myRotation);
+    public void fetchLocation(){
+
         if(gps.canGetLocation()){
             double latitude = gps.getLatitude();
             double longitude = gps.getLongitude();
@@ -83,7 +81,17 @@ public class TFDashBoardFragment extends Fragment implements View.OnClickListene
             case R.id.fetch_location_layout:
             case R.id.fetch_location:
             case R.id.fetch_location_icon:
-                FetchLocation();
+                final Animation myRotation = AnimationUtils.loadAnimation(getActivity(), R.anim.rotation);
+                gps = new GPSTracker(getActivity());
+                mIvFetchLocationIcon.startAnimation(myRotation);
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        fetchLocation();
+                    }
+                });
+                thread.start();
+
                 break;
         }
     }
