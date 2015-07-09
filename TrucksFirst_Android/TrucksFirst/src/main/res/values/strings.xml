@@ -1,4 +1,22 @@
 <resources>
-    <string name="app_name">Trucks First</string>
-    <string name="action_settings">Settings</string>
+<string name="app_name">TrucksFirst</string>
+
+<string name="action_settings">Settings</string>
+    <string name="title_activity_tflogin">TFLoginActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="error_msg">This input requires a value!</string>
+    <string name="login">Log In</string>
+    <string name="app_info">Trucksfirst is built for clients who need hassle free, reliable, professional and super-express logistics services. By using simple processes, advanced technology, trained and professional staff, we help our clients manage long haul logistics seamlessly.\n\nOur vision is to bring a new world order in the surface transport sector. We believe we can offer best in class delivery times by staying focused and honest to our values.</string>
+    <string name="ok">Ok</string>
+    <string name="vehicle_movement">Vehicle Movement</string>
+    <string name="pilots">Pilots</string>
+    <string name="fetch_location">Fetch Your Location</string>
+    <string name="last_login">Your last login: %1$s</string>
 </resources>

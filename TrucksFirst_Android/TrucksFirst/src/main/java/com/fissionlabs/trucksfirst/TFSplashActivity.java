@@ -1,14 +1,51 @@
 package com.fissionlabs.trucksfirst;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.os.Handler;
+import android.view.View;
+import com.fissionlabs.trucksfirst.home.TFHomeActivity;
+import com.fissionlabs.trucksfirst.singup.TFLoginActivity;
 
-import com.fissionlabs.trucksfirst.common.TFCommonActivity;
-
-public class TFSplashActivity extends TFCommonActivity {
+public class TFSplashActivity extends Activity {
+    private static final long SPLASHTIME = 3000;
+    TFSplashActivity _activity;
+    private Handler splashTimeHandler;
+    Runnable r;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.splash);
+        _activity = this;
+
+
+        // Show Splash screen for 3secs and navigate to login screen
+        splashTimeHandler = new Handler();
+        r = new Runnable() {
+            @Override
+            public void run() {
+                finish();
+                startActivity(new Intent(TFSplashActivity.this,
+                        TFLoginActivity.class));
+            }
+        };
+        splashTimeHandler.postDelayed(r, SPLASHTIME);
     }
+
+    @Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+        super.onDestroy();
+    }
+
+    public void FinishActivity(View v) {
+        splashTimeHandler.removeCallbacks(r);
+        finish();
+        startActivity(new Intent(TFSplashActivity.this, TFLoginActivity.class));
+    }
+
 }
+

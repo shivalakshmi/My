@@ -23,4 +23,5 @@
     <color name="navigation_bar_color">#000000</color>
     <color name="color_accent">#428bca</color>
     <color name="color_secondary">#858d93</color>
+    <color name="black">#000000</color>
 </resources>

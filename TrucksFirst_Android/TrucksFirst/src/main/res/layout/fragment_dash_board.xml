@@ -1,14 +1,55 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context="com.fissionlabs.trucksfirst.fragments.TFDashBoardFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Dash borad"
         android:gravity="center"/>
+    <LinearLayout
+        android:id="@+id/lastlogin_location_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:id="@+id/last_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:drawablePadding="10dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            style="@style/textview_style"
+            android:drawableLeft="@drawable/icon_lastlogin"
+            android:text="@string/last_login"/>
+        <LinearLayout
+            android:id="@+id/fetch_location_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/fetch_location_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/icon_location"/>
+            <TextView
+                android:id="@+id/fetch_location"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:paddingLeft="10dp"
+                style="@style/textview_style"
+                android:text="@string/fetch_location"/>
+        </LinearLayout>
 
-</FrameLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
