@@ -8,11 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.common.TFCommonFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TFDashBoardFragment extends Fragment {
+public class TFDashBoardFragment extends TFCommonFragment {
 
 
     public TFDashBoardFragment() {
