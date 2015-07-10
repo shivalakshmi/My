@@ -36,7 +36,9 @@
 
     <string name="pilot_availability">Pilot Availability</string>
     <string name="assign_pilots">Assign Pilot</string>
-
+    <string name="gps_settings_body">GPS is not enabled. Do you want to go to settings menu?</string>
+    <string name="gps_settings_title">GPS settings</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>

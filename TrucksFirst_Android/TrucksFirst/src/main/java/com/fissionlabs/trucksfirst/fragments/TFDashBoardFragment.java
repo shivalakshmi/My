@@ -46,7 +46,6 @@ public class TFDashBoardFragment extends Fragment implements View.OnClickListene
         mTvLastLogin = (TextView) rootview.findViewById(R.id.last_login);
         mTvFetchLocation = (TextView) rootview.findViewById(R.id.fetch_location);
         mIvFetchLocationIcon = (ImageView) rootview.findViewById(R.id.fetch_location_icon);
-        final Animation myRotation = AnimationUtils.loadAnimation(getActivity(), R.anim.rotation);
         mTvFetchLocation.setOnClickListener(this);
         mIvFetchLocationIcon.setOnClickListener(this);
         rootview.findViewById(R.id.fetch_location_layout).setOnClickListener(this);
