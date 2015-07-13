@@ -5,20 +5,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import com.fissionlabs.trucksfirst.home.TFHomeActivity;
+
 import com.fissionlabs.trucksfirst.singup.TFLoginActivity;
 
 public class TFSplashActivity extends Activity {
-    private static final long SPLASHTIME = 3000;
-    TFSplashActivity _activity;
+    private static final long SPLASH_TIME = 3000;
+    private TFSplashActivity _activity;
     private Handler splashTimeHandler;
-    Runnable r;
+    private Runnable r;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash);
+        setContentView(R.layout.activity_splash);
         _activity = this;
 
 
@@ -32,7 +32,7 @@ public class TFSplashActivity extends Activity {
                         TFLoginActivity.class));
             }
         };
-        splashTimeHandler.postDelayed(r, SPLASHTIME);
+        splashTimeHandler.postDelayed(r, SPLASH_TIME);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class TFSplashActivity extends Activity {
         super.onDestroy();
     }
 
-    public void FinishActivity(View v) {
+    public void finishActivity(View v) {
         splashTimeHandler.removeCallbacks(r);
         finish();
         startActivity(new Intent(TFSplashActivity.this, TFLoginActivity.class));
