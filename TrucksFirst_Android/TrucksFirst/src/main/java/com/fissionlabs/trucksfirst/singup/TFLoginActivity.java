@@ -47,7 +47,13 @@ public class TFLoginActivity extends TFCommonActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                mEtUserName.setError(null);
+                if(s.length()>0) {
+                    mEtUserName.setError(null);
+                }
+                else
+                {
+                    mEtUserName.setError(getResources().getString(R.string.error_msg));
+                }
             }
         });
         mEtPassword.addTextChangedListener(new TextWatcher() {
@@ -65,8 +71,14 @@ public class TFLoginActivity extends TFCommonActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if(s.length()>0) {
+                    mEtPassword.setError(null);
+                }
+                else
+                {
+                    mEtPassword.setError(getResources().getString(R.string.error_msg));
+                }
 
-                mEtPassword.setError(null);
             }
         });
     }

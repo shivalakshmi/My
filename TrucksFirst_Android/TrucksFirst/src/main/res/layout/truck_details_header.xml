@@ -42,7 +42,6 @@
             style="@style/textview_header_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="@string/pilot_in_hub" />
     </LinearLayout>
 
@@ -55,7 +54,6 @@
             style="@style/textview_header_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="@string/vehicle_in_hub" />
     </LinearLayout>
 

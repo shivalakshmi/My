@@ -13,7 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
@@ -73,9 +76,10 @@ public class TFTruckFragment extends Fragment {
                 holder.mVehileRoute = (TextView)convertView.findViewById(R.id.vehicle_route);
                 holder.mEta = (TextView)convertView.findViewById(R.id.eta);
                 holder.mAssignedPilot = (TextView)convertView.findViewById(R.id.assigned_pilot);
-                holder.mPolitInHub = (SwitchCompat)convertView.findViewById(R.id.polit_in_hub);
-                holder.mVehicleInHub = (SwitchCompat)convertView.findViewById(R.id.vehicle_in_hub);
-                holder.mChecklist = (TextView)convertView.findViewById(R.id.checklist);
+                holder.mPolitInHub = (RadioGroup)convertView.findViewById(R.id.polit_in_hub);
+                holder.mRadioPolitInHubYes = (RadioButton)convertView.findViewById(R.id.polit_in_hub_yes);
+                holder.mVehicleInHub = (RadioGroup)convertView.findViewById(R.id.vehicle_in_hub);
+                holder.mChecklist = (ImageView)convertView.findViewById(R.id.checklist);
                 convertView.setTag(holder);
             }
             else
@@ -87,13 +91,10 @@ public class TFTruckFragment extends Fragment {
             holder.mVehileRoute.setText(truckDetailsList.get(position).getVehicleRoute());
             holder.mEta.setText(truckDetailsList.get(position).getEta());
             holder.mAssignedPilot.setText(truckDetailsList.get(position).getAssignedPilot());
-            holder.mPolitInHub.setChecked(truckDetailsList.get(position).isPilotInHub());
-            holder.mVehicleInHub.setChecked(truckDetailsList.get(position).isVehicleInHub());
-            holder.mChecklist.setText(truckDetailsList.get(position).getChecklist());
 
-            holder.mPolitInHub.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            holder.mRadioPolitInHubYes.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                public void onClick(View view) {
                     showPilotInHubAlertDialog(truckDetailsList.get(position).getAssignedPilot());
                 }
             });
@@ -115,9 +116,11 @@ public class TFTruckFragment extends Fragment {
             TextView mVehileRoute;
             TextView mEta;
             TextView mAssignedPilot;
-            SwitchCompat mVehicleInHub;
-            SwitchCompat mPolitInHub;
-            TextView mChecklist;
+            RadioGroup mVehicleInHub;
+            RadioGroup mPolitInHub;
+            ImageView mChecklist;
+            RadioButton mRadioPolitInHubYes;
+            RadioButton mRadioPolitInHubNo;
 
 
         }
