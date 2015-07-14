@@ -13,8 +13,12 @@ import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.pojo.TFPilotAvailabilityPojo;
+import com.terlici.dragndroplist.DragNDropListView;
+import com.terlici.dragndroplist.DragNDropSimpleAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Lakshmi on 09-07-2015.
@@ -22,17 +26,24 @@ import java.util.ArrayList;
 public class TFPilotAvailabilityFragment extends Fragment {
 
     private ListView mPilotAvailabilityListView;
+    private DragNDropListView mAssignPilotListView;
     private CustomTrucksAdapter customTrucksAdapter;
     private ArrayList<TFPilotAvailabilityPojo> pilotAvailabityPojoArrayList = new ArrayList<>();
+    private ArrayList<Map<String, Object>> assignPilotsList = new ArrayList<>();
     private TFPilotAvailabilityPojo tfPilotAvailabilityPojo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_truck,container,false);
-        mPilotAvailabilityListView = (ListView)view.findViewById(R.id.truck_details_list);
+        View view = inflater.inflate(R.layout.fragment_pilot_availability,container,false);
+        mPilotAvailabilityListView = (ListView)view.findViewById(R.id.pilots_availability_list);
+        mAssignPilotListView = (DragNDropListView)view.findViewById(R.id.assign_pilots_list);
         manualDataToList();
-        View headerView = inflater.inflate(R.layout.pilot_availabilty_header,null);
-        mPilotAvailabilityListView.addHeaderView(headerView);
+        mAssignPilotListView.setDragNDropAdapter(new DragNDropSimpleAdapter(getActivity(),
+                assignPilotsList,
+                R.layout.assign_pilot_item,
+                new String[]{"name"},
+                new int[]{R.id.assign_pilot},
+                R.id.handler));
         customTrucksAdapter = new CustomTrucksAdapter(getActivity(),pilotAvailabityPojoArrayList);
         mPilotAvailabilityListView.setAdapter(customTrucksAdapter);
 
@@ -60,7 +71,6 @@ public class TFPilotAvailabilityFragment extends Fragment {
                 holder.mVehicleNumber = (TextView)convertView.findViewById(R.id.vehicle_number);
                 holder.mVehileRoute = (TextView)convertView.findViewById(R.id.vehicle_route);
                 holder.mEta = (TextView)convertView.findViewById(R.id.eta);
-                holder.mAssignPilot = (TextView)convertView.findViewById(R.id.assign_pilot);
                 holder.mPilotAvailability = (TextView)convertView.findViewById(R.id.pilot_availability);
                 convertView.setTag(holder);
             }
@@ -72,7 +82,6 @@ public class TFPilotAvailabilityFragment extends Fragment {
             holder.mVehicleNumber.setText(truckDetailsList.get(position).getVehicleNumber());
             holder.mVehileRoute.setText(truckDetailsList.get(position).getVehicleRoute());
             holder.mEta.setText(truckDetailsList.get(position).getEta());
-            holder.mAssignPilot.setText(truckDetailsList.get(position).getAssignPilot());
             holder.mPilotAvailability.setText(truckDetailsList.get(position).getPilotAvailability());
 
 
@@ -85,7 +94,6 @@ public class TFPilotAvailabilityFragment extends Fragment {
             TextView mVehicleNumber;
             TextView mVehileRoute;
             TextView mEta;
-            TextView mAssignPilot;
             TextView mPilotAvailability;
 
 
@@ -119,6 +127,12 @@ public class TFPilotAvailabilityFragment extends Fragment {
         tfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("BALRAM\tIDLE\tBNG","HR55V1235","FKT:  PTD - BNG","28/07/2015 15:30","BALRAM");
         pilotAvailabityPojoArrayList.add(tfPilotAvailabilityPojo);
 
+        for(int i=0;i<pilotAvailabityPojoArrayList.size();i++)
+        {
+            HashMap<String, Object> item = new HashMap<String, Object>();
+            item.put("name", pilotAvailabityPojoArrayList.get(i).getAssignPilot());
+            assignPilotsList.add(item);
+        }
 
     }
 }

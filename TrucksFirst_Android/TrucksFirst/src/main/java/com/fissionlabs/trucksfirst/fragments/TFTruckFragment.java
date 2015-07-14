@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -44,11 +45,8 @@ public class TFTruckFragment extends Fragment {
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         mTruckDetailsListView = (ListView)view.findViewById(R.id.truck_details_list);
         manualDataToList();
-        View headerView = inflater.inflate(R.layout.truck_details_header,null);
-        mTruckDetailsListView.addHeaderView(headerView);
         customTrucksAdapter = new CustomTrucksAdapter(getActivity(),truckDetailsPojoArrayList);
         mTruckDetailsListView.setAdapter(customTrucksAdapter);
-
 
         return view;
     }
@@ -93,9 +91,9 @@ public class TFTruckFragment extends Fragment {
             holder.mVehicleInHub.setChecked(truckDetailsList.get(position).isVehicleInHub());
             holder.mChecklist.setText(truckDetailsList.get(position).getChecklist());
 
-            holder.mPolitInHub.setOnClickListener(new View.OnClickListener() {
+            holder.mPolitInHub.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onClick(View view) {
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                     showPilotInHubAlertDialog(truckDetailsList.get(position).getAssignedPilot());
                 }
             });

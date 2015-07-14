@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:weightSum="5">
+    android:weightSum="4">
 
     <TextView
         android:id="@+id/pilot_availability"
@@ -33,14 +33,5 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
-
-    <TextView
-        android:id="@+id/assign_pilot"
-        style="@style/textview_style_2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
-
 
 </LinearLayout>
