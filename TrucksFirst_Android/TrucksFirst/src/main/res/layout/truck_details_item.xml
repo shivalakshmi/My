@@ -92,7 +92,7 @@
     <ImageView
         android:id="@+id/checklist"
         style="@style/textview_style_2"
-        android:src="@drawable/ic_assignment_black_24dp"
+        android:src="@drawable/ic_assignment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1" />

@@ -20,7 +20,7 @@
         android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_marginRight="10dp"
-        android:src="@drawable/drag_arrow"
+        android:src="@drawable/ic_drag_arrow"
         android:layout_height="20dp" />
 
 </LinearLayout>
