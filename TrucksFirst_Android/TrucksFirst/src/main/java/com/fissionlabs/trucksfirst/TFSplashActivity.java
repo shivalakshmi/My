@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.view.View;
 
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
-import com.fissionlabs.trucksfirst.singup.TFLoginActivity;
+import com.fissionlabs.trucksfirst.signup.TFLoginActivity;
 
 public class TFSplashActivity extends TFCommonActivity {
     private static final long SPLASH_TIME = 3000;
@@ -23,9 +23,8 @@ public class TFSplashActivity extends TFCommonActivity {
         runnable = new Runnable() {
             @Override
             public void run() {
+                startActivity(new Intent(TFSplashActivity.this, TFLoginActivity.class));
                 finish();
-                startActivity(new Intent(TFSplashActivity.this,
-                        TFLoginActivity.class));
             }
         };
         mSplashTimeHandler.postDelayed(runnable, SPLASH_TIME);

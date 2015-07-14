@@ -1,4 +1,4 @@
-package com.fissionlabs.trucksfirst.singup;
+package com.fissionlabs.trucksfirst.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
