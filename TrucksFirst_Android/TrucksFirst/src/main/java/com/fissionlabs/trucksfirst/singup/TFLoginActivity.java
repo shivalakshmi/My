@@ -2,7 +2,6 @@ package com.fissionlabs.trucksfirst.singup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -47,11 +46,9 @@ public class TFLoginActivity extends TFCommonActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                if(s.length()>0) {
+                if (s.length() > 0) {
                     mEtUserName.setError(null);
-                }
-                else
-                {
+                } else {
                     mEtUserName.setError(getResources().getString(R.string.error_msg));
                 }
             }
@@ -71,11 +68,9 @@ public class TFLoginActivity extends TFCommonActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length()>0) {
+                if (s.length() > 0) {
                     mEtPassword.setError(null);
-                }
-                else
-                {
+                } else {
                     mEtPassword.setError(getResources().getString(R.string.error_msg));
                 }
 
@@ -83,13 +78,13 @@ public class TFLoginActivity extends TFCommonActivity {
         });
     }
 
-    private void userLoginChecking(){
-        if(mEtUserName.getText().toString().trim().isEmpty() || mEtPassword.getText().toString().trim().isEmpty()){
-            if(mEtUserName.getText().toString().trim().isEmpty()) {
+    private void userLoginChecking() {
+        if (mEtUserName.getText().toString().trim().isEmpty() || mEtPassword.getText().toString().trim().isEmpty()) {
+            if (mEtUserName.getText().toString().trim().isEmpty()) {
                 mEtUserName.setError(getResources().getString(R.string.error_msg));
                 mEtPassword.requestFocus();
             }
-            if(mEtPassword.getText().toString().trim().isEmpty())
+            if (mEtPassword.getText().toString().trim().isEmpty())
                 mEtPassword.setError(getResources().getString(R.string.error_msg));
             return;
         }

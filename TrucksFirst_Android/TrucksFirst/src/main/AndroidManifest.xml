@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.fissionlabs.trucksfirst"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="com.fissionlabs.trucksfirst"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -13,24 +14,23 @@
         android:theme="@style/Theme.Design">
         <activity
             android:name=".TFSplashActivity"
-            android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".home.TFHomeActivity"
-            android:screenOrientation="landscape"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name=".singup.TFLoginActivity"
-            android:screenOrientation="landscape"
-            android:label="@string/title_activity_tflogin">
+            android:label="@string/app_name"
+            android:screenOrientation="landscape">
         </activity>
     </application>
 

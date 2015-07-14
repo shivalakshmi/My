@@ -1,17 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/window_background"
-    tools:context="com.fissionlabs.trucksfirst.fragments.TFTruckFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/window_background"
+              android:orientation="vertical"
+              tools:context="com.fissionlabs.trucksfirst.fragments.TFTruckFragment">
 
     <include layout="@layout/truck_details_header"/>
 
     <ListView
+        android:id="@+id/truck_details_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:cacheColorHint="@null"
-        android:id="@+id/truck_details_list"/>
+        android:cacheColorHint="@null"/>
 
 </LinearLayout>

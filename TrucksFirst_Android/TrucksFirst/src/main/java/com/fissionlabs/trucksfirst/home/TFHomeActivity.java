@@ -29,17 +29,22 @@ public class TFHomeActivity extends TFCommonActivity {
     private TFPilotFragment mTFPilotFragment;
     private Fragment mSelectedFragment;
 
+    private ActionBar actionBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-        ab.setDisplayHomeAsUpEnabled(true);
+        actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -48,14 +53,8 @@ public class TFHomeActivity extends TFCommonActivity {
             setupDrawerContent(navigationView);
         }
 
-        loadFragment(R.layout.fragment_dash_board);
+        loadFragment(R.layout.fragment_truck);
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }
 
     @Override
@@ -73,44 +72,28 @@ public class TFHomeActivity extends TFCommonActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        //Toast.makeText(getApplicationContext(), "" + menuItem.getTitle(), Toast.LENGTH_LONG).show();
+
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();
 
-                        int position = 0;
-
-                        switch (menuItem.getItemId()) {
-                            case R.id.nav_dashboard:
-                                position = 0;
-                                break;
-                            case R.id.nav_truck_details:
-                                position = 1;
-                                break;
-                            case R.id.nav_pilot_details:
-                                position = 2;
-                                break;
-                        }
-
-                        displayView(position);
-
-
+                        displayView(menuItem);
                         return true;
                     }
                 });
     }
 
     /**
-     * Diplaying fragment view for selected nav drawer list item
+     * Displaying fragment view for selected nav drawer list item
      */
-    private void displayView(int position) {
-        switch (position) {
-            case 0:
+    private void displayView(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.nav_dashboard:
                 loadFragment(R.layout.fragment_dash_board);
                 break;
-            case 1:
+            case R.id.nav_truck_details:
                 loadFragment(R.layout.fragment_truck);
                 break;
-            case 2:
+            case R.id.nav_pilot_details:
                 loadFragment(R.layout.fragment_pilot);
                 break;
             default:
@@ -162,6 +145,23 @@ public class TFHomeActivity extends TFCommonActivity {
 
     public void loadFragment(Fragment fragment) {
         Assert.assertTrue(fragment != null);
+        replaceFragment(fragment);
+    }
+
+    public void addFragment(Fragment fragment) {
+
+        if (mSelectedFragment != fragment) {
+            mSelectedFragment = fragment;
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.frame_container, mSelectedFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+    }
+
+    public void replaceFragment(Fragment fragment) {
 
         if (mSelectedFragment != fragment) {
             mSelectedFragment = fragment;
@@ -170,8 +170,6 @@ public class TFHomeActivity extends TFCommonActivity {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.frame_container, mSelectedFragment);
             fragmentTransaction.commit();
-
-
         }
     }
 

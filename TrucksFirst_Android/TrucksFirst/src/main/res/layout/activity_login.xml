@@ -2,7 +2,8 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context="com.fissionlabs.trucksfirst.singup.TFLoginActivity">
+                tools:context="com.fissionlabs.trucksfirst.signup.TFLoginActivity">
+
     <LinearLayout
         android:id="@+id/userLogin"
         android:layout_width="fill_parent"
@@ -10,48 +11,53 @@
         android:layout_centerInParent="true"
         android:layout_margin="20dp"
         android:orientation="vertical">
-        <ImageView android:id="@+id/logo"
+
+        <ImageView
+            android:id="@+id/logo"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/logo_large"/>
+
         <EditText
             android:id="@+id/username"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_below="@+id/logo"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/edittext_roundcorner"
-            android:singleLine="true"
+            android:hint="@string/username"
+            android:imeOptions="actionNext"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textColor="@color/black"
-            android:imeOptions="actionNext"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:hint="@string/username"
-            android:layout_marginTop="40dp"/>
+            android:singleLine="true"
+            android:textColor="@color/black"/>
+
         <EditText
             android:id="@+id/password"
             android:layout_width="fill_parent"
-            android:layout_below="@+id/username"
             android:layout_height="50dp"
+            android:layout_below="@+id/username"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext_roundcorner"
+            android:hint="@string/password"
+            android:imeOptions="actionDone"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:background="@drawable/edittext_roundcorner"
-            android:imeOptions="actionDone"
-            android:textColor="@color/black"
             android:singleLine="true"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:hint="@string/password"
-            android:layout_marginTop="20dp"/>
+            android:textColor="@color/black"/>
+
         <Button
             android:id="@+id/btnLogin"
+            style="@style/button_style"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
-            style="@style/button_style"
+            android:layout_marginTop="30dp"
             android:onClick="userLoginChecking"
-            android:text="@string/login"
-            android:layout_marginTop="30dp"/>
+            android:text="@string/login"/>
     </LinearLayout>
 
 </RelativeLayout>
