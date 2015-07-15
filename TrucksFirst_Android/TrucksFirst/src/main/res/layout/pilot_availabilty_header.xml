@@ -6,28 +6,28 @@
     android:weightSum="5">
 
     <TextView
-        style="@style/textview_header_style"
+        style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/pilot_availability" />
 
     <TextView
-        style="@style/textview_header_style"
+        style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/vehicle_number" />
 
     <TextView
-        style="@style/textview_header_style"
+        style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/vehicle_route" />
 
     <TextView
-        style="@style/textview_header_style"
+        style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -35,7 +35,7 @@
 
 
     <TextView
-        style="@style/textview_header_style"
+        style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

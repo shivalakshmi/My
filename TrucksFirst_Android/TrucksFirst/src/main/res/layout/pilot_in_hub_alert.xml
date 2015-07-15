@@ -12,7 +12,7 @@
         android:weightSum="2">
 
         <TextView
-            style="@style/textview_style_2"
+            style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -20,7 +20,7 @@
             android:text="@string/checklist_item" />
 
         <TextView
-            style="@style/textview_style_2"
+            style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -37,7 +37,7 @@
         android:weightSum="2">
 
         <TextView
-            style="@style/textview_style_2"
+            style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -65,7 +65,7 @@
         android:weightSum="2">
 
         <TextView
-            style="@style/textview_style_2"
+            style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -93,7 +93,7 @@
         android:weightSum="2">
 
         <TextView
-            style="@style/textview_style_2"
+            style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

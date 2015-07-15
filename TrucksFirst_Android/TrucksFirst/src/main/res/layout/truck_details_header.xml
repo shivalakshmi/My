@@ -6,28 +6,28 @@
     android:weightSum="7">
 
     <TextView
-        style="@style/textview_header_style"
+        style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/vehicle_number" />
 
     <TextView
-        style="@style/textview_header_style"
+        style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/vehicle_route" />
 
     <TextView
-        style="@style/textview_header_style"
+        style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/eta" />
 
     <TextView
-        style="@style/textview_header_style"
+        style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -39,7 +39,7 @@
         android:layout_weight="1">
 
         <TextView
-            style="@style/textview_header_style"
+            style="@style/TextViewHeaderStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pilot_in_hub" />
@@ -51,14 +51,14 @@
         android:layout_weight="1">
 
         <TextView
-            style="@style/textview_header_style"
+            style="@style/TextViewHeaderStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/vehicle_in_hub" />
     </LinearLayout>
 
     <TextView
-        style="@style/textview_header_style"
+        style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

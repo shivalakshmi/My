@@ -24,7 +24,7 @@
             android:drawablePadding="10dp"
             android:singleLine="true"
             android:ellipsize="end"
-            style="@style/textview_style"
+            style="@style/TextViewStyle"
             android:drawableLeft="@drawable/icon_lastlogin"
             android:text="@string/last_login"/>
         <LinearLayout
@@ -45,7 +45,7 @@
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:paddingLeft="10dp"
-                style="@style/textview_style"
+                style="@style/TextViewStyle"
                 android:text="@string/fetch_location"/>
         </LinearLayout>
 

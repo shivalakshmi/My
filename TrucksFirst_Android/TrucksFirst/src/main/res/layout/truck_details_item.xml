@@ -9,28 +9,28 @@
 
     <TextView
         android:id="@+id/vehicle_number"
-        style="@style/textview_style_2"
+        style="@style/TextViewStyle2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
     <TextView
         android:id="@+id/vehicle_route"
-        style="@style/textview_style_2"
+        style="@style/TextViewStyle2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
     <TextView
         android:id="@+id/eta"
-        style="@style/textview_style_2"
+        style="@style/TextViewStyle2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
     <TextView
         android:id="@+id/assigned_pilot"
-        style="@style/textview_style_2"
+        style="@style/TextViewStyle2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
@@ -91,7 +91,7 @@
 
     <ImageView
         android:id="@+id/checklist"
-        style="@style/textview_style_2"
+        style="@style/TextViewStyle2"
         android:src="@drawable/ic_assignment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

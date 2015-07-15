@@ -3,4 +3,35 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!-- Common -->
+    <dimen name="common_padding_small0">2dp</dimen>
+    <dimen name="common_padding_small1">5dp</dimen>
+    <dimen name="common_reverse_padding_small1">-5dp</dimen>
+    <dimen name="common_padding_small2">10dp</dimen>
+    <dimen name="common_reverse_padding_small2">-10dp</dimen>
+    <dimen name="common_padding_medium">15dp</dimen>
+    <dimen name="common_padding_medium1">20dp</dimen>
+    <dimen name="common_reverse_padding_medium1">-20dp</dimen>
+    <dimen name="common_padding_medium2">25dp</dimen>
+    <dimen name="common_padding_medium3">30dp</dimen>
+    <dimen name="common_padding_large1">40dp</dimen>
+    <dimen name="common_padding_large2">50dp</dimen>
+    <dimen name="common_padding_large3">60dp</dimen>
+    <dimen name="common_padding_large4">70dp</dimen>
+    <dimen name="common_padding_large5">80dp</dimen>
+    <dimen name="common_padding_large6">90dp</dimen>
+    <dimen name="common_padding_large7">100dp</dimen>
+    <dimen name="common_padding_large8">110dp</dimen>
+    <dimen name="common_padding_large9">120dp</dimen>
+    <dimen name="common_padding_large10">130dp</dimen>
+
+    <!-- Font Size -->
+    <dimen name="font_small0">8sp</dimen>
+    <dimen name="font_small1">10sp</dimen>
+    <dimen name="font_small2">12sp</dimen>
+    <dimen name="font_medium0">14sp</dimen>
+    <dimen name="font_medium1">16sp</dimen>
+    <dimen name="font_medium2">18sp</dimen>
+    <dimen name="font_medium3">20sp</dimen>
+
 </resources>
