@@ -3,6 +3,7 @@ package com.fissionlabs.trucksfirst.signup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -49,7 +50,7 @@ public class TFLoginActivity extends TFCommonActivity {
                 if (s.length() > 0) {
                     mEtUserName.setError(null);
                 } else {
-                    mEtUserName.setError(getResources().getString(R.string.error_msg));
+                    mEtUserName.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
                 }
             }
         });
@@ -71,7 +72,7 @@ public class TFLoginActivity extends TFCommonActivity {
                 if (s.length() > 0) {
                     mEtPassword.setError(null);
                 } else {
-                    mEtPassword.setError(getResources().getString(R.string.error_msg));
+                    mEtPassword.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
                 }
 
             }
@@ -81,11 +82,11 @@ public class TFLoginActivity extends TFCommonActivity {
     private void userLoginChecking() {
         if (mEtUserName.getText().toString().trim().isEmpty() || mEtPassword.getText().toString().trim().isEmpty()) {
             if (mEtUserName.getText().toString().trim().isEmpty()) {
-                mEtUserName.setError(getResources().getString(R.string.error_msg));
+                mEtUserName.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
                 mEtPassword.requestFocus();
             }
             if (mEtPassword.getText().toString().trim().isEmpty())
-                mEtPassword.setError(getResources().getString(R.string.error_msg));
+                mEtPassword.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
             return;
         }
 
