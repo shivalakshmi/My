@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:id="@+id/userLogin"
-        android:layout_width="fill_parent"
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_margin="20dp"
@@ -14,8 +14,9 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="fill_parent"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:background="@drawable/logo_large"/>
 
         <EditText
@@ -25,8 +26,10 @@
             android:layout_below="@+id/logo"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+            android:drawableLeft="@drawable/ic_user_selector"
+            android:drawablePadding="5dp"
             android:layout_marginTop="40dp"
-            android:background="@drawable/edittext_roundcorner"
+            android:background="@drawable/edittext_selector"
             android:hint="@string/username"
             android:imeOptions="actionNext"
             android:paddingLeft="10dp"
@@ -42,7 +45,9 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/edittext_roundcorner"
+            android:drawableLeft="@drawable/ic_password_selector"
+            android:drawablePadding="5dp"
+            android:background="@drawable/edittext_selector"
             android:hint="@string/password"
             android:imeOptions="actionDone"
             android:paddingLeft="10dp"
