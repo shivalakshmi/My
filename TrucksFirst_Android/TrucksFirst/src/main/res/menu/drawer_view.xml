@@ -20,15 +20,15 @@
         <item
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_dashboard"
-            android:title="Dashboard"/>
+            android:title="@string/dashboard"/>
         <item
-            android:id="@+id/nav_truck_details"
-            android:icon="@drawable/ic_event"
-            android:title="Truck Details"/>
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings"/>
         <item
-            android:id="@+id/nav_pilot_details"
-            android:icon="@drawable/ic_forum"
-            android:title="Pilot Details"/>
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/logout"/>
 
     </group>
 

@@ -27,10 +27,9 @@ public class TFPilotFragment extends TFCommonFragment {
 
     private ListView mPilotAvailabilityListView;
     private DragNDropListView mAssignPilotListView;
-    private CustomTrucksAdapter customTrucksAdapter;
-    private ArrayList<TFPilotAvailabilityPojo> pilotAvailabityPojoArrayList = new ArrayList<>();
+    private ArrayList<TFPilotAvailabilityPojo> mPilotAvailabilityPojoList = new ArrayList<>();
     private ArrayList<Map<String, Object>> assignPilotsList = new ArrayList<>();
-    private TFPilotAvailabilityPojo tfPilotAvailabilityPojo;
+    private TFPilotAvailabilityPojo mTfPilotAvailabilityPojo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,8 +43,7 @@ public class TFPilotFragment extends TFCommonFragment {
                 new String[]{"name"},
                 new int[]{R.id.assign_pilot},
                 R.id.handler));
-        customTrucksAdapter = new CustomTrucksAdapter(getActivity(), pilotAvailabityPojoArrayList);
-        mPilotAvailabilityListView.setAdapter(customTrucksAdapter);
+        mPilotAvailabilityListView.setAdapter(new CustomTrucksAdapter(getActivity(), mPilotAvailabilityPojoList));
 
         return view;
     }
@@ -96,34 +94,34 @@ public class TFPilotFragment extends TFCommonFragment {
 
 
     public void manualDataToList() {
-        tfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("RAJ\tIDLE\tBWD", "HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ");
-        pilotAvailabityPojoArrayList.add(tfPilotAvailabilityPojo);
-        tfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("BALRAM\tIDLE\tBNG", "HR55V1235", "FKT:  PTD - BNG", "28/07/2015 15:30", "BALRAM");
-        pilotAvailabityPojoArrayList.add(tfPilotAvailabilityPojo);
-        tfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("RAJ\tIDLE\tBWD", "HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ");
-        pilotAvailabityPojoArrayList.add(tfPilotAvailabilityPojo);
-        tfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("BALRAM\tIDLE\tBNG", "HR55V1235", "FKT:  PTD - BNG", "28/07/2015 15:30", "BALRAM");
-        pilotAvailabityPojoArrayList.add(tfPilotAvailabilityPojo);
-        tfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("RAJ\tIDLE\tBWD", "HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ");
-        pilotAvailabityPojoArrayList.add(tfPilotAvailabilityPojo);
-        tfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("BALRAM\tIDLE\tBNG", "HR55V1235", "FKT:  PTD - BNG", "28/07/2015 15:30", "BALRAM");
-        pilotAvailabityPojoArrayList.add(tfPilotAvailabilityPojo);
-        tfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("RAJ\tIDLE\tBWD", "HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ");
-        pilotAvailabityPojoArrayList.add(tfPilotAvailabilityPojo);
-        tfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("BALRAM\tIDLE\tBNG", "HR55V1235", "FKT:  PTD - BNG", "28/07/2015 15:30", "BALRAM");
-        pilotAvailabityPojoArrayList.add(tfPilotAvailabilityPojo);
-        tfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("RAJ\tIDLE\tBWD", "HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ");
-        pilotAvailabityPojoArrayList.add(tfPilotAvailabilityPojo);
-        tfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("BALRAM\tIDLE\tBNG", "HR55V1235", "FKT:  PTD - BNG", "28/07/2015 15:30", "BALRAM");
-        pilotAvailabityPojoArrayList.add(tfPilotAvailabilityPojo);
-        tfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("RAJ\tIDLE\tBWD", "HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ");
-        pilotAvailabityPojoArrayList.add(tfPilotAvailabilityPojo);
-        tfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("BALRAM\tIDLE\tBNG", "HR55V1235", "FKT:  PTD - BNG", "28/07/2015 15:30", "BALRAM");
-        pilotAvailabityPojoArrayList.add(tfPilotAvailabilityPojo);
+        mTfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("RAJ\tIDLE\tBWD", "HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ");
+        mPilotAvailabilityPojoList.add(mTfPilotAvailabilityPojo);
+        mTfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("BALRAM\tIDLE\tBNG", "HR55V1235", "FKT:  PTD - BNG", "28/07/2015 15:30", "BALRAM");
+        mPilotAvailabilityPojoList.add(mTfPilotAvailabilityPojo);
+        mTfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("RAJ\tIDLE\tBWD", "HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ");
+        mPilotAvailabilityPojoList.add(mTfPilotAvailabilityPojo);
+        mTfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("BALRAM\tIDLE\tBNG", "HR55V1235", "FKT:  PTD - BNG", "28/07/2015 15:30", "BALRAM");
+        mPilotAvailabilityPojoList.add(mTfPilotAvailabilityPojo);
+        mTfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("RAJ\tIDLE\tBWD", "HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ");
+        mPilotAvailabilityPojoList.add(mTfPilotAvailabilityPojo);
+        mTfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("BALRAM\tIDLE\tBNG", "HR55V1235", "FKT:  PTD - BNG", "28/07/2015 15:30", "BALRAM");
+        mPilotAvailabilityPojoList.add(mTfPilotAvailabilityPojo);
+        mTfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("RAJ\tIDLE\tBWD", "HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ");
+        mPilotAvailabilityPojoList.add(mTfPilotAvailabilityPojo);
+        mTfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("BALRAM\tIDLE\tBNG", "HR55V1235", "FKT:  PTD - BNG", "28/07/2015 15:30", "BALRAM");
+        mPilotAvailabilityPojoList.add(mTfPilotAvailabilityPojo);
+        mTfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("RAJ\tIDLE\tBWD", "HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ");
+        mPilotAvailabilityPojoList.add(mTfPilotAvailabilityPojo);
+        mTfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("BALRAM\tIDLE\tBNG", "HR55V1235", "FKT:  PTD - BNG", "28/07/2015 15:30", "BALRAM");
+        mPilotAvailabilityPojoList.add(mTfPilotAvailabilityPojo);
+        mTfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("RAJ\tIDLE\tBWD", "HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ");
+        mPilotAvailabilityPojoList.add(mTfPilotAvailabilityPojo);
+        mTfPilotAvailabilityPojo = new TFPilotAvailabilityPojo("BALRAM\tIDLE\tBNG", "HR55V1235", "FKT:  PTD - BNG", "28/07/2015 15:30", "BALRAM");
+        mPilotAvailabilityPojoList.add(mTfPilotAvailabilityPojo);
 
-        for (int i = 0; i < pilotAvailabityPojoArrayList.size(); i++) {
+        for (int i = 0; i < mPilotAvailabilityPojoList.size(); i++) {
             HashMap<String, Object> item = new HashMap<String, Object>();
-            item.put("name", pilotAvailabityPojoArrayList.get(i).getAssignPilot());
+            item.put("name", mPilotAvailabilityPojoList.get(i).getAssignPilot());
             assignPilotsList.add(item);
         }
 

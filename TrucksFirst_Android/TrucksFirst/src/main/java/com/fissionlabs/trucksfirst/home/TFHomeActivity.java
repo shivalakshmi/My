@@ -1,5 +1,7 @@
 package com.fissionlabs.trucksfirst.home;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -8,17 +10,23 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.text.format.DateFormat;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
 import com.fissionlabs.trucksfirst.fragments.TFDashBoardFragment;
 import com.fissionlabs.trucksfirst.fragments.TFPilotFragment;
+import com.fissionlabs.trucksfirst.fragments.TFSettingsFragment;
 import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
+import com.fissionlabs.trucksfirst.signup.TFLoginActivity;
 
 import junit.framework.Assert;
+
+import java.util.Date;
 
 public class TFHomeActivity extends TFCommonActivity {
 
@@ -27,9 +35,11 @@ public class TFHomeActivity extends TFCommonActivity {
     private TFDashBoardFragment mTFDashBoardFragment;
     private TFTruckFragment mTFTruckFragment;
     private TFPilotFragment mTFPilotFragment;
+    private TFSettingsFragment mTFSettingsFragment;
     private Fragment mSelectedFragment;
 
-    private ActionBar actionBar;
+    private ActionBar mActionBar;
+    private TextView mTvCurrentDateAndTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +49,15 @@ public class TFHomeActivity extends TFCommonActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        actionBar = getSupportActionBar();
+        mActionBar = getSupportActionBar();
 
-        if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
-            actionBar.setDisplayHomeAsUpEnabled(true);
+        if (mActionBar != null) {
+            mActionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
         }
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mTvCurrentDateAndTime = (TextView) findViewById(R.id.tvDateTime);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
@@ -54,6 +65,9 @@ public class TFHomeActivity extends TFCommonActivity {
         }
 
         loadFragment(R.layout.fragment_truck);
+
+        Thread thread = new Thread(new CountDownRunner());
+        thread.start();
 
     }
 
@@ -88,13 +102,27 @@ public class TFHomeActivity extends TFCommonActivity {
     private void displayView(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_dashboard:
-                loadFragment(R.layout.fragment_dash_board);
-                break;
-            case R.id.nav_truck_details:
                 loadFragment(R.layout.fragment_truck);
                 break;
-            case R.id.nav_pilot_details:
-                loadFragment(R.layout.fragment_pilot);
+            case R.id.nav_settings:
+                loadFragment(R.layout.fragment_settings);
+                break;
+            case R.id.nav_logout:
+
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                dialogBuilder.setTitle(getString(R.string.are_you_sure));
+                dialogBuilder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        goToLogin();
+                    }
+                });
+                dialogBuilder.setNegativeButton(getResources().getString(R.string.no), null);
+
+                AlertDialog alertDialog = dialogBuilder.create();
+
+                alertDialog.show();
+
                 break;
             default:
                 break;
@@ -136,6 +164,14 @@ public class TFHomeActivity extends TFCommonActivity {
                 selectedFragment = mTFPilotFragment;
 
                 break;
+            case R.layout.fragment_settings:
+                if (mTFSettingsFragment == null) {
+                    mTFSettingsFragment = new TFSettingsFragment();
+                }
+
+                selectedFragment = mTFSettingsFragment;
+
+                break;
         }
 
 
@@ -161,16 +197,66 @@ public class TFHomeActivity extends TFCommonActivity {
         }
     }
 
-    public void replaceFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment) {
+        String backStateName = fragment.getClass().getName();
+        String fragmentTag = backStateName;
 
-        if (mSelectedFragment != fragment) {
-            mSelectedFragment = fragment;
+        FragmentManager manager = getSupportFragmentManager();
+        boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.frame_container, mSelectedFragment);
-            fragmentTransaction.commit();
+        if (!fragmentPopped && manager.findFragmentByTag(fragmentTag) == null) { //fragment not in back stack, create it.
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.replace(R.id.frame_container, fragment, fragmentTag);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(backStateName);
+            ft.commit();
         }
+    }
+
+    private void goToLogin() {
+        Intent intent = new Intent(TFHomeActivity.this, TFLoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            finish();
+        } else {
+            super.onBackPressed();
+        }
+
+    }
+
+    class CountDownRunner implements Runnable {
+
+        @Override
+        public void run() {
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    doWork();
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } catch (Exception e) {
+                }
+            }
+        }
+    }
+
+    public void doWork() {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                try {
+                    Date date = new Date();
+                    CharSequence dateFormat = DateFormat.format("dd/MM/yyyy k:mm:ss", date.getTime());
+                    mTvCurrentDateAndTime.setText(getString(R.string.current_date_and_time) + dateFormat);
+                } catch (Exception e) {
+                }
+            }
+        });
     }
 
 }

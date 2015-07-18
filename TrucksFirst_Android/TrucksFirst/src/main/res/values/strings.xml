@@ -12,6 +12,7 @@
     <string name="pilots">Pilots</string>
     <string name="fetch_location">Fetch Your Location</string>
     <string name="last_login">Your last login: %1$s</string>
+    <string name="hub_supervisor">Hub Supervisor</string>
 
     <!-->Truck details screen<-->
     <string name="vehicle_number">Vehicle No.</string>
@@ -26,6 +27,7 @@
     <string name="driving_licence">Driving Licence</string>
     <string name="uniform">Uniform</string>
     <string name="non_alcoholic">Non Alcoholic</string>
+    <string name="current_date_and_time">Current Date and Time : </string>
 
     <!-->Pilot details screen<-->
     <string name="pilot_availability">Pilot Availability</string>
@@ -33,7 +35,17 @@
     <string name="gps_settings_body">GPS is not enabled. Do you want to go to settings menu?</string>
     <string name="gps_settings_title">GPS settings</string>
     <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+
+    <!-->Navigation drawer<-->
+    <string name="dashboard">Dashboard</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Log out</string>
+    <string name="are_you_sure">Are you sure you want to log out?</string>
+
+    <!-->Settings<-->
+    <string name="language_settings">Language Settings</string>
 
 </resources>

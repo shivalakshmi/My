@@ -1,6 +1,7 @@
 package com.fissionlabs.trucksfirst.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -39,8 +40,81 @@ public class TFTruckFragment extends TFCommonFragment {
         manualDataToList();
         mTruckDetailsListView.setAdapter(new CustomTrucksAdapter(getActivity(), mTruckList));
 
-
         return view;
+    }
+
+    public void manualDataToList() {
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "BALRAM", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "OM", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "AKBAR", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "AKBAR", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
+        mTruckList.add(mTruckDetailsPojo);
+
+    }
+
+    public void showPilotInHubAlertDialog(String title) {
+
+        final CharSequence items[] = {getString(R.string.driving_licence),
+                getString(R.string.uniform),
+                getString(R.string.non_alcoholic)};
+
+        final ArrayList<Integer> selectedItems = new ArrayList();
+        boolean checkedItems[] = new boolean[items.length];
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        //LayoutInflater inflater = getActivity().getLayoutInflater();
+        //   View dialogView = inflater.inflate(R.layout.pilot_in_hub_alert, null);
+        //   dialogBuilder.setView(dialogView);
+        dialogBuilder.setTitle(title);
+        dialogBuilder.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                if (isChecked) {
+                    selectedItems.add(which);
+                } else if (selectedItems.contains(which)) {
+                    selectedItems.remove(Integer.valueOf(which));
+                }
+            }
+        });
+        dialogBuilder.setPositiveButton(getResources().getString(R.string.save), null);
+        dialogBuilder.setNegativeButton(getResources().getString(R.string.cancel), null);
+
+        AlertDialog alertDialog = dialogBuilder.create();
+
+        alertDialog.show();
     }
 
     public class CustomTrucksAdapter extends ArrayAdapter<TFTruckDetailsPojo> {
@@ -115,62 +189,5 @@ public class TFTruckFragment extends TFCommonFragment {
             RadioButton mRadioPolitInHubNo;
         }
     }
-
-    public void manualDataToList() {
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "BALRAM", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "OM", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "AKBAR", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "AKBAR", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-
-    }
-
-    public void showPilotInHubAlertDialog(String title) {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.pilot_in_hub_alert, null);
-        dialogBuilder.setView(dialogView);
-        dialogBuilder.setTitle(title);
-        dialogBuilder.setPositiveButton("Save", null);
-        dialogBuilder.setNegativeButton("Cancel", null);
-
-        AlertDialog alertDialog = dialogBuilder.create();
-
-        alertDialog.show();
-    }
-
 
 }

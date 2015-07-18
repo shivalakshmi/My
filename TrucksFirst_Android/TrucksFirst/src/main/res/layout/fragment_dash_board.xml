@@ -25,7 +25,7 @@
             android:singleLine="true"
             android:ellipsize="end"
             style="@style/TextViewStyle"
-            android:drawableLeft="@drawable/icon_lastlogin"
+            android:drawableLeft="@drawable/ic_lastlogin"
             android:text="@string/last_login"/>
         <LinearLayout
             android:id="@+id/fetch_location_layout"
@@ -36,7 +36,7 @@
                 android:id="@+id/fetch_location_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/icon_location"/>
+                android:background="@drawable/ic_location"/>
             <TextView
                 android:id="@+id/fetch_location"
                 android:layout_width="match_parent"
