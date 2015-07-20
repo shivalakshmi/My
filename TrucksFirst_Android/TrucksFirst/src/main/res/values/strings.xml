@@ -115,7 +115,7 @@
     <string name="left">Left</string>
     <string name="rear">Rear</string>
     <string name="right">Right</string>
-<string-array name="language_arrays">
+    <string-array name="language_arrays">
         <item>English</item>
         <item>Hindi</item>
     </string-array>
