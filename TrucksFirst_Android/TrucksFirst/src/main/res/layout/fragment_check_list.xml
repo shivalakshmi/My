@@ -1,12 +1,22 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.fissionlabs.trucksfirst.fragments.TFCheckListFragment">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/checklist"/>
+        android:orientation="vertical"
+        tools:context="com.fissionlabs.trucksfirst.fragments.TFCheckListFragment">
 
-</FrameLayout>
+        <include layout="@layout/operational_header" />
+
+        <include layout="@layout/operational_documents" />
+
+        <include layout="@layout/technical_header"/>
+        <include layout="@layout/technical_driver"/>
+
+
+    </LinearLayout>
+</ScrollView>

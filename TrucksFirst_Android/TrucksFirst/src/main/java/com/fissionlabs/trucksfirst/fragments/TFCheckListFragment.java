@@ -18,7 +18,9 @@ public class TFCheckListFragment extends TFCommonFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_check_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_check_list,container,false);
+
+        return view;
     }
 
 

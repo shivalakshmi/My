@@ -54,7 +54,6 @@ public class TFTruckFragment extends TFCommonFragment {
 
             }
 
-
         });*/
 
         return view;
@@ -187,6 +186,13 @@ public class TFTruckFragment extends TFCommonFragment {
 
                     //navigate(new TFPilotAvailabilityFragment(),"TFPilotAvailabilityFragment");
 
+                }
+            });
+
+            holder.mChecklist.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startFragment(R.layout.fragment_check_list);
                 }
             });
 

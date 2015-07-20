@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
+import com.fissionlabs.trucksfirst.fragments.TFCheckListFragment;
 import com.fissionlabs.trucksfirst.fragments.TFDashBoardFragment;
 import com.fissionlabs.trucksfirst.fragments.TFPilotFragment;
 import com.fissionlabs.trucksfirst.fragments.TFSettingsFragment;
@@ -36,6 +37,7 @@ public class TFHomeActivity extends TFCommonActivity {
     private TFTruckFragment mTFTruckFragment;
     private TFPilotFragment mTFPilotFragment;
     private TFSettingsFragment mTFSettingsFragment;
+    private TFCheckListFragment mTFCheckListFragment;
     private Fragment mSelectedFragment;
 
     private ActionBar mActionBar;
@@ -172,6 +174,12 @@ public class TFHomeActivity extends TFCommonActivity {
                 selectedFragment = mTFSettingsFragment;
 
                 break;
+            case R.layout.fragment_check_list:
+                if (mTFCheckListFragment == null) {
+                    mTFCheckListFragment = new TFCheckListFragment();
+                }
+
+                selectedFragment = mTFCheckListFragment;
         }
 
 
