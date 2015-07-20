@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     compile project(':Volley')
     compile files('libs/DragDropListItem.jar')
+    compile 'com.google.code.gson:gson:2.3.1'
 }

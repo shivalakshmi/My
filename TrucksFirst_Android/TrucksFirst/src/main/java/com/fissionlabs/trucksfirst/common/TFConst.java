@@ -7,4 +7,5 @@ public interface TFConst {
 
     int SUCCESS = 200;
     int ERROR = 100;
+    String URL_TRUCK_DETAILS = "";
 }

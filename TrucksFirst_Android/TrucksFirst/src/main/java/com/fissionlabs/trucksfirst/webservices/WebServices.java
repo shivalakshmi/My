@@ -1,14 +1,24 @@
 package com.fissionlabs.trucksfirst.webservices;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.fissionlabs.trucksfirst.TFApp;
+import com.fissionlabs.trucksfirst.common.TFConst;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +26,7 @@ import java.util.Map;
 /**
  * Created by Ashok on 7/8/2015.
  */
-public class WebServices {
+public class WebServices implements TFConst{
 
 
     public void getPilotData(final String caseObj, final ResultReceiver resultReceiver) {
@@ -56,6 +66,34 @@ public class WebServices {
 
         };
         TFApp.getInstance().addToRequestQueue(stringRequest, "TAG");
+
+    }
+
+    public void truckDetailsRequest(Activity context, final ResultReceiver resultReceiver) {
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("id", Context.MODE_PRIVATE);
+
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET,URL_TRUCK_DETAILS,null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("TRUCKSFIRST", response.toString());
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response.toString());
+                        resultReceiver.send(200, bundle);
+//                        pDialog.hide();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("TRUCKSFIRST", "Error: " + error.getMessage());
+//                pDialog.hide();
+            }
+        });
+
+// Adding request to request queue
+        TFApp.getInstance().addToRequestQueue(req, "TRUCKSFIRST");
+
 
     }
 

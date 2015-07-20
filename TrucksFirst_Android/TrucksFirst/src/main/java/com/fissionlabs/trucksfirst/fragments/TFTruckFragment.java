@@ -1,9 +1,11 @@
 package com.fissionlabs.trucksfirst.fragments;
 
+import android.content.AsyncQueryHandler;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -18,7 +20,10 @@ import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
+import com.fissionlabs.trucksfirst.model.Truck;
 import com.fissionlabs.trucksfirst.pojo.TFTruckDetailsPojo;
+import com.fissionlabs.trucksfirst.webservices.WebServices;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -39,6 +44,18 @@ public class TFTruckFragment extends TFCommonFragment {
         mTruckDetailsListView = (ListView) view.findViewById(R.id.truck_details_list);
         manualDataToList();
         mTruckDetailsListView.setAdapter(new CustomTrucksAdapter(getActivity(), mTruckList));
+        /// Service call
+       /* WebServices webServices = new WebServices();
+        webServices.truckDetailsRequest(getActivity(), new ResultReceiver(null) {
+            @Override
+            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                Truck truck = new Truck();
+                truck = new Gson().fromJson(resultData.getString("response"), Truck.class);
+
+            }
+
+
+        });*/
 
         return view;
     }
