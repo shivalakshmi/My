@@ -14,7 +14,7 @@
     <string name="last_login">Your last login: %1$s</string>
     <string name="hub_supervisor">Hub Supervisor</string>
 
-    <!-->Truck details screen<-->
+    <!-- Truck details screen -->
     <string name="vehicle_number">Vehicle No.</string>
     <string name="vehicle_route">Vehicle Route</string>
     <string name="eta">ETA</string>
@@ -29,7 +29,7 @@
     <string name="non_alcoholic">Non Alcoholic</string>
     <string name="current_date_and_time">Current Date and Time : </string>
 
-    <!-->Pilot details screen<-->
+    <!-- Pilot details screen -->
     <string name="pilot_availability">Pilot Availability</string>
     <string name="assign_pilots">Assign Pilot</string>
     <string name="gps_settings_body">GPS is not enabled. Do you want to go to settings menu?</string>
@@ -39,13 +39,19 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
-    <!-->Navigation drawer<-->
+    <!-- Navigation drawer -->
     <string name="dashboard">Dashboard</string>
     <string name="settings">Settings</string>
     <string name="logout">Log out</string>
     <string name="are_you_sure">Are you sure you want to log out?</string>
 
-    <!-->Settings<-->
+    <!-- Settings -->
     <string name="language_settings">Language Settings</string>
+
+    <!-- Network -->
+    <string name="no_network">No Network</string>
+    <string name="no_connection">No connection</string>
+    <string name="could_not_connect_to_server">No connection. Couldn\'t connect to the server.</string>
+    <string name="try_again">Try again</string>
 
 </resources>
