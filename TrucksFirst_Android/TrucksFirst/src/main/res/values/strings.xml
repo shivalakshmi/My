@@ -45,6 +45,7 @@
 
     <!-- Settings -->
     <string name="language_settings">Language Settings</string>
+    <string name="language_prefered">Prefered Language : </string>
 
 
     <!-- Network -->
@@ -114,6 +115,9 @@
     <string name="left">Left</string>
     <string name="rear">Rear</string>
     <string name="right">Right</string>
-
+<string-array name="language_arrays">
+        <item>English</item>
+        <item>Hindi</item>
+    </string-array>
 
 </resources>

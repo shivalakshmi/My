@@ -24,6 +24,7 @@ import com.fissionlabs.trucksfirst.fragments.TFPilotFragment;
 import com.fissionlabs.trucksfirst.fragments.TFSettingsFragment;
 import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
 import com.fissionlabs.trucksfirst.signup.TFLoginActivity;
+import com.fissionlabs.trucksfirst.util.TFUtils;
 
 import junit.framework.Assert;
 
@@ -222,6 +223,7 @@ public class TFHomeActivity extends TFCommonActivity {
     }
 
     private void goToLogin() {
+        TFUtils.deleteFromSP(TFHomeActivity.this, LANG_SELECTION);
         Intent intent = new Intent(TFHomeActivity.this, TFLoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
