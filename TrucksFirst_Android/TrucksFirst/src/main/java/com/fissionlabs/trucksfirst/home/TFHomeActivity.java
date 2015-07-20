@@ -60,7 +60,7 @@ public class TFHomeActivity extends TFCommonActivity {
         }
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mTvCurrentDateAndTime = (TextView) findViewById(R.id.tvDateTime);
+        mTvCurrentDateAndTime = (TextView) findViewById(R.id.tv_date_time);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
@@ -213,7 +213,7 @@ public class TFHomeActivity extends TFCommonActivity {
         FragmentManager manager = getSupportFragmentManager();
         boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
 
-        if (!fragmentPopped && manager.findFragmentByTag(fragmentTag) == null) { //fragment not in back stack, create it.
+        if (!fragmentPopped && manager.findFragmentByTag(fragmentTag) == null) {
             FragmentTransaction ft = manager.beginTransaction();
             ft.replace(R.id.frame_container, fragment, fragmentTag);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -240,6 +240,19 @@ public class TFHomeActivity extends TFCommonActivity {
 
     }
 
+    public void doWork() {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                try {
+                    Date date = new Date();
+                    CharSequence dateFormat = DateFormat.format("dd/MM/yyyy k:mm:ss", date.getTime());
+                    mTvCurrentDateAndTime.setText(getString(R.string.current_date_and_time) + dateFormat);
+                } catch (Exception e) {
+                }
+            }
+        });
+    }
+
     class CountDownRunner implements Runnable {
 
         @Override
@@ -254,19 +267,6 @@ public class TFHomeActivity extends TFCommonActivity {
                 }
             }
         }
-    }
-
-    public void doWork() {
-        runOnUiThread(new Runnable() {
-            public void run() {
-                try {
-                    Date date = new Date();
-                    CharSequence dateFormat = DateFormat.format("dd/MM/yyyy k:mm:ss", date.getTime());
-                    mTvCurrentDateAndTime.setText(getString(R.string.current_date_and_time) + dateFormat);
-                } catch (Exception e) {
-                }
-            }
-        });
     }
 
 }

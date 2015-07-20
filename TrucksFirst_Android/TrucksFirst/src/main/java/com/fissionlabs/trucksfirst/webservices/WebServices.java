@@ -1,8 +1,6 @@
 package com.fissionlabs.trucksfirst.webservices;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.util.Log;
@@ -12,13 +10,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.fissionlabs.trucksfirst.TFApp;
 import com.fissionlabs.trucksfirst.common.TFConst;
+import com.fissionlabs.trucksfirst.util.LogConfig;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +23,7 @@ import java.util.Map;
 /**
  * Created by Ashok on 7/8/2015.
  */
-public class WebServices implements TFConst{
+public class WebServices implements TFConst {
 
 
     public void getPilotData(final String caseObj, final ResultReceiver resultReceiver) {
@@ -35,7 +32,6 @@ public class WebServices implements TFConst{
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
 
                         Bundle bundle = new Bundle();
                         bundle.putString("response", response);
@@ -71,30 +67,33 @@ public class WebServices implements TFConst{
 
     public void truckDetailsRequest(Activity context, final ResultReceiver resultReceiver) {
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences("id", Context.MODE_PRIVATE);
-
-        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET,URL_TRUCK_DETAILS,null,
+        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, URL_TRUCK_DETAILS, null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("TRUCKSFIRST", response.toString());
-                        Bundle bundle = new Bundle();
-                        bundle.putString("response", response.toString());
-                        resultReceiver.send(200, bundle);
-//                        pDialog.hide();
+                        if (response != null) {
+                            if (LogConfig.D) {
+                                Log.d(TAG, "================================ Truck details ==========================");
+                                Log.d(TAG, response.toString());
+                                Log.d(TAG, "================================ Truck details end ======================");
+                            }
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("response", response.toString());
+                            resultReceiver.send(TFConst.SUCCESS, bundle);
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("TRUCKSFIRST", "Error: " + error.getMessage());
-//                pDialog.hide();
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                resultReceiver.send(TFConst.ERROR, null);
             }
         });
 
-// Adding request to request queue
-        TFApp.getInstance().addToRequestQueue(req, "TRUCKSFIRST");
-
-
+        TFApp.getInstance().addToRequestQueue(req, TAG_TRUCK_DETAILS);
     }
 
 }
