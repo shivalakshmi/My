@@ -1,3 +1,51 @@
 <resources>
     <string name="current_date_and_time">वर्तमान दिनांक और समय : </string>
+    <!--Documents-->
+    <string name="registration_certificate">पंजीकरण प्रमाण पत्र</string>
+    <string name="fitness_certificate">फिटनेस सर्टिफिकेट</string>
+    <string name="national_permit">नेशनल परमिट</string>
+    <string name="road_tax_booklet">रोड एवं माल कर पुस्तक</string>
+    <string name="pollution_certificate">प्रदूषण सर्टिफिकेट</string>
+    <string name="insurance">इन्शुरन्स (बीमा)</string>
+    <string name="toll_tax_receipt_and_cash_balance">टोल टैक्स की रसीद और कॅश बैलेंस</string>
+    <string name="grn_bilti">GRN / BILTI (जी आर इन)</string>
+    <string name="seal_intactness">SEAL (सील) Intactness</string>
+
+    <!--Kits-->
+    <string name="tool_kit">टूल किट (जैक, व्हील पाना, जस रॉड, टायर लीवर)</string>
+    <string name="others">अन्य (प्राथमिक चिकित्सा किट, टोर्च, बाल्टी)</string>
+    <string name="cabin_cleanliness">केबिन की सफाई</string>
+
+    <!--Driver-->
+    <string name="driver">Driver</string>
+    <string name="engine_starting">इंजन स्टार्टिंग</string>
+    <string name="engine_sound">इंजन ध्वनि</string>
+    <string name="exhaust_emission">निकास (इंजन) धुंआ</string>
+    <string name="clutch_working">क्लच निरीक्षण</string>
+    <string name="gear_movement">गियर बदलता</string>
+    <string name="brake_effectiveness">ब्रेक प्रबावशीरता</string>
+
+    <!--Tyre & Oil-->
+    <string name="tyres">टायर्स (स्टोन्स, कट, पंचर)</string>
+    <string name="coolant_leakage">कूलैंट रिसाव</string>
+    <string name="engine_oil_leakage">इंजन तेल रिसाव</string>
+    <string name="gear_oil_leakage">गियर तेल रिसाव </string>
+    <string name="fuel_diesel_leakage">ईर्धन/डीजल  रिसाव</string>
+    <string name="differential_oil_leakage">डिफरेंशियल तेल  रिसाव</string>
+
+    <!--Electrical-->
+    <string name="headlight">हेडलाइट (लो &amp; हाई)</string>
+    <string name="indicator_and_hazard">इंडिकेटर &amp; हैजर्ड</string>
+    <string name="horn">हॉर्न</string>
+    <string name="Wiper">वाइपर</string>
+    <string name="temperature_on_temperature_gauge">तापमान गेज पर तापमान</string>
+    <string name="alternator_charger_light">अल्टरनेटर चार्जर लाइट</string>
+    <string name="oil_pressure_warning_light">तेल प्रेशर चेतावनी लाइट</string>
+
+    <!--Scratch/Dent-->
+    <string name="front">FRONT (फ्रॊट)</string>
+    <string name="left">LEFT (बायें )</string>
+    <string name="rear">REAR (नीचे)</string>
+    <string name="right">RIGHT (दायें)</string>
+
 </resources>
