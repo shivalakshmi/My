@@ -24,6 +24,7 @@
             android:text="@string/tool_kit" />
 
         <RadioGroup
+            android:id="@+id/toolkit_radop_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -82,18 +83,21 @@
             android:text="@string/others" />
 
         <RadioGroup
+            android:id="@+id/others_radio_group"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/others_yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/yes"
                 android:textSize="15dp" />
 
             <RadioButton
+                android:id="@+id/others_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
@@ -141,18 +145,21 @@
             android:text="@string/cabin_cleanliness" />
 
         <RadioGroup
+            android:id="@+id/cabin_radio_group"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/cabin_yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/yes"
                 android:textSize="15dp" />
 
             <RadioButton
+                android:id="@+id/cabin_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
