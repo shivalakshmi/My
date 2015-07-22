@@ -1,6 +1,6 @@
 package com.fissionlabs.trucksfirst.webservices;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.util.Log;
@@ -9,13 +9,9 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.fissionlabs.trucksfirst.TFApp;
 import com.fissionlabs.trucksfirst.common.TFConst;
-import com.fissionlabs.trucksfirst.util.LogConfig;
-
-import org.json.JSONArray;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,12 +22,14 @@ import java.util.Map;
 public class WebServices implements TFConst {
 
 
-    public void getPilotData(final String caseObj, final ResultReceiver resultReceiver) {
+    public void getTruckDetails(final Context context, final ResultReceiver resultReceiver) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "TFConst.URL",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_TRUCK_DETAILS,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
+                        Log.e(TAG, "string response =   " + response);
 
                         Bundle bundle = new Bundle();
                         bundle.putString("response", response);
@@ -56,44 +54,13 @@ public class WebServices implements TFConst {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("payment", caseObj);
+                //  params.put("payment", caseObj);
                 return params;
             }
 
         };
         TFApp.getInstance().addToRequestQueue(stringRequest, "TAG");
 
-    }
-
-    public void truckDetailsRequest(Activity context, final ResultReceiver resultReceiver) {
-
-        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, URL_TRUCK_DETAILS, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        if (response != null) {
-                            if (LogConfig.D) {
-                                Log.d(TAG, "================================ Truck details ==========================");
-                                Log.d(TAG, response.toString());
-                                Log.d(TAG, "================================ Truck details end ======================");
-                            }
-
-                            Bundle bundle = new Bundle();
-                            bundle.putString("response", response.toString());
-                            resultReceiver.send(TFConst.SUCCESS, bundle);
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                if (LogConfig.D) {
-                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
-                }
-                resultReceiver.send(TFConst.ERROR, null);
-            }
-        });
-
-        TFApp.getInstance().addToRequestQueue(req, TAG_TRUCK_DETAILS);
     }
 
 }

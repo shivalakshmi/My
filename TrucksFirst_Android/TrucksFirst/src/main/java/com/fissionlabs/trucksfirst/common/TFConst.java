@@ -6,10 +6,10 @@ package com.fissionlabs.trucksfirst.common;
 public interface TFConst {
     String TAG = "TRUCKS_FIRST";
 
-    String BASE_IP = "";
+    String BASE_IP = "172.168.0.222:8080/com.rivigo.controller/mobile/";
 
-    String URL_TRUCK_DETAILS = "http://" + BASE_IP + "";
-    String URL_PILOT_DETAILS = "http://" + BASE_IP + "";
+    String URL_TRUCK_DETAILS = "http://" + BASE_IP + "truckdetails";
+    String URL_PILOT_AVAILABILITY = "http://" + BASE_IP + "pilotavaility";
 
     String TAG_TRUCK_DETAILS = "TRUCK_DETAILS";
     String TAG_PILOT_DETAILS = "PILOT_DETAILS";

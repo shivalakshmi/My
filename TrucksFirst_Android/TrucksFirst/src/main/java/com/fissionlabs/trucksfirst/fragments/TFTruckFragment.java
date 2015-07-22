@@ -1,9 +1,7 @@
 package com.fissionlabs.trucksfirst.fragments;
 
-import android.content.AsyncQueryHandler;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.support.v4.app.Fragment;
@@ -20,11 +18,13 @@ import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
-import com.fissionlabs.trucksfirst.model.Truck;
+import com.fissionlabs.trucksfirst.model.TruckDetails;
 import com.fissionlabs.trucksfirst.pojo.TFTruckDetailsPojo;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -34,71 +34,26 @@ public class TFTruckFragment extends TFCommonFragment {
 
     private ListView mTruckDetailsListView;
     private ArrayList<TFTruckDetailsPojo> mTruckList = new ArrayList<>();
-    private TFTruckDetailsPojo mTruckDetailsPojo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_truck, container, false);
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         mTruckDetailsListView = (ListView) view.findViewById(R.id.truck_details_list);
-        manualDataToList();
-        mTruckDetailsListView.setAdapter(new CustomTrucksAdapter(getActivity(), mTruckList));
-        /// Service call
-       /* WebServices webServices = new WebServices();
-        webServices.truckDetailsRequest(getActivity(), new ResultReceiver(null) {
+        WebServices webServices = new WebServices();
+        webServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
-                Truck truck = new Truck();
-                truck = new Gson().fromJson(resultData.getString("response"), Truck.class);
 
+                String responseStr = resultData.getString("response").contains("ï»¿") ? resultData.getString("response").replaceAll("ï»¿", "") : resultData.getString("response");
+
+                Type listType = new TypeToken<ArrayList<TruckDetails>>(){}.getType();
+                ArrayList<TruckDetails> myModelList = new Gson().fromJson(responseStr, listType);
+                mTruckDetailsListView.setAdapter(new CustomTrucksAdapter(getActivity(),myModelList));
             }
-
-        });*/
+        });
 
         return view;
-    }
-
-    public void manualDataToList() {
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "BALRAM", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "OM", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "AKBAR", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "AKBAR", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-        mTruckDetailsPojo = new TFTruckDetailsPojo("HR55V1234", "FKT:  PTD - BWD", "28/07/2015 13:30", "RAJ", true, true, "Fill Checklist");
-        mTruckList.add(mTruckDetailsPojo);
-
     }
 
     public void showPilotInHubAlertDialog(String title) {
@@ -133,12 +88,12 @@ public class TFTruckFragment extends TFCommonFragment {
         alertDialog.show();
     }
 
-    public class CustomTrucksAdapter extends ArrayAdapter<TFTruckDetailsPojo> {
+    public class CustomTrucksAdapter extends ArrayAdapter<TruckDetails> {
 
         private Context context;
-        private ArrayList<TFTruckDetailsPojo> truckDetailsList = new ArrayList<TFTruckDetailsPojo>();
+        private ArrayList<TruckDetails> truckDetailsList = new ArrayList<>();
 
-        public CustomTrucksAdapter(Context context, ArrayList<TFTruckDetailsPojo> truckDetailsList) {
+        public CustomTrucksAdapter(Context context, ArrayList<TruckDetails> truckDetailsList) {
             super(context, R.layout.truck_details_item, truckDetailsList);
             this.context = context;
             this.truckDetailsList = truckDetailsList;
@@ -169,6 +124,34 @@ public class TFTruckFragment extends TFCommonFragment {
             holder.mVehicleRoute.setText(truckDetailsList.get(position).getVehicleRoute());
             holder.mEta.setText(truckDetailsList.get(position).getEta());
             holder.mAssignedPilot.setText(truckDetailsList.get(position).getAssignedPilot());
+
+            if(truckDetailsList.get(position).getAssignedPilot().equals("null"))
+            {
+                holder.mVehicleNumber.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                holder.mVehicleRoute.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                holder.mEta.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+                holder.mAssignedPilot.setVisibility(View.GONE);
+                holder.mAssignedPilot.setClickable(true);
+                holder.mPolitInHub.setVisibility(View.GONE);
+                holder.mVehicleInHub.setVisibility(View.GONE);
+                holder.mChecklist.setVisibility(View.GONE);
+
+            }
+            else
+            {
+                holder.mVehicleNumber.setTextColor(getResources().getColor(android.R.color.black));
+                holder.mVehicleRoute.setTextColor(getResources().getColor(android.R.color.black));
+                holder.mEta.setTextColor(getResources().getColor(android.R.color.black));
+                holder.mVehicleNumber.setText(truckDetailsList.get(position).getVehicleNumber());
+                holder.mVehicleRoute.setText(truckDetailsList.get(position).getVehicleRoute());
+                holder.mEta.setText(truckDetailsList.get(position).getEta());
+                holder.mAssignedPilot.setText(truckDetailsList.get(position).getAssignedPilot());
+                holder.mAssignedPilot.setVisibility(View.VISIBLE);
+                holder.mAssignedPilot.setClickable(false);
+                holder.mPolitInHub.setVisibility(View.VISIBLE);
+                holder.mVehicleInHub.setVisibility(View.VISIBLE);
+                holder.mChecklist.setVisibility(View.VISIBLE);
+            }
 
 
             holder.mRadioPolitInHubYes.setOnClickListener(new View.OnClickListener() {

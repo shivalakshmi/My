@@ -3,13 +3,15 @@ package com.fissionlabs.trucksfirst.model;
 /**
  * Created by Lakshmi on 21-07-2015.
  */
-class TruckDetails{
+public class TruckDetails{
     String vehicleNumber;
     String vehicleRoute;
     String eta;
     String assignedPilot;
     String pilotInHub;
-    String vehicleInHub;
+    String vehileInHub;
+
+
 
     public String getAssignedPilot() {
         return assignedPilot;
@@ -52,10 +54,10 @@ class TruckDetails{
     }
 
     public String getVehicleInHub() {
-        return vehicleInHub;
+        return vehileInHub;
     }
 
     public void setVehicleInHub(String vehicleInHub) {
-        this.vehicleInHub = vehicleInHub;
+        this.vehileInHub = vehicleInHub;
     }
 }
