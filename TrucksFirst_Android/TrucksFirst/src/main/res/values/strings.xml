@@ -115,6 +115,12 @@
     <string name="left">Left</string>
     <string name="rear">Rear</string>
     <string name="right">Right</string>
+    <string name="pilot_contact_info">Contact Info %1$s</string>
+    <string name="pilot_change_pilot">Change Pilot</string>
+    <string name="pilot_release_pilot">Release Pilot</string>
+    <string name="are_you_sure_release"><b>Are you sure you want to release pilot %1$s?</b></string>
+    <string name="pilot_availability_title">Available Pilots</string>
+    <string name="issue_parsingdata">Issue with parsing data, Please consult with Administrator.</string>
     <string-array name="language_arrays">
         <item>English</item>
         <item>Hindi</item>

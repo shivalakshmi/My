@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
@@ -44,13 +47,20 @@ public class TFTruckFragment extends TFCommonFragment {
         webServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
+                if(resultCode == 200) {
 
-                String responseStr = resultData.getString("response").contains("ï»¿") ? resultData.getString("response").replaceAll("ï»¿", "") : resultData.getString("response");
+                    String responseStr = resultData.getString("response").contains("ï»¿") ? resultData.getString("response").replaceAll("ï»¿", "") : resultData.getString("response");
 
-                Type listType = new TypeToken<ArrayList<TruckDetails>>(){}.getType();
-                ArrayList<TruckDetails> myModelList = new Gson().fromJson(responseStr, listType);
-                mTruckDetailsListView.setAdapter(new CustomTrucksAdapter(getActivity(),myModelList));
+                    Type listType = new TypeToken<ArrayList<TruckDetails>>() {
+                    }.getType();
+                    ArrayList<TruckDetails> myModelList = new Gson().fromJson(responseStr, listType);
+                    mTruckDetailsListView.setAdapter(new CustomTrucksAdapter(getActivity(), myModelList));
+                } else {
+                    Toast.makeText(getActivity(),""+getResources().getString(R.string.issue_parsingdata),Toast.LENGTH_SHORT).show();
+                }
             }
+
+
         });
 
         return view;
@@ -88,6 +98,70 @@ public class TFTruckFragment extends TFCommonFragment {
         alertDialog.show();
     }
 
+    public void showPilotAssigAlertDialog(final String pilotName) {
+        if (pilotName.equalsIgnoreCase("null") || pilotName.trim().equalsIgnoreCase("") || TextUtils.isEmpty(pilotName)){
+            assignPilotAlertDialog();
+        } else {
+            final CharSequence items[] = {String.format(getString(R.string.pilot_contact_info),"\nMobile Number:9999999999"),
+                    getString(R.string.pilot_change_pilot),
+                    getString(R.string.pilot_release_pilot)};
+
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+            dialogBuilder.setTitle(pilotName);
+            dialogBuilder.setItems(items, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    switch (which) {
+                        case 1:
+                            assignPilotAlertDialog();
+                            break;
+                        case 2:
+                            releasePilotAlertDialog(pilotName);
+                            break;
+                    }
+                }
+            });
+            dialogBuilder.setPositiveButton(getString(R.string.ok),null);
+            AlertDialog alertDialog = dialogBuilder.create();
+            alertDialog.setCanceledOnTouchOutside(true);
+            alertDialog.show();
+        }
+    }
+
+    public void assignPilotAlertDialog(){
+        final CharSequence items[] = {"PK","Vijay","Shanthi","Bhahubhali","Avanthika","Katappa","Rajamouli","Balladeva","Murali","Krishna"};
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        dialogBuilder.setSingleChoiceItems(items,-1,null);
+        dialogBuilder.setTitle(R.string.pilot_availability_title);
+        dialogBuilder.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //write login here for pilot assignment.
+            }
+        });
+        dialogBuilder.setNegativeButton(getResources().getString(R.string.cancel), null);
+
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+    }
+
+    public void releasePilotAlertDialog(String pilotName){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        dialogBuilder.setTitle(Html.fromHtml(String.format(getString(R.string.are_you_sure_release), pilotName)));
+        dialogBuilder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //write login here for pilot release.
+            }
+        });
+        dialogBuilder.setNegativeButton(getResources().getString(R.string.no), null);
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+    }
     public class CustomTrucksAdapter extends ArrayAdapter<TruckDetails> {
 
         private Context context;
@@ -130,8 +204,7 @@ public class TFTruckFragment extends TFCommonFragment {
                 holder.mVehicleNumber.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
                 holder.mVehicleRoute.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
                 holder.mEta.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
-                holder.mAssignedPilot.setVisibility(View.GONE);
-                holder.mAssignedPilot.setClickable(true);
+                holder.mAssignedPilot.setText("");
                 holder.mPolitInHub.setVisibility(View.GONE);
                 holder.mVehicleInHub.setVisibility(View.GONE);
                 holder.mChecklist.setVisibility(View.GONE);
@@ -146,8 +219,6 @@ public class TFTruckFragment extends TFCommonFragment {
                 holder.mVehicleRoute.setText(truckDetailsList.get(position).getVehicleRoute());
                 holder.mEta.setText(truckDetailsList.get(position).getEta());
                 holder.mAssignedPilot.setText(truckDetailsList.get(position).getAssignedPilot());
-                holder.mAssignedPilot.setVisibility(View.VISIBLE);
-                holder.mAssignedPilot.setClickable(false);
                 holder.mPolitInHub.setVisibility(View.VISIBLE);
                 holder.mVehicleInHub.setVisibility(View.VISIBLE);
                 holder.mChecklist.setVisibility(View.VISIBLE);
@@ -165,8 +236,8 @@ public class TFTruckFragment extends TFCommonFragment {
             holder.mAssignedPilot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startFragment(R.layout.fragment_pilot);
-
+//                    startFragment(R.layout.fragment_pilot);
+                    showPilotAssigAlertDialog(truckDetailsList.get(position).getAssignedPilot());
                     //navigate(new TFPilotAvailabilityFragment(),"TFPilotAvailabilityFragment");
 
                 }
