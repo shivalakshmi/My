@@ -51,7 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:src="@drawable/ic_print" />
 
 
         <ImageView
@@ -59,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:src="@drawable/ic_mail" />
 
     </LinearLayout>
 
@@ -109,7 +109,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:src="@drawable/ic_print" />
 
 
         <ImageView
@@ -117,7 +117,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:src="@drawable/ic_mail" />
 
     </LinearLayout>
 
@@ -167,7 +167,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:src="@drawable/ic_print" />
 
 
         <ImageView
@@ -175,7 +175,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:src="@drawable/ic_mail" />
 
     </LinearLayout>
 
@@ -225,7 +225,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:src="@drawable/ic_print" />
 
 
         <ImageView
@@ -233,7 +233,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:src="@drawable/ic_mail" />
 
     </LinearLayout>
 
@@ -283,7 +283,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:src="@drawable/ic_print" />
 
 
         <ImageView
@@ -291,7 +291,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:src="@drawable/ic_mail" />
 
     </LinearLayout>
 
@@ -341,7 +341,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:src="@drawable/ic_print" />
 
 
         <ImageView
@@ -349,7 +349,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:src="@drawable/ic_mail" />
 
     </LinearLayout>
 
@@ -399,7 +399,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:src="@drawable/ic_print" />
 
 
         <ImageView
@@ -407,7 +407,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:src="@drawable/ic_mail" />
 
     </LinearLayout>
 
@@ -457,7 +457,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:src="@drawable/ic_print" />
 
 
         <ImageView
@@ -465,7 +465,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:src="@drawable/ic_mail" />
 
     </LinearLayout>
 
@@ -515,7 +515,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:src="@drawable/ic_print" />
 
 
         <ImageView
@@ -523,7 +523,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:src="@drawable/ic_mail" />
 
     </LinearLayout>
 
@@ -573,7 +573,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:src="@drawable/ic_print" />
 
 
         <ImageView
@@ -581,7 +581,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:src="@drawable/ic_mail" />
 
     </LinearLayout>
 

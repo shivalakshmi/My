@@ -102,7 +102,7 @@ public class TFTruckFragment extends TFCommonFragment {
     }
 
     public void showPilotAssigAlertDialog(final String pilotName) {
-        if (pilotName.equalsIgnoreCase("null") || pilotName.trim().equalsIgnoreCase("") || TextUtils.isEmpty(pilotName)){
+        if (pilotName == null || pilotName.trim().equalsIgnoreCase("") || TextUtils.isEmpty(pilotName)){
             assignPilotAlertDialog();
         } else {
             final CharSequence items[] = {String.format(getString(R.string.pilot_contact_info),"\nMobile Number:9999999999"),
