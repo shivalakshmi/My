@@ -32,6 +32,8 @@
         android:id="@+id/assigned_pilot"
         style="@style/TextViewStyle2"
         android:layout_width="0dp"
+        android:textColor="@color/color_accent"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 

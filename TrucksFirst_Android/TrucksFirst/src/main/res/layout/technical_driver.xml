@@ -21,26 +21,33 @@
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/engine_starting" />
-
-
-
-
-        <ImageView
-            style="@style/TextViewStyle2"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dashboard" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_assignment" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 
@@ -61,25 +68,33 @@
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/engine_sound" />
-
-
-
-        <ImageView
-            style="@style/TextViewStyle2"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dashboard" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_assignment" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 
@@ -99,25 +114,32 @@
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/exhaust_emission" />
-
-
-
-        <ImageView
-            style="@style/TextViewStyle2"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dashboard" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_assignment" />
+        </LinearLayout>
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 
@@ -137,26 +159,32 @@
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/clutch_working" />
-
-
-
-
-        <ImageView
-            style="@style/TextViewStyle2"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dashboard" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_assignment" />
+        </LinearLayout>
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 
@@ -176,25 +204,33 @@
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/gear_movement" />
-
-
-
-        <ImageView
-            style="@style/TextViewStyle2"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dashboard" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_assignment" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 
@@ -214,24 +250,34 @@
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/brake_effectiveness" />
 
-
-        <ImageView
-            style="@style/TextViewStyle2"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dashboard" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_assignment" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 

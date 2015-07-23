@@ -21,24 +21,35 @@
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/headlight" />
 
-
-        <ImageView
-            style="@style/TextViewStyle2"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dashboard" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_assignment" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:layout_weight="1"
+            />
+
 
     </LinearLayout>
 
@@ -58,24 +69,33 @@
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/indicator_and_hazard" />
-
-
-        <ImageView
-            style="@style/TextViewStyle2"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dashboard" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_assignment" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 
@@ -95,24 +115,34 @@
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/horn" />
 
-
-        <ImageView
-            style="@style/TextViewStyle2"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dashboard" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_assignment" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 
@@ -132,24 +162,35 @@
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/Wiper" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dashboard" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_assignment" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 
@@ -169,24 +210,35 @@
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/temperature_on_temperature_gauge" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dashboard" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_assignment" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 
@@ -206,24 +258,34 @@
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/alternator_charger_light" />
 
-
-        <ImageView
-            style="@style/TextViewStyle2"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dashboard" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_assignment" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 
@@ -243,24 +305,35 @@
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/oil_pressure_warning_light" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_dashboard" />
+            android:layout_weight="1">
+
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_dashboard" />
 
 
-        <ImageView
-            style="@style/TextViewStyle2"
+            <ImageView
+                style="@style/TextViewStyle2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_assignment" />
+        </LinearLayout>
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:src="@drawable/ic_assignment" />
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 
