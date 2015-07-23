@@ -133,6 +133,7 @@ public class TFTruckFragment extends TFCommonFragment {
             dialogBuilder.setPositiveButton(getString(R.string.ok),null);
             AlertDialog alertDialog = dialogBuilder.create();
             alertDialog.setCanceledOnTouchOutside(true);
+            alertDialog.getWindow().setLayout(500, 400);
             alertDialog.show();
         }
     }
@@ -193,6 +194,7 @@ public class TFTruckFragment extends TFCommonFragment {
         });
         dialogBuilder.setNegativeButton(getResources().getString(R.string.no), null);
         final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.getWindow().setLayout(500, 200);
         alertDialog.show();
     }
     public class CustomTrucksAdapter extends ArrayAdapter<TruckDetails> {

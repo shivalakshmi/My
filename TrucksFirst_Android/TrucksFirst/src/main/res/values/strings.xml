@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TrucksFirst</string>
+    <string name="app_name">Rivigo</string>
     <string name="action_settings">Settings</string>
 
     <string name="username">Username</string>
@@ -45,7 +45,7 @@
 
     <!-- Settings -->
     <string name="language_settings">Language Settings</string>
-    <string name="language_prefered">Prefered Language : </string>
+    <string name="language_preferred">Preferred Language : </string>
 
 
     <!-- Network -->

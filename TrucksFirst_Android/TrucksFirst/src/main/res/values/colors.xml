@@ -25,6 +25,7 @@
     <color name="color_secondary">#858d93</color>
     <color name="black">#000000</color>
 
+    <color name="list_header_color">#808080</color>
     <color name="orange">#EF6C36</color>
 
 </resources>

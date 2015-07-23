@@ -3,7 +3,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/common_padding_small0"
-              android:background="@color/color_primary"
+              android:background="@color/list_header_color"
               android:padding="@dimen/common_padding_small2"
               android:weightSum="7">
 

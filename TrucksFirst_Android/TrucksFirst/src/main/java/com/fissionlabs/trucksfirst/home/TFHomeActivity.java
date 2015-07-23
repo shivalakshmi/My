@@ -123,6 +123,7 @@ public class TFHomeActivity extends TFCommonActivity {
                 dialogBuilder.setNegativeButton(getResources().getString(R.string.no), null);
 
                 AlertDialog alertDialog = dialogBuilder.create();
+                alertDialog.getWindow().setLayout(500, 200);
 
                 alertDialog.show();
 
