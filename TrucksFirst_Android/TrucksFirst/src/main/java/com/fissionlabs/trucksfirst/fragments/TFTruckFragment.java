@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
+import com.fissionlabs.trucksfirst.model.PilotAvailability;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
 import com.fissionlabs.trucksfirst.pojo.TFTruckDetailsPojo;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
@@ -29,6 +30,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,13 +39,16 @@ public class TFTruckFragment extends TFCommonFragment {
 
     private ListView mTruckDetailsListView;
     private ArrayList<TFTruckDetailsPojo> mTruckList = new ArrayList<>();
+    private  WebServices webServices;
+    private ArrayList<PilotAvailability> pilotAvailabilityList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_truck, container, false);
         mTruckDetailsListView = (ListView) view.findViewById(R.id.truck_details_list);
-        WebServices webServices = new WebServices();
+
+        webServices = new WebServices();
         webServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
@@ -133,8 +138,25 @@ public class TFTruckFragment extends TFCommonFragment {
     }
 
     public void assignPilotAlertDialog(){
-        final CharSequence items[] = {"PK","Vijay","Shanthi","Bhahubhali","Avanthika","Katappa","Rajamouli","Balladeva","Murali","Krishna"};
+        webServices.getPilotAvailability(getActivity(), new ResultReceiver(null) {
+            @Override
+            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                if (resultCode == 200) {
+                    String responseStr = resultData.getString("response");
 
+                    Type listType = new TypeToken<ArrayList<PilotAvailability>>() {
+                    }.getType();
+
+                    pilotAvailabilityList = new Gson().fromJson(responseStr, listType);
+//        CharSequence items[] = new CharSequence[100];// = {"PK","Vijay","Shanthi","Bhahubhali","Avanthika","Katappa","Rajamouli","Balladeva","Murali","Krishna"};
+        List<String> listItems = new ArrayList<String>();
+
+
+        for (int i = 0; i < pilotAvailabilityList.size(); i++) {
+            listItems.add(pilotAvailabilityList.get(i).getPilotName()+"\n"+pilotAvailabilityList.get(i).getPilotAvailabilityStatus());
+        }
+
+        final CharSequence[] items = listItems.toArray(new CharSequence[listItems.size()]);
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         dialogBuilder.setSingleChoiceItems(items,-1,null);
         dialogBuilder.setTitle(R.string.pilot_availability_title);
@@ -149,6 +171,14 @@ public class TFTruckFragment extends TFCommonFragment {
 
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
+
+                } else {
+                    Toast.makeText(getActivity(), "" + getResources().getString(R.string.issue_parsingdata), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+
+        });
     }
 
     public void releasePilotAlertDialog(String pilotName){
