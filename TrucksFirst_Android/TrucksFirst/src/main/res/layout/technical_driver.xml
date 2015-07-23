@@ -32,7 +32,7 @@
                 style="@style/TextViewStyle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_dashboard" />
+                android:src="@drawable/ic_check" />
 
 
             <ImageView
@@ -40,7 +40,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_assignment" />
+                android:src="@drawable/ic_cancel" />
         </LinearLayout>
 
         <TextView
@@ -79,7 +79,7 @@
                 style="@style/TextViewStyle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_dashboard" />
+                android:src="@drawable/ic_check" />
 
 
             <ImageView
@@ -87,7 +87,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_assignment" />
+                android:src="@drawable/ic_cancel" />
         </LinearLayout>
 
         <TextView
@@ -125,7 +125,7 @@
                 style="@style/TextViewStyle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_dashboard" />
+                android:src="@drawable/ic_check" />
 
 
             <ImageView
@@ -133,7 +133,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_assignment" />
+                android:src="@drawable/ic_cancel" />
         </LinearLayout>
         <TextView
             android:layout_width="0dp"
@@ -170,7 +170,7 @@
                 style="@style/TextViewStyle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_dashboard" />
+                android:src="@drawable/ic_check" />
 
 
             <ImageView
@@ -178,7 +178,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_assignment" />
+                android:src="@drawable/ic_cancel" />
         </LinearLayout>
         <TextView
             android:layout_width="0dp"
@@ -215,7 +215,7 @@
                 style="@style/TextViewStyle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_dashboard" />
+                android:src="@drawable/ic_check" />
 
 
             <ImageView
@@ -223,7 +223,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_assignment" />
+                android:src="@drawable/ic_cancel" />
         </LinearLayout>
 
         <TextView
@@ -262,7 +262,7 @@
                 style="@style/TextViewStyle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_dashboard" />
+                android:src="@drawable/ic_check" />
 
 
             <ImageView
@@ -270,7 +270,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_assignment" />
+                android:src="@drawable/ic_cancel" />
         </LinearLayout>
 
         <TextView
