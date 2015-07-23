@@ -49,7 +49,10 @@ public class TFTruckFragment extends TFCommonFragment {
             protected void onReceiveResult(int resultCode, Bundle resultData) {
                 if(resultCode == 200) {
 
-                    String responseStr = resultData.getString("response").contains("ï»¿") ? resultData.getString("response").replaceAll("ï»¿", "") : resultData.getString("response");
+                    String responseStr = resultData.getString("response");
+                    String temp[] = responseStr.split("\\[");
+                    if(temp.length > 1)
+                        responseStr ="["+temp[1];
 
                     Type listType = new TypeToken<ArrayList<TruckDetails>>() {
                     }.getType();
@@ -198,8 +201,7 @@ public class TFTruckFragment extends TFCommonFragment {
             holder.mVehicleRoute.setText(truckDetailsList.get(position).getVehicleRoute());
             holder.mEta.setText(truckDetailsList.get(position).getEta());
             holder.mAssignedPilot.setText(truckDetailsList.get(position).getAssignedPilot());
-
-            if(truckDetailsList.get(position).getAssignedPilot().equals("null"))
+            if(truckDetailsList.get(position).getAssignedPilot() == null)
             {
                 holder.mVehicleNumber.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
                 holder.mVehicleRoute.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
