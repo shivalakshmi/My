@@ -24,6 +24,7 @@ import com.fissionlabs.trucksfirst.common.TFCommonFragment;
 import com.fissionlabs.trucksfirst.model.PilotAvailability;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
 import com.fissionlabs.trucksfirst.pojo.TFTruckDetailsPojo;
+import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,13 +32,16 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TFTruckFragment extends TFCommonFragment {
+public class TFTruckFragment extends TFCommonFragment implements View.OnClickListener{
 
     private ListView mTruckDetailsListView;
+    private ArrayList<TruckDetails> myModelList;
     private ArrayList<TFTruckDetailsPojo> mTruckList = new ArrayList<>();
     private  WebServices webServices;
     private ArrayList<PilotAvailability> pilotAvailabilityList = new ArrayList<>();
@@ -47,7 +51,11 @@ public class TFTruckFragment extends TFCommonFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_truck, container, false);
         mTruckDetailsListView = (ListView) view.findViewById(R.id.truck_details_list);
-
+        view.findViewById(R.id.vehicle_no).setOnClickListener(this);
+        view.findViewById(R.id.eta).setOnClickListener(this);
+        view.findViewById(R.id.vehicle_route).setOnClickListener(this);
+        view.findViewById(R.id.assign_pilot).setOnClickListener(this);
+        TFUtils.showProgressBar(getActivity(),getResources().getString(R.string.please_wait));
         webServices = new WebServices();
         webServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
             @Override
@@ -57,21 +65,42 @@ public class TFTruckFragment extends TFCommonFragment {
                     String responseStr = resultData.getString("response");
                     String temp[] = responseStr.split("\\[");
                     if(temp.length > 1)
-                        responseStr ="["+temp[1];
+                        responseStr = "[" + temp[1];
 
                     Type listType = new TypeToken<ArrayList<TruckDetails>>() {
                     }.getType();
-                    ArrayList<TruckDetails> myModelList = new Gson().fromJson(responseStr, listType);
+                    myModelList = new Gson().fromJson(responseStr, listType);
                     mTruckDetailsListView.setAdapter(new CustomTrucksAdapter(getActivity(), myModelList));
                 } else {
                     Toast.makeText(getActivity(),""+getResources().getString(R.string.issue_parsingdata),Toast.LENGTH_SHORT).show();
                 }
+                TFUtils.hideProgressBar();
             }
-
-
         });
 
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.vehicle_no:
+                Collections.sort(myModelList, new CustomComparator("vehicleNo"));
+                ((CustomTrucksAdapter)mTruckDetailsListView.getAdapter()).notifyDataSetChanged();
+                break;
+            case R.id.vehicle_route:
+                Collections.sort(myModelList, new CustomComparator("VehivleRoute"));
+                ((CustomTrucksAdapter)mTruckDetailsListView.getAdapter()).notifyDataSetChanged();
+                break;
+            case R.id.eta:
+                Collections.sort(myModelList, new CustomComparator("Eta"));
+                ((CustomTrucksAdapter)mTruckDetailsListView.getAdapter()).notifyDataSetChanged();
+                break;
+            case R.id.assign_pilot:
+                Collections.sort(myModelList, new CustomComparator("AssignedPilot"));
+                ((CustomTrucksAdapter)mTruckDetailsListView.getAdapter()).notifyDataSetChanged();
+                break;
+        }
     }
 
     public void showPilotInHubAlertDialog(String title) {
@@ -177,8 +206,6 @@ public class TFTruckFragment extends TFCommonFragment {
                     Toast.makeText(getActivity(), "" + getResources().getString(R.string.issue_parsingdata), Toast.LENGTH_SHORT).show();
                 }
             }
-
-
         });
     }
 
@@ -301,4 +328,33 @@ public class TFTruckFragment extends TFCommonFragment {
         }
     }
 
+    public class CustomComparator implements Comparator<TruckDetails> {
+        String type;
+        CustomComparator(String type){
+            this.type = type;
+        }
+        @Override
+        public int compare(TruckDetails o1, TruckDetails o2) {
+            if(type.equalsIgnoreCase("vehicleNo")) {
+                return o1.getVehicleNumber().compareTo(o2.getVehicleNumber());
+            } else if(type.equalsIgnoreCase("VehivleRoute")) {
+                return o1.getVehicleRoute().compareTo(o2.getVehicleRoute());
+            } else if(type.equalsIgnoreCase("Eta")) {
+                return o1.getEta().compareTo(o2.getEta());
+            } else if(type.equalsIgnoreCase("AssignedPilot")) {
+                if (o1.getAssignedPilot() == null) {
+                    if (o2.getAssignedPilot() == null)
+                        return 0; //equal
+                    else
+                        return -1; // null is before other strings
+                } else {
+                    if (o2.getAssignedPilot() == null)
+                        return 1;  // all other strings are after null
+                    else
+                        return o1.getAssignedPilot().compareTo(o2.getAssignedPilot());
+                }
+            }
+            return 0;
+        }
+    }
 }

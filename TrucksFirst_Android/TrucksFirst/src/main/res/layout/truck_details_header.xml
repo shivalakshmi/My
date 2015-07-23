@@ -2,35 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginTop="@dimen/common_padding_small0"
-              android:background="@color/list_header_color"
-              android:padding="@dimen/common_padding_small2"
-              android:weightSum="7">
+              android:weightSum="7"
+              android:layout_marginTop="@dimen/common_padding_small0">
 
     <TextView
+        android:id="@+id/vehicle_no"
         style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/common_padding_smal09"
         android:layout_weight="1"
         android:text="@string/vehicle_number"/>
 
     <TextView
+        android:id="@+id/vehicle_route"
         style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
+        android:layout_marginRight="@dimen/common_padding_smal09"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/vehicle_route"/>
 
     <TextView
+        android:id="@+id/eta"
         style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
+        android:layout_marginRight="@dimen/common_padding_smal09"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/eta"/>
 
     <TextView
+        android:id="@+id/assign_pilot"
         style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
+        android:layout_marginRight="@dimen/common_padding_smal09"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/assigned_pilots"/>
@@ -38,11 +44,12 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/common_padding_smal09"
         android:layout_weight="1">
 
         <TextView
             style="@style/TextViewHeaderStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/pilot_in_hub"/>
     </LinearLayout>
@@ -50,11 +57,12 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/common_padding_smal09"
         android:layout_weight="1">
 
         <TextView
             style="@style/TextViewHeaderStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/vehicle_in_hub"/>
     </LinearLayout>

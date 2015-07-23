@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:weightSum="5"
     android:gravity="center"
-    android:background="@color/color_primary"
     android:minHeight="@dimen/common_padding_large1"
     android:orientation="horizontal">
 
@@ -12,16 +11,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginLeft="@dimen/common_padding_small1"
         style="@style/TextViewHeaderStyle"
+        android:layout_marginRight="@dimen/common_padding_smal09"
         android:text="@string/technical"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="3"
-        android:layout_marginLeft="@dimen/common_padding_small1"
         style="@style/TextViewHeaderStyle"
+        android:layout_marginRight="@dimen/common_padding_smal09"
         android:text="@string/checklist_item"/>
 
     <TextView
