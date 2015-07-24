@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -39,7 +40,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TFTruckFragment extends TFCommonFragment implements View.OnClickListener {
+public class TFTruckFragment extends TFCommonFragment implements TFConst, View.OnClickListener{
 
     private ListView mTruckDetailsListView;
     private ArrayList<TruckDetails> myModelList;
@@ -68,7 +69,8 @@ public class TFTruckFragment extends TFCommonFragment implements View.OnClickLis
         webServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
-                if (resultCode == TFConst.SUCCESS) {
+                if(resultCode == SUCCESS) {
+
                     String responseStr = resultData.getString("response");
 
                     if (responseStr != null) {
@@ -141,7 +143,7 @@ public class TFTruckFragment extends TFCommonFragment implements View.OnClickLis
         dialogBuilder.setNegativeButton(getResources().getString(R.string.cancel), null);
 
         AlertDialog alertDialog = dialogBuilder.create();
-        alertDialog.getWindow().setLayout(500, 400);
+        alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         alertDialog.show();
     }
@@ -173,7 +175,7 @@ public class TFTruckFragment extends TFCommonFragment implements View.OnClickLis
             dialogBuilder.setPositiveButton(getString(R.string.ok), null);
             AlertDialog alertDialog = dialogBuilder.create();
             alertDialog.setCanceledOnTouchOutside(true);
-            alertDialog.getWindow().setLayout(500, 400);
+            alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
             alertDialog.show();
         }
     }
@@ -272,7 +274,8 @@ public class TFTruckFragment extends TFCommonFragment implements View.OnClickLis
             holder.mVehicleRoute.setText(truckDetailsList.get(position).getVehicleRoute());
             holder.mEta.setText(truckDetailsList.get(position).getEta());
             holder.mAssignedPilot.setText(truckDetailsList.get(position).getAssignedPilot());
-            if (truckDetailsList.get(position).getAssignedPilot() == null || truckDetailsList.get(position).getAssignedPilot().equalsIgnoreCase("null")) {
+            if(truckDetailsList.get(position).getAssignedPilot() == null || truckDetailsList.get(position).getAssignedPilot().equalsIgnoreCase("null"))
+            {
                 holder.mVehicleNumber.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
                 holder.mVehicleRoute.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
                 holder.mEta.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
@@ -280,7 +283,6 @@ public class TFTruckFragment extends TFCommonFragment implements View.OnClickLis
                 holder.mPilotInHub.setVisibility(View.GONE);
                 holder.mVehicleInHub.setVisibility(View.GONE);
                 holder.mChecklist.setVisibility(View.GONE);
-
             } else {
                 holder.mVehicleNumber.setTextColor(getResources().getColor(android.R.color.black));
                 holder.mVehicleRoute.setTextColor(getResources().getColor(android.R.color.black));
