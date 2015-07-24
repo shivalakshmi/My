@@ -19,7 +19,7 @@
         style="@style/TextViewStyle2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1.15" />
 
     <TextView
         android:id="@+id/eta"
@@ -35,7 +35,7 @@
         android:textColor="@color/color_accent"
         android:textStyle="bold"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1.15" />
 
 
     <RadioGroup
@@ -97,7 +97,7 @@
         android:src="@drawable/ic_assignment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="0.8" />
 
 
 </LinearLayout>

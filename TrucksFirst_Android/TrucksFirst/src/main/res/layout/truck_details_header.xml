@@ -9,25 +9,34 @@
         android:id="@+id/vehicle_no"
         style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
+        android:drawableLeft="@drawable/ic_arrow_right"
+        android:drawablePadding="1dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/common_padding_smal09"
         android:layout_weight="1"
+        android:background="@drawable/header_selector"
         android:text="@string/vehicle_number"/>
 
     <TextView
         android:id="@+id/vehicle_route"
         style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
+        android:drawableLeft="@drawable/ic_arrow_right"
+        android:drawablePadding="1dp"
         android:layout_marginRight="@dimen/common_padding_smal09"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:background="@drawable/header_selector"
+        android:layout_weight="1.15"
         android:text="@string/vehicle_route"/>
 
     <TextView
         android:id="@+id/eta"
         style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
+        android:drawableLeft="@drawable/ic_arrow_right"
+        android:drawablePadding="1dp"
         android:layout_marginRight="@dimen/common_padding_smal09"
+        android:background="@drawable/header_selector"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/eta"/>
@@ -36,9 +45,12 @@
         android:id="@+id/assign_pilot"
         style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
+        android:drawableLeft="@drawable/ic_arrow_right"
+        android:drawablePadding="1dp"
         android:layout_marginRight="@dimen/common_padding_smal09"
+        android:background="@drawable/header_selector"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="1.15"
         android:text="@string/assigned_pilots"/>
 
     <LinearLayout
@@ -71,7 +83,7 @@
         style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:text="@string/checklist"/>
 
 </LinearLayout>

@@ -2,6 +2,9 @@ package com.fissionlabs.trucksfirst.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.support.v4.app.Fragment;
@@ -43,7 +46,11 @@ import java.util.List;
 public class TFTruckFragment extends TFCommonFragment implements TFConst, View.OnClickListener{
 
     private ListView mTruckDetailsListView;
-    private ArrayList<TruckDetails> myModelList;
+    private TextView mTVVehivleNo;
+    private TextView mTVVehicleRoute;
+    private TextView mTVEta;
+    private TextView mTVAssignedPilot;
+    private ArrayList<TruckDetails> myModelList = null;
     private ArrayList<TFTruckDetailsPojo> mTruckList = new ArrayList<>();
     private WebServices webServices;
     private ArrayList<PilotAvailability> pilotAvailabilityList = new ArrayList<>();
@@ -60,10 +67,14 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_truck, container, false);
         mTruckDetailsListView = (ListView) view.findViewById(R.id.truck_details_list);
-        view.findViewById(R.id.vehicle_no).setOnClickListener(this);
-        view.findViewById(R.id.eta).setOnClickListener(this);
-        view.findViewById(R.id.vehicle_route).setOnClickListener(this);
-        view.findViewById(R.id.assign_pilot).setOnClickListener(this);
+        mTVVehivleNo = (TextView) view.findViewById(R.id.vehicle_no);
+        mTVVehicleRoute = (TextView) view.findViewById(R.id.vehicle_route);
+        mTVEta = (TextView) view.findViewById(R.id.eta);
+        mTVAssignedPilot = (TextView) view.findViewById(R.id.assign_pilot);
+        mTVAssignedPilot.setOnClickListener(this);
+        mTVEta.setOnClickListener(this);
+        mTVVehicleRoute.setOnClickListener(this);
+        mTVVehivleNo.setOnClickListener(this);
         TFUtils.showProgressBar(getActivity(), getResources().getString(R.string.please_wait));
         webServices = new WebServices();
         webServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
@@ -95,23 +106,71 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        if(myModelList != null && myModelList.size()>1) {
+            changeIconStatus(v);
+        }
+    }
+
+    private void changeIconStatus(View v) {
+        Drawable drawables[];
+        Bitmap bitmap;
+        int ascRdesc;
+        switch (v.getId()){
             case R.id.vehicle_no:
-                Collections.sort(myModelList, new CustomComparator(Sort.VEHICLE_NO));
+                drawables = mTVVehivleNo.getCompoundDrawables();
+                bitmap = ((BitmapDrawable)drawables[0] ).getBitmap();
+                ascRdesc = getPresentIcon(bitmap, mTVVehivleNo);
+                mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                Collections.sort(myModelList, new CustomComparator(Sort.VEHICLE_NO,ascRdesc));
                 ((CustomTrucksAdapter) mTruckDetailsListView.getAdapter()).notifyDataSetChanged();
                 break;
             case R.id.vehicle_route:
-                Collections.sort(myModelList, new CustomComparator(Sort.VEHICLE_ROUTE));
+                drawables = mTVVehicleRoute.getCompoundDrawables();
+                bitmap = ((BitmapDrawable)drawables[0] ).getBitmap();
+                ascRdesc = getPresentIcon(bitmap, mTVVehicleRoute);
+                mTVVehivleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                Collections.sort(myModelList, new CustomComparator(Sort.VEHICLE_ROUTE,ascRdesc));
                 ((CustomTrucksAdapter) mTruckDetailsListView.getAdapter()).notifyDataSetChanged();
                 break;
             case R.id.eta:
-                Collections.sort(myModelList, new CustomComparator(Sort.ETA));
+                drawables = mTVEta.getCompoundDrawables();
+                bitmap = ((BitmapDrawable)drawables[0] ).getBitmap();
+                ascRdesc = getPresentIcon(bitmap, mTVEta);
+                mTVVehivleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                Collections.sort(myModelList, new CustomComparator(Sort.ETA,ascRdesc));
                 ((CustomTrucksAdapter) mTruckDetailsListView.getAdapter()).notifyDataSetChanged();
                 break;
             case R.id.assign_pilot:
-                Collections.sort(myModelList, new CustomComparator(Sort.ASSIGNED_PILOT));
+                drawables = mTVAssignedPilot.getCompoundDrawables();
+                bitmap = ((BitmapDrawable)drawables[0] ).getBitmap();
+                ascRdesc = getPresentIcon(bitmap, mTVAssignedPilot);
+                mTVVehivleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                Collections.sort(myModelList, new CustomComparator(Sort.ASSIGNED_PILOT,ascRdesc));
                 ((CustomTrucksAdapter) mTruckDetailsListView.getAdapter()).notifyDataSetChanged();
                 break;
+        }
+    }
+
+    private int getPresentIcon(Bitmap bitmap, TextView tv) {
+        Bitmap rightBitmap = ((BitmapDrawable)getResources().getDrawable(R.drawable.ic_arrow_right)).getBitmap();
+        Bitmap upBitmap = ((BitmapDrawable)getResources().getDrawable(R.drawable.ic_arrow_up)).getBitmap();
+        if(bitmap == rightBitmap) {
+            tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_up, 0, 0, 0);
+            return 0;
+        } else if(bitmap == upBitmap) {
+            tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_down, 0, 0, 0);
+            return 1;
+        } else {
+            tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_up, 0, 0, 0);
+            return 0;  //down bitmap
         }
     }
 
@@ -339,9 +398,11 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
 
     public class CustomComparator implements Comparator<TruckDetails> {
         private Sort type;
+        private int ascRdesc;
 
-        CustomComparator(Sort type) {
+        CustomComparator(Sort type,int ascRdesc) {
             this.type = type;
+            this.ascRdesc = ascRdesc;
         }
 
         @Override
@@ -349,11 +410,11 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
 
             switch (type) {
                 case VEHICLE_NO:
-                    return o1.getVehicleNumber().compareTo(o2.getVehicleNumber());
+                    return ascRdesc == 0 ? o1.getVehicleNumber().compareTo(o2.getVehicleNumber()) : o2.getVehicleNumber().compareTo(o1.getVehicleNumber());
                 case VEHICLE_ROUTE:
-                    return o1.getVehicleRoute().compareTo(o2.getVehicleRoute());
+                    return ascRdesc == 0 ? o1.getVehicleRoute().compareTo(o2.getVehicleRoute()) : o2.getVehicleRoute().compareTo(o1.getVehicleRoute());
                 case ETA:
-                    return o1.getEta().compareTo(o2.getEta());
+                    return ascRdesc == 0 ? o1.getEta().compareTo(o2.getEta()) : o2.getEta().compareTo(o1.getEta());
                 case ASSIGNED_PILOT:
                     if (o1.getAssignedPilot() == null) {
                         if (o2.getAssignedPilot() == null)
@@ -364,7 +425,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                         if (o2.getAssignedPilot() == null)
                             return 1;  // all other strings are after null
                         else
-                            return o1.getAssignedPilot().compareTo(o2.getAssignedPilot());
+                            return ascRdesc == 0 ? o1.getAssignedPilot().compareTo(o2.getAssignedPilot()) : o2.getAssignedPilot().compareTo(o1.getAssignedPilot());
                     }
                 default:
                     return 0;
