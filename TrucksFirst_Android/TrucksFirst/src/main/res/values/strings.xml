@@ -54,7 +54,7 @@
     <string name="could_not_connect_to_server">No connection. Couldn\'t connect to the server.</string>
     <string name="try_again">Try again</string>
 
-    <!-->Checklist <-->
+    <!-- Checklist -->
     <string name="operational">Operational</string>
     <string name="technical">Technical</string>
     <string name="checklist_item">Checklist item</string>
@@ -62,7 +62,7 @@
     <string name="print">Print</string>
     <string name="email">Email</string>
 
-    <!-->Documents<-->
+    <!-- Documents -->
     <string name="documents">Documents</string>
     <string name="registration_certificate">Registration Certificate</string>
     <string name="fitness_certificate">Fitness Certificate</string>
@@ -74,14 +74,14 @@
     <string name="grn_bilti">GRN / Bilti</string>
     <string name="seal_intactness">Seal Intactness</string>
 
-    <!-->Kits<-->
+    <!-- Kits -->
     <string name="kits">Kits</string>
     <string name="tool_kit">Tool Kit</string>
     <string name="others">Others (Medical Kit, Torch, Bucket)</string>
     <string name="cleanliness">Cleanliness</string>
     <string name="cabin_cleanliness">Cabin Cleanliness</string>
 
-    <!-->Driver<-->
+    <!-- Driver -->
     <string name="driver">Driver</string>
     <string name="engine_starting">Engine Starting</string>
     <string name="engine_sound">Engine Sound</string>
@@ -90,7 +90,7 @@
     <string name="gear_movement">Gear Movement</string>
     <string name="brake_effectiveness">Brake Effectiveness</string>
 
-    <!-->Tyre & Oil<-->
+    <!-- Tyre & Oil -->
     <string name="tyre_oil">Tyre &amp; Oil</string>
     <string name="tyres">Tyres (Stones, Cut, Puncture)</string>
     <string name="coolant_leakage">Coolant Leakage</string>
@@ -99,7 +99,7 @@
     <string name="fuel_diesel_leakage">Fuel/Diesel Leakage</string>
     <string name="differential_oil_leakage">Differential Oil Leakage</string>
 
-    <!-->Electrical<-->
+    <!-- Electrical -->
     <string name="electrical">Electrical</string>
     <string name="headlight">Headlight (Low and High)</string>
     <string name="indicator_and_hazard">Indicator and Hazard</string>
@@ -109,7 +109,7 @@
     <string name="alternator_charger_light">Alternator Charger Light</string>
     <string name="oil_pressure_warning_light">Oil Pressure Warning Light</string>
 
-    <!-->Scratch/Dent<-->
+    <!-- Scratch/Dent -->
     <string name="scratch_dent">Scratch/Dent</string>
     <string name="front">Front</string>
     <string name="left">Left</string>
@@ -120,11 +120,14 @@
     <string name="pilot_release_pilot">Release Pilot</string>
     <string name="are_you_sure_release"><b>Are you sure you want to release pilot %1$s?</b></string>
     <string name="pilot_availability_title">Available Pilots</string>
-    <string name="issue_parsingdata">Issue with parsing data, Please consult with Administrator.</string>
-    <string name="please_wait">Please wait...</string>
+    <string name="issue_parsing_data">Issue with parsing data, Please consult with Administrator.</string>
     <string-array name="language_arrays">
         <item>English</item>
         <item>Hindi</item>
     </string-array>
+
+    <!-- Progressbar messages -->
+    <string name="please_wait">Please wait&#8230;</string>
+    <string name="loading">Loading&#8230;</string>
 
 </resources>
