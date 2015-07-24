@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Rivigo</string>
     <string name="action_settings">Settings</string>
+    <string name="action_save">Save</string>
 
     <string name="username">Username</string>
     <string name="password">Password</string>
