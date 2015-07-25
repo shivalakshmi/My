@@ -52,14 +52,14 @@ public class WebServices implements TFConst {
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<>();
+                HashMap<String, String> headers = new HashMap();
                 headers.put("Content-Type", "application/x-www-form-urlencoded");
                 return headers;
             }
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
+                Map<String, String> params = new HashMap();
                 return params;
             }
 
@@ -96,14 +96,14 @@ public class WebServices implements TFConst {
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<>();
+                HashMap<String, String> headers = new HashMap();
                 headers.put("Content-Type", "application/x-www-form-urlencoded");
                 return headers;
             }
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
+                Map<String, String> params = new HashMap();
                 return params;
             }
 

@@ -27,8 +27,8 @@ public class TFPilotFragment extends TFCommonFragment {
 
     private ListView mPilotAvailabilityListView;
     private DragNDropListView mAssignPilotListView;
-    private ArrayList<TFPilotAvailabilityPojo> mPilotAvailabilityPojoList = new ArrayList<>();
-    private ArrayList<Map<String, Object>> assignPilotsList = new ArrayList<>();
+    private ArrayList<TFPilotAvailabilityPojo> mPilotAvailabilityPojoList = new ArrayList();
+    private ArrayList<Map<String, Object>> assignPilotsList = new ArrayList();
     private TFPilotAvailabilityPojo mTfPilotAvailabilityPojo;
 
     @Override
