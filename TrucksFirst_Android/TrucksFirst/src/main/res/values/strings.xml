@@ -26,7 +26,7 @@
     <string name="driving_licence">Driving Licence</string>
     <string name="uniform">Uniform</string>
     <string name="non_alcoholic">Non Alcoholic</string>
-    <string name="current_date_and_time">Current Date and Time : </string>
+    <string name="current_date_and_time">Date and Time:</string>
 
     <!-- Pilot details screen -->
     <string name="pilot_availability">Pilot Availability</string>
