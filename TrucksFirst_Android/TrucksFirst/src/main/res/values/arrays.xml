@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="document_checklist">
+        <item>@string/registration_certificate</item>
+        <item>@string/fitness_certificate</item>
+        <item>@string/national_permit</item>
+        <item>@string/road_tax_booklet</item>
+        <item>@string/pollution_certificate</item>
+        <item>@string/insurance</item>
+        <item>@string/toll_tax_receipt_and_cash_balance</item>
+        <item>@string/grn_bilti</item>
+        <item>@string/seal_intactness</item>
+    </string-array>
+
+    <string-array name="kits_checklist">
+        <item>@string/tool_kit</item>
+        <item>@string/others</item>
+    </string-array>
+
+    <string-array name="driver_checklist">
+        <item>@string/engine_starting</item>
+        <item>@string/engine_sound</item>
+        <item>@string/exhaust_emission</item>
+        <item>@string/clutch_working</item>
+        <item>@string/gear_movement</item>
+        <item>@string/brake_effectiveness</item>
+
+    </string-array>
+
+    <string-array name="tyre_oil_checklist">
+        <item>@string/tyres</item>
+        <item>@string/coolant_leakage</item>
+        <item>@string/engine_oil_leakage</item>
+        <item>@string/gear_oil_leakage</item>
+        <item>@string/fuel_diesel_leakage</item>
+        <item>@string/differential_oil_leakage</item>
+
+    </string-array>
+
+    <string-array name="electrical_checklist">
+        <item>@string/headlight</item>
+        <item>@string/indicator_and_hazard</item>
+        <item>@string/horn</item>
+        <item>@string/Wiper</item>
+        <item>@string/temperature_on_temperature_gauge</item>
+        <item>@string/alternator_charger_light</item>
+        <item>@string/oil_pressure_warning_light</item>
+
+    </string-array>
+
+    <string-array name="scratch_checklist">
+        <item>@string/front</item>
+        <item>@string/left</item>
+        <item>@string/rear</item>
+        <item>@string/right</item>
+
+    </string-array>
+
+</resources>
