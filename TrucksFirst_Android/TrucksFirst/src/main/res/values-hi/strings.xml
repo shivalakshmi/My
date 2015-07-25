@@ -37,7 +37,7 @@
     <string name="headlight">हेडलाइट (लो &amp; हाई)</string>
     <string name="indicator_and_hazard">इंडिकेटर &amp; हैजर्ड</string>
     <string name="horn">हॉर्न</string>
-    <string name="Wiper">वाइपर</string>
+    <string name="wiper">वाइपर</string>
     <string name="temperature_on_temperature_gauge">तापमान गेज पर तापमान</string>
     <string name="alternator_charger_light">अल्टरनेटर चार्जर लाइट</string>
     <string name="oil_pressure_warning_light">तेल प्रेशर चेतावनी लाइट</string>

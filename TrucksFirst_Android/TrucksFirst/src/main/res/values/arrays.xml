@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string-array name="language_arrays">
+        <item>English</item>
+        <item>Hindi</item>
+    </string-array>
+
     <string-array name="document_checklist">
         <item>@string/registration_certificate</item>
         <item>@string/fitness_certificate</item>
@@ -24,7 +30,6 @@
         <item>@string/clutch_working</item>
         <item>@string/gear_movement</item>
         <item>@string/brake_effectiveness</item>
-
     </string-array>
 
     <string-array name="tyre_oil_checklist">
@@ -34,18 +39,16 @@
         <item>@string/gear_oil_leakage</item>
         <item>@string/fuel_diesel_leakage</item>
         <item>@string/differential_oil_leakage</item>
-
     </string-array>
 
     <string-array name="electrical_checklist">
         <item>@string/headlight</item>
         <item>@string/indicator_and_hazard</item>
         <item>@string/horn</item>
-        <item>@string/Wiper</item>
+        <item>@string/wiper</item>
         <item>@string/temperature_on_temperature_gauge</item>
         <item>@string/alternator_charger_light</item>
         <item>@string/oil_pressure_warning_light</item>
-
     </string-array>
 
     <string-array name="scratch_checklist">
@@ -53,7 +56,6 @@
         <item>@string/left</item>
         <item>@string/rear</item>
         <item>@string/right</item>
-
     </string-array>
 
 </resources>

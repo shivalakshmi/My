@@ -25,6 +25,10 @@
     <dimen name="common_padding_large8">110dp</dimen>
     <dimen name="common_padding_large9">120dp</dimen>
     <dimen name="common_padding_large10">130dp</dimen>
+    <dimen name="common_padding_large11">140dp</dimen>
+    <dimen name="common_padding_large12">150dp</dimen>
+    <dimen name="common_padding_large13">160dp</dimen>
+
 
     <!-- Font Size -->
     <dimen name="font_small0">8sp</dimen>
