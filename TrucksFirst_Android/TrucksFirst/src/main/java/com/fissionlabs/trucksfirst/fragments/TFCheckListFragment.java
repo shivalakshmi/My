@@ -51,6 +51,8 @@ public class TFCheckListFragment extends TFCommonFragment {
         ListView mLVChecklist = (ListView) view.findViewById(R.id.listView);
         checklistData();
         mLVChecklist.setAdapter(new MyCustomAdapter(getActivity()));
+        View footerView = inflater.inflate(R.layout.checklist_footer,null);
+        mLVChecklist.addFooterView(footerView);
         return view;
     }
 
