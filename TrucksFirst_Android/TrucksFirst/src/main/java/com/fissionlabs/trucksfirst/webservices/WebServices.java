@@ -68,6 +68,95 @@ public class WebServices implements TFConst {
 
     }
 
+
+    public void getVehicleCheckList(final Context context, final ResultReceiver resultReceiver) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_VEHICLE_CHECKLIST,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Vehicle checklist details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Vehicle checklist details end ======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+                        resultReceiver.send(SUCCESS, bundle);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                resultReceiver.send(ERROR, null);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap();
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap();
+                return params;
+            }
+
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_VEHICLE_CHECKLIST);
+
+    }
+
+    public void getDriverCheckList(final Context context, final ResultReceiver resultReceiver) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_DRIVER_CHECKLIST,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Driver checklist details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Driver checklist details end ======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+                        resultReceiver.send(SUCCESS, bundle);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                resultReceiver.send(ERROR, null);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap();
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap();
+                return params;
+            }
+
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_DRIVER_CHECKLIST);
+
+    }
+
     public void getPilotAvailability(final Context context, final ResultReceiver resultReceiver) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_PILOT_AVAILABILITY,
