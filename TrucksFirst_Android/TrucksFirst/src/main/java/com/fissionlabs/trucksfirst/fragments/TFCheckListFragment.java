@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
@@ -148,6 +149,16 @@ public class TFCheckListFragment extends TFCommonFragment {
                     } else {
                         holder.mRadioBtnNo.setChecked(true);
                     }
+                    holder.mImgEmail.setVisibility(View.INVISIBLE);
+                    if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(getResources().getString(R.string.grn_bilti)))
+                    {
+                        holder.mImgEmail.setVisibility(View.VISIBLE);
+                    }
+                    if(position<8)
+                    {
+                        holder.mImgPrint.setVisibility(View.VISIBLE);
+                    }
+
                     break;
                 case TYPE_TECHNICAL:
                     holder.mTVoperational.setText(mChecklistArrayList.get(position).getOperational());
@@ -192,25 +203,26 @@ public class TFCheckListFragment extends TFCommonFragment {
         String[] documentList = getResources().getStringArray(R.array.document_checklist);
         for (int i = 0; i < documentList.length; i++) {
             if (i == 0) {
-                mChecklist = new Checklist(getResources().getString(R.string.documents), documentList[i], mDocumentStatusList.get(i), "true", "true");
+                mChecklist = new Checklist(getResources().getString(R.string.documents), documentList[i], mDocumentStatusList.get(i), "true", "false");
                 mChecklistArrayList.add(mChecklist);
             } else {
-                mChecklist = new Checklist("", documentList[i], mDocumentStatusList.get(i), "true", "true");
+                mChecklist = new Checklist("", documentList[i], mDocumentStatusList.get(i), "true", "false");
                 mChecklistArrayList.add(mChecklist);
             }
+
         }
 
         String[] kitsList = getResources().getStringArray(R.array.kits_checklist);
         for (int j = 0; j < kitsList.length; j++) {
             if (j == 0) {
-                mChecklist = new Checklist(getResources().getString(R.string.kits), kitsList[j], mKitsStatusList.get(j), "true", "true");
+                mChecklist = new Checklist(getResources().getString(R.string.kits), kitsList[j], mKitsStatusList.get(j), "false", "false");
                 mChecklistArrayList.add(mChecklist);
             } else {
-                mChecklist = new Checklist("",kitsList[j], mKitsStatusList.get(j), "true", "true");
+                mChecklist = new Checklist("",kitsList[j], mKitsStatusList.get(j), "false", "false");
                 mChecklistArrayList.add(mChecklist);
             }
         }
-        mChecklist = new Checklist(getResources().getString(R.string.cleanliness), getResources().getString(R.string.cabin_cleanliness), mCleanlinessStatusList.get(0), "true", "true");
+        mChecklist = new Checklist(getResources().getString(R.string.cleanliness), getResources().getString(R.string.cabin_cleanliness), mCleanlinessStatusList.get(0), "false", "false");
         mChecklistArrayList.add(mChecklist);
         mChecklist = new Checklist(null, null, null, "true", "true");
         mChecklistArrayList.add(mChecklist);
