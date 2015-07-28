@@ -43,7 +43,6 @@ public class TFCheckListFragment extends TFCommonFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_check_list, container, false);
-        getActivity().getActionBar().setTitle("Binnu");
         ListView mLVChecklist = (ListView) view.findViewById(R.id.listView);
         mChecklistArrayList.clear();
         checklistData();
