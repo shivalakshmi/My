@@ -17,6 +17,7 @@
 
 <resources>
     <color name="color_primary">#6d6c71</color>
+    <color name="color_primary_light">#8a898d</color>
     <color name="color_primary_dark">#626165</color>
     <color name="text_color_primary">#FFFFFF</color>
     <color name="window_background">#FFFFFF</color>

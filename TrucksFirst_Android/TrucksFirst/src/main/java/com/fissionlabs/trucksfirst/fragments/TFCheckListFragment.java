@@ -1,10 +1,15 @@
 package com.fissionlabs.trucksfirst.fragments;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.fissionlabs.trucksfirst.R;
@@ -18,7 +23,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 @SuppressWarnings({"ALL", "CanBeFinal"})
-public class TFCheckListFragment extends TFCommonFragment {
+public class TFCheckListFragment extends TFCommonFragment{
 
     private ArrayList<Checklist> mChecklistArrayList = new ArrayList();
     private ArrayList<String> mDocumentStatusList = new ArrayList();
@@ -52,6 +57,18 @@ public class TFCheckListFragment extends TFCommonFragment {
         View footerView = inflater.inflate(R.layout.checklist_footer, null);
         mLVChecklist.addFooterView(footerView);
         mLVChecklist.setAdapter(new CheckListAdapter(getActivity(), mChecklistArrayList));
+        mLVChecklist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                long viewId = view.getId();
+
+                if (viewId == R.id.cross) {
+                   showStatusAlertDialog("HR55V1234");
+                }
+
+
+            }
+        });
         return view;
     }
 
@@ -144,6 +161,36 @@ public class TFCheckListFragment extends TFCommonFragment {
             }
         }
 
+    }
+
+    public void showStatusAlertDialog(String title) {
+
+        final CharSequence items[] = {getString(R.string.next_hub),
+                getString(R.string.ashok_leyland)};
+
+        final ArrayList<Integer> selectedItems = new ArrayList();
+        boolean checkedItems[] = new boolean[items.length];
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+
+        dialogBuilder.setTitle(Html.fromHtml("<b>" + title+"\t\t" + "</b>" +getResources().getString(R.string.notification_send_to)));
+        dialogBuilder.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                if (isChecked) {
+                    selectedItems.add(which);
+                } else if (selectedItems.contains(which)) {
+                    selectedItems.remove(Integer.valueOf(which));
+                }
+            }
+        });
+        dialogBuilder.setPositiveButton(getResources().getString(R.string.save), null);
+        dialogBuilder.setNegativeButton(getResources().getString(R.string.cancel), null);
+
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        alertDialog.show();
     }
 
 }

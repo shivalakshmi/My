@@ -7,7 +7,12 @@ public class Checklist {
 
     String operational;
     String checklistItem;
-    String status;
+    public String status;
+
+    public Checklist()
+    {
+
+    }
 
    public Checklist(String operational,String checklistItem,String status)
     {

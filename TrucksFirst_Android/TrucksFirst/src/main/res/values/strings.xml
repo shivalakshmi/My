@@ -128,5 +128,13 @@
     <!-- Progressbar messages -->
     <string name="please_wait">Please wait&#8230;</string>
     <string name="loading">Loading&#8230;</string>
+    
+    <!-- CheckList Status PopUp -->
+    <string name="notification_send_to">Notification send to</string>
+    <string name="next_hub">Next Hub</string>
+    <string name="ashok_leyland">Ashok Leyland</string>
+
+
+
 
 </resources>

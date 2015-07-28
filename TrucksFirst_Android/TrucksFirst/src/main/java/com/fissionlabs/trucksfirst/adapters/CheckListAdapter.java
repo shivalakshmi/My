@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,8 +72,8 @@ public class CheckListAdapter extends BaseAdapter {
     }
 
     @SuppressLint("InflateParams")
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+    public View getView(final int position, View convertView, final ViewGroup parent) {
+        final ViewHolder holder;
         int type = getItemViewType(position);
         System.out.println("getView " + position + " " + convertView + " type = " + type);
         if (convertView == null) {
@@ -88,6 +90,7 @@ public class CheckListAdapter extends BaseAdapter {
                     holder.mRadioBtnNo = (RadioButton) convertView.findViewById(R.id.radio_btn_no);
                     holder.mImgPrint = (ImageView) convertView.findViewById(R.id.print_img);
                     holder.mImgEmail = (ImageView) convertView.findViewById(R.id.email_img);
+                    holder.mRadioGroup = (RadioGroup)convertView.findViewById(R.id.radio_group);
 
                     break;
                 case TECHNICAL_ITEM:
@@ -105,6 +108,8 @@ public class CheckListAdapter extends BaseAdapter {
         switch (type) {
 
             case OPERATIONAL_ITEM:
+                holder.mRadioBtnNo.setTag(holder);
+                holder.mRadioBtnYes.setTag(holder);
                 holder.mTVoperational.setText(mChecklistArrayList.get(position).getOperational());
                 holder.mTVchecklistTtem.setText(mChecklistArrayList.get(position).getChecklistItem());
                 if (mChecklistArrayList.get(position).getStatus().equalsIgnoreCase("true")) {
@@ -128,10 +133,34 @@ public class CheckListAdapter extends BaseAdapter {
                         sendEmail();
                     }
                 });
+
+
+                holder.mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+                {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        if(R.id.radio_btn_yes == checkedId)
+                        {
+                            mChecklistArrayList.get(position).status = "true";
+                        }
+                        else
+                        {
+                            mChecklistArrayList.get(position).status = "false";
+                        }
+                        notifyDataSetChanged();
+                    }
+                });
+
                 break;
             case TECHNICAL_ITEM:
                 holder.mTVoperational.setText(mChecklistArrayList.get(position).getOperational());
                 holder.mTVchecklistTtem.setText(mChecklistArrayList.get(position).getChecklistItem());
+                convertView.findViewById(R.id.cross).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((ListView) parent).performItemClick(v, position, 0);
+                    }
+                });
                 break;
         }
 
@@ -145,6 +174,7 @@ public class CheckListAdapter extends BaseAdapter {
         RadioButton mRadioBtnNo;
         ImageView mImgPrint;
         ImageView mImgEmail;
+        public RadioGroup mRadioGroup;
     }
     static void sendEmail() {
         String[] TO = {""};
