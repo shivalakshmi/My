@@ -2,6 +2,8 @@ package com.fissionlabs.trucksfirst.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.support.v7.app.AlertDialog;
@@ -159,6 +161,10 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                     switch (which) {
+                        case 0:
+                            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + items[0].toString().split(":")[1]));
+                            mContext.startActivity(intent);
+                            break;
                         case 1:
                             assignPilotAlertDialog();
                             break;
