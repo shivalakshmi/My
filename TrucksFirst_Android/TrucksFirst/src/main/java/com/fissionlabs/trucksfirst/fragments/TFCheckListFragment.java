@@ -28,11 +28,11 @@ import java.util.ArrayList;
 public class TFCheckListFragment extends TFCommonFragment{
 
     private ArrayList<Checklist> mChecklistArrayList = new ArrayList();
-    private ArrayList<String> mDocumentStatusList = new ArrayList();
+    private ArrayList<Boolean> mDocumentStatusList = new ArrayList();
     private ArrayList<String> mDocumentChecklist = new ArrayList();
-    private ArrayList<String> mKitsStatusList = new ArrayList();
+    private ArrayList<Boolean> mKitsStatusList = new ArrayList();
     private ArrayList<String> mKitsChecklist = new ArrayList();
-    private ArrayList<String> mCleanlinessStatusList = new ArrayList();
+    private ArrayList<Boolean> mCleanlinessStatusList = new ArrayList();
     private ArrayList<String> mCleanlinessChecklist = new ArrayList();
 
     private ArrayList<String> mDriverChecklist = new ArrayList();
@@ -79,20 +79,20 @@ public class TFCheckListFragment extends TFCommonFragment{
 
 
     private void checklistData() {
-        mDocumentStatusList.add("true");
-        mDocumentStatusList.add("true");
-        mDocumentStatusList.add("false");
-        mDocumentStatusList.add("true");
-        mDocumentStatusList.add("true");
-        mDocumentStatusList.add("false");
-        mDocumentStatusList.add("true");
-        mDocumentStatusList.add("true");
-        mDocumentStatusList.add("true");
+        mDocumentStatusList.add(true);
+        mDocumentStatusList.add(true);
+        mDocumentStatusList.add(false);
+        mDocumentStatusList.add(true);
+        mDocumentStatusList.add(true);
+        mDocumentStatusList.add(false);
+        mDocumentStatusList.add(true);
+        mDocumentStatusList.add(true);
+        mDocumentStatusList.add(true);
 
-        mKitsStatusList.add("true");
-        mKitsStatusList.add("false");
+        mKitsStatusList.add(true);
+        mKitsStatusList.add(false);
 
-        mCleanlinessStatusList.add("false");
+        mCleanlinessStatusList.add(false);
 
         Checklist mChecklist;
 
@@ -120,17 +120,17 @@ public class TFCheckListFragment extends TFCommonFragment{
         }
         mChecklist = new Checklist(getResources().getString(R.string.cleanliness), getResources().getString(R.string.cabin_cleanliness), mCleanlinessStatusList.get(0));
         mChecklistArrayList.add(mChecklist);
-        mChecklist = new Checklist(null, null, null);
+        mChecklist = new Checklist(null, null, false);
         mChecklistArrayList.add(mChecklist);
 
         String[] driverList = getResources().getStringArray(R.array.driver_checklist);
 
         for (int k = 0; k < driverList.length; k++) {
             if (k == 0) {
-                mChecklist = new Checklist(getResources().getString(R.string.driver), driverList[k], "false");
+                mChecklist = new Checklist(getResources().getString(R.string.driver), driverList[k], false);
                 mChecklistArrayList.add(mChecklist);
             } else {
-                mChecklist = new Checklist("", driverList[k], "true");
+                mChecklist = new Checklist("", driverList[k], true);
                 mChecklistArrayList.add(mChecklist);
             }
         }
@@ -138,30 +138,30 @@ public class TFCheckListFragment extends TFCommonFragment{
         String[] tyreOilChecklist = getResources().getStringArray(R.array.tyre_oil_checklist);
         for (int l = 0; l < tyreOilChecklist.length; l++) {
             if (l == 0) {
-                mChecklist = new Checklist(getResources().getString(R.string.tyre_oil), tyreOilChecklist[l], "false");
+                mChecklist = new Checklist(getResources().getString(R.string.tyre_oil), tyreOilChecklist[l], false);
                 mChecklistArrayList.add(mChecklist);
             } else {
-                mChecklist = new Checklist("", tyreOilChecklist[l], "true");
+                mChecklist = new Checklist("", tyreOilChecklist[l], true);
                 mChecklistArrayList.add(mChecklist);
             }
         }
         String[] electricalChecklist = getResources().getStringArray(R.array.electrical_checklist);
         for (int m = 0; m < electricalChecklist.length; m++) {
             if (m == 0) {
-                mChecklist = new Checklist(getResources().getString(R.string.electrical), electricalChecklist[m], "false");
+                mChecklist = new Checklist(getResources().getString(R.string.electrical), electricalChecklist[m], false);
                 mChecklistArrayList.add(mChecklist);
             } else {
-                mChecklist = new Checklist("", electricalChecklist[m], "true");
+                mChecklist = new Checklist("", electricalChecklist[m], true);
                 mChecklistArrayList.add(mChecklist);
             }
         }
         String[] scratchChecklist = getResources().getStringArray(R.array.scratch_checklist);
         for (int n = 0; n < scratchChecklist.length; n++) {
             if (n == 0) {
-                mChecklist = new Checklist(getResources().getString(R.string.scratch_dent), scratchChecklist[n], "false");
+                mChecklist = new Checklist(getResources().getString(R.string.scratch_dent), scratchChecklist[n], false);
                 mChecklistArrayList.add(mChecklist);
             } else {
-                mChecklist = new Checklist("", scratchChecklist[n], "true");
+                mChecklist = new Checklist("", scratchChecklist[n], true);
                 mChecklistArrayList.add(mChecklist);
             }
         }

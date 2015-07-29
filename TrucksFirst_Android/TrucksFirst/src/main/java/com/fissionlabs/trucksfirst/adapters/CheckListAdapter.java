@@ -112,7 +112,7 @@ public class CheckListAdapter extends BaseAdapter {
                 holder.mRadioBtnYes.setTag(holder);
                 holder.mTVoperational.setText(mChecklistArrayList.get(position).getOperational());
                 holder.mTVchecklistTtem.setText(mChecklistArrayList.get(position).getChecklistItem());
-                if (mChecklistArrayList.get(position).getStatus().equalsIgnoreCase("true")) {
+                if (mChecklistArrayList.get(position).getStatus()) {
                     holder.mRadioBtnYes.setChecked(true);
                 } else {
                     holder.mRadioBtnNo.setChecked(true);
@@ -142,11 +142,11 @@ public class CheckListAdapter extends BaseAdapter {
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         if(R.id.radio_btn_yes == checkedId)
                         {
-                            mChecklistArrayList.get(position).status = "true";
+                            mChecklistArrayList.get(position).setStatus(true);
                         }
                         else
                         {
-                            mChecklistArrayList.get(position).status = "false";
+                            mChecklistArrayList.get(position).setStatus(false);
                         }
                         notifyDataSetChanged();
                     }

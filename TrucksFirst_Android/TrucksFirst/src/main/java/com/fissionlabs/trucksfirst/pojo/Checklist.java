@@ -7,14 +7,14 @@ public class Checklist {
 
     String operational;
     String checklistItem;
-    public String status;
+    boolean status;
 
     public Checklist()
     {
 
     }
 
-   public Checklist(String operational,String checklistItem,String status)
+   public Checklist(String operational,String checklistItem,boolean status)
     {
         this.operational = operational;
         this.checklistItem = checklistItem;
@@ -37,11 +37,11 @@ public class Checklist {
         this.checklistItem = checklistItem;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 }
