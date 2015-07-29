@@ -41,7 +41,7 @@ public class TFHomeActivity extends TFCommonActivity {
     private TFCheckListFragment mTFCheckListFragment;
     private Fragment mSelectedFragment;
 
-    private ActionBar mActionBar;
+    public static ActionBar mActionBar;
     private TextView mTvCurrentDateAndTime;
 
     @Override
@@ -49,7 +49,7 @@ public class TFHomeActivity extends TFCommonActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mActionBar = getSupportActionBar();
@@ -67,7 +67,7 @@ public class TFHomeActivity extends TFCommonActivity {
             setupDrawerContent(navigationView);
         }
 
-        loadFragment(R.layout.fragment_truck);
+        loadFragment(R.layout.fragment_truck,null);
 
         Thread thread = new Thread(new CountDownRunner());
         thread.start();
@@ -105,10 +105,10 @@ public class TFHomeActivity extends TFCommonActivity {
     private void displayView(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_dashboard:
-                loadFragment(R.layout.fragment_truck);
+                loadFragment(R.layout.fragment_truck,null);
                 break;
             case R.id.nav_settings:
-                loadFragment(R.layout.fragment_settings);
+                loadFragment(R.layout.fragment_settings,null);
                 break;
             case R.id.nav_logout:
 
@@ -137,7 +137,7 @@ public class TFHomeActivity extends TFCommonActivity {
     /**
      * ******************* Fragment ***********************
      */
-    public void loadFragment(int fragResId) {
+    public void loadFragment(int fragResId,Bundle bundle) {
 
         Fragment selectedFragment = null;
 
@@ -186,12 +186,12 @@ public class TFHomeActivity extends TFCommonActivity {
 
 
         Assert.assertTrue(selectedFragment != null);
-        loadFragment(selectedFragment);
+        loadFragment(selectedFragment,bundle);
     }
 
-    public void loadFragment(Fragment fragment) {
+    public void loadFragment(Fragment fragment, Bundle bundle) {
         Assert.assertTrue(fragment != null);
-        replaceFragment(fragment);
+        replaceFragment(fragment,bundle);
     }
 
     public void addFragment(Fragment fragment) {
@@ -207,12 +207,14 @@ public class TFHomeActivity extends TFCommonActivity {
         }
     }
 
-    private void replaceFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment, Bundle bundle) {
         String backStateName = fragment.getClass().getName();
         String fragmentTag = backStateName;
 
         FragmentManager manager = getSupportFragmentManager();
         boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
+
+        fragment.setArguments(bundle);
 
         if (!fragmentPopped && manager.findFragmentByTag(fragmentTag) == null) {
             FragmentTransaction ft = manager.beginTransaction();

@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.adapters.CheckListAdapter;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
+import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.pojo.Checklist;
 
 import java.util.ArrayList;
@@ -48,6 +50,9 @@ public class TFCheckListFragment extends TFCommonFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_check_list, container, false);
+        Bundle bundle = this.getArguments();
+
+        TFHomeActivity.mActionBar.setTitle(bundle.getString("vehicle_number"));
         ListView mLVChecklist = (ListView) view.findViewById(R.id.listView);
         mChecklistArrayList.clear();
         checklistData();

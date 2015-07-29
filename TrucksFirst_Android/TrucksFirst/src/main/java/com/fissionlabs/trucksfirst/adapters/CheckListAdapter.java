@@ -122,10 +122,11 @@ public class CheckListAdapter extends BaseAdapter {
                 {
                     holder.mImgEmail.setVisibility(View.VISIBLE);
                 }
-                if(position<8)
+                if(position<6 || position==7)
                 {
                     holder.mImgPrint.setVisibility(View.VISIBLE);
                 }
+
 
                 holder.mImgEmail.setOnClickListener(new View.OnClickListener() {
                     @Override

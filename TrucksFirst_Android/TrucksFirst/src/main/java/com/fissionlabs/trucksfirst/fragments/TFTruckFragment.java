@@ -311,7 +311,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
+            final ViewHolder holder;
             if (convertView == null) {
                 convertView = LayoutInflater.from(context).inflate(R.layout.truck_details_item, parent, false);
                 holder = new ViewHolder();
@@ -375,7 +375,9 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
             holder.mChecklist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startFragment(R.layout.fragment_check_list);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("vehicle_number",holder.mVehicleNumber.getText().toString());
+                    startFragment(R.layout.fragment_check_list, bundle);
                 }
             });
 

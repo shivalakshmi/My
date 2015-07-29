@@ -19,7 +19,7 @@ public class TFCommonFragment extends Fragment {
         mHomeActivity = (TFHomeActivity) getActivity();
     }
 
-    public void startFragment(int fragmentResId) {
-        mHomeActivity.loadFragment(fragmentResId);
+    public void startFragment(int fragmentResId, Bundle bundle) {
+        mHomeActivity.loadFragment(fragmentResId, bundle);
     }
 }
