@@ -33,6 +33,7 @@ import java.util.Date;
 public class TFHomeActivity extends TFCommonActivity {
 
     private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
 
     private TFDashBoardFragment mTFDashBoardFragment;
     private TFTruckFragment mTFTruckFragment;
@@ -49,7 +50,7 @@ public class TFHomeActivity extends TFCommonActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-       Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mActionBar = getSupportActionBar();
@@ -62,12 +63,12 @@ public class TFHomeActivity extends TFCommonActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mTvCurrentDateAndTime = (TextView) findViewById(R.id.tv_date_time);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (navigationView != null) {
-            setupDrawerContent(navigationView);
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (mNavigationView != null) {
+            setupDrawerContent(mNavigationView);
         }
 
-        loadFragment(R.layout.fragment_truck,null);
+        loadFragment(R.layout.fragment_truck, null);
 
         Thread thread = new Thread(new CountDownRunner());
         thread.start();
@@ -105,10 +106,10 @@ public class TFHomeActivity extends TFCommonActivity {
     private void displayView(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_dashboard:
-                loadFragment(R.layout.fragment_truck,null);
+                loadFragment(R.layout.fragment_truck, null);
                 break;
             case R.id.nav_settings:
-                loadFragment(R.layout.fragment_settings,null);
+                loadFragment(R.layout.fragment_settings, null);
                 break;
             case R.id.nav_logout:
 
@@ -137,7 +138,7 @@ public class TFHomeActivity extends TFCommonActivity {
     /**
      * ******************* Fragment ***********************
      */
-    public void loadFragment(int fragResId,Bundle bundle) {
+    public void loadFragment(int fragResId, Bundle bundle) {
 
         Fragment selectedFragment = null;
 
@@ -186,12 +187,12 @@ public class TFHomeActivity extends TFCommonActivity {
 
 
         Assert.assertTrue(selectedFragment != null);
-        loadFragment(selectedFragment,bundle);
+        loadFragment(selectedFragment, bundle);
     }
 
     public void loadFragment(Fragment fragment, Bundle bundle) {
         Assert.assertTrue(fragment != null);
-        replaceFragment(fragment,bundle);
+        replaceFragment(fragment, bundle);
     }
 
     public void addFragment(Fragment fragment) {
@@ -214,7 +215,9 @@ public class TFHomeActivity extends TFCommonActivity {
         FragmentManager manager = getSupportFragmentManager();
         boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
 
-        fragment.setArguments(bundle);
+        if(!fragment.isAdded()) {
+            fragment.setArguments(bundle);
+        }
 
         if (!fragmentPopped && manager.findFragmentByTag(fragmentTag) == null) {
             FragmentTransaction ft = manager.beginTransaction();
@@ -234,6 +237,11 @@ public class TFHomeActivity extends TFCommonActivity {
 
     @Override
     public void onBackPressed() {
+
+        if (mDrawerLayout.isDrawerOpen(mNavigationView)) {
+            mDrawerLayout.closeDrawers();
+            return;
+        }
 
         if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
             finish();

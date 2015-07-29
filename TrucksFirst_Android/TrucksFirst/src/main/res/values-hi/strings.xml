@@ -1,5 +1,5 @@
 <resources>
-    <string name="current_date_and_time">वर्तमान दिनांक और समय : </string>
+    <string name="current_date_and_time">दिनांक और समय : </string>
     <!--Documents-->
     <string name="registration_certificate">पंजीकरण प्रमाण पत्र</string>
     <string name="fitness_certificate">फिटनेस सर्टिफिकेट</string>
