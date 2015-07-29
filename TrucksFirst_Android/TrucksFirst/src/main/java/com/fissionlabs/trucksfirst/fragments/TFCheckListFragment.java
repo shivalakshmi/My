@@ -198,4 +198,9 @@ public class TFCheckListFragment extends TFCommonFragment{
         alertDialog.show();
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        TFHomeActivity.mActionBar.setTitle(getResources().getString(R.string.app_name));
+    }
 }
