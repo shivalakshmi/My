@@ -1,16 +1,26 @@
 package com.fissionlabs.trucksfirst.fragments;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,11 +38,12 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TFTruckFragment extends TFCommonFragment implements TFConst, View.OnClickListener {
+public class TFTruckFragment extends TFCommonFragment implements TFConst, View.OnClickListener, SearchView.OnQueryTextListener {
 
     private RecyclerView mTruckDetailsListView;
     private TextView mTVVehicleNo;
@@ -42,6 +53,13 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
     private ArrayList<TruckDetails> mTrucksList = null;
     private WebServices mWebServices;
     private TFTruckFragment mTFragment;
+    private TrucksAdapter mAdapter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,7 +97,8 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                         Type listType = new TypeToken<ArrayList<TruckDetails>>() {
                         }.getType();
                         mTrucksList = new Gson().fromJson(responseStr, listType);
-                        mTruckDetailsListView.setAdapter(new TrucksAdapter(getActivity(), mTFragment, mTrucksList));
+                        mAdapter = new TrucksAdapter(getActivity(), mTFragment, mTrucksList);
+                        mTruckDetailsListView.setAdapter(mAdapter);
                     }
                 } else {
                     Toast.makeText(getActivity(), "" + getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
@@ -110,7 +129,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
-                Collections.sort(mTrucksList, new CustomComparator(Sort.VEHICLE_NO, asc_desc));
+                Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.VEHICLE_NO, asc_desc));
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.vehicle_route:
@@ -120,7 +139,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
-                Collections.sort(mTrucksList, new CustomComparator(Sort.VEHICLE_ROUTE, asc_desc));
+                Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.VEHICLE_ROUTE, asc_desc));
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.eta:
@@ -130,7 +149,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
-                Collections.sort(mTrucksList, new CustomComparator(Sort.ETA, asc_desc));
+                Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.ETA, asc_desc));
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.assign_pilot:
@@ -140,7 +159,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
-                Collections.sort(mTrucksList, new CustomComparator(Sort.ASSIGNED_PILOT, asc_desc));
+                Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.ASSIGNED_PILOT, asc_desc));
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
         }
@@ -205,5 +224,44 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
             }
 
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+
+        final MenuItem item = menu.findItem(R.id.menu_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(this);
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        final ArrayList<TruckDetails> filteredModelList = filter(mAdapter.getUpdatedList(), query);
+        mAdapter.setUpdateList(filteredModelList);
+        mTruckDetailsListView.getAdapter().notifyDataSetChanged();
+        mTruckDetailsListView.scrollToPosition(0);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    private ArrayList<TruckDetails> filter(List<TruckDetails> models, String query) {
+        query = query.toLowerCase();
+
+        ArrayList<TruckDetails> filteredModelList = new ArrayList<>();
+
+        for (TruckDetails model : models) {
+            if (model.getVehicleNumber().toLowerCase().contains(query) ||
+                    model.getVehicleRoute().toLowerCase().contains(query) ||
+                    model.getEta().toLowerCase().contains(query) ||
+                    model.getAssignedPilot().toLowerCase().contains(query)) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
     }
 }

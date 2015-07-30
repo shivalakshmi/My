@@ -257,7 +257,7 @@ public class TFHomeActivity extends TFCommonActivity {
                 try {
                     Date date = new Date();
                     CharSequence dateFormat = DateFormat.format("dd/MM/yyyy k:mm:ss", date.getTime());
-                    mTvCurrentDateAndTime.setText(getString(R.string.current_date_and_time) + " " + dateFormat);
+                    mTvCurrentDateAndTime.setText(" " + dateFormat);
                 } catch (Exception e) {
                 }
             }

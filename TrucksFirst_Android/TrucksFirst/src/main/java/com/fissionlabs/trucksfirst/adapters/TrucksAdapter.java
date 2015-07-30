@@ -49,6 +49,14 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         mDataSet = dataSet;
     }
 
+    public void setUpdateList(ArrayList<TruckDetails> dataset) {
+        mDataSet = dataset;
+    }
+
+    public ArrayList<TruckDetails> getUpdatedList(){
+        return  mDataSet;
+    }
+
     @Override
     public TrucksAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.truck_details_item, parent, false);
