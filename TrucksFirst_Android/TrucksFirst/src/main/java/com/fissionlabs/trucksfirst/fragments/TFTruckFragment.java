@@ -233,11 +233,12 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         final MenuItem item = menu.findItem(R.id.menu_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
         searchView.setOnQueryTextListener(this);
-    }
+        searchView.findViewById(android.support.v7.appcompat.R.id.search_edit_frame).setBackgroundResource(R.drawable.abc_edit_text_material);
+            }
 
     @Override
     public boolean onQueryTextChange(String query) {
-        final ArrayList<TruckDetails> filteredModelList = filter(mAdapter.getUpdatedList(), query);
+        final ArrayList<TruckDetails> filteredModelList = filter(mTrucksList, query);
         mAdapter.setUpdateList(filteredModelList);
         mTruckDetailsListView.getAdapter().notifyDataSetChanged();
         mTruckDetailsListView.scrollToPosition(0);
