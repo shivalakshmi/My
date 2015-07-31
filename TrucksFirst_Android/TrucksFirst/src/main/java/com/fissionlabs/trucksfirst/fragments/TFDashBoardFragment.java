@@ -33,14 +33,14 @@ public class TFDashBoardFragment extends TFCommonFragment implements View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootview = inflater.inflate(R.layout.fragment_dash_board, container, false);
-        mTvFetchLocation = (TextView) rootview.findViewById(R.id.fetch_location);
-        mIvFetchLocationIcon = (ImageView) rootview.findViewById(R.id.fetch_location_icon);
+        View rootView = inflater.inflate(R.layout.fragment_dash_board, container, false);
+        mTvFetchLocation = (TextView) rootView.findViewById(R.id.fetch_location);
+        mIvFetchLocationIcon = (ImageView) rootView.findViewById(R.id.fetch_location_icon);
         mTvFetchLocation.setOnClickListener(this);
         mIvFetchLocationIcon.setOnClickListener(this);
-        rootview.findViewById(R.id.fetch_location_layout).setOnClickListener(this);
+        rootView.findViewById(R.id.fetch_location_layout).setOnClickListener(this);
 
-        return rootview;
+        return rootView;
     }
 
     public void fetchLocation() {

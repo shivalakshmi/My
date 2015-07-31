@@ -50,7 +50,7 @@ public class TFPilotAvailabilityPojo {
         return vehicleRoute;
     }
 
-    public void setVehicleRoute(String vehiceRoute) {
+    public void setVehicleRoute(String vehicleRoute) {
         this.vehicleRoute = vehicleRoute;
     }
 

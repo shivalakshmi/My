@@ -9,11 +9,11 @@ public class Truck {
 
     private ArrayList<TruckDetails> mTruckDetailsList;
 
-    public ArrayList<TruckDetails> getmTruckDetailsList() {
+    public ArrayList<TruckDetails> getTruckDetailsList() {
         return mTruckDetailsList;
     }
 
-    public void setmTruckDetailsList(ArrayList<TruckDetails> mTruckDetailsList) {
+    public void setTruckDetailsList(ArrayList<TruckDetails> mTruckDetailsList) {
         this.mTruckDetailsList = mTruckDetailsList;
     }
 }

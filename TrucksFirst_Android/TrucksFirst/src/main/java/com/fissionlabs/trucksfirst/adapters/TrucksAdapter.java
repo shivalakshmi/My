@@ -49,8 +49,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         mDataSet = dataSet;
     }
 
-    public void setUpdateList(ArrayList<TruckDetails> dataset) {
-        mDataSet = dataset;
+    public void setUpdateList(ArrayList<TruckDetails> dataSet) {
+        mDataSet = dataSet;
     }
 
     public ArrayList<TruckDetails> getUpdatedList(){
@@ -203,8 +203,10 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     ArrayList<PilotAvailability> pilotAvailabilityList = new Gson().fromJson(responseStr, listType);
                     List<String> listItems = new ArrayList<>();
 
-                    for (int i = 0; i < pilotAvailabilityList.size(); i++) {
-                        listItems.add(pilotAvailabilityList.get(i).getPilotName() + "  -  " + pilotAvailabilityList.get(i).getPilotAvailabilityStatus());
+                    if(pilotAvailabilityList != null) {
+                        for (int i = 0; i < pilotAvailabilityList.size(); i++) {
+                            listItems.add(pilotAvailabilityList.get(i).getPilotName() + "  -  " + pilotAvailabilityList.get(i).getPilotAvailabilityStatus());
+                        }
                     }
 
                     final CharSequence[] items = listItems.toArray(new CharSequence[listItems.size()]);

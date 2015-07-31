@@ -15,7 +15,6 @@ import android.widget.ListView;
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.adapters.CheckListAdapter;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
-import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.pojo.Checklist;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 @SuppressWarnings({"ALL", "CanBeFinal"})
-public class TFCheckListFragment extends TFCommonFragment{
+public class TFCheckListFragment extends TFCommonFragment {
 
     private ArrayList<Checklist> mChecklistArrayList = new ArrayList();
     private ArrayList<Boolean> mDocumentStatusList = new ArrayList();
@@ -67,7 +66,7 @@ public class TFCheckListFragment extends TFCommonFragment{
                 long viewId = view.getId();
 
                 if (viewId == R.id.cross) {
-                   showStatusAlertDialog("HR55V1234");
+                    showStatusAlertDialog("HR55V1234");
                 }
 
 
@@ -177,7 +176,7 @@ public class TFCheckListFragment extends TFCommonFragment{
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
 
-        dialogBuilder.setTitle(Html.fromHtml("<b>" + title+"\t\t" + "</b>" +getResources().getString(R.string.notification_send_to)));
+        dialogBuilder.setTitle(Html.fromHtml("<b>" + title + "\t\t" + "</b>" + getResources().getString(R.string.notification_send_to)));
         dialogBuilder.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {

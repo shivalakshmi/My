@@ -71,7 +71,7 @@ public class TFUtils implements TFConst{
     }//getFromSP()
 
     /**
-     * This methos is used to delete the given key - value pair data from the {@link SharedPreferences}.
+     * This method is used to delete the given key - value pair data from the {@link SharedPreferences}.
      * @param _activity {@link Activity} instance
      * @param key key value
      */

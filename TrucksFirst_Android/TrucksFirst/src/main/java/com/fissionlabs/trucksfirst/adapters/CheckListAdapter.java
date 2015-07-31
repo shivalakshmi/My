@@ -81,8 +81,8 @@ public class CheckListAdapter extends BaseAdapter {
                     break;
                 case OPERATIONAL_ITEM:
                     convertView = mInflater.inflate(R.layout.operational_item, parent, false);
-                    holder.mTVoperational = (TextView) convertView.findViewById(R.id.operational);
-                    holder.mTVchecklistTtem = (TextView) convertView.findViewById(R.id.checklist_item);
+                    holder.mTvOperational = (TextView) convertView.findViewById(R.id.operational);
+                    holder.mTvChecklistItem = (TextView) convertView.findViewById(R.id.checklist_item);
                     holder.mRadioBtnYes = (RadioButton) convertView.findViewById(R.id.radio_btn_yes);
                     holder.mRadioBtnNo = (RadioButton) convertView.findViewById(R.id.radio_btn_no);
                     holder.mImgPrint = (ImageView) convertView.findViewById(R.id.print_img);
@@ -92,8 +92,8 @@ public class CheckListAdapter extends BaseAdapter {
                     break;
                 case TECHNICAL_ITEM:
                     convertView = mInflater.inflate(R.layout.technical_item, parent, false);
-                    holder.mTVoperational = (TextView) convertView.findViewById(R.id.technical);
-                    holder.mTVchecklistTtem = (TextView) convertView.findViewById(R.id.checklist_technical);
+                    holder.mTvOperational = (TextView) convertView.findViewById(R.id.technical);
+                    holder.mTvChecklistItem = (TextView) convertView.findViewById(R.id.checklist_technical);
                     break;
             }
             assert convertView != null;
@@ -107,8 +107,8 @@ public class CheckListAdapter extends BaseAdapter {
             case OPERATIONAL_ITEM:
                 holder.mRadioBtnNo.setTag(holder);
                 holder.mRadioBtnYes.setTag(holder);
-                holder.mTVoperational.setText(mChecklistArrayList.get(position).getOperational());
-                holder.mTVchecklistTtem.setText(mChecklistArrayList.get(position).getChecklistItem());
+                holder.mTvOperational.setText(mChecklistArrayList.get(position).getOperational());
+                holder.mTvChecklistItem.setText(mChecklistArrayList.get(position).getChecklistItem());
                 if (mChecklistArrayList.get(position).getStatus()) {
                     holder.mRadioBtnYes.setChecked(true);
                 } else {
@@ -151,8 +151,8 @@ public class CheckListAdapter extends BaseAdapter {
 
                 break;
             case TECHNICAL_ITEM:
-                holder.mTVoperational.setText(mChecklistArrayList.get(position).getOperational());
-                holder.mTVchecklistTtem.setText(mChecklistArrayList.get(position).getChecklistItem());
+                holder.mTvOperational.setText(mChecklistArrayList.get(position).getOperational());
+                holder.mTvChecklistItem.setText(mChecklistArrayList.get(position).getChecklistItem());
                 convertView.findViewById(R.id.cross).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -166,8 +166,8 @@ public class CheckListAdapter extends BaseAdapter {
     }
 
     public class ViewHolder {
-        TextView mTVoperational;
-        TextView mTVchecklistTtem;
+        TextView mTvOperational;
+        TextView mTvChecklistItem;
         RadioButton mRadioBtnYes;
         RadioButton mRadioBtnNo;
         ImageView mImgPrint;
