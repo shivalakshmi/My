@@ -25,7 +25,6 @@ import java.util.Locale;
  */
 public class TFDashBoardFragment extends TFCommonFragment implements View.OnClickListener {
 
-    private TextView mTvLastLogin;
     private TextView mTvFetchLocation;
     private GPSTracker gps;
     private ImageView mIvFetchLocationIcon;
@@ -35,7 +34,6 @@ public class TFDashBoardFragment extends TFCommonFragment implements View.OnClic
                              Bundle savedInstanceState) {
 
         View rootview = inflater.inflate(R.layout.fragment_dash_board, container, false);
-        mTvLastLogin = (TextView) rootview.findViewById(R.id.last_login);
         mTvFetchLocation = (TextView) rootview.findViewById(R.id.fetch_location);
         mIvFetchLocationIcon = (ImageView) rootview.findViewById(R.id.fetch_location_icon);
         mTvFetchLocation.setOnClickListener(this);

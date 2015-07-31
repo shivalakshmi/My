@@ -51,7 +51,7 @@ public class TFPilotFragment extends TFCommonFragment {
     public class CustomTrucksAdapter extends ArrayAdapter<TFPilotAvailabilityPojo> {
 
         private Context context;
-        private ArrayList<TFPilotAvailabilityPojo> truckDetailsList = new ArrayList<TFPilotAvailabilityPojo>();
+        private ArrayList<TFPilotAvailabilityPojo> truckDetailsList = new ArrayList();
 
         public CustomTrucksAdapter(Context context, ArrayList<TFPilotAvailabilityPojo> truckDetailsList) {
             super(context, R.layout.pilot_availability_item, truckDetailsList);
@@ -63,7 +63,7 @@ public class TFPilotFragment extends TFCommonFragment {
         public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
-                convertView = LayoutInflater.from(context).inflate(R.layout.pilot_availability_item, null);
+                convertView = LayoutInflater.from(context).inflate(R.layout.pilot_availability_item, parent, false);
                 holder = new ViewHolder();
                 holder.mVehicleNumber = (TextView) convertView.findViewById(R.id.vehicle_number);
                 holder.mVehicleRoute = (TextView) convertView.findViewById(R.id.vehicle_route);
@@ -120,7 +120,7 @@ public class TFPilotFragment extends TFCommonFragment {
         mPilotAvailabilityPojoList.add(mTfPilotAvailabilityPojo);
 
         for (int i = 0; i < mPilotAvailabilityPojoList.size(); i++) {
-            HashMap<String, Object> item = new HashMap<String, Object>();
+            HashMap<String, Object> item = new HashMap();
             item.put("name", mPilotAvailabilityPojoList.get(i).getAssignPilot());
             assignPilotsList.add(item);
         }

@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +51,7 @@ public class TFCheckListFragment extends TFCommonFragment{
         View view = inflater.inflate(R.layout.fragment_check_list, container, false);
         Bundle bundle = this.getArguments();
 
-        TFHomeActivity.mActionBar.setTitle(bundle.getString("vehicle_number"));
+        mHomeActivity.mActionBar.setTitle(bundle.getString("vehicle_number"));
         ListView mLVChecklist = (ListView) view.findViewById(R.id.listView);
         mChecklistArrayList.clear();
         checklistData();
@@ -201,6 +200,6 @@ public class TFCheckListFragment extends TFCommonFragment{
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        TFHomeActivity.mActionBar.setTitle(getResources().getString(R.string.app_name));
+        mHomeActivity.mActionBar.setTitle(getResources().getString(R.string.app_name));
     }
 }

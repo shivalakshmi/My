@@ -20,17 +20,14 @@ import com.fissionlabs.trucksfirst.pojo.Checklist;
 
 import java.util.ArrayList;
 
-/**
- * Created by Lakshmi on 27-07-2015.
- */
 public class CheckListAdapter extends BaseAdapter {
 
     private static final int TECHNICAL_HEADER = 0;
     private static final int OPERATIONAL_ITEM = 1;
     private static final int TECHNICAL_ITEM = 2;
     private static final int TYPE_MAX_COUNT = TECHNICAL_ITEM + 1;
-    private ArrayList<Checklist> mChecklistArrayList = new ArrayList();
-    private static Context context;
+    private ArrayList<Checklist> mChecklistArrayList = null;
+    private Context context;
 
     private LayoutInflater mInflater;
 
@@ -177,7 +174,7 @@ public class CheckListAdapter extends BaseAdapter {
         ImageView mImgEmail;
         public RadioGroup mRadioGroup;
     }
-    static void sendEmail() {
+    void sendEmail() {
         String[] TO = {""};
         String[] CC = {""};
 

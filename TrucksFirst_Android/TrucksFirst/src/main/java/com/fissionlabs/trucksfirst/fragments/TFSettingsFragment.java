@@ -23,29 +23,34 @@ import java.util.Locale;
  * A simple {@link Fragment} subclass.
  */
 public class TFSettingsFragment extends TFCommonFragment implements TFConst{
-    private Spinner mSpinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
+        Spinner mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
         mSpinner.setSelection(TFUtils.getIntFromSP(getActivity(),LANG_SELECTION));
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int pos, long id) {
-                if (pos == 0) {
-                    TFUtils.saveIntInSP(getActivity(),LANG_SELECTION,pos);
-                    setLocale("en");
-                } else if (pos == 1) {
-                    TFUtils.saveIntInSP(getActivity(),LANG_SELECTION,pos);
-                    setLocale("hi");
+                switch (pos){
+                    case 0:
+                        TFUtils.saveIntInSP(getActivity(),LANG_SELECTION,pos);
+                        setLocale("en");
+                        break;
+                    case 1:
+                        TFUtils.saveIntInSP(getActivity(),LANG_SELECTION,pos);
+                        setLocale("hi");
+                        break;
+                    default:
+                        TFUtils.saveIntInSP(getActivity(),LANG_SELECTION,pos);
+                        setLocale("en");
+                        break;
                 }
             }
             public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
             }
         });
 

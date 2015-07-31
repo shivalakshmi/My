@@ -41,7 +41,7 @@ public class TFUtils implements TFConst{
         SharedPreferences preferences = _activity.getSharedPreferences(SHARED_PREFERENCES_NAME, android.content.Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(key, value);
-        editor.commit();
+        editor.apply();
     }//saveInSP()
 
     /**
@@ -55,7 +55,7 @@ public class TFUtils implements TFConst{
         SharedPreferences preferences = _activity.getSharedPreferences(SHARED_PREFERENCES_NAME, android.content.Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(key, value);
-        editor.commit();
+        editor.apply();
     }//saveInSP()
 
     /**
@@ -99,7 +99,7 @@ public class TFUtils implements TFConst{
         SharedPreferences preferences = _activity.getSharedPreferences(SHARED_PREFERENCES_NAME, android.content.Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(key, value);
-        editor.commit();
+        editor.apply();
     }//saveIntInSP()
     
     public static void deleteFromSP(Activity _activity,String key){
@@ -107,7 +107,7 @@ public class TFUtils implements TFConst{
         SharedPreferences preferences = _activity.getSharedPreferences(SHARED_PREFERENCES_NAME, android.content.Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.remove(key);
-        editor.commit();
+        editor.apply();
     }
 
     

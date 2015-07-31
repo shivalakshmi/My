@@ -13,7 +13,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.fissionlabs.trucksfirst.R;
@@ -23,7 +22,6 @@ import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 public class TFLoginActivity extends TFCommonActivity {
     private EditText mEtUserName;
     private EditText mEtPassword;
-    private Button mBtnLogIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +32,7 @@ public class TFLoginActivity extends TFCommonActivity {
 
         mEtUserName = (EditText) findViewById(R.id.username);
         mEtPassword = (EditText) findViewById(R.id.password);
-        mBtnLogIn = (Button) findViewById(R.id.btnLogin);
-        mBtnLogIn.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnLogin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userLoginChecking();

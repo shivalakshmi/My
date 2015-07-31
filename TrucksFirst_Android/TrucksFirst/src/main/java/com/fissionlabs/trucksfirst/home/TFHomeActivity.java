@@ -42,7 +42,7 @@ public class TFHomeActivity extends TFCommonActivity {
     private TFCheckListFragment mTFCheckListFragment;
     private Fragment mSelectedFragment;
 
-    public static ActionBar mActionBar;
+    public ActionBar mActionBar;
     private TextView mTvCurrentDateAndTime;
 
     @Override
@@ -210,7 +210,6 @@ public class TFHomeActivity extends TFCommonActivity {
 
     private void replaceFragment(Fragment fragment, Bundle bundle) {
         String backStateName = fragment.getClass().getName();
-        String fragmentTag = backStateName;
 
         FragmentManager manager = getSupportFragmentManager();
         boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
@@ -219,9 +218,9 @@ public class TFHomeActivity extends TFCommonActivity {
             fragment.setArguments(bundle);
         }
 
-        if (!fragmentPopped && manager.findFragmentByTag(fragmentTag) == null) {
+        if (!fragmentPopped && manager.findFragmentByTag(backStateName) == null) {
             FragmentTransaction ft = manager.beginTransaction();
-            ft.replace(R.id.frame_container, fragment, fragmentTag);
+            ft.replace(R.id.frame_container, fragment, backStateName);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(backStateName);
             ft.commit();
@@ -259,6 +258,7 @@ public class TFHomeActivity extends TFCommonActivity {
                     CharSequence dateFormat = DateFormat.format("dd/MM/yyyy k:mm:ss", date.getTime());
                     mTvCurrentDateAndTime.setText(" " + dateFormat);
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -275,6 +275,7 @@ public class TFHomeActivity extends TFCommonActivity {
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }

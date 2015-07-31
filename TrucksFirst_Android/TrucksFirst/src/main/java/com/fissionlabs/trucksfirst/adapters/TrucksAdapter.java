@@ -60,8 +60,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
     @Override
     public TrucksAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.truck_details_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
