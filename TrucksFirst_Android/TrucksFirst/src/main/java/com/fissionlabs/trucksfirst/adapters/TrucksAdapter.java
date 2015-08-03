@@ -97,37 +97,51 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             holder.mRadioVehicleInHubYes.setChecked(true);
             holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_enabled));
             holder.mChecklist.setClickable(true);
-        }
-        else {
+        } else {
             holder.mRadioVehicleInHubNo.setChecked(true);
             holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_disabled));
             holder.mChecklist.setClickable(false);
         }
 
-       holder.mVehicleInHub.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        holder.mRadioVehicleInHubYes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    if (R.id.vehicle_in_hub_yes == checkedId) {
-                        mDataSet.get(position).setVehicleInHub("true");
-                        holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_enabled));
-                        holder.mChecklist.setClickable(true);
-                    } else {
-                        mDataSet.get(position).setVehicleInHub("false");
-                        holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_disabled));
-                        holder.mChecklist.setClickable(false);
-                    }
-//                notifyDataSetChanged();
+            public void onClick(View v) {
+                mDataSet.get(position).setVehicleInHub("true");
+                holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_enabled));
+                holder.mChecklist.setClickable(true);
+                notifyItemChanged(position);
             }
         });
+        holder.mRadioVehicleInHubNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDataSet.get(position).setVehicleInHub("false");
+                holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_disabled));
+                holder.mChecklist.setClickable(false);
+                notifyItemChanged(position);
+            }
+        });
+        if(mDataSet.get(position).getPilotInHub().equalsIgnoreCase("true")){
+            holder.mRadioPilotInHubYes.setChecked(true);
+        } else {
+            holder.mRadioPilotInHubNo.setChecked(true);
+        }
 
         holder.mRadioPilotInHubYes.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                showPilotInHubAlertDialog(mDataSet.get(position).getAssignedPilot());
+                showPilotInHubAlertDialog(mDataSet.get(position).getAssignedPilot(), position, holder.mRadioPilotInHubYes,holder.mRadioPilotInHubNo);
             }
         });
+        holder.mRadioPilotInHubNo.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View view) {
+                mDataSet.get(position).setPilotInHub("false");
+                notifyItemChanged(position);
+            }
+        });
         holder.mAssignedPilot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,7 +165,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         return mDataSet.size();
     }
 
-    public void showPilotInHubAlertDialog(String title) {
+    public void showPilotInHubAlertDialog(String title, final int positon, final RadioButton yes, final RadioButton no) {
 
         final CharSequence items[] = {mContext.getString(R.string.driving_licence),
                 mContext.getString(R.string.uniform),
@@ -172,9 +186,22 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                 }
             }
         });
-        dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.save), null);
-        dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), null);
+        dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.save), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mDataSet.get(positon).setPilotInHub("true");
+                notifyDataSetChanged();
+            }
+        });
+        dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                no.setChecked(true);
+                mDataSet.get(positon).setPilotInHub("false");
+            }
+        });
 
+        notifyItemChanged(positon);
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -302,6 +329,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             mAssignedPilot = (TextView) view.findViewById(R.id.assigned_pilot);
             mPilotInHub = (RadioGroup) view.findViewById(R.id.polit_in_hub);
             mRadioPilotInHubYes = (RadioButton) view.findViewById(R.id.polit_in_hub_yes);
+            mRadioPilotInHubNo = (RadioButton) view.findViewById(R.id.polit_in_hub_no);
             mVehicleInHub = (RadioGroup) view.findViewById(R.id.vehicle_in_hub);
             mChecklist = (ImageView) view.findViewById(R.id.checklist);
             mRadioVehicleInHubYes = (RadioButton)view.findViewById(R.id.vehicle_in_hub_yes);
