@@ -95,7 +95,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
 
         if(mDataSet.get(position).getVehicleInHub().equals("true")) {
             holder.mRadioVehicleInHubYes.setChecked(true);
-            holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_enabled));
+            holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.checklist_selector));
             holder.mChecklist.setClickable(true);
         } else {
             holder.mRadioVehicleInHubNo.setChecked(true);
@@ -107,7 +107,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 mDataSet.get(position).setVehicleInHub("true");
-                holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_enabled));
+                holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.checklist_selector));
                 holder.mChecklist.setClickable(true);
                 notifyItemChanged(position);
             }
