@@ -229,6 +229,7 @@ public class TFHomeActivity extends TFCommonActivity {
 
     private void goToLogin() {
         TFUtils.deleteFromSP(TFHomeActivity.this, LANG_SELECTION);
+        TFUtils.deleteFromSP(TFHomeActivity.this,IS_USER_EXISTS);
         Intent intent = new Intent(TFHomeActivity.this, TFLoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

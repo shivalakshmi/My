@@ -6,7 +6,9 @@ import android.os.Handler;
 import android.view.View;
 
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
+import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.signup.TFLoginActivity;
+import com.fissionlabs.trucksfirst.util.TFUtils;
 
 public class TFSplashActivity extends TFCommonActivity {
     private static final long SPLASH_TIME = 3000;
@@ -23,8 +25,7 @@ public class TFSplashActivity extends TFCommonActivity {
         runnable = new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(TFSplashActivity.this, TFLoginActivity.class));
-                finish();
+                launchHome();
             }
         };
         mSplashTimeHandler.postDelayed(runnable, SPLASH_TIME);
@@ -37,8 +38,19 @@ public class TFSplashActivity extends TFCommonActivity {
 
     public void finishActivity(View v) {
         mSplashTimeHandler.removeCallbacks(runnable);
-        finish();
-        startActivity(new Intent(TFSplashActivity.this, TFLoginActivity.class));
+        launchHome();
+    }
+
+
+    private void launchHome(){
+        if(TFUtils.getBooleanFromSP(TFSplashActivity.this,IS_USER_EXISTS)){
+            startActivity(new Intent(TFSplashActivity.this, TFHomeActivity.class));
+            finish();
+        } else {
+            startActivity(new Intent(TFSplashActivity.this, TFLoginActivity.class));
+            finish();
+        }
+
     }
 
 }
