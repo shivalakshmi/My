@@ -115,7 +115,7 @@ public class TFLoginActivity extends TFCommonActivity {
 
         TFUtils.showProgressBar(this, getString(R.string.please_wait));
 
-        new WebServices().userLogin(new JSONObject(params), new ResultReceiver(null) {
+        new WebServices().userLogin(getApplicationContext(), new JSONObject(params), new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
 

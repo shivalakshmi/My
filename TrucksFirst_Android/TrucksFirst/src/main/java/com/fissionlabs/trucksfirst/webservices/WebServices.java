@@ -13,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.TFApp;
 import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.util.LogConfig;
@@ -28,7 +29,7 @@ import java.util.Map;
 
 public class WebServices implements TFConst {
 
-    public void userLogin(final JSONObject jsonObject, final ResultReceiver resultReceiver) {
+    public void userLogin(final Context context, final JSONObject jsonObject, final ResultReceiver resultReceiver) {
 
         JsonObjectRequest request = new JsonObjectRequest(URL_LOGIN, jsonObject,
                 new Response.Listener<JSONObject>() {
@@ -51,6 +52,7 @@ public class WebServices implements TFConst {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("Error: ", error.getMessage());
+                Toast.makeText(context,context.getResources().getString(R.string.server_not_responding),Toast.LENGTH_SHORT).show();
                 resultReceiver.send(ERROR, null);
             }
         });
@@ -82,6 +84,7 @@ public class WebServices implements TFConst {
                 if (LogConfig.D) {
                     Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
                 }
+                Toast.makeText(context,context.getResources().getString(R.string.server_not_responding),Toast.LENGTH_SHORT).show();
                 resultReceiver.send(ERROR, null);
             }
         }) {
@@ -97,12 +100,10 @@ public class WebServices implements TFConst {
                 Map<String, String> params = new HashMap();
                 return params;
             }
-
         };
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_TRUCK_DETAILS);
 
     }
-
 
     public void getPilotAvailability(final Context context, final ResultReceiver resultReceiver) {
 

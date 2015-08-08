@@ -136,6 +136,7 @@
 
     <string name="search_hint">Type and Search</string>
     <string name="menu_search">Search</string>
+    <string name="server_not_responding">Server is not responding...</string>
 
 
 

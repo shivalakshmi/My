@@ -77,7 +77,6 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
 
                     if (responseStr != null) {
                         mChecklistNew = new Gson().fromJson(responseStr, ChecklistNew.class);
-                        Log.d("data::", "data" + mChecklistNew.isRegistrationCertificate());
                         checklistData();
                         mLVChecklist.setAdapter(new CheckListAdapter(getActivity(), mChecklistArrayList, mChecklistNew));
                     }
