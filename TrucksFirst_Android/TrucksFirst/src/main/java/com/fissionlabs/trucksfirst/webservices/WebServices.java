@@ -9,10 +9,14 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.fissionlabs.trucksfirst.TFApp;
 import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.util.LogConfig;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +27,36 @@ import java.util.Map;
 
 public class WebServices implements TFConst {
 
+    public void userLogin(final JSONObject jsonObject, final ResultReceiver resultReceiver) {
+
+        JsonObjectRequest request = new JsonObjectRequest(URL_LOGIN, jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ User login ==========================");
+                            Log.d(TAG, "" + response);
+                            Log.d(TAG, "================================ User login end ======================");
+                        }
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response.toString());
+
+                        resultReceiver.send(SUCCESS, bundle);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                resultReceiver.send(ERROR, null);
+            }
+        });
+
+        TFApp.getInstance().addToRequestQueue(request, TAG_USER_LOGIN);
+
+    }
 
     public void getTruckDetails(final Context context, final ResultReceiver resultReceiver) {
 
