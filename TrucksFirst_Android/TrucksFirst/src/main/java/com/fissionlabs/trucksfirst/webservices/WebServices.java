@@ -229,6 +229,88 @@ public class WebServices implements TFConst {
         }
     }
 
+    public void getDriverChecklistDetails(final Context context, final ResultReceiver resultReceiver) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DRIVER_CHECKLIST,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Checklist details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Checklist details end ======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+                        resultReceiver.send(SUCCESS, bundle);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                resultReceiver.send(ERROR, null);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap();
+//                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap();
+                params.put("vehicleNo", "HR55V1234");
+                params.put("pilotNo","PTD/DR/H/0001");
+                return params;
+            }
+
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CHECKLIST_DETAILS);
+    }
+
+    public void updateDriverChecklist(String jsonObj) {
+        try {
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                    URL_UPDATE_DRIVER_CHECKLIST, new JSONObject(jsonObj),
+                    new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.e("A", "" + response);
+                            Log.e("JSON Object response", "" + response);
+
+                        }
+                    }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("A", "Error");
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+//                    headers.put("Content-Type", "application/json");
+                    return headers;
+                }
+
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    return params;
+                }
+            };
+            TFApp.getInstance().addToRequestQueue(jsonObjReq, "TAG");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
 

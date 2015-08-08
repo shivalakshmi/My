@@ -25,6 +25,8 @@ import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
 import com.fissionlabs.trucksfirst.model.PilotAvailability;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
+import com.fissionlabs.trucksfirst.pojo.ChecklistNew;
+import com.fissionlabs.trucksfirst.pojo.DriverChecklist;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
 import com.google.gson.Gson;
@@ -42,6 +44,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
     private Context mContext;
     private ArrayList<TruckDetails> mDataSet;
     private TFTruckFragment mTfTruckFragment;
+    private DriverChecklist mDriverChecklist;
+    private WebServices mWebServices;
 
     public TrucksAdapter(Context context, TFTruckFragment tfTruckFragment, ArrayList<TruckDetails> dataSet) {
         mContext = context;
@@ -165,47 +169,71 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         return mDataSet.size();
     }
 
-    public void showPilotInHubAlertDialog(String title, final int positon, final RadioButton yes, final RadioButton no) {
+    public void showPilotInHubAlertDialog(final String title, final int positon, final RadioButton yes, final RadioButton no) {
 
-        final CharSequence items[] = {mContext.getString(R.string.driving_licence),
-                mContext.getString(R.string.uniform),
-                mContext.getString(R.string.non_alcoholic)};
 
-        final ArrayList<Integer> selectedItems = new ArrayList();
-        boolean checkedItems[] = new boolean[items.length];
-
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
-        dialogBuilder.setTitle(Html.fromHtml("<b>" + title + "</b>"));
-        dialogBuilder.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+        mWebServices = new WebServices();
+        mWebServices.getDriverChecklistDetails(mContext, new ResultReceiver(null) {
             @Override
-            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                if (isChecked) {
-                    selectedItems.add(which);
-                } else if (selectedItems.contains(which)) {
-                    selectedItems.remove(Integer.valueOf(which));
+            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                if (resultCode == TFConst.SUCCESS) {
+
+                    String responseStr = resultData.getString("response");
+                    mDriverChecklist = new Gson().fromJson(responseStr, DriverChecklist.class);
+
+                    final CharSequence items[] = {mContext.getString(R.string.driving_licence),
+                            mContext.getString(R.string.uniform),
+                            mContext.getString(R.string.non_alcoholic)};
+
+                    boolean checkedItems[] = {mDriverChecklist.isDrivingLicence(),
+                            mDriverChecklist.isUniform(),
+                            mDriverChecklist.isNonAlchoholic()};
+
+                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
+                    dialogBuilder.setTitle(Html.fromHtml("<b>" + title + "</b>"));
+                    dialogBuilder.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                            if(which == 0){
+                                mDriverChecklist.setDrivingLicence(isChecked);
+                            }else if(which == 1){
+                                mDriverChecklist.setUniform(isChecked);
+                            }else {
+                                mDriverChecklist.setNonAlchoholic(isChecked);
+                            }
+                        }
+                    });
+                    dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.save), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mDataSet.get(positon).setPilotInHub("true");
+                            notifyDataSetChanged();
+                            String jsonObject = new Gson().toJson(mDriverChecklist, DriverChecklist.class);
+                            mWebServices.updateDriverChecklist(jsonObject);
+
+                        }
+                    });
+                    dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            no.setChecked(true);
+                            mDataSet.get(positon).setPilotInHub("false");
+                        }
+                    });
+
+                    notifyItemChanged(positon);
+                    AlertDialog alertDialog = dialogBuilder.create();
+                    alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                    alertDialog.show();
+                } else {
+                    Toast.makeText(mContext, "" + mContext.getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-        dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.save), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mDataSet.get(positon).setPilotInHub("true");
-                notifyDataSetChanged();
-            }
-        });
-        dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                no.setChecked(true);
-                mDataSet.get(positon).setPilotInHub("false");
+                TFUtils.hideProgressBar();
             }
         });
 
-        notifyItemChanged(positon);
-        AlertDialog alertDialog = dialogBuilder.create();
-        alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        alertDialog.show();
     }
 
 
