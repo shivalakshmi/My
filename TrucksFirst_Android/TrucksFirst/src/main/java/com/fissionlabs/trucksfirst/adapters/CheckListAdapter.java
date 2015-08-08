@@ -16,9 +16,11 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.pojo.Checklist;
+import com.fissionlabs.trucksfirst.pojo.ChecklistNew;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +35,13 @@ public class CheckListAdapter extends BaseAdapter {
     private Context context;
 
     private LayoutInflater mInflater;
+    private ChecklistNew mChecklistNew;
 
-    public CheckListAdapter(Context context, ArrayList<Checklist> ChecklistArrayList) {
+    public CheckListAdapter(Context context, ArrayList<Checklist> ChecklistArrayList, ChecklistNew checklistNew) {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mChecklistArrayList = ChecklistArrayList;
         this.context = context;
+        this.mChecklistNew = checklistNew;
     }
 
     @Override
@@ -136,8 +140,12 @@ public class CheckListAdapter extends BaseAdapter {
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         if (R.id.radio_btn_yes == checkedId) {
                             mChecklistArrayList.get(position).setStatus(true);
+                            updateStatus(position, true);
                         } else {
                             mChecklistArrayList.get(position).setStatus(false);
+                            updateStatus(position, false);
+//                            mChecklistNew.setRegistrationCertificate(false);
+//                            Toast.makeText(context,"status:"+mChecklistNew.isRegistrationCertificate(),Toast.LENGTH_SHORT).show();
                         }
                         notifyDataSetChanged();
                     }
@@ -157,6 +165,34 @@ public class CheckListAdapter extends BaseAdapter {
         }
 
         return convertView;
+    }
+
+    private void updateStatus(int position, boolean flag) {
+        if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.registration_certificate))){
+            mChecklistNew.setRegistrationCertificate(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.fitness_certificate))){
+            mChecklistNew.setFitnessCertificate(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.national_permit))){
+            mChecklistNew.setNationalPermit(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.road_tax_booklet))){
+            mChecklistNew.setRoadTaxBooklet(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.pollution_certificate))){
+            mChecklistNew.setPollutionCertificate(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.insurance))){
+            mChecklistNew.setInsurance(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.toll_tax_receipt_and_cash_balance))){
+            mChecklistNew.setTollTaxReceiptAndCashBalance(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.grn_bilti))){
+            mChecklistNew.setGrnOrBilti(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.seal_intactness))){
+            mChecklistNew.setSealIntactness(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.tool_kit))){
+            mChecklistNew.setToolKit(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.others))){
+            mChecklistNew.setToolKit(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.cabin_cleanliness))){
+            mChecklistNew.setCabinCleanliness(flag);
+        }
     }
 
     public class ViewHolder {

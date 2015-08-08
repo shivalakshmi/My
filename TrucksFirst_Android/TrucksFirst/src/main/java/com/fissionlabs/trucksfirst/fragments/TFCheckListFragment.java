@@ -3,19 +3,28 @@ package com.fissionlabs.trucksfirst.fragments;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.adapters.CheckListAdapter;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
+import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.pojo.Checklist;
+import com.fissionlabs.trucksfirst.pojo.ChecklistNew;
+import com.fissionlabs.trucksfirst.util.TFUtils;
+import com.fissionlabs.trucksfirst.webservices.WebServices;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -23,7 +32,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 @SuppressWarnings({"ALL", "CanBeFinal"})
-public class TFCheckListFragment extends TFCommonFragment {
+public class TFCheckListFragment extends TFCommonFragment implements TFConst{
 
     private ArrayList<Checklist> mChecklistArrayList = new ArrayList();
     private ArrayList<Boolean> mDocumentStatusList = new ArrayList();
@@ -37,6 +46,10 @@ public class TFCheckListFragment extends TFCommonFragment {
     private ArrayList<String> mTyreOilChecklist = new ArrayList();
     private ArrayList<String> mElectrical = new ArrayList();
     private ArrayList<String> mScratch = new ArrayList();
+    private ChecklistNew mChecklistNew;
+    private WebServices mWebServices;
+    private Button saveBtn;
+    private Button cancelBtn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,15 +64,54 @@ public class TFCheckListFragment extends TFCommonFragment {
         Bundle bundle = this.getArguments();
 
         mHomeActivity.mActionBar.setTitle(bundle.getString("vehicle_number"));
-        ListView mLVChecklist = (ListView) view.findViewById(R.id.listView);
+        final ListView mLVChecklist = (ListView) view.findViewById(R.id.listView);
         mChecklistArrayList.clear();
-        checklistData();
+        mWebServices = new WebServices();
+//        mChecklistNew =new ChecklistNew();
+        mWebServices.getVehicleChecklistDetails(getActivity(), new ResultReceiver(null) {
+            @Override
+            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                if (resultCode == SUCCESS) {
+
+                    String responseStr = resultData.getString("response");
+
+                    if (responseStr != null) {
+                        mChecklistNew = new Gson().fromJson(responseStr, ChecklistNew.class);
+                        Log.d("data::", "data" + mChecklistNew.isRegistrationCertificate());
+                        checklistData();
+                        mLVChecklist.setAdapter(new CheckListAdapter(getActivity(), mChecklistArrayList, mChecklistNew));
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "" + getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
+                }
+                TFUtils.hideProgressBar();
+            }
+        });
+
 
         View headerView = inflater.inflate(R.layout.operational_header, null);
         mLVChecklist.addHeaderView(headerView);
         View footerView = inflater.inflate(R.layout.checklist_footer, null);
+        saveBtn = (Button)footerView.findViewById(R.id.save);
+        cancelBtn = (Button)footerView.findViewById(R.id.cancel);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHomeActivity.onBackPressed();
+            }
+        });
+
         mLVChecklist.addFooterView(footerView);
-        mLVChecklist.setAdapter(new CheckListAdapter(getActivity(), mChecklistArrayList));
+
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String jsonObject = new Gson().toJson(mChecklistNew, ChecklistNew.class);
+                mWebServices.updateVehicleChecklist(jsonObject);
+                mHomeActivity.onBackPressed();
+            }
+        });
+
         mLVChecklist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -77,21 +129,21 @@ public class TFCheckListFragment extends TFCommonFragment {
 
 
     private void checklistData() {
-        mDocumentStatusList.add(true);
-        mDocumentStatusList.add(true);
-        mDocumentStatusList.add(false);
-        mDocumentStatusList.add(true);
-        mDocumentStatusList.add(true);
-        mDocumentStatusList.add(false);
-        mDocumentStatusList.add(true);
-        mDocumentStatusList.add(true);
-        mDocumentStatusList.add(true);
+        mDocumentStatusList.clear();
+        mDocumentStatusList.add(mChecklistNew.isRegistrationCertificate());
+        mDocumentStatusList.add(mChecklistNew.isFitnessCertificate());
+        mDocumentStatusList.add(mChecklistNew.isNationalPermit());
+        mDocumentStatusList.add(mChecklistNew.isRoadTaxBooklet());
+        mDocumentStatusList.add(mChecklistNew.isPollutionCertificate());
+        mDocumentStatusList.add(mChecklistNew.isInsurance());
+        mDocumentStatusList.add(mChecklistNew.isTollTaxReceiptAndCashBalance());
+        mDocumentStatusList.add(mChecklistNew.isGrnOrBilti());
+        mDocumentStatusList.add(mChecklistNew.isSealIntactness());
 
-        mKitsStatusList.add(true);
-        mKitsStatusList.add(false);
+        mKitsStatusList.add(mChecklistNew.isToolKit());
+        mKitsStatusList.add(mChecklistNew.isToolKit());
 
-        mCleanlinessStatusList.add(false);
-
+        mCleanlinessStatusList.add(mChecklistNew.isCabinCleanliness());
         Checklist mChecklist;
 
         String[] documentList = getResources().getStringArray(R.array.document_checklist);
