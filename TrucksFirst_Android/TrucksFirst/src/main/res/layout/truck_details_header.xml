@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/common_padding_smal09"
         android:layout_weight="1"
+        android:tag="1"
         android:background="@drawable/header_selector"
         android:text="@string/vehicle_number"/>
 
@@ -27,6 +28,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/header_selector"
         android:layout_weight="1.15"
+        android:tag="1"
         android:text="@string/vehicle_route"/>
 
     <TextView
@@ -36,6 +38,7 @@
         android:drawableLeft="@drawable/ic_arrow_right"
         android:drawablePadding="1dp"
         android:layout_marginRight="@dimen/common_padding_smal09"
+        android:tag="1"
         android:background="@drawable/header_selector"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -45,6 +48,7 @@
         android:id="@+id/assign_pilot"
         style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
+        android:tag="1"
         android:drawableLeft="@drawable/ic_arrow_right"
         android:drawablePadding="1dp"
         android:layout_marginRight="@dimen/common_padding_smal09"

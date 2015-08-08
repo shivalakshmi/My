@@ -113,14 +113,10 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
     }
 
     private void changeIconStatus(View v) {
-        Drawable drawables[];
-        Bitmap bitmap;
         int asc_desc;
         switch (v.getId()) {
             case R.id.vehicle_no:
-                drawables = mTVVehicleNo.getCompoundDrawables();
-                bitmap = ((BitmapDrawable) drawables[0]).getBitmap();
-                asc_desc = getPresentIcon(bitmap, mTVVehicleNo);
+                asc_desc = getPresentIcon(mTVVehicleNo);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
@@ -128,9 +124,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.vehicle_route:
-                drawables = mTVVehicleRoute.getCompoundDrawables();
-                bitmap = ((BitmapDrawable) drawables[0]).getBitmap();
-                asc_desc = getPresentIcon(bitmap, mTVVehicleRoute);
+                asc_desc = getPresentIcon(mTVVehicleRoute);
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
@@ -138,9 +132,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.eta:
-                drawables = mTVEta.getCompoundDrawables();
-                bitmap = ((BitmapDrawable) drawables[0]).getBitmap();
-                asc_desc = getPresentIcon(bitmap, mTVEta);
+                asc_desc = getPresentIcon(mTVEta);
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
@@ -148,9 +140,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.assign_pilot:
-                drawables = mTVAssignedPilot.getCompoundDrawables();
-                bitmap = ((BitmapDrawable) drawables[0]).getBitmap();
-                asc_desc = getPresentIcon(bitmap, mTVAssignedPilot);
+                asc_desc = getPresentIcon(mTVAssignedPilot);
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
@@ -160,17 +150,18 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         }
     }
 
-    private int getPresentIcon(Bitmap bitmap, TextView tv) {
-        Bitmap rightBitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.ic_arrow_right)).getBitmap();
-        Bitmap upBitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.ic_arrow_up)).getBitmap();
-        if (bitmap == rightBitmap) {
+    private int getPresentIcon(TextView tv) {
+        if (tv.getTag().equals("1")) {
             tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_up, 0, 0, 0);
+            tv.setTag("2");
             return 0;
-        } else if (bitmap == upBitmap) {
+        } else if (tv.getTag().equals("2")) {
             tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_down, 0, 0, 0);
+            tv.setTag("1");
             return 1;
         } else {
             tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_up, 0, 0, 0);
+            tv.setTag("1");
             return 0;  //down bitmap
         }
     }
