@@ -9,8 +9,7 @@ public class Checklist {
     String checklistItem;
     boolean status;
 
-    public Checklist()
-    {
+    public Checklist() {
 
     }
 

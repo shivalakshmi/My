@@ -44,6 +44,8 @@ public class TFHomeActivity extends TFCommonActivity {
 
     public ActionBar mActionBar;
     private TextView mTvCurrentDateAndTime;
+    public static boolean isChangesMade;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +142,10 @@ public class TFHomeActivity extends TFCommonActivity {
      */
     public void loadFragment(int fragResId, Bundle bundle) {
 
+        if (isChangesMade) {
+            showConfirmationPopUp();
+            return;
+        }
         Fragment selectedFragment = null;
 
         switch (fragResId) {
@@ -246,10 +252,32 @@ public class TFHomeActivity extends TFCommonActivity {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
             finish();
         } else {
-            super.onBackPressed();
+            if(isChangesMade)
+                showConfirmationPopUp();
+            else
+                super.onBackPressed();
         }
 
     }
+
+    private void showConfirmationPopUp() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setTitle(getString(R.string.discard_changes));
+        dialogBuilder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                isChangesMade =false;
+                onBackPressed();
+            }
+        });
+        dialogBuilder.setNegativeButton(getResources().getString(R.string.no), null);
+
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.getWindow().setLayout(500, 200);
+
+        alertDialog.show();
+    }
+
 
     public void doWork() {
         runOnUiThread(new Runnable() {

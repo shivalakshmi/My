@@ -192,10 +192,9 @@ public class WebServices implements TFConst {
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CHECKLIST_DETAILS);
     }
 
-    public void updateVehicleChecklist(String jsonObj) {
-        try {
+    public void updateVehicleChecklist(JSONObject jsonObj) {
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                    URL_UPDATE_VEHICLE_CHECKLIST_DETAILS, new JSONObject(jsonObj),
+                    URL_UPDATE_VEHICLE_CHECKLIST_DETAILS,jsonObj,
                     new Response.Listener<JSONObject>() {
 
                         @Override
@@ -225,9 +224,6 @@ public class WebServices implements TFConst {
                 }
             };
             TFApp.getInstance().addToRequestQueue(jsonObjReq, "TAG");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void getDriverChecklistDetails(final Context context, final ResultReceiver resultReceiver) {
@@ -274,10 +270,9 @@ public class WebServices implements TFConst {
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CHECKLIST_DETAILS);
     }
 
-    public void updateDriverChecklist(String jsonObj) {
-        try {
+    public void updateDriverChecklist(JSONObject jsonObj) {
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                    URL_UPDATE_DRIVER_CHECKLIST, new JSONObject(jsonObj),
+                    URL_UPDATE_DRIVER_CHECKLIST,jsonObj,
                     new Response.Listener<JSONObject>() {
 
                         @Override
@@ -307,9 +302,6 @@ public class WebServices implements TFConst {
                 }
             };
             TFApp.getInstance().addToRequestQueue(jsonObjReq, "TAG");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 }

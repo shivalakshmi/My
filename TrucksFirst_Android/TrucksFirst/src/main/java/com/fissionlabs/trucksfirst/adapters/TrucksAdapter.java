@@ -32,6 +32,8 @@ import com.fissionlabs.trucksfirst.webservices.WebServices;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -209,7 +211,12 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             mDataSet.get(positon).setPilotInHub("true");
                             notifyDataSetChanged();
                             String jsonObject = new Gson().toJson(mDriverChecklist, DriverChecklist.class);
-                            mWebServices.updateDriverChecklist(jsonObject);
+                            try {
+                                mWebServices.updateDriverChecklist(new JSONObject(jsonObject));
+                            }
+                            catch(Exception e){
+                                e.printStackTrace();
+                            }
 
                         }
                     });

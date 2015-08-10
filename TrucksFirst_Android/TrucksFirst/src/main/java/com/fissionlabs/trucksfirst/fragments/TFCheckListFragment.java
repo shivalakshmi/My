@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +19,14 @@ import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.adapters.CheckListAdapter;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
 import com.fissionlabs.trucksfirst.common.TFConst;
+import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.pojo.Checklist;
 import com.fissionlabs.trucksfirst.pojo.ChecklistNew;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
 import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -50,7 +52,6 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
     private WebServices mWebServices;
     private Button saveBtn;
     private Button cancelBtn;
-    public static boolean isChangesMade;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,9 +98,6 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isChangesMade)
-                    showConfirmationPopUp();
-                else
                     mHomeActivity.onBackPressed();
             }
         });
@@ -110,7 +108,12 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
             @Override
             public void onClick(View v) {
                 String jsonObject = new Gson().toJson(mChecklistNew, ChecklistNew.class);
-                mWebServices.updateVehicleChecklist(jsonObject);
+                try {
+                    mWebServices.updateVehicleChecklist(new JSONObject(jsonObject));
+                }
+                catch(Exception e) {
+                    e.printStackTrace();
+                }
                 mHomeActivity.onBackPressed();
             }
         });
@@ -128,24 +131,6 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
             }
         });
         return view;
-    }
-
-    private void showConfirmationPopUp() {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-        dialogBuilder.setTitle(getString(R.string.discard_changes));
-        dialogBuilder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                isChangesMade =false;
-               mHomeActivity.onBackPressed();
-            }
-        });
-        dialogBuilder.setNegativeButton(getResources().getString(R.string.no), null);
-
-        AlertDialog alertDialog = dialogBuilder.create();
-        alertDialog.getWindow().setLayout(500, 200);
-
-        alertDialog.show();
     }
 
 
