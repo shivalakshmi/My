@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.fragments.TFCheckListFragment;
 import com.fissionlabs.trucksfirst.pojo.Checklist;
 import com.fissionlabs.trucksfirst.pojo.ChecklistNew;
 
@@ -138,14 +139,13 @@ public class CheckListAdapter extends BaseAdapter {
                 holder.mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        TFCheckListFragment.isChangesMade = true;
                         if (R.id.radio_btn_yes == checkedId) {
                             mChecklistArrayList.get(position).setStatus(true);
                             updateStatus(position, true);
                         } else {
                             mChecklistArrayList.get(position).setStatus(false);
                             updateStatus(position, false);
-//                            mChecklistNew.setRegistrationCertificate(false);
-//                            Toast.makeText(context,"status:"+mChecklistNew.isRegistrationCertificate(),Toast.LENGTH_SHORT).show();
                         }
                         notifyDataSetChanged();
                     }
@@ -158,6 +158,7 @@ public class CheckListAdapter extends BaseAdapter {
                 convertView.findViewById(R.id.cross).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        TFCheckListFragment.isChangesMade = true;
                         ((ListView) parent).performItemClick(v, position, 0);
                     }
                 });

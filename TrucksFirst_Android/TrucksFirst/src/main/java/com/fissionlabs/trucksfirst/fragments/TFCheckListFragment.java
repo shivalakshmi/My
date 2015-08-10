@@ -50,6 +50,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
     private WebServices mWebServices;
     private Button saveBtn;
     private Button cancelBtn;
+    public static boolean isChangesMade;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,7 +97,10 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mHomeActivity.onBackPressed();
+                if(isChangesMade)
+                    showConfirmationPopUp();
+                else
+                    mHomeActivity.onBackPressed();
             }
         });
 
@@ -124,6 +128,24 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
             }
         });
         return view;
+    }
+
+    private void showConfirmationPopUp() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        dialogBuilder.setTitle(getString(R.string.discard_changes));
+        dialogBuilder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                isChangesMade =false;
+               mHomeActivity.onBackPressed();
+            }
+        });
+        dialogBuilder.setNegativeButton(getResources().getString(R.string.no), null);
+
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.getWindow().setLayout(500, 200);
+
+        alertDialog.show();
     }
 
 
