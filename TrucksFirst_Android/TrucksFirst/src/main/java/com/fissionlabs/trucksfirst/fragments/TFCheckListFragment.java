@@ -129,6 +129,8 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
 
     private void checklistData() {
         mDocumentStatusList.clear();
+        mKitsStatusList.clear();
+        mCleanlinessStatusList.clear();
         mDocumentStatusList.add(mChecklistNew.isRegistrationCertificate());
         mDocumentStatusList.add(mChecklistNew.isFitnessCertificate());
         mDocumentStatusList.add(mChecklistNew.isNationalPermit());
