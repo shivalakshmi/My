@@ -4,12 +4,12 @@ package com.fissionlabs.trucksfirst.model;
  * Created by Lakshmi on 21-07-2015.
  */
 public class TruckDetails {
-    String vehicleNumber;
-    String vehicleRoute;
-    String eta;
-    String assignedPilot;
-    String pilotInHub;
-    String vehicleInHub;
+    private String vehicleNumber;
+    private String vehicleRoute;
+    private String eta;
+    private String assignedPilot;
+    private String pilotInHub;
+    private String vehicleInHub;
 
 
     public String getAssignedPilot() {

@@ -31,11 +31,6 @@ public class TFSplashActivity extends TFCommonActivity {
         mSplashTimeHandler.postDelayed(runnable, SPLASH_TIME);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
     public void finishActivity(View v) {
         mSplashTimeHandler.removeCallbacks(runnable);
         launchHome();

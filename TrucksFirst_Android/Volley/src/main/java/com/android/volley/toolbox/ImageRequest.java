@@ -46,7 +46,7 @@ public class ImageRequest extends Request<Bitmap> {
     private final Config mDecodeConfig;
     private final int mMaxWidth;
     private final int mMaxHeight;
-    private ScaleType mScaleType;
+    private final ScaleType mScaleType;
 
     /** Decoding lock so that we don't decode more than one image at a time (to avoid OOM's) */
     private static final Object sDecodeLock = new Object();
@@ -229,7 +229,7 @@ public class ImageRequest extends Request<Bitmap> {
      * @param desiredHeight Desired height of the bitmap
      */
     // Visible for testing.
-    static int findBestSampleSize(
+    private static int findBestSampleSize(
             int actualWidth, int actualHeight, int desiredWidth, int desiredHeight) {
         double wr = (double) actualWidth / desiredWidth;
         double hr = (double) actualHeight / desiredHeight;

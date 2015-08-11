@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="35dp"
     android:orientation="horizontal"
@@ -13,7 +14,8 @@
         android:text="@string/cancel"
         android:background="@color/color_primary"
         android:textColor="@android:color/white"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        tools:ignore="ButtonStyle" />
 
     <Button
         android:id="@+id/save"
@@ -22,7 +24,8 @@
         android:layout_margin="5dp"
         android:background="@color/color_accent"
         android:textColor="@android:color/white"
-        android:text="@string/save"/>
+        android:text="@string/save"
+        tools:ignore="ButtonStyle" />
 
 
 </LinearLayout>

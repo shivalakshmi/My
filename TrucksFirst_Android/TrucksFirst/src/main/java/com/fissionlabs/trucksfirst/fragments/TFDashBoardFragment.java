@@ -43,7 +43,7 @@ public class TFDashBoardFragment extends TFCommonFragment implements View.OnClic
         return rootView;
     }
 
-    public void fetchLocation() {
+    private void fetchLocation() {
 
         if (gps.canGetLocation()) {
             double latitude = gps.getLatitude();

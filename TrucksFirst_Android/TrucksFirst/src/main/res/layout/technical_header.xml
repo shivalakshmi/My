@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:gravity="center"
               android:minHeight="@dimen/common_padding_large1"
@@ -11,7 +12,7 @@
         style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/common_padding_smal09"
+        android:layout_marginEnd="@dimen/common_padding_smal09"
         android:layout_weight="1"
         android:text="@string/technical"/>
 
@@ -19,7 +20,7 @@
         style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/common_padding_smal09"
+        android:layout_marginEnd="@dimen/common_padding_smal09"
         android:layout_weight="2"
         android:text="@string/checklist_item"/>
 
@@ -47,14 +48,15 @@
             style="@style/TextViewStyle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_dashboard"/>
+            android:src="@drawable/ic_dashboard"
+            tools:ignore="ContentDescription" />
 
 
         <ImageView
             style="@style/TextViewStyle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/ic_assignment"/>
+            android:src="@drawable/ic_assignment"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 </LinearLayout>

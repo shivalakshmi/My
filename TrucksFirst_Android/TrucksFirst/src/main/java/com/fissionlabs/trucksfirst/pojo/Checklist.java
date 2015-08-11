@@ -5,13 +5,9 @@ package com.fissionlabs.trucksfirst.pojo;
  */
 public class Checklist {
 
-    String operational;
-    String checklistItem;
-    boolean status;
-
-    public Checklist() {
-
-    }
+    private String operational;
+    private String checklistItem;
+    private boolean status;
 
    public Checklist(String operational,String checklistItem,boolean status)
     {

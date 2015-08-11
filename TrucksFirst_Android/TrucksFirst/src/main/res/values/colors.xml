@@ -19,15 +19,11 @@
     <color name="color_primary">#6d6c71</color>
     <color name="color_primary_light">#8a898d</color>
     <color name="color_primary_dark">#626165</color>
-    <color name="text_color_primary">#FFFFFF</color>
     <color name="window_background">#FFFFFF</color>
-    <color name="navigation_bar_color">#000000</color>
     <color name="color_accent">#428bca</color>
-    <color name="color_secondary">#858d93</color>
     <color name="black">#000000</color>
     <color name="header_pressed">#a7a6a9</color>
 
-    <color name="list_header_color">#808080</color>
     <color name="orange">#EF6C36</color>
 
 </resources>

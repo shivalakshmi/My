@@ -3,7 +3,7 @@ package com.fissionlabs.trucksfirst.pojo;
 /**
  * Created by Lakshmi on 09-07-2015.
  */
-public class TFPilotAvailabilityPojo {
+class TFPilotAvailabilityPojo {
 
     private String pilotAvailability;
     private String vehicleNumber;

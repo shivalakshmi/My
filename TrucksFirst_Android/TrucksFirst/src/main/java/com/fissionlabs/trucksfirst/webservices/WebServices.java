@@ -90,22 +90,18 @@ public class WebServices implements TFConst {
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
+                @SuppressWarnings("unchecked")
                 HashMap<String, String> headers = new HashMap();
                 headers.put("Content-Type", "application/x-www-form-urlencoded");
                 return headers;
             }
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap();
-                return params;
-            }
         };
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_TRUCK_DETAILS);
 
     }
 
-    public void getPilotAvailability(final Context context, final ResultReceiver resultReceiver) {
+    public void getPilotAvailability(final ResultReceiver resultReceiver) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_PILOT_AVAILABILITY,
                 new Response.Listener<String>() {
@@ -133,15 +129,9 @@ public class WebServices implements TFConst {
         }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap();
+                HashMap<String, String> headers = new HashMap<>();
                 headers.put("Content-Type", "application/x-www-form-urlencoded");
                 return headers;
-            }
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap();
-                return params;
             }
 
         };
@@ -149,7 +139,7 @@ public class WebServices implements TFConst {
 
     }
 
-    public void getVehicleChecklistDetails(final Context context, final ResultReceiver resultReceiver) {
+    public void getVehicleChecklistDetails(final ResultReceiver resultReceiver) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_VEHICLE_CHECKLIST_DETAILS,
                 new Response.Listener<String>() {
@@ -174,16 +164,10 @@ public class WebServices implements TFConst {
                 resultReceiver.send(ERROR, null);
             }
         }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap();
-//                headers.put("Content-Type", "application/x-www-form-urlencoded");
-                return headers;
-            }
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap();
+                Map<String, String> params = new HashMap<>();
                 params.put("vehicleNo", "TFFL123");
                 return params;
             }
@@ -210,23 +194,11 @@ public class WebServices implements TFConst {
                     Log.e("A", "Error");
                 }
             }) {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    HashMap<String, String> headers = new HashMap<String, String>();
-//                    headers.put("Content-Type", "application/json");
-                    return headers;
-                }
-
-                @Override
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<String, String>();
-                    return params;
-                }
             };
             TFApp.getInstance().addToRequestQueue(jsonObjReq, "TAG");
     }
 
-    public void getDriverChecklistDetails(final Context context, final ResultReceiver resultReceiver) {
+    public void getDriverChecklistDetails(final ResultReceiver resultReceiver) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DRIVER_CHECKLIST,
                 new Response.Listener<String>() {
@@ -251,16 +223,10 @@ public class WebServices implements TFConst {
                 resultReceiver.send(ERROR, null);
             }
         }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap();
-//                headers.put("Content-Type", "application/x-www-form-urlencoded");
-                return headers;
-            }
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap();
+                Map<String, String> params = new HashMap<>();
                 params.put("vehicleNo", "HR55V1234");
                 params.put("pilotNo","PTD/DR/H/0001");
                 return params;
@@ -288,18 +254,7 @@ public class WebServices implements TFConst {
                     Log.e("A", "Error");
                 }
             }) {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    HashMap<String, String> headers = new HashMap<String, String>();
-//                    headers.put("Content-Type", "application/json");
-                    return headers;
-                }
 
-                @Override
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<String, String>();
-                    return params;
-                }
             };
             TFApp.getInstance().addToRequestQueue(jsonObjReq, "TAG");
     }

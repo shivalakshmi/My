@@ -1,8 +1,5 @@
 package com.fissionlabs.trucksfirst.fragments;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.support.v4.app.Fragment;
@@ -46,7 +43,6 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
     private TextView mTVEta;
     private TextView mTVAssignedPilot;
     private ArrayList<TruckDetails> mTrucksList = null;
-    private WebServices mWebServices;
     private TFTruckFragment mTFragment;
     private TrucksAdapter mAdapter;
 
@@ -76,7 +72,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         mTVVehicleRoute.setOnClickListener(this);
         mTVVehicleNo.setOnClickListener(this);
         TFUtils.showProgressBar(getActivity(), getResources().getString(R.string.please_wait));
-        mWebServices = new WebServices();
+        WebServices mWebServices = new WebServices();
         mWebServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
@@ -175,8 +171,8 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
     }
 
     public class CustomComparator implements Comparator<TruckDetails> {
-        private Sort type;
-        private int asc_desc;
+        private final Sort type;
+        private final int asc_desc;
 
         CustomComparator(Sort type, int asc_desc) {
             this.type = type;

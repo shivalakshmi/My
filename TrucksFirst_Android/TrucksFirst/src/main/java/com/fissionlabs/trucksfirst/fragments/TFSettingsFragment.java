@@ -56,7 +56,7 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
 
         return rootView;
     }
-    public void setLocale(String lang) {
+    private void setLocale(String lang) {
         Locale myLocale = new Locale(lang);
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();

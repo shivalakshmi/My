@@ -1,71 +1,63 @@
-<resources>
-    <string name="app_name">Rivigo</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_save">Save</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:ignore="MissingTranslation">Rivigo</string>
+    <string name="action_settings" tools:ignore="MissingTranslation">Settings</string>
 
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="error_msg">This input requires a value!</string>
-    <string name="login">LOG IN</string>
-    <string name="app_info">TrucksFirst is built for clients who need hassle free, reliable, professional and super-express logistics services. By using simple processes, advanced technology, trained and professional staff, we help our clients manage long haul logistics seamlessly.\n\nOur vision is to bring a new world order in the surface transport sector. We believe we can offer best in class delivery times by staying focused and honest to our values.</string>
-    <string name="ok">@android:string/ok</string>
-    <string name="vehicle_movement">Vehicle Movement</string>
-    <string name="pilots">Pilots</string>
-    <string name="fetch_location">Fetch Your Location</string>
-    <string name="last_login">Your last login: %1$s</string>
-    <string name="hub_supervisor">Hub Supervisor</string>
+    <string name="username" tools:ignore="MissingTranslation">Username</string>
+    <string name="password" tools:ignore="MissingTranslation">Password</string>
+    <string name="error_msg" tools:ignore="MissingTranslation">This input requires a value!</string>
+    <string name="login" tools:ignore="MissingTranslation">LOG IN</string>
+    <string name="ok" tools:ignore="MissingTranslation">@android:string/ok</string>
+    <string name="fetch_location" tools:ignore="MissingTranslation">Fetch Your Location</string>
+    <string name="last_login" tools:ignore="MissingTranslation">Your last login: %1$s</string>
+    <string name="hub_supervisor" tools:ignore="MissingTranslation">Hub Supervisor</string>
 
     <!-- Truck details screen -->
-    <string name="vehicle_number">Vehicle No.</string>
-    <string name="vehicle_route">Vehicle Route</string>
-    <string name="eta">ETA</string>
-    <string name="assigned_pilots">Assigned Pilot</string>
-    <string name="pilot_in_hub">Pilot In Hub</string>
-    <string name="vehicle_in_hub">Vehicle In Hub</string>
-    <string name="checklist">Checklist</string>
-    <string name="driving_licence">Driving Licence</string>
-    <string name="uniform">Uniform</string>
-    <string name="non_alcoholic">Non Alcoholic</string>
+    <string name="vehicle_number" tools:ignore="MissingTranslation">Vehicle No.</string>
+    <string name="vehicle_route" tools:ignore="MissingTranslation">Vehicle Route</string>
+    <string name="eta" tools:ignore="MissingTranslation">ETA</string>
+    <string name="assigned_pilots" tools:ignore="MissingTranslation">Assigned Pilot</string>
+    <string name="pilot_in_hub" tools:ignore="MissingTranslation">Pilot In Hub</string>
+    <string name="vehicle_in_hub" tools:ignore="MissingTranslation">Vehicle In Hub</string>
+    <string name="checklist" tools:ignore="MissingTranslation">Checklist</string>
+    <string name="driving_licence" tools:ignore="MissingTranslation">Driving Licence</string>
+    <string name="uniform" tools:ignore="MissingTranslation">Uniform</string>
+    <string name="non_alcoholic" tools:ignore="MissingTranslation">Non Alcoholic</string>
     <string name="current_date_and_time">Date and Time:</string>
 
     <!-- Pilot details screen -->
-    <string name="pilot_availability">Pilot Availability</string>
-    <string name="assign_pilots">Assign Pilot</string>
-    <string name="gps_settings_body">GPS is not enabled. Do you want to go to settings menu?</string>
-    <string name="gps_settings_title">GPS settings</string>
-    <string name="cancel">Cancel</string>
-    <string name="save">Save</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
+    <string name="pilot_availability" tools:ignore="MissingTranslation">Pilot Availability</string>
+    <string name="assign_pilots" tools:ignore="MissingTranslation">Assign Pilot</string>
+    <string name="gps_settings_body" tools:ignore="MissingTranslation">GPS is not enabled. Do you want to go to settings menu?</string>
+    <string name="gps_settings_title" tools:ignore="MissingTranslation">GPS settings</string>
+    <string name="cancel" tools:ignore="MissingTranslation">Cancel</string>
+    <string name="save" tools:ignore="MissingTranslation">Save</string>
+    <string name="yes" tools:ignore="MissingTranslation">Yes</string>
+    <string name="no" tools:ignore="MissingTranslation">No</string>
 
     <!-- Navigation drawer -->
-    <string name="dashboard">Dashboard</string>
-    <string name="settings">Settings</string>
-    <string name="logout">Log out</string>
-    <string name="are_you_sure">Are you sure you want to log out?</string>
-    <string name="discard_changes">Are you sure you want to discard changes?</string>
+    <string name="dashboard" tools:ignore="MissingTranslation">Dashboard</string>
+    <string name="settings" tools:ignore="MissingTranslation">Settings</string>
+    <string name="logout" tools:ignore="MissingTranslation">Log out</string>
+    <string name="are_you_sure" tools:ignore="MissingTranslation">Are you sure you want to log out?</string>
+    <string name="discard_changes" tools:ignore="MissingTranslation">Are you sure you want to discard changes?</string>
 
     <!-- Settings -->
-    <string name="language_settings">Language Settings</string>
-    <string name="language_preferred">Preferred Language : </string>
+    <string name="language_preferred" tools:ignore="MissingTranslation">Preferred Language : </string>
 
 
     <!-- Network -->
-    <string name="no_network">No Network</string>
-    <string name="no_connection">No connection</string>
-    <string name="could_not_connect_to_server">No connection. Couldn\'t connect to the server.</string>
-    <string name="try_again">Try again</string>
+    <string name="could_not_connect_to_server" tools:ignore="MissingTranslation">No connection. Couldn\'t connect to the server.</string>
 
     <!-- Checklist -->
-    <string name="operational">Operational</string>
-    <string name="technical">Technical</string>
-    <string name="checklist_item">Checklist item</string>
-    <string name="status">Status</string>
-    <string name="print">Print</string>
-    <string name="email">Email</string>
+    <string name="operational" tools:ignore="MissingTranslation">Operational</string>
+    <string name="technical" tools:ignore="MissingTranslation">Technical</string>
+    <string name="checklist_item" tools:ignore="MissingTranslation">Checklist item</string>
+    <string name="status" tools:ignore="MissingTranslation">Status</string>
+    <string name="print" tools:ignore="MissingTranslation">Print</string>
+    <string name="email" tools:ignore="MissingTranslation">Email</string>
 
     <!-- Documents -->
-    <string name="documents">Documents</string>
+    <string name="documents" tools:ignore="MissingTranslation">Documents</string>
     <string name="registration_certificate">Registration Certificate</string>
     <string name="fitness_certificate">Fitness Certificate</string>
     <string name="national_permit">National Permit</string>
@@ -77,10 +69,10 @@
     <string name="seal_intactness">Seal Intactness</string>
 
     <!-- Kits -->
-    <string name="kits">Kits</string>
+    <string name="kits" tools:ignore="MissingTranslation">Kits</string>
     <string name="tool_kit">Tool Kit</string>
     <string name="others">Others (Medical Kit, Torch, Bucket)</string>
-    <string name="cleanliness">Cleanliness</string>
+    <string name="cleanliness" tools:ignore="MissingTranslation">Cleanliness</string>
     <string name="cabin_cleanliness">Cabin Cleanliness</string>
 
     <!-- Driver -->
@@ -93,7 +85,7 @@
     <string name="brake_effectiveness">Brake Effectiveness</string>
 
     <!-- Tyre & Oil -->
-    <string name="tyre_oil">Tyre &amp; Oil</string>
+    <string name="tyre_oil" tools:ignore="MissingTranslation">Tyre &amp; Oil</string>
     <string name="tyres">Tyres (Stones, Cut, Puncture)</string>
     <string name="coolant_leakage">Coolant Leakage</string>
     <string name="engine_oil_leakage">Engine Oil Leakage</string>
@@ -102,7 +94,7 @@
     <string name="differential_oil_leakage">Differential Oil Leakage</string>
 
     <!-- Electrical -->
-    <string name="electrical">Electrical</string>
+    <string name="electrical" tools:ignore="MissingTranslation">Electrical</string>
     <string name="headlight">Headlight (Low and High)</string>
     <string name="indicator_and_hazard">Indicator and Hazard</string>
     <string name="horn">Horn</string>
@@ -112,32 +104,32 @@
     <string name="oil_pressure_warning_light">Oil Pressure Warning Light</string>
 
     <!-- Scratch/Dent -->
-    <string name="scratch_dent">Scratch/Dent</string>
+    <string name="scratch_dent" tools:ignore="MissingTranslation">Scratch/Dent</string>
     <string name="front">Front</string>
     <string name="left">Left</string>
     <string name="rear">Rear</string>
     <string name="right">Right</string>
 
     <!-- Pilot assignment -->
-    <string name="pilot_contact_info">Contact Info %1$s</string>
-    <string name="pilot_change_pilot">Change Pilot</string>
-    <string name="pilot_release_pilot">Release Pilot</string>
-    <string name="are_you_sure_release"><b>Are you sure you want to release pilot %1$s?</b></string>
-    <string name="pilot_availability_title">Available Pilots</string>
-    <string name="issue_parsing_data">Issue with parsing data, Please consult with Administrator.</string>
+    <string name="pilot_contact_info" tools:ignore="MissingTranslation">Contact Info %1$s</string>
+    <string name="pilot_change_pilot" tools:ignore="MissingTranslation">Change Pilot</string>
+    <string name="pilot_release_pilot" tools:ignore="MissingTranslation">Release Pilot</string>
+    <string name="are_you_sure_release" tools:ignore="MissingTranslation"><b>Are you sure you want to release pilot %1$s?</b></string>
+    <string name="pilot_availability_title" tools:ignore="MissingTranslation">Available Pilots</string>
+    <string name="issue_parsing_data" tools:ignore="MissingTranslation">Issue with parsing data, Please consult with Administrator.</string>
 
     <!-- Progressbar messages -->
-    <string name="please_wait">Please wait&#8230;</string>
-    <string name="loading">Loading&#8230;</string>
+    <string name="please_wait" tools:ignore="MissingTranslation">Please wait&#8230;</string>
+    <string name="loading" tools:ignore="MissingTranslation">Loading&#8230;</string>
     
     <!-- CheckList Status PopUp -->
-    <string name="notification_send_to">Notification send to</string>
-    <string name="next_hub">Next Hub</string>
-    <string name="ashok_leyland">Ashok Leyland</string>
+    <string name="notification_send_to" tools:ignore="MissingTranslation">Notification send to</string>
+    <string name="next_hub" tools:ignore="MissingTranslation">Next Hub</string>
+    <string name="ashok_leyland" tools:ignore="MissingTranslation">Ashok Leyland</string>
 
-    <string name="search_hint">Type and Search</string>
-    <string name="menu_search">Search</string>
-    <string name="server_not_responding">Server is not responding...</string>
+    <string name="menu_search" tools:ignore="MissingTranslation">Search</string>
+    <string name="server_not_responding" tools:ignore="MissingTranslation">Server is not responding…</string>
+    <string name="dash_board" tools:ignore="MissingTranslation">Dash Board</string>
 
 
 

@@ -29,7 +29,7 @@ public final class LogConfig {
      */
     public static final boolean E = true;
 
-    public static boolean DEBUG_FLAG = false;
+    private static final boolean DEBUG_FLAG = false;
 
     public static boolean DEBUG_FLAG_MIRROR = DEBUG_FLAG;
 }

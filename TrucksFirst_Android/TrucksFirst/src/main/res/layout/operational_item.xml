@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -8,7 +9,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="5">
+        android:weightSum="5"
+        tools:ignore="UselessParent">
 
         <TextView
             android:id="@+id/operational"
@@ -37,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/yes"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <RadioButton
                 android:id="@+id/radio_btn_no"
@@ -45,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/no"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
         </RadioGroup>
 
@@ -57,7 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:visibility="invisible"
-            android:src="@drawable/ic_print" />
+            android:src="@drawable/ic_print"
+            tools:ignore="ContentDescription" />
 
 
         <ImageView
@@ -66,7 +69,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:src="@drawable/ic_mail" />
+            android:src="@drawable/ic_mail"
+            tools:ignore="ContentDescription" />
 
     </LinearLayout>
 

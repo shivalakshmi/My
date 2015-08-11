@@ -25,7 +25,6 @@ import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
 import com.fissionlabs.trucksfirst.model.PilotAvailability;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
-import com.fissionlabs.trucksfirst.pojo.ChecklistNew;
 import com.fissionlabs.trucksfirst.pojo.DriverChecklist;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
@@ -41,6 +40,7 @@ import java.util.List;
 /**
  * Created by Ashok on 7/29/2015.
  */
+@SuppressWarnings("ALL")
 public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder> {
 
     private Context mContext;
@@ -101,10 +101,12 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
 
         if(mDataSet.get(position).getVehicleInHub().equals("true")) {
             holder.mRadioVehicleInHubYes.setChecked(true);
+            //noinspection deprecation,deprecation
             holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.checklist_selector));
             holder.mChecklist.setClickable(true);
         } else {
             holder.mRadioVehicleInHubNo.setChecked(true);
+            //noinspection deprecation
             holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_disabled));
             holder.mChecklist.setClickable(false);
         }
@@ -113,6 +115,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 mDataSet.get(position).setVehicleInHub("true");
+                //noinspection deprecation
                 holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.checklist_selector));
                 holder.mChecklist.setClickable(true);
                 notifyItemChanged(position);
@@ -122,6 +125,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 mDataSet.get(position).setVehicleInHub("false");
+                //noinspection deprecation
                 holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_disabled));
                 holder.mChecklist.setClickable(false);
                 notifyItemChanged(position);
@@ -175,7 +179,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
 
 
         mWebServices = new WebServices();
-        mWebServices.getDriverChecklistDetails(mContext, new ResultReceiver(null) {
+        mWebServices.getDriverChecklistDetails(new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
                 if (resultCode == TFConst.SUCCESS) {
@@ -282,7 +286,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
 
     public void assignPilotAlertDialog() {
         TFUtils.showProgressBar(mContext, mContext.getString(R.string.loading));
-        new WebServices().getPilotAvailability(mContext, new ResultReceiver(null) {
+        new WebServices().getPilotAvailability(new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
                 if (resultCode == TFConst.SUCCESS) {

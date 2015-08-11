@@ -20,7 +20,6 @@ import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
 import com.fissionlabs.trucksfirst.fragments.TFCheckListFragment;
 import com.fissionlabs.trucksfirst.fragments.TFDashBoardFragment;
-import com.fissionlabs.trucksfirst.fragments.TFPilotFragment;
 import com.fissionlabs.trucksfirst.fragments.TFSettingsFragment;
 import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
 import com.fissionlabs.trucksfirst.signup.TFLoginActivity;
@@ -37,7 +36,6 @@ public class TFHomeActivity extends TFCommonActivity {
 
     private TFDashBoardFragment mTFDashBoardFragment;
     private TFTruckFragment mTFTruckFragment;
-    private TFPilotFragment mTFPilotFragment;
     private TFSettingsFragment mTFSettingsFragment;
     private TFCheckListFragment mTFCheckListFragment;
     private Fragment mSelectedFragment;
@@ -167,14 +165,7 @@ public class TFHomeActivity extends TFCommonActivity {
                 selectedFragment = mTFTruckFragment;
 
                 break;
-            case R.layout.fragment_pilot:
-                if (mTFPilotFragment == null) {
-                    mTFPilotFragment = new TFPilotFragment();
-                }
 
-                selectedFragment = mTFPilotFragment;
-
-                break;
             case R.layout.fragment_settings:
                 if (mTFSettingsFragment == null) {
                     mTFSettingsFragment = new TFSettingsFragment();
@@ -196,7 +187,7 @@ public class TFHomeActivity extends TFCommonActivity {
         loadFragment(selectedFragment, bundle);
     }
 
-    public void loadFragment(Fragment fragment, Bundle bundle) {
+    private void loadFragment(Fragment fragment, Bundle bundle) {
         Assert.assertTrue(fragment != null);
         replaceFragment(fragment, bundle);
     }
@@ -227,6 +218,7 @@ public class TFHomeActivity extends TFCommonActivity {
         if (!fragmentPopped && manager.findFragmentByTag(backStateName) == null) {
             FragmentTransaction ft = manager.beginTransaction();
             ft.replace(R.id.frame_container, fragment, backStateName);
+            //noinspection ResourceType
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.addToBackStack(backStateName);
             ft.commit();
@@ -279,13 +271,14 @@ public class TFHomeActivity extends TFCommonActivity {
     }
 
 
-    public void doWork() {
+    private void doWork() {
         runOnUiThread(new Runnable() {
             public void run() {
                 try {
                     Date date = new Date();
                     CharSequence dateFormat = DateFormat.format("dd/MM/yyyy k:mm:ss", date.getTime());
                     mTvCurrentDateAndTime.setText(" " + dateFormat);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -293,7 +286,7 @@ public class TFHomeActivity extends TFCommonActivity {
         });
     }
 
-    class CountDownRunner implements Runnable {
+    private class CountDownRunner implements Runnable {
 
         @Override
         public void run() {

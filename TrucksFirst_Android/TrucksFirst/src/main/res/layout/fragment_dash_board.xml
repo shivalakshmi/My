@@ -7,15 +7,16 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Dash borad"
+        android:text="@string/dash_board"
         android:gravity="center"/>
     <LinearLayout
         android:id="@+id/lastlogin_location_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:layout_alignParentBottom="true">
+        android:paddingStart="10dp"
+        android:layout_alignParentBottom="true"
+        tools:ignore="RtlSymmetry">
         <TextView
             android:id="@+id/last_login"
             android:layout_width="match_parent"
@@ -25,18 +26,20 @@
             android:singleLine="true"
             android:ellipsize="end"
             style="@style/TextViewStyle"
-            android:drawableLeft="@drawable/ic_lastlogin"
+            android:drawableStart="@drawable/ic_lastlogin"
             android:text="@string/last_login"/>
         <LinearLayout
             android:id="@+id/fetch_location_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
             <ImageView
                 android:id="@+id/fetch_location_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_location"/>
+                android:background="@drawable/ic_location"
+                tools:ignore="ContentDescription" />
             <TextView
                 android:id="@+id/fetch_location"
                 android:layout_width="match_parent"
@@ -44,9 +47,10 @@
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:paddingLeft="10dp"
+                android:paddingStart="10dp"
                 style="@style/TextViewStyle"
-                android:text="@string/fetch_location"/>
+                android:text="@string/fetch_location"
+                tools:ignore="RtlSymmetry" />
         </LinearLayout>
 
 

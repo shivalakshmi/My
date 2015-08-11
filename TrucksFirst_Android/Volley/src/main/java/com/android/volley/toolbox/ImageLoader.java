@@ -162,7 +162,7 @@ public class ImageLoader {
      * @param scaleType  The scaleType of the imageView.
      * @return True if the item exists in cache, false otherwise.
      */
-    public boolean isCached(String requestUrl, int maxWidth, int maxHeight, ScaleType scaleType) {
+    private boolean isCached(String requestUrl, int maxWidth, int maxHeight, ScaleType scaleType) {
         throwIfNotOnMainThread();
 
         String cacheKey = getCacheKey(requestUrl, maxWidth, maxHeight, scaleType);
@@ -186,8 +186,8 @@ public class ImageLoader {
      * Equivalent to calling {@link #get(String, ImageListener, int, int, ScaleType)} with
      * {@code Scaletype == ScaleType.CENTER_INSIDE}.
      */
-    public ImageContainer get(String requestUrl, ImageListener imageListener,
-            int maxWidth, int maxHeight) {
+    private ImageContainer get(String requestUrl, ImageListener imageListener,
+                               int maxWidth, int maxHeight) {
         return get(requestUrl, imageListener, maxWidth, maxHeight, ScaleType.CENTER_INSIDE);
     }
 
@@ -247,8 +247,8 @@ public class ImageLoader {
         return imageContainer;
     }
 
-    protected Request<Bitmap> makeImageRequest(String requestUrl, int maxWidth, int maxHeight,
-            ScaleType scaleType, final String cacheKey) {
+    private Request<Bitmap> makeImageRequest(String requestUrl, int maxWidth, int maxHeight,
+                                             ScaleType scaleType, final String cacheKey) {
         return new ImageRequest(requestUrl, new Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
@@ -276,7 +276,7 @@ public class ImageLoader {
      * @param cacheKey The cache key that is associated with the image request.
      * @param response The bitmap that was returned from the network.
      */
-    protected void onGetImageSuccess(String cacheKey, Bitmap response) {
+    private void onGetImageSuccess(String cacheKey, Bitmap response) {
         // cache the image that was fetched.
         mCache.putBitmap(cacheKey, response);
 
@@ -296,7 +296,7 @@ public class ImageLoader {
      * Handler for when an image failed to load.
      * @param cacheKey The cache key that is associated with the image request.
      */
-    protected void onGetImageError(String cacheKey, VolleyError error) {
+    private void onGetImageError(String cacheKey, VolleyError error) {
         // Notify the requesters that something failed via a null result.
         // Remove this request from the list of in-flight requests.
         BatchedImageRequest request = mInFlightRequests.remove(cacheKey);

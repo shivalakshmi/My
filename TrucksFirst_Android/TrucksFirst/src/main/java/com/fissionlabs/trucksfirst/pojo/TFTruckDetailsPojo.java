@@ -3,7 +3,7 @@ package com.fissionlabs.trucksfirst.pojo;
 /**
  * Created by Lakshmi on 09-07-2015.
  */
-public class TFTruckDetailsPojo {
+class TFTruckDetailsPojo {
 
     private String vehicleNumber;
     private String vehicleRoute;

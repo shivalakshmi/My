@@ -18,7 +18,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
-import com.fissionlabs.trucksfirst.fragments.TFCheckListFragment;
 import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.pojo.Checklist;
 import com.fissionlabs.trucksfirst.pojo.ChecklistNew;
@@ -33,10 +32,10 @@ public class CheckListAdapter extends BaseAdapter {
     private static final int TECHNICAL_ITEM = 2;
     private static final int TYPE_MAX_COUNT = TECHNICAL_ITEM + 1;
     private ArrayList<Checklist> mChecklistArrayList = null;
-    private Context context;
+    private final Context context;
 
-    private LayoutInflater mInflater;
-    private ChecklistNew mChecklistNew;
+    private final LayoutInflater mInflater;
+    private final ChecklistNew mChecklistNew;
 
     public CheckListAdapter(Context context, ArrayList<Checklist> ChecklistArrayList, ChecklistNew checklistNew) {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -206,7 +205,7 @@ public class CheckListAdapter extends BaseAdapter {
         public RadioGroup mRadioGroup;
     }
 
-    void sendEmail() {
+    private void sendEmail() {
         Intent emailIntent = new Intent();
         emailIntent.setAction(Intent.ACTION_SEND);
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Documents- GRN/Bilti");

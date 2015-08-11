@@ -17,7 +17,7 @@ import com.fissionlabs.trucksfirst.R;
  */
 public class TFUtils implements TFConst{
 
-	public static ProgressDialog mProgressDialog;
+	private static ProgressDialog mProgressDialog;
 
     /**
      * This method is used to get the {@link String} data from the {@link SharedPreferences}.
@@ -154,7 +154,7 @@ public class TFUtils implements TFConst{
         return true;
     }
 
-    public static boolean isConnected(Context context) {
+    private static boolean isConnected(Context context) {
         ConnectivityManager connect = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         return connect.getNetworkInfo(0).getState() == NetworkInfo.State.CONNECTED

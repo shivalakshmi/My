@@ -70,7 +70,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
         mChecklistArrayList.clear();
         mWebServices = new WebServices();
 //        mChecklistNew =new ChecklistNew();
-        mWebServices.getVehicleChecklistDetails(getActivity(), new ResultReceiver(null) {
+        mWebServices.getVehicleChecklistDetails(new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
                 if (resultCode == SUCCESS) {
@@ -107,6 +107,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TFHomeActivity.isChangesMade = false;
                 String jsonObject = new Gson().toJson(mChecklistNew, ChecklistNew.class);
                 try {
                     mWebServices.updateVehicleChecklist(new JSONObject(jsonObject));
