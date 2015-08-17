@@ -1,12 +1,15 @@
 package com.fissionlabs.trucksfirst.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.LabeledIntent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,14 @@ import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.pojo.Checklist;
 import com.fissionlabs.trucksfirst.pojo.ChecklistNew;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +43,15 @@ public class CheckListAdapter extends BaseAdapter {
     private static final int TECHNICAL_ITEM = 2;
     private static final int TYPE_MAX_COUNT = TECHNICAL_ITEM + 1;
     private ArrayList<Checklist> mChecklistArrayList = null;
-    private final Context context;
+    private final Activity context;
 
     private final LayoutInflater mInflater;
     private final ChecklistNew mChecklistNew;
+    private ProgressDialog dialog = null;
+    private String dwnload_file_path = "http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf";
+    private String dest_file_path = "/sdcard/dwnloaded_file2.pdf";
 
-    public CheckListAdapter(Context context, ArrayList<Checklist> ChecklistArrayList, ChecklistNew checklistNew) {
+    public CheckListAdapter(Activity context, ArrayList<Checklist> ChecklistArrayList, ChecklistNew checklistNew) {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.mChecklistArrayList = ChecklistArrayList;
         this.context = context;
@@ -134,6 +148,18 @@ public class CheckListAdapter extends BaseAdapter {
                     }
                 });
 
+                holder.mImgPrint.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog = ProgressDialog.show(context, "", "Downloading file...", true);
+                        new Thread(new Runnable() {
+                            public void run() {
+                                downloadFile(dwnload_file_path, dest_file_path);
+                            }
+                        }).start();
+
+                    }
+                });
 
                 holder.mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
@@ -241,6 +267,45 @@ public class CheckListAdapter extends BaseAdapter {
 
         openInChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, extraIntents);
         context.startActivity(openInChooser);
+    }
+
+    public void downloadFile(String url, String dest_file_path) {
+
+        try {
+            File dest_file = new File(dest_file_path);
+            URL u = new URL(url);
+            URLConnection conn = u.openConnection();
+            int contentLength = conn.getContentLength();
+            DataInputStream stream = new DataInputStream(u.openStream());
+            byte[] buffer = new byte[contentLength];
+            stream.readFully(buffer);
+            stream.close();
+            DataOutputStream fos = new DataOutputStream(new FileOutputStream(dest_file));
+            fos.write(buffer);
+            fos.flush();
+            fos.close();
+            hideProgressIndicator();
+            final Uri printFileUri = Uri.parse("file:///sdcard/dwnloaded_file2.pdf");
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setPackage("com.hp.android.print");
+            i.setDataAndType(printFileUri, "text/plain");
+            context.startActivity(i);
+
+        } catch(FileNotFoundException e) {
+            hideProgressIndicator();
+            return;
+        } catch (IOException e) {
+            hideProgressIndicator();
+            return;
+        }
+    }
+
+    private void hideProgressIndicator() {
+            context.runOnUiThread(new Runnable() {
+                public void run() {
+                    dialog.dismiss();
+                }
+            });
     }
 
 }
