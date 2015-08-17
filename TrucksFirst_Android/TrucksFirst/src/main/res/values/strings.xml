@@ -37,6 +37,7 @@
     <!-- Navigation drawer -->
     <string name="dashboard" tools:ignore="MissingTranslation">Dashboard</string>
     <string name="settings" tools:ignore="MissingTranslation">Settings</string>
+    <string name="sos" tools:ignore="MissingTranslation">SOS</string>
     <string name="logout" tools:ignore="MissingTranslation">Log out</string>
     <string name="are_you_sure" tools:ignore="MissingTranslation">Are you sure you want to log out?</string>
     <string name="discard_changes" tools:ignore="MissingTranslation">Are you sure you want to discard changes?</string>
@@ -131,7 +132,12 @@
     <string name="server_not_responding" tools:ignore="MissingTranslation">Server is not responding…</string>
     <string name="dash_board" tools:ignore="MissingTranslation">Dash Board</string>
 
-
+    <!-- SOS -->
+    <string name="accident" tools:ignore="MissingTranslation">Accident</string>
+    <string name="breakdown" tools:ignore="MissingTranslation">Breakdown</string>
+    <string name="non_technical" tools:ignore="MissingTranslation">Non-Technical</string>
+    <string name="reason">Reason :</string>
+    <string name="send">Send</string>
 
 
 </resources>

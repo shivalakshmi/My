@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/vehicle_number_edt"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/edittext_background"
+        android:ellipsize="end"
+        android:hint="Enter vehicle number"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
+
+
+    <RadioGroup
+        android:id="@+id/sos_radiogroup"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp">
+
+        <RadioButton
+            android:id="@+id/accident_radiobtn"
+            style="@style/TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/accident" />
+
+        <RadioButton
+            android:id="@+id/breakdown_radiobtn"
+            style="@style/TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/breakdown" />
+
+        <RadioButton
+            android:id="@+id/non_technical_radiobtn"
+            style="@style/TextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/non_technical" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/reason_edt"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/edittext_background"
+        android:ellipsize="end"
+        android:gravity="top|left"
+        android:hint="Enter reason"
+        android:minLines="3"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="18dp" />
+
+    <Button android:id="@+id/send_mail_sms"
+        style="@style/ButtonStyle"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="@string/send" />
+
+</LinearLayout>

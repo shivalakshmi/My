@@ -20,6 +20,7 @@ import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
 import com.fissionlabs.trucksfirst.fragments.TFCheckListFragment;
 import com.fissionlabs.trucksfirst.fragments.TFDashBoardFragment;
+import com.fissionlabs.trucksfirst.fragments.TFSOSFragment;
 import com.fissionlabs.trucksfirst.fragments.TFSettingsFragment;
 import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
 import com.fissionlabs.trucksfirst.signup.TFLoginActivity;
@@ -38,6 +39,7 @@ public class TFHomeActivity extends TFCommonActivity {
     private TFTruckFragment mTFTruckFragment;
     private TFSettingsFragment mTFSettingsFragment;
     private TFCheckListFragment mTFCheckListFragment;
+    private TFSOSFragment mTFSOSFragment;
     private Fragment mSelectedFragment;
 
     public ActionBar mActionBar;
@@ -111,6 +113,9 @@ public class TFHomeActivity extends TFCommonActivity {
             case R.id.nav_settings:
                 loadFragment(R.layout.fragment_settings, null);
                 break;
+            case R.id.nav_sos:
+                loadFragment(R.layout.fragment_sos, null);
+                break;
             case R.id.nav_logout:
 
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -180,6 +185,16 @@ public class TFHomeActivity extends TFCommonActivity {
                 }
 
                 selectedFragment = mTFCheckListFragment;
+                break;
+
+            case R.layout.fragment_sos:
+                if (mTFSOSFragment == null) {
+                    mTFSOSFragment = new TFSOSFragment();
+                }
+
+                selectedFragment = mTFSOSFragment;
+
+                break;
         }
 
 
