@@ -16,6 +16,8 @@ public interface TFConst {
     String URL_UPDATE_VEHICLE_CHECKLIST_DETAILS = "http://" + BASE_IP + "mobile/vehicle/updatechecklist";
     String URL_LOGIN = "http://" + BASE_IP + "user/login";
 
+    String URL_SMS = "http://bhashsms.com/api/sendmsg.php";
+
     String TAG_TRUCK_DETAILS = "TRUCK_DETAILS";
     String TAG_PILOT_DETAILS = "PILOT_DETAILS";
     String TAG_VEHICLE_CHECKLIST = "VEHICLE_CHECKLIST";

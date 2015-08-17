@@ -139,5 +139,11 @@
     <string name="reason">Reason :</string>
     <string name="send">Send</string>
 
+    <string name="sos_vehicle_no">Please enter VehicleNo.</string>
+    <string name="sos_reason">Enter enter Reason.</string>
+    <string name="sos_email_success">Email sent successfully.</string>
+    <string name="sos_email_failure">Email not sent.</string>
+    <string name="sos_email_failure_problem">There is a problem sending the email.</string>
+
 
 </resources>
