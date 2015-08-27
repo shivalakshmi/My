@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:weightSum="7"
+              android:weightSum="8"
               android:layout_marginTop="@dimen/common_padding_small0">
 
     <TextView
@@ -11,13 +11,24 @@
         android:layout_width="0dp"
         android:drawableStart="@drawable/ic_arrow_right"
         android:drawablePadding="1dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginEnd="@dimen/common_padding_smal09"
-        android:layout_weight="1"
+        android:layout_weight="1.1"
         android:tag="1"
         android:background="@drawable/header_selector"
         android:text="@string/vehicle_number"/>
-
+    <TextView
+        android:id="@+id/client"
+        style="@style/TextViewHeaderStyle"
+        android:layout_width="0dp"
+        android:drawableStart="@drawable/ic_arrow_right"
+        android:drawablePadding="1dp"
+        android:layout_marginEnd="@dimen/common_padding_smal09"
+        android:layout_height="match_parent"
+        android:background="@drawable/header_selector"
+        android:layout_weight="0.7"
+        android:tag="1"
+        android:text="@string/client"/>
     <TextView
         android:id="@+id/vehicle_route"
         style="@style/TextViewHeaderStyle"
@@ -25,9 +36,9 @@
         android:drawableStart="@drawable/ic_arrow_right"
         android:drawablePadding="1dp"
         android:layout_marginEnd="@dimen/common_padding_smal09"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/header_selector"
-        android:layout_weight="1.15"
+        android:layout_weight="1.35"
         android:tag="1"
         android:text="@string/vehicle_route"/>
 
@@ -40,7 +51,7 @@
         android:layout_marginEnd="@dimen/common_padding_smal09"
         android:tag="1"
         android:background="@drawable/header_selector"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="@string/eta"/>
 
@@ -53,40 +64,42 @@
         android:drawablePadding="1dp"
         android:layout_marginEnd="@dimen/common_padding_smal09"
         android:background="@drawable/header_selector"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1.15"
         android:text="@string/assigned_pilots"/>
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/color_primary_light"
         android:layout_marginEnd="@dimen/common_padding_smal09"
         android:layout_weight="1">
 
         <TextView
             style="@style/TextViewHeaderStyle"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="@string/pilot_in_hub"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/color_primary_light"
         android:layout_marginEnd="@dimen/common_padding_smal09"
         android:layout_weight="1">
 
         <TextView
             style="@style/TextViewHeaderStyle"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="@string/vehicle_in_hub"/>
     </LinearLayout>
 
     <TextView
         style="@style/TextViewHeaderStyle"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="0.8"
         android:text="@string/checklist"/>
 

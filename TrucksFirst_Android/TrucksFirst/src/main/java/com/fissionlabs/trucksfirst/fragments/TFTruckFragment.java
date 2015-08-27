@@ -41,6 +41,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
     private TextView mTVVehicleNo;
     private TextView mTVVehicleRoute;
     private TextView mTVEta;
+    private TextView mTvClient;
     private TextView mTVAssignedPilot;
     private ArrayList<TruckDetails> mTrucksList = null;
     private TFTruckFragment mTFragment;
@@ -66,9 +67,11 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         mTVVehicleNo = (TextView) view.findViewById(R.id.vehicle_no);
         mTVVehicleRoute = (TextView) view.findViewById(R.id.vehicle_route);
         mTVEta = (TextView) view.findViewById(R.id.eta);
+        mTvClient = (TextView) view.findViewById(R.id.client);
         mTVAssignedPilot = (TextView) view.findViewById(R.id.assign_pilot);
         mTVAssignedPilot.setOnClickListener(this);
         mTVEta.setOnClickListener(this);
+        mTvClient.setOnClickListener(this);
         mTVVehicleRoute.setOnClickListener(this);
         mTVVehicleNo.setOnClickListener(this);
         TFUtils.showProgressBar(getActivity(), getResources().getString(R.string.please_wait));
@@ -114,15 +117,26 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
             case R.id.vehicle_no:
                 asc_desc = getPresentIcon(mTVVehicleNo);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTvClient.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.VEHICLE_NO, asc_desc));
+                mTruckDetailsListView.getAdapter().notifyDataSetChanged();
+                break;
+            case R.id.client:
+                asc_desc = getPresentIcon(mTvClient);
+                mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.CLIENT, asc_desc));
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.vehicle_route:
                 asc_desc = getPresentIcon(mTVVehicleRoute);
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTvClient.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.VEHICLE_ROUTE, asc_desc));
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
@@ -131,6 +145,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 asc_desc = getPresentIcon(mTVEta);
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTvClient.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.ETA, asc_desc));
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
@@ -139,6 +154,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 asc_desc = getPresentIcon(mTVAssignedPilot);
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
+                mTvClient.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.ASSIGNED_PILOT, asc_desc));
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
@@ -165,6 +181,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
 
     private enum Sort {
         VEHICLE_NO,
+        CLIENT,
         VEHICLE_ROUTE,
         ETA,
         ASSIGNED_PILOT
@@ -185,6 +202,8 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
             switch (type) {
                 case VEHICLE_NO:
                     return asc_desc == 0 ? o1.getVehicleNumber().compareTo(o2.getVehicleNumber()) : o2.getVehicleNumber().compareTo(o1.getVehicleNumber());
+                case CLIENT:
+                    return asc_desc == 0 ? o1.getClient().compareTo(o2.getClient()) : o2.getClient().compareTo(o1.getClient());
                 case VEHICLE_ROUTE:
                     return asc_desc == 0 ? o1.getVehicleRoute().compareTo(o2.getVehicleRoute()) : o2.getVehicleRoute().compareTo(o1.getVehicleRoute());
                 case ETA:

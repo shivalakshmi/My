@@ -17,6 +17,7 @@ import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.TFApp;
 import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.util.LogConfig;
+import com.fissionlabs.trucksfirst.util.TFUtils;
 
 import org.json.JSONObject;
 
@@ -63,7 +64,7 @@ public class WebServices implements TFConst {
 
     public void getTruckDetails(final Context context, final ResultReceiver resultReceiver) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_TRUCK_DETAILS,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_TRUCK_DETAILS+"?hubName="+TFUtils.getStringFromSP(context,HUB_NAME),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -95,7 +96,19 @@ public class WebServices implements TFConst {
                 headers.put("Content-Type", "application/x-www-form-urlencoded");
                 return headers;
             }
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("hubName", TFUtils.getStringFromSP(context,HUB_NAME));
 
+                return params;
+            }
+            /*@Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> params = new HashMap();
+                params.put("hubName","PTD" *//*TFUtils.getStringFromSP(context,HUB_NAME)*//*);
+                return params;
+            }*/
         };
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_TRUCK_DETAILS);
 

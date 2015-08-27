@@ -126,6 +126,8 @@ public class TFLoginActivity extends TFCommonActivity {
                     LoginResponse loginResponse = new Gson().fromJson(resultData.getString("response"), LoginResponse.class);
 
                     if (loginResponse.success.equalsIgnoreCase("true")) {
+                        TFUtils.saveStringInSP(TFLoginActivity.this, HUB_NAME, loginResponse.result.getHubName());
+                        TFUtils.saveStringInSP(TFLoginActivity.this, EMP_ID, loginResponse.result.getEmpId());
                         TFUtils.saveBooleanInSP(TFLoginActivity.this, IS_USER_EXISTS, true);
                         Intent i = new Intent(TFLoginActivity.this, TFHomeActivity.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.Mail;
@@ -32,6 +33,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
     private Handler mHandler;
     private EditText mEtVehivleNo;
     private EditText mEtReason;
+    private RadioGroup mRadioGroup;
 
     @Nullable
     @Override
@@ -40,6 +42,10 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
         mMail = new Mail("rivigodev@gmail.com", "fissionlabs");
         mEtVehivleNo = (EditText) view.findViewById(R.id.vehicle_number_edt);
         mEtReason = (EditText) view.findViewById(R.id.reason_edt);
+        mRadioGroup = (RadioGroup) view.findViewById(R.id.sos_radiogroup);
+        int index = mRadioGroup.indexOfChild(view.findViewById(mRadioGroup.getCheckedRadioButtonId()));
+
+        Toast.makeText(getActivity(),"here:"+index,Toast.LENGTH_SHORT).show();
 
         mHandler = new Handler(){
             public void handleMessage(Message msg) {
@@ -101,7 +107,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
                     e.printStackTrace();
                 }
 
-                String[] toArr = {"shivalakshmi.yella@fissionlabs.com","murali.naru@fissionlabs.com"}; // This is an array, you can add more emails, just separate them with a coma
+                String[] toArr = {"sowjanya.guddeti@fissionlabs.com","shivalakshmi.yella@fissionlabs.com","murali.naru@fissionlabs.com"}; // This is an array, you can add more emails, just separate them with a coma
                 mMail.setTo(toArr); // load array to setTo function
                 mMail.setFrom("rivigodev@gmail.com"); // who is sending the email
                 mMail.setSubject("subject");

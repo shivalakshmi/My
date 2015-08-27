@@ -31,4 +31,6 @@ public interface TFConst {
     String SHARED_PREFERENCES_NAME = "RIVIGO";
     String LANG_SELECTION = "lang_selection";
     String IS_USER_EXISTS = "is_user_exists";
+    String HUB_NAME = "hub_name";
+    String EMP_ID = "emp_id";
 }

@@ -34,7 +34,10 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -76,11 +79,13 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         holder.mRadioVehicleInHubNo.setTag(holder);
         holder.mVehicleNumber.setText(mDataSet.get(position).getVehicleNumber());
         holder.mVehicleRoute.setText(mDataSet.get(position).getVehicleRoute());
-        holder.mEta.setText(mDataSet.get(position).getEta());
+        holder.mClient.setText(mDataSet.get(position).getClient());
+        holder.mEta.setText(changeTime(mDataSet.get(position).getEta()));
         holder.mAssignedPilot.setText(mDataSet.get(position).getAssignedPilot());
         if (mDataSet.get(position).getAssignedPilot() == null || mDataSet.get(position).getAssignedPilot().equalsIgnoreCase("null")) {
             holder.mVehicleNumber.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
             holder.mVehicleRoute.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
+            holder.mClient.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
             holder.mEta.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
             holder.mAssignedPilot.setText("");
             holder.mPilotInHub.setVisibility(View.GONE);
@@ -89,17 +94,19 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         } else {
             holder.mVehicleNumber.setTextColor(mContext.getResources().getColor(android.R.color.black));
             holder.mVehicleRoute.setTextColor(mContext.getResources().getColor(android.R.color.black));
+            holder.mClient.setTextColor(mContext.getResources().getColor(android.R.color.black));
             holder.mEta.setTextColor(mContext.getResources().getColor(android.R.color.black));
             holder.mVehicleNumber.setText(mDataSet.get(position).getVehicleNumber());
             holder.mVehicleRoute.setText(mDataSet.get(position).getVehicleRoute());
-            holder.mEta.setText(mDataSet.get(position).getEta());
+            holder.mClient.setText(mDataSet.get(position).getClient());
+            holder.mEta.setText(changeTime(mDataSet.get(position).getEta()));
             holder.mAssignedPilot.setText(mDataSet.get(position).getAssignedPilot());
             holder.mPilotInHub.setVisibility(View.VISIBLE);
             holder.mVehicleInHub.setVisibility(View.VISIBLE);
             holder.mChecklist.setVisibility(View.VISIBLE);
         }
 
-        if(mDataSet.get(position).getVehicleInHub().equals("true")) {
+        if(mDataSet.get(position).getVehicleInHub()!= null && mDataSet.get(position).getVehicleInHub().equals("true")) {
             holder.mRadioVehicleInHubYes.setChecked(true);
             //noinspection deprecation,deprecation
             holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.checklist_selector));
@@ -131,7 +138,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                 notifyItemChanged(position);
             }
         });
-        if(mDataSet.get(position).getPilotInHub().equalsIgnoreCase("true")){
+        if(mDataSet.get(position).getPilotInHub() != null && mDataSet.get(position).getPilotInHub().equalsIgnoreCase("true")){
             holder.mRadioPilotInHubYes.setChecked(true);
         } else {
             holder.mRadioPilotInHubNo.setChecked(true);
@@ -168,6 +175,14 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             }
         });
 
+    }
+
+    private String changeTime(String etaInMills) {
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        long milliSeconds= Long.parseLong(etaInMills);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliSeconds);
+        return formatter.format(calendar.getTime());
     }
 
     @Override
@@ -348,6 +363,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView mVehicleNumber;
+        public TextView mClient;
         public TextView mVehicleRoute;
         public TextView mEta;
         public TextView mAssignedPilot;
@@ -364,6 +380,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
 
             mVehicleNumber = (TextView) view.findViewById(R.id.vehicle_number);
             mVehicleRoute = (TextView) view.findViewById(R.id.vehicle_route);
+            mClient = (TextView) view.findViewById(R.id.client);
             mEta = (TextView) view.findViewById(R.id.eta);
             mAssignedPilot = (TextView) view.findViewById(R.id.assigned_pilot);
             mPilotInHub = (RadioGroup) view.findViewById(R.id.polit_in_hub);

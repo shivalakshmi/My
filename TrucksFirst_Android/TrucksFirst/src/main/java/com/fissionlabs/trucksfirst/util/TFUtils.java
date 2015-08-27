@@ -25,7 +25,7 @@ public class TFUtils implements TFConst{
      * @param key key value
      * @return {@link String} value of the given key
      */
-    public static String getStringFromSP(Activity _activity,String key) {
+    public static String getStringFromSP(Context _activity,String key) {
         SharedPreferences preferences = _activity.getSharedPreferences(SHARED_PREFERENCES_NAME, android.content.Context.MODE_PRIVATE);
         return preferences.getString(key, null);
     }//getFromSP()
