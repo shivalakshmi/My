@@ -162,7 +162,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         holder.mAssignedPilot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPilotAssignAlertDialog(mDataSet.get(position).getAssignedPilot());
+                showPilotAssignAlertDialog(mDataSet.get(position).getAssignedPilot(),
+                        mDataSet.get(position).getEta(),mDataSet.get(position).getNextHub());
             }
         });
 
@@ -263,9 +264,9 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
     }
 
 
-    public void showPilotAssignAlertDialog(final String pilotName) {
+    public void showPilotAssignAlertDialog(final String pilotName, final String eta, final String nextHub) {
         if (pilotName == null || pilotName.trim().equalsIgnoreCase("") || TextUtils.isEmpty(pilotName) || pilotName.equalsIgnoreCase("null")) {
-            assignPilotAlertDialog();
+            assignPilotAlertDialog(eta,nextHub);
         } else {
             final CharSequence items[] = {String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:9999999999"),
                     mContext.getString(R.string.pilot_change_pilot),
@@ -283,7 +284,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             mContext.startActivity(intent);
                             break;
                         case 1:
-                            assignPilotAlertDialog();
+                            assignPilotAlertDialog(eta,nextHub);
                             break;
                         case 2:
                             releasePilotAlertDialog(pilotName);
@@ -299,9 +300,9 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         }
     }
 
-    public void assignPilotAlertDialog() {
+    public void assignPilotAlertDialog(String eta, String nextHub) {
         TFUtils.showProgressBar(mContext, mContext.getString(R.string.loading));
-        new WebServices().getPilotAvailability(new ResultReceiver(null) {
+        new WebServices().getPilotAvailability(mContext,eta,nextHub,new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
                 if (resultCode == TFConst.SUCCESS) {
@@ -315,7 +316,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
 
                     if(pilotAvailabilityList != null) {
                         for (int i = 0; i < pilotAvailabilityList.size(); i++) {
-                            listItems.add(pilotAvailabilityList.get(i).getPilotName() + "  -  " + pilotAvailabilityList.get(i).getPilotAvailabilityStatus());
+                            listItems.add(pilotAvailabilityList.get(i).getPilotFirstName() + "  -  " + pilotAvailabilityList.get(i).getAvailabilityStatus());
                         }
                     }
 

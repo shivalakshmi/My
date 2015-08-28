@@ -4,28 +4,13 @@ package com.fissionlabs.trucksfirst.model;
  * Created by Lakshmi on 23-07-2015.
  */
 public class PilotAvailability {
+
     String pilotId;
-    String pilotName;
-    String pilotAvailabilityStatus;
-    String vehicleNumber;
-    String vehicleRoute;
-    String eta;
-
-    public String getEta() {
-        return eta;
-    }
-
-    public void setEta(String eta) {
-        this.eta = eta;
-    }
-
-    public String getPilotAvailabilityStatus() {
-        return pilotAvailabilityStatus;
-    }
-
-    public void setPilotAvailabilityStatus(String pilotAvailabilityStatus) {
-        this.pilotAvailabilityStatus = pilotAvailabilityStatus;
-    }
+    String pilotFirstName;
+    String pilotLastName;
+    String nextAvailabilityTime;
+    String availabilityStatus;
+    String contactNumber;
 
     public String getPilotId() {
         return pilotId;
@@ -35,27 +20,43 @@ public class PilotAvailability {
         this.pilotId = pilotId;
     }
 
-    public String getPilotName() {
-        return pilotName;
+    public String getPilotFirstName() {
+        return pilotFirstName;
     }
 
-    public void setPilotName(String pilotName) {
-        this.pilotName = pilotName;
+    public void setPilotFirstName(String pilotFirstName) {
+        this.pilotFirstName = pilotFirstName;
     }
 
-    public String getVehicleNumber() {
-        return vehicleNumber;
+    public String getPilotLastName() {
+        return pilotLastName;
     }
 
-    public void setVehicleNumber(String vehicleNumber) {
-        this.vehicleNumber = vehicleNumber;
+    public void setPilotLastName(String pilotLastName) {
+        this.pilotLastName = pilotLastName;
     }
 
-    public String getVehicleRoute() {
-        return vehicleRoute;
+    public String getNextAvailabilityTime() {
+        return nextAvailabilityTime;
     }
 
-    public void setVehicleRoute(String vehicleRoute) {
-        this.vehicleRoute = vehicleRoute;
+    public void setNextAvailabilityTime(String nextAvailabilityTime) {
+        this.nextAvailabilityTime = nextAvailabilityTime;
+    }
+
+    public String getAvailabilityStatus() {
+        return availabilityStatus;
+    }
+
+    public void setAvailabilityStatus(String availabilityStatus) {
+        this.availabilityStatus = availabilityStatus;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
     }
 }

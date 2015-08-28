@@ -114,9 +114,10 @@ public class WebServices implements TFConst {
 
     }
 
-    public void getPilotAvailability(final ResultReceiver resultReceiver) {
+    public void getPilotAvailability(final Context context, final String eta, final String nextHub, final ResultReceiver resultReceiver) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_PILOT_AVAILABILITY,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_PILOT_AVAILABILITY + "?currentHub="+TFUtils.getStringFromSP(context,HUB_NAME)+"&ETA="+eta+"&nextHub="+nextHub,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -143,9 +144,20 @@ public class WebServices implements TFConst {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<>();
-                headers.put("Content-Type", "application/x-www-form-urlencoded");
+//                headers.put("Content-Type", "application/x-www-form-urlencoded");
                 return headers;
             }
+
+
+         /*   @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("currentHub",TFUtils.getStringFromSP(context,HUB_NAME));
+                params.put("ETA", eta);
+                params.put("nextHub", nextHub);
+
+                return params;
+            }*/
 
         };
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_PILOT_DETAILS);
