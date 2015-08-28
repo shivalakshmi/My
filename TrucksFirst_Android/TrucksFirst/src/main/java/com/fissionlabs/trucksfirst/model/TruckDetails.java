@@ -5,13 +5,67 @@ package com.fissionlabs.trucksfirst.model;
  */
 public class TruckDetails {
 
+    private String vehicleTrackingId;
     private String vehicleNumber;
     private String vehicleRoute;
     private String eta;
+    private String nextHubEta;
     private String assignedPilot;
     private String pilotInHub;
     private String vehicleInHub;
     private String client;
+    private String sequence;
+    private String nextHub;
+    private String currentHub;
+    private String vehiclePlanningId;
+
+    public String getVehicleTrackingId() {
+        return vehicleTrackingId;
+    }
+
+    public void setVehicleTrackingId(String vehicleTrackingId) {
+        this.vehicleTrackingId = vehicleTrackingId;
+    }
+
+    public String getNextHubEta() {
+        return nextHubEta;
+    }
+
+    public void setNextHubEta(String nextHubEta) {
+        this.nextHubEta = nextHubEta;
+    }
+
+    public String getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(String sequence) {
+        this.sequence = sequence;
+    }
+
+    public String getNextHub() {
+        return nextHub;
+    }
+
+    public void setNextHub(String nextHub) {
+        this.nextHub = nextHub;
+    }
+
+    public String getCurrentHub() {
+        return currentHub;
+    }
+
+    public void setCurrentHub(String currentHub) {
+        this.currentHub = currentHub;
+    }
+
+    public String getVehiclePlanningId() {
+        return vehiclePlanningId;
+    }
+
+    public void setVehiclePlanningId(String vehiclePlanningId) {
+        this.vehiclePlanningId = vehiclePlanningId;
+    }
 
     public String getClient() {
         return client;
