@@ -168,7 +168,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         holder.mAssignedPilot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPilotAssignAlertDialog(mDataSet.get(position) /*.getAssignedPilot(),
+                showPilotAssignAlertDialog(position,mDataSet.get(position) /*.getAssignedPilot(),
                         mDataSet.get(position).getEta(),mDataSet.get(position).getNextHub()*/);
             }
         });
@@ -262,9 +262,9 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
     }
 
 
-    public void showPilotAssignAlertDialog(final TruckDetails obj/*final String pilotName, final String eta, final String nextHub*/) {
+    public void showPilotAssignAlertDialog(final int positioin, final TruckDetails obj/*final String pilotName, final String eta, final String nextHub*/) {
         if (obj.getAssignedPilot() == null || obj.getAssignedPilot().trim().equalsIgnoreCase("") || TextUtils.isEmpty(obj.getAssignedPilot()) || obj.getAssignedPilot().equalsIgnoreCase("null")) {
-            assignPilotAlertDialog(obj);
+            assignPilotAlertDialog(positioin,obj);
         } else {
             final CharSequence items[] = {String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:9999999999"),
                     mContext.getString(R.string.pilot_change_pilot),
@@ -282,7 +282,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             mContext.startActivity(intent);
                             break;
                         case 1:
-                            assignPilotAlertDialog(obj);
+                            assignPilotAlertDialog(positioin,obj);
                             break;
                         case 2:
                             releasePilotAlertDialog(obj);
@@ -298,7 +298,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         }
     }
 
-    public void assignPilotAlertDialog(final TruckDetails obj /*final String eta, final String nextHub*/) {
+    public void assignPilotAlertDialog(final int position, final TruckDetails obj /*final String eta, final String nextHub*/) {
         TFUtils.showProgressBar(mContext, mContext.getString(R.string.loading));
         new WebServices().getPilotAvailability(mContext,obj.getEta(),obj.getNextHub(),new ResultReceiver(null) {
             @Override
@@ -309,7 +309,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     Type listType = new TypeToken<ArrayList<PilotAvailability>>() {
                     }.getType();
 
-                    ArrayList<PilotAvailability> pilotAvailabilityList = new Gson().fromJson(responseStr, listType);
+                    final ArrayList<PilotAvailability> pilotAvailabilityList = new Gson().fromJson(responseStr, listType);
                     final List<String> listItems = new ArrayList<>();
                     final List<String > sortedListItems = new ArrayList<>();
 
@@ -346,15 +346,17 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             availablePilots.removeFooterView(footerView);
                         }
                     });
-
+                    final PilotAvailability pilot= new PilotAvailability();
                     availablePilots.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            if(position != 0){
-
-                            } else {
-
-                            }
+                                pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
+                                pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
+                                pilot.setPilotLastName(pilotAvailabilityList.get(position).getPilotLastName());
+                                pilot.setNextAvailabilityTime(pilotAvailabilityList.get(position).getNextAvailabilityTime());
+                                pilot.setAvailabilityStatus(pilotAvailabilityList.get(position).getAvailabilityStatus());
+                                pilot.setContactNumber(pilotAvailabilityList.get(position).getContactNumber());
+                                pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
                         }
                     });
 
@@ -363,7 +365,25 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
-                            //Todo pilot assignment.
+                            if(availablePilots.getCheckedItemPosition() == -1){
+                                Toast.makeText(mContext,mContext.getResources().getString(R.string.no_pilot_selected),Toast.LENGTH_SHORT).show();
+                            }else {
+                                TFUtils.showProgressBar(mContext,mContext.getResources().getString(R.string.please_wait));
+                                mDataSet.get(position).setAssignedPilot(pilot.getPilotFirstName());
+                                mDataSet.get(position).setPilotAvailability(pilot);
+                                new WebServices().getChangePilot(mContext, obj, false, new ResultReceiver(null) {
+                                    @Override
+                                    protected void onReceiveResult(int resultCode, Bundle resultData) {
+                                        super.onReceiveResult(resultCode, resultData);
+                                        if(resultCode == TFConst.SUCCESS){
+                                            notifyItemChanged(position);
+                                        } else {
+                                            Toast.makeText(mContext,mContext.getResources().getString(R.string.problem_assign_pilot),Toast.LENGTH_SHORT).show();
+                                        }
+                                        TFUtils.hideProgressBar();
+                                    }
+                                });
+                            }
                         }
                     });
                     dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), null);

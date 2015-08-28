@@ -148,4 +148,6 @@
     <string name="not_ok">Not Ok</string>
 
 <string name="more_pilots">Load More Pilots...</string>
+<string name="no_pilot_selected">No Pilot is selected.</string>
+<string name="problem_assign_pilot">Sorry, Problem assigning Pilot.</string>
 </resources>
