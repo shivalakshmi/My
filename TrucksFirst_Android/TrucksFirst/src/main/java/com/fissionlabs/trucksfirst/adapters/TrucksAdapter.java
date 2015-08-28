@@ -27,6 +27,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
@@ -267,7 +268,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         if (obj.getAssignedPilot() == null || obj.getAssignedPilot().trim().equalsIgnoreCase("") || TextUtils.isEmpty(obj.getAssignedPilot()) || obj.getAssignedPilot().equalsIgnoreCase("null")) {
             assignPilotAlertDialog(positioin, obj, false);
         } else {
-            final CharSequence items[] = {String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:" + mDataSet.get(positioin).getPilotAvailability().getContactNumber().trim()),
+            final CharSequence items[] = {String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:"+ mDataSet.get(positioin).getContactNo().trim()),
                     mContext.getString(R.string.pilot_change_pilot),
                     mContext.getString(R.string.pilot_release_pilot)};
 
@@ -391,6 +392,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                 TFUtils.showProgressBar(mContext, mContext.getResources().getString(R.string.please_wait));
                                 String existingPilotId = flag ? mDataSet.get(position).getPilotAvailability().getPilotId() : null;
                                 mDataSet.get(position).setAssignedPilot(pilot.getPilotFirstName());
+                                mDataSet.get(position).setContactNo(pilot.getContactNumber());
                                 mDataSet.get(position).setPilotAvailability(pilot);
                                 new WebServices().getChangePilot(mContext, obj, flag, existingPilotId, new ResultReceiver(null) {
                                     @Override

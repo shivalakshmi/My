@@ -19,6 +19,15 @@ public class TruckDetails {
     private String currentHub;
     private String vehiclePlanningId;
     private PilotAvailability pilotAvailability;
+    private String contactNo;
+
+    public String getContactNo() {
+        return contactNo;
+    }
+
+    public void setContactNo(String contactNo) {
+        this.contactNo = contactNo;
+    }
 
     public PilotAvailability getPilotAvailability() {
         return pilotAvailability;
