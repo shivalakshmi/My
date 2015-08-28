@@ -164,6 +164,86 @@ public class WebServices implements TFConst {
 
     }
 
+    public void getPilotRelease(final Context context, final String pilotId, final ResultReceiver resultReceiver) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_PILOT_RELEASE + "?currentHub="+TFUtils.getStringFromSP(context,HUB_NAME)+"&pilotId="+pilotId,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Pilot details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Pilot details end ======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+                        resultReceiver.send(SUCCESS, bundle);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                resultReceiver.send(ERROR, null);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+//                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_PILOT_DETAILS);
+
+    }
+
+
+    public void getChangePilot(final Context context, final String vehicleTrackingId,final String currentHubEta,final String nextHub, final String nextHubEta,final String existingPilotId,final String pilotId, final ResultReceiver resultReceiver) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_CHANGE_PILOT + "?vehicleTrackingId="+ vehicleTrackingId +"&currentHub" +TFUtils.getStringFromSP(context,HUB_NAME) + "&currentHubEta="+currentHubEta + "&nextHub=" + nextHub + "&nextHubEta=" + nextHubEta + "&existingPilotId=" + existingPilotId + "&pilotId=" + pilotId ,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Pilot details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Pilot details end ======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+                        resultReceiver.send(SUCCESS, bundle);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                resultReceiver.send(ERROR, null);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+//                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_PILOT_DETAILS);
+
+    }
+
+
     public void getVehicleChecklistDetails(final ResultReceiver resultReceiver) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_VEHICLE_CHECKLIST_DETAILS,

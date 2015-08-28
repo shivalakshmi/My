@@ -10,6 +10,8 @@ public interface TFConst {
 
     String URL_TRUCK_DETAILS = "http://" + BASE_IP + "mobile/truckdetails";
     String URL_PILOT_AVAILABILITY = "http://" + BASE_IP + "pilot/availablepilots";
+    String URL_PILOT_RELEASE = "http://" + BASE_IP + "pilot/releasePilot";
+    String URL_CHANGE_PILOT = "http://" + BASE_IP + "pilot/udpatePilotInfo";
     String URL_DRIVER_CHECKLIST = "http://" + BASE_IP + "mobile/driver/checklist";
     String URL_UPDATE_DRIVER_CHECKLIST = "http://" + BASE_IP + "mobile/driver/updatechecklist";
     String URL_VEHICLE_CHECKLIST_DETAILS = "http://" + BASE_IP + "mobile/vehicle/checklist";

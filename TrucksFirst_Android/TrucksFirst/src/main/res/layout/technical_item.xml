@@ -32,22 +32,31 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
-            <ImageView
-                android:id="@+id/tick"
-                style="@style/TextViewStyle2"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_check"
-                tools:ignore="ContentDescription" />
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/tick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ok"
+                    android:textSize="15sp" />
+
+                <RadioButton
+                    android:id="@+id/cross"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/not_ok"
+                    android:textSize="15sp" />
+
+            </RadioGroup>
 
 
-            <ImageView
-                android:id="@+id/cross"
-                style="@style/TextViewStyle2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_cancel"
-                tools:ignore="ContentDescription" />
         </LinearLayout>
 
         <TextView
