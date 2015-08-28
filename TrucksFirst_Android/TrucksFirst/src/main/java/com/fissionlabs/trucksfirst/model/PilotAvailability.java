@@ -11,6 +11,15 @@ public class PilotAvailability {
     String nextAvailabilityTime;
     String availabilityStatus;
     String contactNumber;
+    String pilotParentHub;
+
+    public String getPilotParentHub() {
+        return pilotParentHub;
+    }
+
+    public void setPilotParentHub(String pilotParentHub) {
+        this.pilotParentHub = pilotParentHub;
+    }
 
     public String getPilotId() {
         return pilotId;

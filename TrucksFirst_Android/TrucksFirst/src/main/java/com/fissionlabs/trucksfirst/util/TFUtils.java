@@ -12,6 +12,10 @@ import com.fissionlabs.trucksfirst.common.TFConst;
 
 import com.fissionlabs.trucksfirst.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 /**
  * Created by Ashok on 7/8/2015.
  */
@@ -161,6 +165,28 @@ public class TFUtils implements TFConst{
                 || connect.getNetworkInfo(0).getState() == NetworkInfo.State.CONNECTING
                 || connect.getNetworkInfo(1).getState() == NetworkInfo.State.CONNECTING
                 || connect.getNetworkInfo(1).getState() == NetworkInfo.State.CONNECTED;
+    }
+
+    public static String changeTime(String etaInMills) {
+        if(etaInMills == null || etaInMills.equalsIgnoreCase("null")){
+            return "";
+        }
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        long milliSeconds= Long.parseLong(etaInMills);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliSeconds);
+        return formatter.format(calendar.getTime());
+    }
+
+    public static String sendServerTime(String etaInMills) {
+        if(etaInMills == null || etaInMills.equalsIgnoreCase("null")){
+            return "null";
+        }
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long milliSeconds= Long.parseLong(etaInMills);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliSeconds);
+        return formatter.format(calendar.getTime());
     }
 
 }

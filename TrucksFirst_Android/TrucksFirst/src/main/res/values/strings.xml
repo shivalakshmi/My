@@ -146,5 +146,5 @@
     <string name="sos_email_failure">Email not sent.</string>
     <string name="sos_email_failure_problem">There is a problem sending the email.</string>
 
-
+<string name="more_pilots">Load More Pilots...</string>
 </resources>

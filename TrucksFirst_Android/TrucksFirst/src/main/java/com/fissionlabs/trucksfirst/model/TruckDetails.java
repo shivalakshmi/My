@@ -18,6 +18,16 @@ public class TruckDetails {
     private String nextHub;
     private String currentHub;
     private String vehiclePlanningId;
+    private PilotAvailability pilotAvailability;
+
+    public PilotAvailability getPilotAvailability() {
+        return pilotAvailability;
+    }
+
+    public void setPilotAvailability(PilotAvailability pilotAvailability) {
+        this.pilotAvailability = pilotAvailability;
+    }
+
 
     public String getVehicleTrackingId() {
         return vehicleTrackingId;
