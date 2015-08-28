@@ -20,6 +20,15 @@ public class TruckDetails {
     private String vehiclePlanningId;
     private PilotAvailability pilotAvailability;
     private String contactNo;
+    private String pilotId;
+
+    public String getPilotId() {
+        return pilotId;
+    }
+
+    public void setPilotId(String pilotId) {
+        this.pilotId = pilotId;
+    }
 
     public String getContactNo() {
         return contactNo;

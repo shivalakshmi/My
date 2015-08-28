@@ -263,14 +263,21 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
 
     }
 
-
+    private CharSequence items[] = null;
     public void showPilotAssignAlertDialog(final int positioin, final TruckDetails obj/*final String pilotName, final String eta, final String nextHub*/) {
         if (obj.getAssignedPilot() == null || obj.getAssignedPilot().trim().equalsIgnoreCase("") || TextUtils.isEmpty(obj.getAssignedPilot()) || obj.getAssignedPilot().equalsIgnoreCase("null")) {
             assignPilotAlertDialog(positioin, obj, false);
         } else {
-            final CharSequence items[] = {String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:"+ mDataSet.get(positioin).getContactNo().trim()),
-                    mContext.getString(R.string.pilot_change_pilot),
-                    mContext.getString(R.string.pilot_release_pilot)};
+
+            if(mDataSet.get(positioin).getNextHub() == null || mDataSet.get(positioin).getNextHub().equals(null))
+            {
+                items= new CharSequence[]{String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:" + mDataSet.get(positioin).getContactNo().trim()),
+                        mContext.getString(R.string.pilot_release_pilot)};
+            } else {
+                items= new CharSequence[]{String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:"+ mDataSet.get(positioin).getContactNo().trim()),
+                        mContext.getString(R.string.pilot_release_pilot),
+                        mContext.getString(R.string.pilot_change_pilot)};
+            }
 
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
             dialogBuilder.setTitle(Html.fromHtml("<b>" + obj.getAssignedPilot() + "</b>"));
@@ -284,10 +291,10 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             mContext.startActivity(intent);
                             break;
                         case 1:
-                            assignPilotAlertDialog(positioin, obj, true);
+                            releasePilotAlertDialog(positioin, obj);
                             break;
                         case 2:
-                            releasePilotAlertDialog(positioin, obj);
+                            assignPilotAlertDialog(positioin, obj, true);
                             break;
                     }
                 }
@@ -393,6 +400,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                 String existingPilotId = flag ? mDataSet.get(position).getPilotAvailability().getPilotId() : null;
                                 mDataSet.get(position).setAssignedPilot(pilot.getPilotFirstName());
                                 mDataSet.get(position).setContactNo(pilot.getContactNumber());
+                                mDataSet.get(position).setPilotId(pilot.getPilotId());
                                 mDataSet.get(position).setPilotAvailability(pilot);
                                 new WebServices().getChangePilot(mContext, obj, flag, existingPilotId, new ResultReceiver(null) {
                                     @Override
@@ -429,7 +437,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                new WebServices().getPilotRelease(mContext, mDataSet.get(position).getCurrentHub(), mDataSet.get(position).getPilotAvailability().getPilotId(), new ResultReceiver(null) {
+                new WebServices().getPilotRelease(mContext, mDataSet.get(position).getCurrentHub(), mDataSet.get(position).getPilotId(), new ResultReceiver(null) {
                     @Override
                     protected void onReceiveResult(int resultCode, Bundle resultData) {
                         super.onReceiveResult(resultCode, resultData);
