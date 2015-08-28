@@ -151,4 +151,5 @@
 <string name="no_pilot_selected">No Pilot is selected.</string>
 <string name="problem_assign_pilot">Sorry, Problem assigning Pilot.</string>
     <string name="error_releasing_pilot">Sorry, Program releasing Pilot! Try Again!!</string>
+    <string name="warning">Warning</string>
 </resources>
