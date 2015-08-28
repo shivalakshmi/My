@@ -264,7 +264,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
 
     public void showPilotAssignAlertDialog(final int positioin, final TruckDetails obj/*final String pilotName, final String eta, final String nextHub*/) {
         if (obj.getAssignedPilot() == null || obj.getAssignedPilot().trim().equalsIgnoreCase("") || TextUtils.isEmpty(obj.getAssignedPilot()) || obj.getAssignedPilot().equalsIgnoreCase("null")) {
-            assignPilotAlertDialog(positioin,obj);
+            assignPilotAlertDialog(positioin,obj,false);
         } else {
             final CharSequence items[] = {String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:"+ mDataSet.get(positioin).getPilotAvailability().getContactNumber().trim()),
                     mContext.getString(R.string.pilot_change_pilot),
@@ -282,7 +282,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             mContext.startActivity(intent);
                             break;
                         case 1:
-                            assignPilotAlertDialog(positioin,obj);
+                            assignPilotAlertDialog(positioin,obj,true);
                             break;
                         case 2:
                             releasePilotAlertDialog(positioin,obj);
@@ -298,7 +298,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         }
     }
 
-    public void assignPilotAlertDialog(final int position, final TruckDetails obj /*final String eta, final String nextHub*/) {
+    public void assignPilotAlertDialog(final int position, final TruckDetails obj, final boolean flag /*final String eta, final String nextHub*/) {
         TFUtils.showProgressBar(mContext, mContext.getString(R.string.loading));
         new WebServices().getPilotAvailability(mContext,obj.getEta(),obj.getNextHub(),new ResultReceiver(null) {
             @Override
@@ -368,10 +368,11 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             if(availablePilots.getCheckedItemPosition() == -1){
                                 Toast.makeText(mContext,mContext.getResources().getString(R.string.no_pilot_selected),Toast.LENGTH_SHORT).show();
                             }else {
-                                TFUtils.showProgressBar(mContext,mContext.getResources().getString(R.string.please_wait));
+                                TFUtils.showProgressBar(mContext, mContext.getResources().getString(R.string.please_wait));
+                                String existingPilotId = flag ? mDataSet.get(position).getPilotAvailability().getPilotId() : null;
                                 mDataSet.get(position).setAssignedPilot(pilot.getPilotFirstName());
                                 mDataSet.get(position).setPilotAvailability(pilot);
-                                new WebServices().getChangePilot(mContext, obj, false, new ResultReceiver(null) {
+                                new WebServices().getChangePilot(mContext, obj, flag,existingPilotId, new ResultReceiver(null) {
                                     @Override
                                     protected void onReceiveResult(int resultCode, Bundle resultData) {
                                         super.onReceiveResult(resultCode, resultData);
@@ -406,18 +407,16 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                new WebServices().getPilotRelease(mContext,mDataSet.get(position).getCurrentHub(),mDataSet.get(position).getPilotAvailability().getPilotId(), new ResultReceiver(null){
+                new WebServices().getPilotRelease(mContext, mDataSet.get(position).getCurrentHub(), mDataSet.get(position).getPilotAvailability().getPilotId(), new ResultReceiver(null) {
                     @Override
                     protected void onReceiveResult(int resultCode, Bundle resultData) {
                         super.onReceiveResult(resultCode, resultData);
-                        if(resultCode == 200)
-                        {
+                        if (resultCode == 200) {
                             mDataSet.get(position).setAssignedPilot(null);
                             notifyItemChanged(position);
 
-                        }else
-                        {
-                            Toast.makeText(mContext,mContext.getResources().getString(R.string.error_releasing_pilot),Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(mContext, mContext.getResources().getString(R.string.error_releasing_pilot), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

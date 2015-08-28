@@ -205,8 +205,11 @@ public class WebServices implements TFConst {
     }
 
 
-    public void getChangePilot(final Context context, TruckDetails obj, boolean flag, final ResultReceiver resultReceiver) {
-        String params = "?vehicleTrackingId="+ obj.getVehicleTrackingId() +"&currentHub=" +obj.getCurrentHub() + "&currentHubEta="+TFUtils.sendServerTime(obj.getEta()) + "&nextHub=" + obj.getNextHub() + "&nextHubEta=" + TFUtils.sendServerTime(obj.getNextHubEta()) + (flag ? "&existingPilotId=" + obj.getPilotAvailability().getPilotId():"" )+ "&pilotId=" + obj.getPilotAvailability().getPilotId();
+    public void getChangePilot(final Context context, TruckDetails obj, boolean flag,String existingPilotId, final ResultReceiver resultReceiver) {
+        String params = "?vehicleTrackingId="+ obj.getVehicleTrackingId() +"&currentHub=" +obj.getCurrentHub()
+                + "&currentHubEta="+TFUtils.sendServerTime(obj.getEta()) + "&nextHub=" + obj.getNextHub()
+                + "&nextHubEta=" + TFUtils.sendServerTime(obj.getNextHubEta()) +
+                (flag ? "&existingPilotId=" + existingPilotId : "" )+ "&pilotId=" + obj.getPilotAvailability().getPilotId();
         params = params.replaceAll(" ","%20");
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URL_CHANGE_PILOT + params,
