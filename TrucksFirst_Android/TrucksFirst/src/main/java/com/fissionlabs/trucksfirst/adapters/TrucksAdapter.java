@@ -266,7 +266,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         if (obj.getAssignedPilot() == null || obj.getAssignedPilot().trim().equalsIgnoreCase("") || TextUtils.isEmpty(obj.getAssignedPilot()) || obj.getAssignedPilot().equalsIgnoreCase("null")) {
             assignPilotAlertDialog(positioin,obj);
         } else {
-            final CharSequence items[] = {String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:9999999999"),
+            final CharSequence items[] = {String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:"+ mDataSet.get(positioin).getPilotAvailability().getContactNumber().trim()),
                     mContext.getString(R.string.pilot_change_pilot),
                     mContext.getString(R.string.pilot_release_pilot)};
 
@@ -285,7 +285,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             assignPilotAlertDialog(positioin,obj);
                             break;
                         case 2:
-                            releasePilotAlertDialog(obj);
+                            releasePilotAlertDialog(positioin,obj);
                             break;
                     }
                 }
@@ -350,13 +350,13 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     availablePilots.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
-                                pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
-                                pilot.setPilotLastName(pilotAvailabilityList.get(position).getPilotLastName());
-                                pilot.setNextAvailabilityTime(pilotAvailabilityList.get(position).getNextAvailabilityTime());
-                                pilot.setAvailabilityStatus(pilotAvailabilityList.get(position).getAvailabilityStatus());
-                                pilot.setContactNumber(pilotAvailabilityList.get(position).getContactNumber());
-                                pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
+                            pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
+                            pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
+                            pilot.setPilotLastName(pilotAvailabilityList.get(position).getPilotLastName());
+                            pilot.setNextAvailabilityTime(pilotAvailabilityList.get(position).getNextAvailabilityTime());
+                            pilot.setAvailabilityStatus(pilotAvailabilityList.get(position).getAvailabilityStatus());
+                            pilot.setContactNumber(pilotAvailabilityList.get(position).getContactNumber());
+                            pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
                         }
                     });
 
@@ -399,13 +399,28 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         });
     }
 
-    public void releasePilotAlertDialog(TruckDetails obj) {
+    public void releasePilotAlertDialog(final int position, TruckDetails obj) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
         dialogBuilder.setTitle(Html.fromHtml(String.format(mContext.getString(R.string.are_you_sure_release), obj.getAssignedPilot())));
         dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                new WebServices().getPilotRelease(mContext,mDataSet.get(position).getCurrentHub(),mDataSet.get(position).getPilotAvailability().getPilotId(), new ResultReceiver(null){
+                    @Override
+                    protected void onReceiveResult(int resultCode, Bundle resultData) {
+                        super.onReceiveResult(resultCode, resultData);
+                        if(resultCode == 200)
+                        {
+                            mDataSet.get(position).setAssignedPilot(null);
+                            notifyItemChanged(position);
+
+                        }else
+                        {
+                            Toast.makeText(mContext,mContext.getResources().getString(R.string.error_releasing_pilot),Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
             }
         });

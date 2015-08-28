@@ -165,10 +165,10 @@ public class WebServices implements TFConst {
 
     }
 
-    public void getPilotRelease(final Context context, final String pilotId, final ResultReceiver resultReceiver) {
+    public void getPilotRelease(final Context context, final String currentHub,final String pilotId, final ResultReceiver resultReceiver) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URL_PILOT_RELEASE + "?currentHub="+TFUtils.getStringFromSP(context,HUB_NAME)+"&pilotId="+pilotId,
+                URL_PILOT_RELEASE + "?currentHub="+currentHub+"&pilotId="+pilotId,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
