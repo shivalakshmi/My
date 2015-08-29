@@ -48,6 +48,11 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
     private ArrayList<String> mTyreOilChecklist = new ArrayList();
     private ArrayList<String> mElectrical = new ArrayList();
     private ArrayList<String> mScratch = new ArrayList();
+
+    private ArrayList<Boolean> mDriverChecklistStatus = new ArrayList();
+    private ArrayList<Boolean> mTyreOilChecklistStatus = new ArrayList();
+    private ArrayList<Boolean> mElectricalStatus = new ArrayList();
+    private ArrayList<Boolean> mScratchStatus = new ArrayList();
     private ChecklistNew mChecklistNew;
     private WebServices mWebServices;
     private Button saveBtn;
@@ -70,7 +75,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
         mChecklistArrayList.clear();
         mWebServices = new WebServices();
 //        mChecklistNew =new ChecklistNew();
-        mWebServices.getVehicleChecklistDetails(new ResultReceiver(null) {
+        mWebServices.getVehicleChecklistDetails(bundle.getString("vehicle_number"), new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
                 if (resultCode == SUCCESS) {
@@ -139,6 +144,10 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
         mDocumentStatusList.clear();
         mKitsStatusList.clear();
         mCleanlinessStatusList.clear();
+        mDriverChecklistStatus.clear();
+        mTyreOilChecklistStatus.clear();
+        mElectricalStatus.clear();
+        mScratchStatus.clear();
         mDocumentStatusList.add(mChecklistNew.isRegistrationCertificate());
         mDocumentStatusList.add(mChecklistNew.isFitnessCertificate());
         mDocumentStatusList.add(mChecklistNew.isNationalPermit());
@@ -153,6 +162,36 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
         mKitsStatusList.add(mChecklistNew.isToolKit());
 
         mCleanlinessStatusList.add(mChecklistNew.isCabinCleanliness());
+
+        mDriverChecklistStatus.add(mChecklistNew.isEngineStarting());
+        mDriverChecklistStatus.add(mChecklistNew.isEngineSound());
+        mDriverChecklistStatus.add(mChecklistNew.isExhaustEmission());
+        mDriverChecklistStatus.add(mChecklistNew.isClutchWorking());
+        mDriverChecklistStatus.add(mChecklistNew.isGearMovement());
+        mDriverChecklistStatus.add(mChecklistNew.isBrakeEffectiveness());
+
+        mTyreOilChecklistStatus.add(mChecklistNew.isTyres());
+        mTyreOilChecklistStatus.add(mChecklistNew.isCoolantLeakage());
+        mTyreOilChecklistStatus.add(mChecklistNew.isEngineOilLeakage());
+        mTyreOilChecklistStatus.add(mChecklistNew.isGearOilLeakage());
+        mTyreOilChecklistStatus.add(mChecklistNew.isFuelDieselLeakage());
+        mTyreOilChecklistStatus.add(mChecklistNew.isDifferentialOilLeakage());
+
+        mElectricalStatus.add(mChecklistNew.isHeadlight());
+        mElectricalStatus.add(mChecklistNew.isIndicatorAndHazard());
+        mElectricalStatus.add(mChecklistNew.isHorn());
+        mElectricalStatus.add(mChecklistNew.isWiper());
+        mElectricalStatus.add(mChecklistNew.isTemperatureOnTemperatureGauge());
+        mElectricalStatus.add(mChecklistNew.isAlternatorChargerLight());
+        mElectricalStatus.add(mChecklistNew.isOilPressureWarningLight());
+
+        mScratchStatus.add(mChecklistNew.isFront());
+        mScratchStatus.add(mChecklistNew.isLeft());
+        mScratchStatus.add(mChecklistNew.isRear());
+        mScratchStatus.add(mChecklistNew.isRight());
+
+
+
         Checklist mChecklist;
 
         String[] documentList = getResources().getStringArray(R.array.document_checklist);
@@ -186,10 +225,10 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
 
         for (int k = 0; k < driverList.length; k++) {
             if (k == 0) {
-                mChecklist = new Checklist(getResources().getString(R.string.driver), driverList[k], false);
+                mChecklist = new Checklist(getResources().getString(R.string.driver), driverList[k], mDriverChecklistStatus.get(k));
                 mChecklistArrayList.add(mChecklist);
             } else {
-                mChecklist = new Checklist("", driverList[k], true);
+                mChecklist = new Checklist("", driverList[k], mDriverChecklistStatus.get(k));
                 mChecklistArrayList.add(mChecklist);
             }
         }
@@ -197,30 +236,30 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
         String[] tyreOilChecklist = getResources().getStringArray(R.array.tyre_oil_checklist);
         for (int l = 0; l < tyreOilChecklist.length; l++) {
             if (l == 0) {
-                mChecklist = new Checklist(getResources().getString(R.string.tyre_oil), tyreOilChecklist[l], false);
+                mChecklist = new Checklist(getResources().getString(R.string.tyre_oil), tyreOilChecklist[l], mTyreOilChecklistStatus.get(l));
                 mChecklistArrayList.add(mChecklist);
             } else {
-                mChecklist = new Checklist("", tyreOilChecklist[l], true);
+                mChecklist = new Checklist("", tyreOilChecklist[l], mTyreOilChecklistStatus.get(l));
                 mChecklistArrayList.add(mChecklist);
             }
         }
         String[] electricalChecklist = getResources().getStringArray(R.array.electrical_checklist);
         for (int m = 0; m < electricalChecklist.length; m++) {
             if (m == 0) {
-                mChecklist = new Checklist(getResources().getString(R.string.electrical), electricalChecklist[m], false);
+                mChecklist = new Checklist(getResources().getString(R.string.electrical), electricalChecklist[m], mElectricalStatus.get(m));
                 mChecklistArrayList.add(mChecklist);
             } else {
-                mChecklist = new Checklist("", electricalChecklist[m], true);
+                mChecklist = new Checklist("", electricalChecklist[m], mElectricalStatus.get(m));
                 mChecklistArrayList.add(mChecklist);
             }
         }
         String[] scratchChecklist = getResources().getStringArray(R.array.scratch_checklist);
         for (int n = 0; n < scratchChecklist.length; n++) {
             if (n == 0) {
-                mChecklist = new Checklist(getResources().getString(R.string.scratch_dent), scratchChecklist[n], false);
+                mChecklist = new Checklist(getResources().getString(R.string.scratch_dent), scratchChecklist[n], mScratchStatus.get(n));
                 mChecklistArrayList.add(mChecklist);
             } else {
-                mChecklist = new Checklist("", scratchChecklist[n], true);
+                mChecklist = new Checklist("", scratchChecklist[n], mScratchStatus.get(n));
                 mChecklistArrayList.add(mChecklist);
             }
         }

@@ -249,9 +249,10 @@ public class WebServices implements TFConst {
     }
 
 
-    public void getVehicleChecklistDetails(final ResultReceiver resultReceiver) {
+    public void getVehicleChecklistDetails(final String vehicleNumber, final ResultReceiver resultReceiver) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_VEHICLE_CHECKLIST_DETAILS,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_VEHICLE_CHECKLIST_DETAILS + "?vehicleNo=" + "HR55V7964",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -262,6 +263,7 @@ public class WebServices implements TFConst {
                         }
                         Bundle bundle = new Bundle();
                         bundle.putString("response", response);
+
 
                         resultReceiver.send(SUCCESS, bundle);
                     }
@@ -275,12 +277,12 @@ public class WebServices implements TFConst {
             }
         }) {
 
-            @Override
+           /* @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("vehicleNo", "TFFL123");
+                params.put("vehicleNo", vehicleNumber);
                 return params;
-            }
+            }*/
 
         };
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CHECKLIST_DETAILS);

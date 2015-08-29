@@ -112,6 +112,9 @@ public class CheckListAdapter extends BaseAdapter {
                     convertView = mInflater.inflate(R.layout.technical_item, parent, false);
                     holder.mTvOperational = (TextView) convertView.findViewById(R.id.technical);
                     holder.mTvChecklistItem = (TextView) convertView.findViewById(R.id.checklist_technical);
+                    holder.mRadioBtnYes = (RadioButton) convertView.findViewById(R.id.tick);
+                    holder.mRadioBtnNo = (RadioButton) convertView.findViewById(R.id.cross);
+                    holder.mRadioGroup = (RadioGroup) convertView.findViewById(R.id.radio_group);
                     break;
             }
             assert convertView != null;
@@ -178,8 +181,15 @@ public class CheckListAdapter extends BaseAdapter {
 
                 break;
             case TECHNICAL_ITEM:
+                holder.mRadioBtnNo.setTag(holder);
+                holder.mRadioBtnYes.setTag(holder);
                 holder.mTvOperational.setText(mChecklistArrayList.get(position).getOperational());
                 holder.mTvChecklistItem.setText(mChecklistArrayList.get(position).getChecklistItem());
+                if (mChecklistArrayList.get(position).getStatus()) {
+                    holder.mRadioBtnYes.setChecked(true);
+                } else {
+                    holder.mRadioBtnNo.setChecked(true);
+                }
                 convertView.findViewById(R.id.cross).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -187,6 +197,23 @@ public class CheckListAdapter extends BaseAdapter {
                         ((ListView) parent).performItemClick(v, position, 0);
                     }
                 });
+
+                holder.mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        TFHomeActivity.isChangesMade = true;
+                        if (R.id.tick == checkedId) {
+                            mChecklistArrayList.get(position).setStatus(true);
+                            updateStatus(position, true);
+                        } else {
+                            mChecklistArrayList.get(position).setStatus(false);
+                            updateStatus(position, false);
+                        }
+                        notifyDataSetChanged();
+                    }
+                });
+
+
                 break;
         }
 
@@ -218,6 +245,50 @@ public class CheckListAdapter extends BaseAdapter {
             mChecklistNew.setToolKit(flag);
         }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.cabin_cleanliness))){
             mChecklistNew.setCabinCleanliness(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.engine_starting))){
+            mChecklistNew.setEngineStarting(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.engine_sound))){
+            mChecklistNew.setEngineSound(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.exhaust_emission))){
+            mChecklistNew.setExhaustEmission(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.clutch_working))){
+            mChecklistNew.setClutchWorking(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.gear_movement))){
+            mChecklistNew.setGearMovement(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.brake_effectiveness))){
+            mChecklistNew.setBrakeEffectiveness(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.tyres))){
+            mChecklistNew.setTyres(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.coolant_leakage))){
+            mChecklistNew.setCoolantLeakage(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.engine_oil_leakage))){
+            mChecklistNew.setGearOilLeakage(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.fuel_diesel_leakage))){
+            mChecklistNew.setFuelDieselLeakage(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.differential_oil_leakage))){
+            mChecklistNew.setDifferentialOilLeakage(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.headlight))){
+            mChecklistNew.setHeadlight(flag);
+        } else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.indicator_and_hazard))){
+            mChecklistNew.setIndicatorAndHazard(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.horn))){
+            mChecklistNew.setHorn(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.wiper))){
+            mChecklistNew.setWiper(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.temperature_on_temperature_gauge))){
+            mChecklistNew.setTemperatureOnTemperatureGauge(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.alternator_charger_light))){
+            mChecklistNew.setAlternatorChargerLight(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.oil_pressure_warning_light))){
+            mChecklistNew.setOilPressureWarningLight(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.front))){
+            mChecklistNew.setFront(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.left))){
+            mChecklistNew.setLeft(flag);
+        } else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.rear))){
+            mChecklistNew.setRear(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.right))){
+            mChecklistNew.setRight(flag);
         }
     }
 
@@ -301,11 +372,11 @@ public class CheckListAdapter extends BaseAdapter {
     }
 
     private void hideProgressIndicator() {
-            context.runOnUiThread(new Runnable() {
-                public void run() {
-                    dialog.dismiss();
-                }
-            });
+        context.runOnUiThread(new Runnable() {
+            public void run() {
+                dialog.dismiss();
+            }
+        });
     }
 
 }

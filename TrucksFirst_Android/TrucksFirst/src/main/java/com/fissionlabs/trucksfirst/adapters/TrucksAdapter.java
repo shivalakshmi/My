@@ -359,7 +359,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     final PilotAvailability pilot = new PilotAvailability();
                     availablePilots.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
                             if (position == 0) {
                                 pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
                                 pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
@@ -377,6 +377,13 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
+                                        pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
+                                        pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
+                                        pilot.setPilotLastName(pilotAvailabilityList.get(position).getPilotLastName());
+                                        pilot.setNextAvailabilityTime(pilotAvailabilityList.get(position).getNextAvailabilityTime());
+                                        pilot.setAvailabilityStatus(pilotAvailabilityList.get(position).getAvailabilityStatus());
+                                        pilot.setContactNumber(pilotAvailabilityList.get(position).getContactNumber());
+                                        pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
                                     }
                                 });
                                 dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), null);
