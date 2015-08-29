@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/vehicle_number_edt"
         android:layout_width="300dp"
         android:layout_height="wrap_content"

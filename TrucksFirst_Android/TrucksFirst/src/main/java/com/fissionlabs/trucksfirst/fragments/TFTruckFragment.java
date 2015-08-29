@@ -43,7 +43,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
     private TextView mTVEta;
     private TextView mTvClient;
     private TextView mTVAssignedPilot;
-    private ArrayList<TruckDetails> mTrucksList = null;
+    public static ArrayList<TruckDetails> mTrucksList = null;
     private TFTruckFragment mTFragment;
     private TrucksAdapter mAdapter;
 

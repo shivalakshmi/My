@@ -397,7 +397,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                 Toast.makeText(mContext, mContext.getResources().getString(R.string.no_pilot_selected), Toast.LENGTH_SHORT).show();
                             } else {
                                 TFUtils.showProgressBar(mContext, mContext.getResources().getString(R.string.please_wait));
-                                String existingPilotId = flag ? mDataSet.get(position).getPilotAvailability().getPilotId() : null;
+                                String existingPilotId = flag ? mDataSet.get(position).getPilotId() : null;
                                 mDataSet.get(position).setAssignedPilot(pilot.getPilotFirstName());
                                 mDataSet.get(position).setContactNo(pilot.getContactNumber());
                                 mDataSet.get(position).setPilotId(pilot.getPilotId());
@@ -437,7 +437,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                new WebServices().getPilotRelease(mContext, mDataSet.get(position).getCurrentHub(), mDataSet.get(position).getPilotId(), new ResultReceiver(null) {
+                new WebServices().getPilotRelease(mContext, mDataSet.get(position).getCurrentHub(), mDataSet.get(position).getPilotId(),mDataSet.get(position).getVehicleTrackingId(), new ResultReceiver(null) {
                     @Override
                     protected void onReceiveResult(int resultCode, Bundle resultData) {
                         super.onReceiveResult(resultCode, resultData);

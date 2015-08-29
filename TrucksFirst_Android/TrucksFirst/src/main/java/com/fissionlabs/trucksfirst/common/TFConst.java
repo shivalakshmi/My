@@ -6,7 +6,8 @@ package com.fissionlabs.trucksfirst.common;
 public interface TFConst {
     String TAG = "TRUCKS_FIRST";
 
-    String BASE_IP = "rivigo-dev.elasticbeanstalk.com/";
+//    String BASE_IP = "rivigo-dev.elasticbeanstalk.com/";
+    String BASE_IP = "172.168.0.223:8080/com.rivigo.controller/";
 
     String URL_TRUCK_DETAILS = "http://" + BASE_IP + "mobile/truckdetails";
     String URL_PILOT_AVAILABILITY = "http://" + BASE_IP + "pilot/availablepilots";

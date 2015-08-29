@@ -8,9 +8,13 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.android.volley.toolbox.StringRequest;
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.Mail;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
@@ -25,27 +29,37 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class TFSOSFragment extends TFCommonFragment implements TFConst{
 
     private Mail mMail;
     private Handler mHandler;
-    private EditText mEtVehivleNo;
+    private AutoCompleteTextView mEtVehivleNo;
     private EditText mEtReason;
     private RadioGroup mRadioGroup;
+    private ArrayList<String> vehicleNumberList = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sos,container,false);
         mMail = new Mail("rivigodev@gmail.com", "fissionlabs");
-        mEtVehivleNo = (EditText) view.findViewById(R.id.vehicle_number_edt);
+        mEtVehivleNo = (AutoCompleteTextView) view.findViewById(R.id.vehicle_number_edt);
         mEtReason = (EditText) view.findViewById(R.id.reason_edt);
         mRadioGroup = (RadioGroup) view.findViewById(R.id.sos_radiogroup);
         int index = mRadioGroup.indexOfChild(view.findViewById(mRadioGroup.getCheckedRadioButtonId()));
 
-        Toast.makeText(getActivity(),"here:"+index,Toast.LENGTH_SHORT).show();
+        if(TFTruckFragment.mTrucksList.size()>0 && TFTruckFragment.mTrucksList!=null) {
+            vehicleNumberList.clear();
+            for (int i = 0; i < TFTruckFragment.mTrucksList.size(); i++) {
+                vehicleNumberList.add(TFTruckFragment.mTrucksList.get(i).getVehicleNumber());
+            }
+            ArrayAdapter<String> adapter =  new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, vehicleNumberList);
+            mEtVehivleNo.setThreshold(1);
+            mEtVehivleNo.setAdapter(adapter);
+        }
 
         mHandler = new Handler(){
             public void handleMessage(Message msg) {
