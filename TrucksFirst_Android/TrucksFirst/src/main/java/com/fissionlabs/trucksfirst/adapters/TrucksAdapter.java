@@ -14,10 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,14 +25,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
 import com.fissionlabs.trucksfirst.model.PilotAvailability;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
 import com.fissionlabs.trucksfirst.pojo.DriverChecklist;
-import com.fissionlabs.trucksfirst.util.LogConfig;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
 import com.google.gson.Gson;
@@ -43,10 +39,7 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -157,7 +150,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
 
             @Override
             public void onClick(View view) {
-                showPilotInHubAlertDialog(mDataSet.get(position).getAssignedPilot(), position, holder.mRadioPilotInHubYes, holder.mRadioPilotInHubNo);
+                showPilotInHubAlertDialog(mDataSet.get(position).getAssignedPilot(), position, holder.mRadioPilotInHubYes, holder.mRadioPilotInHubNo, mDataSet.get(position).getVehicleNumber(), mDataSet.get(position).getPilotId());
             }
         });
         holder.mRadioPilotInHubNo.setOnClickListener(new View.OnClickListener() {
@@ -192,11 +185,11 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         return mDataSet.size();
     }
 
-    public void showPilotInHubAlertDialog(final String title, final int positon, final RadioButton yes, final RadioButton no) {
+    public void showPilotInHubAlertDialog(final String title, final int positon, final RadioButton yes, final RadioButton no, final String vehicleNo, final String pilotNo) {
 
 
         mWebServices = new WebServices();
-        mWebServices.getDriverChecklistDetails(new ResultReceiver(null) {
+        mWebServices.getDriverChecklistDetails(vehicleNo,pilotNo,new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
                 if (resultCode == TFConst.SUCCESS) {
@@ -372,6 +365,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                 View view2 = LayoutInflater.from(mContext).inflate(R.layout.wrong_pilot_assignment, null, false);
                                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
                                 dialogBuilder.setView(view2);
+                                TextView pilotName = (TextView)view2.findViewById(R.id.pilot_name);
+                                pilotName.setText(pilotAvailabilityList.get(position).getPilotFirstName());
                                 dialogBuilder.setTitle(Html.fromHtml("<b>" + mContext.getString(R.string.warning) + "</b>"));
                                 dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                                     @Override

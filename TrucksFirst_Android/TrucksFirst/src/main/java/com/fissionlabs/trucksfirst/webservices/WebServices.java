@@ -90,26 +90,8 @@ public class WebServices implements TFConst {
                 resultReceiver.send(ERROR, null);
             }
         }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                @SuppressWarnings("unchecked")
-                HashMap<String, String> headers = new HashMap();
-                headers.put("Content-Type", "application/x-www-form-urlencoded");
-                return headers;
-            }
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("hubName", TFUtils.getStringFromSP(context,HUB_NAME));
 
-                return params;
-            }
-            /*@Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> params = new HashMap();
-                params.put("hubName","PTD" *//*TFUtils.getStringFromSP(context,HUB_NAME)*//*);
-                return params;
-            }*/
+
         };
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_TRUCK_DETAILS);
 
@@ -310,9 +292,12 @@ public class WebServices implements TFConst {
             TFApp.getInstance().addToRequestQueue(jsonObjReq, "TAG");
     }
 
-    public void getDriverChecklistDetails(final ResultReceiver resultReceiver) {
+    public void getDriverChecklistDetails(final String vehicleNo, final String pilotNo, final ResultReceiver resultReceiver) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DRIVER_CHECKLIST,
+        Log.e("Lakshmi",URL_DRIVER_CHECKLIST + "?vehicleNo="+vehicleNo+"&pilotNo="+pilotNo );
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_DRIVER_CHECKLIST + "?vehicleNo="+vehicleNo+"&pilotNo="+pilotNo,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -336,14 +321,14 @@ public class WebServices implements TFConst {
             }
         }) {
 
-            @Override
+          /*  @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("vehicleNo", "HR55V1234");
-                params.put("pilotNo","PTD/DR/H/0001");
+                params.put("vehicleNo", "HR55V7225");
+                params.put("pilotNo","55");
                 return params;
             }
-
+*/
         };
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CHECKLIST_DETAILS);
     }
