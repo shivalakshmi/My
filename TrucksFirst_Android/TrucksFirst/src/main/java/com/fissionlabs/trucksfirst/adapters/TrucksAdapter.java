@@ -262,7 +262,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             assignPilotAlertDialog(positioin, obj, false);
         } else {
 
-            if(mDataSet.get(positioin).getNextHub() == null || mDataSet.get(positioin).getNextHub().equals(null))
+            if(mDataSet.get(positioin).getNextHub() == null || mDataSet.get(positioin).getNextHub().equals("null"))
             {
                 items= new CharSequence[]{String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:" + mDataSet.get(positioin).getContactNo().trim()),
                         mContext.getString(R.string.pilot_release_pilot)};
