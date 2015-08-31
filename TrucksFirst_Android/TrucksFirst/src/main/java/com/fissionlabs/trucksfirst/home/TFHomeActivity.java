@@ -1,8 +1,11 @@
 package com.fissionlabs.trucksfirst.home;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +17,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
@@ -275,7 +282,7 @@ public class TFHomeActivity extends TFCommonActivity {
         dialogBuilder.setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                isChangesMade =false;
+                isChangesMade = false;
                 onBackPressed();
             }
         });
@@ -319,5 +326,35 @@ public class TFHomeActivity extends TFCommonActivity {
             }
         }
     }
+
+    /**
+     * Called to process touch screen events.
+     */
+    @Override
+    public boolean dispatchTouchEvent(@NonNull MotionEvent ev) {
+        View v = getCurrentFocus();
+
+        if (v != null &&
+                (ev.getAction() == MotionEvent.ACTION_UP) &&
+                v instanceof EditText &&
+                !v.getClass().getName().startsWith("android.webkit.")) {
+            int scrcoords[] = new int[2];
+            v.getLocationOnScreen(scrcoords);
+            float x = ev.getRawX() + v.getLeft() - scrcoords[0];
+            float y = ev.getRawY() + v.getTop() - scrcoords[1];
+
+            if (x < v.getLeft() || x > v.getRight() || y < v.getTop() || y > v.getBottom())
+                hideKeyboard(this);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    private void hideKeyboard(Activity activity) {
+        if (activity != null && activity.getWindow() != null && activity.getWindow().getDecorView() != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), 0);
+        }
+    }
+
 
 }

@@ -57,15 +57,13 @@
         <item>@string/rear</item>
         <item>@string/right</item>
     </string-array>
+
     <string-array name="wrong_pilot_assignment_reasons">
+        <item>@string/weekly_off</item>
         <item>@string/sick</item>
-        <item>@string/not_available</item>
-        <item>@string/on_leave</item>
+        <item>@string/late</item>
+        <item>@string/overduty</item>
         <item>@string/other</item>
     </string-array>
 
-    <string name="sick">Sick</string>
-    <string name="not_available">Not Available</string>
-    <string name="on_leave">On Leave</string>
-    <string name="other">Others</string>
 </resources>
