@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:minLines="4"
         android:id="@+id/reason_edt"
+        android:hint="@string/pilot_selection_warning"
         android:gravity="left|top"
         android:background="@drawable/edittext_background"
         android:layout_margin="15dp"/>

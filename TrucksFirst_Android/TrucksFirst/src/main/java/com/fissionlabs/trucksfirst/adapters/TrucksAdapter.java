@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -366,7 +367,9 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
                                 dialogBuilder.setView(view2);
                                 TextView pilotName = (TextView)view2.findViewById(R.id.pilot_name);
-                                pilotName.setText(pilotAvailabilityList.get(position).getPilotFirstName());
+                                EditText etReason = (EditText) view2.findViewById(R.id.reason_edt);
+                                etReason.setHint(mContext.getResources().getString(R.string.pilot_selection_warning,""+pilotAvailabilityList.get(0).getPilotFirstName()));
+                                pilotName.setText(pilotAvailabilityList.get(0).getPilotFirstName());
                                 dialogBuilder.setTitle(Html.fromHtml("<b>" + mContext.getString(R.string.warning) + "</b>"));
                                 dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                                     @Override
@@ -381,7 +384,17 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                         pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
                                     }
                                 });
-                                dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), null);
+                                dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        availablePilots.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                availablePilots.setItemChecked(position,false);
+                                            }
+                                        });
+                                    }
+                                });
                                 AlertDialog alertDialog2 = dialogBuilder.create();
                                 alertDialog2.getWindow().setLayout(600, LinearLayout.LayoutParams.WRAP_CONTENT);
                                 alertDialog2.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
