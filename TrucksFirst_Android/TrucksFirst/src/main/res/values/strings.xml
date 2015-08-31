@@ -159,4 +159,6 @@
     <string name="overduty">Overduty</string>
     <string name="other">Others</string>
     <string name="pilot_selection_warning">Enter a reason why you are not selecting %1$s ?</string>
+    <string name="hint_checklist_reason">Enter reason....</string>
+    <string name="no_pilots_available">No Pilots available for this time and date.</string>
 </resources>

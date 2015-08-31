@@ -1,6 +1,7 @@
 package com.fissionlabs.trucksfirst.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,8 +38,8 @@ import java.util.ArrayList;
 
 public class TFSOSFragment extends TFCommonFragment implements TFConst{
 
-    private Mail mMail;
-    private Handler mHandler;
+    private static Mail mMail;
+    private static Handler mHandler;
     private AutoCompleteTextView mEtVehivleNo;
     private EditText mEtReason;
     private RadioGroup mRadioGroup;
@@ -49,7 +50,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_sos,container,false);
-        mMail = new Mail("rivigodev@gmail.com", "fissionlabs");
+//        mMail = new Mail("rivigodev@gmail.com", "fissionlabs");
         mEtVehivleNo = (AutoCompleteTextView) view.findViewById(R.id.vehicle_number_edt);
         mEtReason = (EditText) view.findViewById(R.id.reason_edt);
         mRadioGroup = (RadioGroup) view.findViewById(R.id.sos_radiogroup);
@@ -63,13 +64,6 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
             mEtVehivleNo.setThreshold(1);
             mEtVehivleNo.setAdapter(adapter);
         }
-
-        mHandler = new Handler(){
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                Toast.makeText(mActivity, "" + msg.getData().getString("what"), Toast.LENGTH_LONG).show();
-            }
-        };
 
         view.findViewById(R.id.send_mail_sms).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +79,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
                 RadioButton radioButton = (RadioButton) view.findViewById(selectedId);
                 String reason = "\nVehivleNo::"+mEtVehivleNo.getText().toString().trim()+"\nIncident::"+radioButton.getText()+"\nReason::"+mEtReason.getText().toString().trim();
                 TFUtils.showProgressBar(getActivity(), mActivity.getResources().getString(R.string.please_wait));
-                sendEmailAndSMS(v, reason);
+                sendEmailAndSMS(getActivity(),reason);
                 mEtVehivleNo.setText("");
                 mEtReason.setText("");
             }
@@ -99,9 +93,15 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
         mActivity = activity;
     }
 
+    public static void sendEmailAndSMS(final Context context,final String reason){
+        mMail = new Mail("rivigodev@gmail.com", "fissionlabs");
 
-
-    public void sendEmailAndSMS(View view, final String reason){
+        mHandler = new Handler(){
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                Toast.makeText(context, "" + msg.getData().getString("what"), Toast.LENGTH_LONG).show();
+            }
+        };
 
         Thread thread = new Thread(new Runnable() {
 
@@ -145,13 +145,13 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
 //                    new URL(sms).openConnection().connect();
 //					m.addAttachment("/sdcard/myPicture.jpg");  // path to file you want to attach
                     if(mMail.send()) {
-                        b.putString("what",getResources().getString(R.string.sos_email_success));
+                        b.putString("what",context.getResources().getString(R.string.sos_email_success));
                     } else {
-                        b.putString("what",getResources().getString(R.string.sos_email_failure));
+                        b.putString("what",context.getResources().getString(R.string.sos_email_failure));
                     }
                 } catch(Exception e) {
                     e.printStackTrace();
-                    b.putString("what",mActivity.getResources().getString(R.string.sos_email_failure_problem));
+                    b.putString("what",context.getResources().getString(R.string.sos_email_failure_problem));
                 }
                 message.setData(b);
                 mHandler.sendMessage(message);

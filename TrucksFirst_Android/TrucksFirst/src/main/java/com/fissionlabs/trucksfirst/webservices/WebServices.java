@@ -234,7 +234,7 @@ public class WebServices implements TFConst {
     public void getVehicleChecklistDetails(final String vehicleNumber, final ResultReceiver resultReceiver) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URL_VEHICLE_CHECKLIST_DETAILS + "?vehicleNo=" + "HR55V7964",
+                URL_VEHICLE_CHECKLIST_DETAILS + "?vehicleNo=" + vehicleNumber,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

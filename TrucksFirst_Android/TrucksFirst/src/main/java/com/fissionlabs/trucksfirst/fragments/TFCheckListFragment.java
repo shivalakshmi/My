@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -29,6 +31,7 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,6 +61,10 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
     private Button saveBtn;
     private Button cancelBtn;
     private Bundle bundle;
+    private ListView mLVChecklist;
+    private CheckListAdapter checkListAdapter;
+    private List<String> checklistNextHub_AshokLeylandReasons = new ArrayList<>();
+    private String notOkReason = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,7 +80,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
         bundle = this.getArguments();
 
         mHomeActivity.mActionBar.setTitle(bundle.getString("vehicle_number"));
-        final ListView mLVChecklist = (ListView) view.findViewById(R.id.listView);
+        mLVChecklist = (ListView) view.findViewById(R.id.listView);
         mChecklistArrayList.clear();
         mWebServices = new WebServices();
 //        mChecklistNew =new ChecklistNew();
@@ -87,7 +94,8 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                     if (responseStr != null) {
                         mChecklistNew = new Gson().fromJson(responseStr, ChecklistNew.class);
                         checklistData();
-                        mLVChecklist.setAdapter(new CheckListAdapter(getActivity(), mChecklistArrayList, mChecklistNew));
+                        checkListAdapter = new CheckListAdapter(getActivity(), mChecklistArrayList, mChecklistNew);
+                        mLVChecklist.setAdapter(checkListAdapter);
                     }
                 } else {
                     Toast.makeText(getActivity(), "" + getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
@@ -121,6 +129,11 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                String reason = "";
+                for(int i=0;i<checklistNextHub_AshokLeylandReasons.size();i++){
+                    reason = reason +checklistNextHub_AshokLeylandReasons.get(i)+"\n";
+                }
+                TFSOSFragment.sendEmailAndSMS(getActivity(),reason);
                 mHomeActivity.onBackPressed();
             }
         });
@@ -129,9 +142,9 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 long viewId = view.getId();
-
+                notOkReason = notOkReason + mChecklistArrayList.get(position).getChecklistItem();
                 if (viewId == R.id.cross) {
-                    showStatusAlertDialog(bundle.getString("vehicle_number"));
+                    showStatusAlertDialog(bundle.getString("vehicle_number"),position);
                 }
 
 
@@ -149,6 +162,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
         mTyreOilChecklistStatus.clear();
         mElectricalStatus.clear();
         mScratchStatus.clear();
+        checklistNextHub_AshokLeylandReasons.clear();
         mDocumentStatusList.add(mChecklistNew.isRegistrationCertificate());
         mDocumentStatusList.add(mChecklistNew.isFitnessCertificate());
         mDocumentStatusList.add(mChecklistNew.isNationalPermit());
@@ -266,13 +280,13 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
 
     }
 
-    public void showStatusAlertDialog(String title) {
+    public void showStatusAlertDialog(String title, final int position) {
 
-        final CharSequence items[] = {getString(R.string.next_hub),
-                getString(R.string.ashok_leyland)};
+//        final CharSequence items[] = {getString(R.string.next_hub),
+//                getString(R.string.ashok_leyland)};
 
         final ArrayList<Integer> selectedItems = new ArrayList();
-        boolean checkedItems[] = new boolean[items.length];
+//        boolean checkedItems[] = new boolean[items.length];
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
 
@@ -288,14 +302,65 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
 //            }
 //        });
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.checklist_popup,null,false);
+        final CheckBox nextHubCb = (CheckBox) view.findViewById(R.id.next_hub_cb);
+        final CheckBox ashokLeylandCb = (CheckBox) view.findViewById(R.id.ashok_layout_cb);
+        final EditText nextHubEt = (EditText) view.findViewById(R.id.next_hub_edt);
+        final EditText ashokLeylandEt = (EditText) view.findViewById(R.id.ashok_layout_edt);
+        nextHubCb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(nextHubCb.isChecked()){
+                    nextHubEt.setVisibility(View.VISIBLE);
+                    nextHubEt.setFocusable(true);
+                } else {
+                    nextHubEt.setVisibility(View.GONE);
+                    TFUtils.hideKeyboard(getActivity());
+                }
+            }
+        });
+        ashokLeylandCb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ashokLeylandCb.isChecked()) {
+                    ashokLeylandEt.setVisibility(View.VISIBLE);
+                    ashokLeylandEt.setFocusable(true);
+                } else {
+                    ashokLeylandEt.setVisibility(View.GONE);
+                    TFUtils.hideKeyboard(getActivity());
+                }
+            }
+        });
+
         dialogBuilder.setView(view);
 
-        dialogBuilder.setPositiveButton(getResources().getString(R.string.save), null);
-        dialogBuilder.setNegativeButton(getResources().getString(R.string.cancel), null);
+        dialogBuilder.setPositiveButton(getResources().getString(R.string.save), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (nextHubCb.isChecked() && nextHubEt.getText().toString().trim().length() > 0) {
+                    notOkReason = notOkReason + "\t" + nextHubEt.getText().toString().trim();
+                }
+                if (ashokLeylandCb.isChecked() && ashokLeylandEt.getText().toString().trim().length() > 0) {
+                    notOkReason = notOkReason + "\t" + ashokLeylandEt.getText().toString().trim();
+                }
+                if((nextHubCb.isChecked() && nextHubEt.getText().toString().trim().length() == 0)
+                        || (ashokLeylandCb.isChecked() && ashokLeylandEt.getText().toString().trim().length() == 0) ){
+                    Toast.makeText(getActivity(),"Please enter reason field.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                checklistNextHub_AshokLeylandReasons.add(notOkReason);
+            }
+        });
+        dialogBuilder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mChecklistArrayList.get(position).setStatus(true);
+                checkListAdapter.notifyDataSetChanged();
+            }
+        });
 
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
-
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
     }
 

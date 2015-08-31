@@ -341,6 +341,11 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             listItems.add(pilotAvailabilityList.get(i).getPilotFirstName() + "/" + pilotAvailabilityList.get(i).getPilotParentHub() + "\t\t" + TFUtils.changeTime(pilotAvailabilityList.get(i).getNextAvailabilityTime()));
                         }
                     }
+                    if(listItems.size() == 0){
+                        Toast.makeText(mContext,mContext.getResources().getString(R.string.no_pilots_available),Toast.LENGTH_SHORT).show();
+                        TFUtils.hideProgressBar();
+                        return;
+                    }
 //                    final CharSequence[] items = listItems.toArray(new CharSequence[listItems.size()]);
 
                     View view = LayoutInflater.from(mContext).inflate(R.layout.pilot_availability, null, false);
