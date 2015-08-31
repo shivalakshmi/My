@@ -54,7 +54,7 @@ public class WebServices implements TFConst {
             @Override
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.e("Error: ", error.getMessage());
-                Toast.makeText(context,context.getResources().getString(R.string.server_not_responding),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getResources().getString(R.string.server_not_responding), Toast.LENGTH_SHORT).show();
                 resultReceiver.send(ERROR, null);
             }
         });
@@ -65,7 +65,7 @@ public class WebServices implements TFConst {
 
     public void getTruckDetails(final Context context, final ResultReceiver resultReceiver) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_TRUCK_DETAILS+"?hubName="+TFUtils.getStringFromSP(context,HUB_NAME),
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_TRUCK_DETAILS + "?hubName=" + TFUtils.getStringFromSP(context, HUB_NAME),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -86,7 +86,7 @@ public class WebServices implements TFConst {
                 if (LogConfig.D) {
                     Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
                 }
-                Toast.makeText(context,context.getResources().getString(R.string.server_not_responding),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getResources().getString(R.string.server_not_responding), Toast.LENGTH_SHORT).show();
                 resultReceiver.send(ERROR, null);
             }
         }) {
@@ -98,9 +98,9 @@ public class WebServices implements TFConst {
     }
 
     public void getPilotAvailability(final Context context, final String eta, final String nextHub, final ResultReceiver resultReceiver) {
-
+        Log.e("Lakshmi", URL_PILOT_AVAILABILITY + "?currentHub=" + TFUtils.getStringFromSP(context, HUB_NAME) + "&ETA=" + eta + "&nextHub=" + nextHub);
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URL_PILOT_AVAILABILITY + "?currentHub="+TFUtils.getStringFromSP(context,HUB_NAME)+"&ETA="+eta+"&nextHub="+nextHub,
+                URL_PILOT_AVAILABILITY + "?currentHub=" + TFUtils.getStringFromSP(context, HUB_NAME) + "&ETA=" + eta + "&nextHub=" + nextHub,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -147,10 +147,10 @@ public class WebServices implements TFConst {
 
     }
 
-    public void getPilotRelease(final Context context, final String currentHub,final String pilotId,final String vehicleTrackingId, final ResultReceiver resultReceiver) {
+    public void getPilotRelease(final Context context, final String currentHub, final String pilotId, final String vehicleTrackingId, final ResultReceiver resultReceiver) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URL_PILOT_RELEASE + "?currentHub="+currentHub+"&pilotId="+pilotId+"&vehicleTrackingId="+vehicleTrackingId,
+                URL_PILOT_RELEASE + "?currentHub=" + currentHub + "&pilotId=" + pilotId + "&vehicleTrackingId=" + vehicleTrackingId,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -187,12 +187,12 @@ public class WebServices implements TFConst {
     }
 
 
-    public void getChangePilot(final Context context, TruckDetails obj, boolean flag,String existingPilotId, final ResultReceiver resultReceiver) {
-        String params = "?vehicleTrackingId="+ obj.getVehicleTrackingId() +"&currentHub=" +obj.getCurrentHub()
-                + "&currentHubEta="+TFUtils.sendServerTime(obj.getEta()) + "&nextHub=" + obj.getNextHub()
+    public void getChangePilot(final Context context, TruckDetails obj, boolean flag, String existingPilotId, final ResultReceiver resultReceiver) {
+        String params = "?vehicleTrackingId=" + obj.getVehicleTrackingId() + "&currentHub=" + obj.getCurrentHub()
+                + "&currentHubEta=" + TFUtils.sendServerTime(obj.getEta()) + "&nextHub=" + obj.getNextHub()
                 + "&nextHubEta=" + TFUtils.sendServerTime(obj.getNextHubEta()) +
-                (flag ? "&existingPilotId=" + existingPilotId : "" )+ "&pilotId=" + obj.getPilotAvailability().getPilotId();
-        params = params.replaceAll(" ","%20");
+                (flag ? "&existingPilotId=" + existingPilotId : "") + "&pilotId=" + obj.getPilotAvailability().getPilotId();
+        params = params.replaceAll(" ", "%20");
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URL_CHANGE_PILOT + params,
                 new Response.Listener<String>() {
@@ -271,33 +271,31 @@ public class WebServices implements TFConst {
     }
 
     public void updateVehicleChecklist(JSONObject jsonObj) {
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                    URL_UPDATE_VEHICLE_CHECKLIST_DETAILS,jsonObj,
-                    new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                URL_UPDATE_VEHICLE_CHECKLIST_DETAILS, jsonObj,
+                new Response.Listener<JSONObject>() {
 
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.e("A", "" + response);
-                            Log.e("JSON Object response", "" + response);
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("A", "" + response);
+                        Log.e("JSON Object response", "" + response);
 
-                        }
-                    }, new Response.ErrorListener() {
+                    }
+                }, new Response.ErrorListener() {
 
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("A", "Error");
-                }
-            }) {
-            };
-            TFApp.getInstance().addToRequestQueue(jsonObjReq, "TAG");
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("A", "Error");
+            }
+        }) {
+        };
+        TFApp.getInstance().addToRequestQueue(jsonObjReq, "TAG");
     }
 
     public void getDriverChecklistDetails(final String vehicleNo, final String pilotNo, final ResultReceiver resultReceiver) {
 
-        Log.e("Lakshmi",URL_DRIVER_CHECKLIST + "?vehicleNo="+vehicleNo+"&pilotNo="+pilotNo );
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URL_DRIVER_CHECKLIST + "?vehicleNo="+vehicleNo+"&pilotNo="+pilotNo,
+                URL_DRIVER_CHECKLIST + "?pilotNo=" + pilotNo,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -334,26 +332,53 @@ public class WebServices implements TFConst {
     }
 
     public void updateDriverChecklist(JSONObject jsonObj) {
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                    URL_UPDATE_DRIVER_CHECKLIST,jsonObj,
-                    new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                URL_UPDATE_DRIVER_CHECKLIST, jsonObj,
+                new Response.Listener<JSONObject>() {
 
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.e("A", "" + response);
-                            Log.e("JSON Object response", "" + response);
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("A", "" + response);
+                        Log.e("JSON Object response", "" + response);
 
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("A", "Error");
+            }
+        }) {
+
+        };
+        TFApp.getInstance().addToRequestQueue(jsonObjReq, "TAG");
+    }
+
+    public void getPilotInHub(final String vehicleTrackingID, final String pilotInHub) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_PILOT_IN_HUB + "?vehicleTrackingId=" + vehicleTrackingID + "&pilotInHub=" + pilotInHub,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Checklist details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Checklist details end ======================");
                         }
-                    }, new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("A", "Error");
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
                 }
-            }) {
+            }
+        }) {
 
-            };
-            TFApp.getInstance().addToRequestQueue(jsonObjReq, "TAG");
+
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CHECKLIST_DETAILS);
     }
 
 }

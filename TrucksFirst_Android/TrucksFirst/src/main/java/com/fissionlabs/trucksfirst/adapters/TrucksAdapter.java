@@ -53,7 +53,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
     private ArrayList<TruckDetails> mDataSet;
     private TFTruckFragment mTfTruckFragment;
     private DriverChecklist mDriverChecklist;
-    private WebServices mWebServices;
+    private WebServices mWebServices = new WebServices();
 
     public TrucksAdapter(Context context, TFTruckFragment tfTruckFragment, ArrayList<TruckDetails> dataSet) {
         mContext = context;
@@ -145,14 +145,14 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             holder.mRadioPilotInHubYes.setChecked(true);
         } else {
             holder.mRadioPilotInHubNo.setChecked(true);
+            mWebServices.getPilotInHub(mDataSet.get(position).getVehicleTrackingId(),"false");
         }
 
         holder.mRadioPilotInHubYes.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                showPilotInHubAlertDialog(mDataSet.get(position).getAssignedPilot(), position, holder.mRadioPilotInHubYes, holder.mRadioPilotInHubNo, mDataSet.get(position).getVehicleNumber(), mDataSet.get(position).getPilotId());
-            }
+                showPilotInHubAlertDialog(mDataSet.get(position).getAssignedPilot(), position, holder.mRadioPilotInHubYes, holder.mRadioPilotInHubNo, mDataSet.get(position).getVehicleNumber(), mDataSet.get(position).getPilotId(),holder);            }
         });
         holder.mRadioPilotInHubNo.setOnClickListener(new View.OnClickListener() {
 
@@ -186,14 +186,16 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         return mDataSet.size();
     }
 
-    public void showPilotInHubAlertDialog(final String title, final int positon, final RadioButton yes, final RadioButton no, final String vehicleNo, final String pilotNo) {
+    public void showPilotInHubAlertDialog(final String title, final int position, final RadioButton yes, final RadioButton no, final String vehicleNo, final String pilotNo,final ViewHolder holder) {
 
 
-        mWebServices = new WebServices();
+
         mWebServices.getDriverChecklistDetails(vehicleNo,pilotNo,new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
                 if (resultCode == TFConst.SUCCESS) {
+
+
 
                     String responseStr = resultData.getString("response");
                     mDriverChecklist = new Gson().fromJson(responseStr, DriverChecklist.class);
@@ -206,7 +208,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             mDriverChecklist.isUniform(),
                             mDriverChecklist.isNonAlchoholic()};
 
-                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
+                    final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
                     dialogBuilder.setTitle(Html.fromHtml("<b>" + title + "</b>"));
                     dialogBuilder.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                         @Override
@@ -218,35 +220,45 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             } else {
                                 mDriverChecklist.setNonAlchoholic(isChecked);
                             }
+
                         }
                     });
+
+
+
                     dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.save), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            mDataSet.get(positon).setPilotInHub("true");
+                            mDataSet.get(position).setPilotInHub("true");
                             notifyDataSetChanged();
+                            mDriverChecklist.setPilotName(mDataSet.get(position).getAssignedPilot());
+                            mDriverChecklist.setVehiclenumber(mDataSet.get(position).getVehicleNumber());
                             String jsonObject = new Gson().toJson(mDriverChecklist, DriverChecklist.class);
                             try {
                                 mWebServices.updateDriverChecklist(new JSONObject(jsonObject));
+                                mWebServices.getPilotInHub(mDataSet.get(position).getVehicleTrackingId(),"true");
+                                holder.mRadioPilotInHubYes.setChecked(true);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
 
                         }
                     });
+
                     dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             no.setChecked(true);
-                            mDataSet.get(positon).setPilotInHub("false");
+                            mDataSet.get(position).setPilotInHub("false");
                         }
                     });
 
-                    notifyItemChanged(positon);
+                    notifyItemChanged(position);
                     AlertDialog alertDialog = dialogBuilder.create();
                     alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
 
                     alertDialog.show();
+
                 } else {
                     Toast.makeText(mContext, "" + mContext.getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
                 }
