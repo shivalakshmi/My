@@ -114,31 +114,35 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             //noinspection deprecation,deprecation
             holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.checklist_selector));
             holder.mChecklist.setClickable(true);
+            holder.mChecklist.setEnabled(true);
         } else {
             holder.mRadioVehicleInHubNo.setChecked(true);
             //noinspection deprecation
             holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_disabled));
             holder.mChecklist.setClickable(false);
+            holder.mChecklist.setEnabled(false);
         }
 
         holder.mRadioVehicleInHubYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDataSet.get(position).setVehicleInHub("true");
-                //noinspection deprecation
                 holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.checklist_selector));
                 holder.mChecklist.setClickable(true);
+                holder.mChecklist.setEnabled(true);
                 notifyItemChanged(position);
+                mWebServices.getVehicleInHub(mDataSet.get(position).getVehicleTrackingId(), "true");
             }
         });
         holder.mRadioVehicleInHubNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDataSet.get(position).setVehicleInHub("false");
-                //noinspection deprecation
                 holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_disabled));
                 holder.mChecklist.setClickable(false);
+                holder.mChecklist.setEnabled(false);
                 notifyItemChanged(position);
+                mWebServices.getVehicleInHub(mDataSet.get(position).getVehicleTrackingId(),"false");
             }
         });
         if (mDataSet.get(position).getPilotInHub() != null && mDataSet.get(position).getPilotInHub().equalsIgnoreCase("true")) {
