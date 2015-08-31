@@ -34,7 +34,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 @SuppressWarnings({"ALL", "CanBeFinal"})
-public class TFCheckListFragment extends TFCommonFragment implements TFConst{
+public class TFCheckListFragment extends TFCommonFragment implements TFConst {
 
     private ArrayList<Checklist> mChecklistArrayList = new ArrayList();
     private ArrayList<Boolean> mDocumentStatusList = new ArrayList();
@@ -57,6 +57,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
     private WebServices mWebServices;
     private Button saveBtn;
     private Button cancelBtn;
+    private Bundle bundle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,8 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_check_list, container, false);
-        Bundle bundle = this.getArguments();
+
+        bundle = this.getArguments();
 
         mHomeActivity.mActionBar.setTitle(bundle.getString("vehicle_number"));
         final ListView mLVChecklist = (ListView) view.findViewById(R.id.listView);
@@ -98,12 +100,12 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
         View headerView = inflater.inflate(R.layout.operational_header, null);
         mLVChecklist.addHeaderView(headerView);
         View footerView = inflater.inflate(R.layout.checklist_footer, null);
-        saveBtn = (Button)footerView.findViewById(R.id.save);
-        cancelBtn = (Button)footerView.findViewById(R.id.cancel);
+        saveBtn = (Button) footerView.findViewById(R.id.save);
+        cancelBtn = (Button) footerView.findViewById(R.id.cancel);
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    mHomeActivity.onBackPressed();
+                mHomeActivity.onBackPressed();
             }
         });
 
@@ -116,8 +118,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
                 String jsonObject = new Gson().toJson(mChecklistNew, ChecklistNew.class);
                 try {
                     mWebServices.updateVehicleChecklist(new JSONObject(jsonObject));
-                }
-                catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 mHomeActivity.onBackPressed();
@@ -130,7 +131,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
                 long viewId = view.getId();
 
                 if (viewId == R.id.cross) {
-                    showStatusAlertDialog("HR55V1234");
+                    showStatusAlertDialog(bundle.getString("vehicle_number"));
                 }
 
 
@@ -189,7 +190,6 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
         mScratchStatus.add(mChecklistNew.isLeft());
         mScratchStatus.add(mChecklistNew.isRear());
         mScratchStatus.add(mChecklistNew.isRight());
-
 
 
         Checklist mChecklist;
@@ -277,16 +277,19 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst{
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
 
         dialogBuilder.setTitle(Html.fromHtml("<b>" + title + "\t\t" + "</b>" + getResources().getString(R.string.notification_send_to)));
-        dialogBuilder.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                if (isChecked) {
-                    selectedItems.add(which);
-                } else if (selectedItems.contains(which)) {
-                    selectedItems.remove(Integer.valueOf(which));
-                }
-            }
-        });
+//        dialogBuilder.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+//                if (isChecked) {
+//                    selectedItems.add(which);
+//                } else if (selectedItems.contains(which)) {
+//                    selectedItems.remove(Integer.valueOf(which));
+//                }
+//            }
+//        });
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.checklist_popup,null,false);
+        dialogBuilder.setView(view);
+
         dialogBuilder.setPositiveButton(getResources().getString(R.string.save), null);
         dialogBuilder.setNegativeButton(getResources().getString(R.string.cancel), null);
 
