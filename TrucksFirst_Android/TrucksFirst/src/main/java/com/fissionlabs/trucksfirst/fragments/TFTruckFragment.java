@@ -257,10 +257,12 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         ArrayList<TruckDetails> filteredModelList = new ArrayList<>();
 
         for (TruckDetails model : models) {
-            if (model.getVehicleNumber().toLowerCase().contains(query) ||
-                    model.getVehicleRoute().toLowerCase().contains(query) ||
-                    model.getEta().toLowerCase().contains(query) ||
-                    model.getAssignedPilot().toLowerCase().contains(query)) {
+            boolean flag = ((model.getVehicleNumber() == null || model.getVehicleNumber().equals("null"))? false : model.getVehicleNumber().toLowerCase().contains(query))
+                || ((model.getClient() == null || model.getClient().equals("null"))? false : model.getClient().toLowerCase().contains(query))
+                || ((model.getVehicleRoute() == null || model.getVehicleRoute().equals("null"))? false : model.getVehicleRoute().toLowerCase().contains(query))
+                || ((model.getEta() == null || model.getEta().equals("null"))? false : TFUtils.changeTime(model.getEta()).toLowerCase().contains(query))
+                || ((model.getAssignedPilot() == null || model.getAssignedPilot().equals("null"))? false : model.getAssignedPilot().toLowerCase().contains(query));
+            if (flag) {
                 filteredModelList.add(model);
             }
         }
