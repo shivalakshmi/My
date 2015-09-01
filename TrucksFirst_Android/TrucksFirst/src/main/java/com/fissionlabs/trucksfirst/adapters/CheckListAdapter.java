@@ -377,9 +377,15 @@ public class CheckListAdapter extends BaseAdapter {
             context.startActivity(i);
 
         } catch(FileNotFoundException e) {
+            e.printStackTrace();
             hideProgressIndicator();
             return;
         } catch (IOException e) {
+            e.printStackTrace();
+            hideProgressIndicator();
+            return;
+        }catch (Exception e){
+            e.printStackTrace();
             hideProgressIndicator();
             return;
         }
