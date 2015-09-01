@@ -358,6 +358,19 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     View view = LayoutInflater.from(mContext).inflate(R.layout.pilot_availability, null, false);
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
                     dialogBuilder.setView(view);
+                    dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), null);
+
+                    dialogBuilder.setTitle(Html.fromHtml("<b>" + mContext.getString(R.string.pilot_availability_title) + "</b>"));
+                    dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    final AlertDialog alertDialog = dialogBuilder.create();
+                    alertDialog.getWindow().setLayout(600, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    alertDialog.show();
                     final ListView availablePilots = (ListView) view.findViewById(R.id.pilot_availability);
 
                     final ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_single_choice, sortedListItems);
@@ -381,7 +394,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     final PilotAvailability pilot = new PilotAvailability();
                     availablePilots.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
-                        public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
+                        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                             if (position == 0) {
                                 pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
                                 pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
@@ -394,7 +407,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                 View view2 = LayoutInflater.from(mContext).inflate(R.layout.wrong_pilot_assignment, null, false);
                                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
                                 dialogBuilder.setView(view2);
-                                TextView pilotName = (TextView)view2.findViewById(R.id.pilot_name);
+                                TextView pilotName = (TextView) view2.findViewById(R.id.pilot_name);
                                 final EditText etReason = (EditText) view2.findViewById(R.id.reason_edt);
                                 final Spinner spinner = (Spinner) view2.findViewById(R.id.spinner);
 
@@ -413,7 +426,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
 
                                     }
                                 });*/
-                                etReason.setHint(mContext.getResources().getString(R.string.pilot_selection_warning,""+pilotAvailabilityList.get(0).getPilotFirstName()));
+                                etReason.setHint(mContext.getResources().getString(R.string.pilot_selection_warning, "" + pilotAvailabilityList.get(0).getPilotFirstName()));
                                 pilotName.setText(pilotAvailabilityList.get(0).getPilotFirstName());
                                 dialogBuilder.setTitle(Html.fromHtml("<b>" + mContext.getString(R.string.warning) + "</b>"));
                                 dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
@@ -428,7 +441,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                         availablePilots.post(new Runnable() {
                                             @Override
                                             public void run() {
-                                                availablePilots.setItemChecked(position,false);
+                                                availablePilots.setItemChecked(position, false);
                                             }
                                         });
                                     }
@@ -440,38 +453,33 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                 alertDialog2.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        if(spinnerText.equals("Others") && etReason.getText().toString().length()==0) {
-                                            Toast.makeText(mContext,"Please enter the reason",Toast.LENGTH_SHORT).show();
+                                        if (spinnerText.equals("Others") && etReason.getText().toString().length() == 0) {
+                                            Toast.makeText(mContext, "Please enter the reason", Toast.LENGTH_SHORT).show();
                                             return;
-                                        }else {
-                                        pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
-                                        pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
-                                        pilot.setPilotLastName(pilotAvailabilityList.get(position).getPilotLastName());
-                                        pilot.setNextAvailabilityTime(pilotAvailabilityList.get(position).getNextAvailabilityTime());
-                                        pilot.setAvailabilityStatus(pilotAvailabilityList.get(position).getAvailabilityStatus());
-                                        pilot.setContactNumber(pilotAvailabilityList.get(position).getContactNumber());
-                                        pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
-                                        spinnerText  = spinner.getSelectedItem().toString();
+                                        } else {
+                                            pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
+                                            pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
+                                            pilot.setPilotLastName(pilotAvailabilityList.get(position).getPilotLastName());
+                                            pilot.setNextAvailabilityTime(pilotAvailabilityList.get(position).getNextAvailabilityTime());
+                                            pilot.setAvailabilityStatus(pilotAvailabilityList.get(position).getAvailabilityStatus());
+                                            pilot.setContactNumber(pilotAvailabilityList.get(position).getContactNumber());
+                                            pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
+                                            spinnerText = spinner.getSelectedItem().toString();
                                             alertDialog2.dismiss();
-                                            mWebServices.postSkippedPilotInfo(pilotAvailabilityList.get(0).getPilotId(), spinnerText, etReason.getText().toString());
+                                            try {
+                                                mWebServices.postSkippedPilotInfo(pilotAvailabilityList.get(0).getPilotId(), spinnerText, etReason.getText().toString());
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            } finally {
+                                                alertDialog.dismiss();
+                                                assignPilotAlertDialog(position, obj, flag);
+                                            }
                                         }
                                     }
                                 });
                             }
                         }
                     });
-
-                    dialogBuilder.setTitle(Html.fromHtml("<b>" + mContext.getString(R.string.pilot_availability_title) + "</b>"));
-                    dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), null);
-                    final AlertDialog alertDialog = dialogBuilder.create();
-                    alertDialog.getWindow().setLayout(600, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    alertDialog.show();
                     alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
