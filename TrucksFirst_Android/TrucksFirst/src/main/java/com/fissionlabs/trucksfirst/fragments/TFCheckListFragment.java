@@ -375,7 +375,11 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                     Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.checklist_notok_reason), Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 checklistNextHub_AshokLeylandReasons.add(notOkReason);
+
+                mChecklistArrayList.get(position).setStatus(false);
+                checkListAdapter.notifyDataSetChanged();
                 alertDialog.dismiss();
             }
         });

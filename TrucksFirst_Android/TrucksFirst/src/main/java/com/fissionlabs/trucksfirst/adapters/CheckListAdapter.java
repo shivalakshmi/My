@@ -194,11 +194,23 @@ public class CheckListAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View v) {
                         TFHomeActivity.isChangesMade = true;
+                        mChecklistArrayList.get(position).setStatus(false);
+                        updateStatus(position, false);
+                        notifyDataSetChanged();
                         ((ListView) parent).performItemClick(v, position, 0);
                     }
                 });
+                convertView.findViewById(R.id.tick).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TFHomeActivity.isChangesMade = true;
+                        mChecklistArrayList.get(position).setStatus(true);
+                        updateStatus(position, true);
+                        notifyDataSetChanged();
+                    }
+                });
 
-                holder.mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+               /* holder.mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         TFHomeActivity.isChangesMade = true;
@@ -211,7 +223,7 @@ public class CheckListAdapter extends BaseAdapter {
                         }
                         notifyDataSetChanged();
                     }
-                });
+                });*/
 
 
                 break;
@@ -220,7 +232,7 @@ public class CheckListAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void updateStatus(int position, boolean flag) {
+    public void updateStatus(int position, boolean flag) {
         if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.registration_certificate))){
             mChecklistNew.setRegistrationCertificate(flag);
         }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.fitness_certificate))){
