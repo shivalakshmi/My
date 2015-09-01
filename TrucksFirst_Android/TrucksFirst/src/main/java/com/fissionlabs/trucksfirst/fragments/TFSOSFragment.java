@@ -78,8 +78,8 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
                 int selectedId = mRadioGroup.getCheckedRadioButtonId();
                 RadioButton radioButton = (RadioButton) view.findViewById(selectedId);
                 String reason = "\nVehivleNo::"+mEtVehivleNo.getText().toString().trim()+"\nIncident::"+radioButton.getText()+"\nReason::"+mEtReason.getText().toString().trim();
-                TFUtils.showProgressBar(getActivity(), mActivity.getResources().getString(R.string.please_wait));
-                sendEmailAndSMS(getActivity(),reason);
+
+                sendEmailAndSMS(mActivity,reason);
                 mEtVehivleNo.setText("");
                 mEtReason.setText("");
             }
@@ -94,6 +94,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
     }
 
     public static void sendEmailAndSMS(final Context context,final String reason){
+        TFUtils.showProgressBar(context, context.getResources().getString(R.string.please_wait));
         mMail = new Mail("rivigodev@gmail.com", "fissionlabs");
 
         mHandler = new Handler(){

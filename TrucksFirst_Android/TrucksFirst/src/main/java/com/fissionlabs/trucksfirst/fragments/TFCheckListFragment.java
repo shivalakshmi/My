@@ -133,8 +133,14 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                 for(int i=0;i<checklistNextHub_AshokLeylandReasons.size();i++){
                     reason = reason +checklistNextHub_AshokLeylandReasons.get(i)+"\n";
                 }
-                TFSOSFragment.sendEmailAndSMS(getActivity(),reason);
-                mHomeActivity.onBackPressed();
+                try {
+                    TFSOSFragment.sendEmailAndSMS(getActivity(), reason);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                finally {
+                    mHomeActivity.onBackPressed();
+                }
             }
         });
 
@@ -336,18 +342,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
         dialogBuilder.setPositiveButton(getResources().getString(R.string.save), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (nextHubCb.isChecked() && nextHubEt.getText().toString().trim().length() > 0) {
-                    notOkReason = notOkReason + "\t" + nextHubEt.getText().toString().trim();
-                }
-                if (ashokLeylandCb.isChecked() && ashokLeylandEt.getText().toString().trim().length() > 0) {
-                    notOkReason = notOkReason + "\t" + ashokLeylandEt.getText().toString().trim();
-                }
-                if((nextHubCb.isChecked() && nextHubEt.getText().toString().trim().length() == 0)
-                        || (ashokLeylandCb.isChecked() && ashokLeylandEt.getText().toString().trim().length() == 0) ){
-                    Toast.makeText(getActivity(),"Please enter reason field.",Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                checklistNextHub_AshokLeylandReasons.add(notOkReason);
+
             }
         });
         dialogBuilder.setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -358,10 +353,32 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
             }
         });
 
-        AlertDialog alertDialog = dialogBuilder.create();
+        final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (nextHubCb.isChecked() && nextHubEt.getText().toString().trim().length() > 0) {
+                    notOkReason = notOkReason + "\t" + nextHubEt.getText().toString().trim();
+                }
+                if (ashokLeylandCb.isChecked() && ashokLeylandEt.getText().toString().trim().length() > 0) {
+                    notOkReason = notOkReason + "\t" + ashokLeylandEt.getText().toString().trim();
+                }
+                if (!nextHubCb.isChecked() && !ashokLeylandCb.isChecked()) {
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.checklist_notok_select_atleastone), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if ((nextHubCb.isChecked() && nextHubEt.getText().toString().trim().length() == 0)
+                        || (ashokLeylandCb.isChecked() && ashokLeylandEt.getText().toString().trim().length() == 0)) {
+                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.checklist_notok_reason), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                checklistNextHub_AshokLeylandReasons.add(notOkReason);
+                alertDialog.dismiss();
+            }
+        });
     }
 
     @Override

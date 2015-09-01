@@ -161,4 +161,6 @@
     <string name="pilot_selection_warning">Enter a reason why you are not selecting %1$s ?</string>
     <string name="hint_checklist_reason">Enter reason....</string>
     <string name="no_pilots_available">No Pilots available for this time and date.</string>
+    <string name="checklist_notok_select_atleastone">Please select atleast one.</string>
+    <string name="checklist_notok_reason">Please enter reason field.</string>
 </resources>
