@@ -408,6 +408,33 @@ public class WebServices implements TFConst {
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CHECKLIST_DETAILS);
     }
 
+    public void postSkippedPilotInfo(final String pilotId, final String reason, final String comment) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_SKIPPED_PILOT_INFO + "?pilotId="+ pilotId + "&reason="+ reason + "&comment=" + comment,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Checklist details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Checklist details end ======================");
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+            }
+        }) {
+
+
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CHECKLIST_DETAILS);
+    }
+
 }
 
 
