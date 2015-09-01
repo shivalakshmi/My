@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +55,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
     private TFTruckFragment mTfTruckFragment;
     private DriverChecklist mDriverChecklist;
     private WebServices mWebServices = new WebServices();
+    private String spinnerText = "";
 
     public TrucksAdapter(Context context, TFTruckFragment tfTruckFragment, ArrayList<TruckDetails> dataSet) {
         mContext = context;
@@ -388,7 +390,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
                                 dialogBuilder.setView(view2);
                                 TextView pilotName = (TextView)view2.findViewById(R.id.pilot_name);
-                                EditText etReason = (EditText) view2.findViewById(R.id.reason_edt);
+                                final EditText etReason = (EditText) view2.findViewById(R.id.reason_edt);
+                                final Spinner spinner = (Spinner) view2.findViewById(R.id.spinner);
                                 etReason.setHint(mContext.getResources().getString(R.string.pilot_selection_warning,""+pilotAvailabilityList.get(0).getPilotFirstName()));
                                 pilotName.setText(pilotAvailabilityList.get(0).getPilotFirstName());
                                 dialogBuilder.setTitle(Html.fromHtml("<b>" + mContext.getString(R.string.warning) + "</b>"));
@@ -403,6 +406,18 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                         pilot.setAvailabilityStatus(pilotAvailabilityList.get(position).getAvailabilityStatus());
                                         pilot.setContactNumber(pilotAvailabilityList.get(position).getContactNumber());
                                         pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
+                                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                                            @Override
+                                            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                                                       int arg2, long arg3) {
+                                                spinnerText = spinner.getSelectedItem().toString();
+                                            }
+                                            @Override
+                                            public void onNothingSelected(AdapterView<?> arg0) {
+                                            }
+                                        });
+                                        mWebServices.postSkippedPilotInfo(pilotAvailabilityList.get(position).getPilotId(),spinnerText,etReason.getText().toString());
                                     }
                                 });
                                 dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
