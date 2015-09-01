@@ -274,6 +274,8 @@ public class CheckListAdapter extends BaseAdapter {
         }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.coolant_leakage))){
             mChecklistNew.setCoolantLeakage(flag);
         }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.engine_oil_leakage))){
+            mChecklistNew.setEngineOilLeakage(flag);
+        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.gear_oil_leakage))){
             mChecklistNew.setGearOilLeakage(flag);
         }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.fuel_diesel_leakage))){
             mChecklistNew.setFuelDieselLeakage(flag);
