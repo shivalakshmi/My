@@ -134,7 +134,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                     reason = reason +checklistNextHub_AshokLeylandReasons.get(i)+"\n";
                 }
                 try {
-                    TFSOSFragment.sendEmailAndSMS(getActivity(), reason);
+                    TFSOSFragment.sendEmailAndSMS(getActivity(), reason,"Checklist Issue");
                 }catch (Exception e){
                     e.printStackTrace();
                 }

@@ -324,7 +324,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
         }
     }
 
-    public void assignPilotAlertDialog(final int position, final TruckDetails obj, final boolean flag /*final String eta, final String nextHub*/) {
+    public void assignPilotAlertDialog(final int trucksPosition, final TruckDetails obj, final boolean flag /*final String eta, final String nextHub*/) {
         TFUtils.showProgressBar(mContext, mContext.getString(R.string.loading));
         new WebServices().getPilotAvailability(mContext, obj.getEta(), obj.getNextHub(), new ResultReceiver(null) {
             @Override
@@ -453,6 +453,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                 alertDialog2.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        spinnerText = spinner.getSelectedItem().toString();
                                         if (spinnerText.equals("Others") && etReason.getText().toString().length() == 0) {
                                             Toast.makeText(mContext, "Please enter the reason", Toast.LENGTH_SHORT).show();
                                             return;
@@ -472,7 +473,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                                 e.printStackTrace();
                                             } finally {
                                                 alertDialog.dismiss();
-                                                assignPilotAlertDialog(position, obj, flag);
+                                                assignPilotAlertDialog(trucksPosition, obj, flag);
                                             }
                                         }
                                     }
@@ -489,17 +490,17 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             } else {
                                 alertDialog.dismiss();
                                 TFUtils.showProgressBar(mContext, mContext.getResources().getString(R.string.please_wait));
-                                String existingPilotId = flag ? mDataSet.get(position).getPilotId() : null;
-                                mDataSet.get(position).setAssignedPilot(pilot.getPilotFirstName());
-                                mDataSet.get(position).setContactNo(pilot.getContactNumber());
-                                mDataSet.get(position).setPilotId(pilot.getPilotId());
-                                mDataSet.get(position).setPilotAvailability(pilot);
-                                new WebServices().getChangePilot(mContext, obj, flag, existingPilotId, new ResultReceiver(null) {
+                                String existingPilotId = flag ? mDataSet.get(trucksPosition).getPilotId() : null;
+                                mDataSet.get(trucksPosition).setAssignedPilot(pilot.getPilotFirstName());
+                                mDataSet.get(trucksPosition).setContactNo(pilot.getContactNumber());
+                                mDataSet.get(trucksPosition).setPilotId(pilot.getPilotId());
+                                mDataSet.get(trucksPosition).setPilotAvailability(pilot);
+                                new WebServices().getChangePilot(mContext, obj, flag, existingPilotId,new ResultReceiver(null) {
                                     @Override
                                     protected void onReceiveResult(int resultCode, Bundle resultData) {
                                         super.onReceiveResult(resultCode, resultData);
                                         if (resultCode == TFConst.SUCCESS) {
-                                            notifyItemChanged(position);
+                                            notifyItemChanged(trucksPosition);
                                         } else {
                                             Toast.makeText(mContext, mContext.getResources().getString(R.string.problem_assign_pilot), Toast.LENGTH_SHORT).show();
                                         }
