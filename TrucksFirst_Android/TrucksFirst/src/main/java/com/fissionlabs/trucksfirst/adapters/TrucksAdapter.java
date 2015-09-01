@@ -72,7 +72,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
     }
 
     @Override
-    public TrucksAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.truck_details_item, parent, false);
         return new ViewHolder(view);
     }
@@ -278,7 +278,12 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
     private CharSequence items[] = null;
     public void showPilotAssignAlertDialog(final int positioin, final TruckDetails obj/*final String pilotName, final String eta, final String nextHub*/) {
         if (obj.getAssignedPilot() == null || obj.getAssignedPilot().trim().equalsIgnoreCase("") || TextUtils.isEmpty(obj.getAssignedPilot()) || obj.getAssignedPilot().equalsIgnoreCase("null")) {
-            assignPilotAlertDialog(positioin, obj, false);
+            if(obj.getNextHub() == null || obj.getNextHub().equals("null") || obj.getNextHub().equals("") ){
+                Toast.makeText(mContext,mContext.getResources().getString(R.string.final_hub_no_need_toassign_pilot),Toast.LENGTH_SHORT).show();
+            }
+            else {
+                assignPilotAlertDialog(positioin, obj, false);
+            }
         } else {
 
             if(mDataSet.get(positioin).getNextHub() == null || mDataSet.get(positioin).getNextHub().equals("null"))
@@ -392,32 +397,29 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                 TextView pilotName = (TextView)view2.findViewById(R.id.pilot_name);
                                 final EditText etReason = (EditText) view2.findViewById(R.id.reason_edt);
                                 final Spinner spinner = (Spinner) view2.findViewById(R.id.spinner);
+
+                               /* spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        if (position == 4) {
+                                            etReason.setVisibility(View.VISIBLE);
+                                        } else {
+                                            etReason.setVisibility(View.GONE);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                    }
+                                });*/
                                 etReason.setHint(mContext.getResources().getString(R.string.pilot_selection_warning,""+pilotAvailabilityList.get(0).getPilotFirstName()));
                                 pilotName.setText(pilotAvailabilityList.get(0).getPilotFirstName());
                                 dialogBuilder.setTitle(Html.fromHtml("<b>" + mContext.getString(R.string.warning) + "</b>"));
                                 dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                        pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
-                                        pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
-                                        pilot.setPilotLastName(pilotAvailabilityList.get(position).getPilotLastName());
-                                        pilot.setNextAvailabilityTime(pilotAvailabilityList.get(position).getNextAvailabilityTime());
-                                        pilot.setAvailabilityStatus(pilotAvailabilityList.get(position).getAvailabilityStatus());
-                                        pilot.setContactNumber(pilotAvailabilityList.get(position).getContactNumber());
-                                        pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
-                                        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                                            @Override
-                                            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                                                       int arg2, long arg3) {
-                                                spinnerText = spinner.getSelectedItem().toString();
-                                            }
-                                            @Override
-                                            public void onNothingSelected(AdapterView<?> arg0) {
-                                            }
-                                        });
-                                        mWebServices.postSkippedPilotInfo(pilotAvailabilityList.get(position).getPilotId(),spinnerText,etReason.getText().toString());
                                     }
                                 });
                                 dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -431,10 +433,30 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                         });
                                     }
                                 });
-                                AlertDialog alertDialog2 = dialogBuilder.create();
+                                final AlertDialog alertDialog2 = dialogBuilder.create();
                                 alertDialog2.getWindow().setLayout(600, LinearLayout.LayoutParams.WRAP_CONTENT);
                                 alertDialog2.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                                 alertDialog2.show();
+                                alertDialog2.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        if(spinnerText.equals("Others") && etReason.getText().toString().length()==0) {
+                                            Toast.makeText(mContext,"Please enter the reason",Toast.LENGTH_SHORT).show();
+                                            return;
+                                        }else {
+                                        pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
+                                        pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
+                                        pilot.setPilotLastName(pilotAvailabilityList.get(position).getPilotLastName());
+                                        pilot.setNextAvailabilityTime(pilotAvailabilityList.get(position).getNextAvailabilityTime());
+                                        pilot.setAvailabilityStatus(pilotAvailabilityList.get(position).getAvailabilityStatus());
+                                        pilot.setContactNumber(pilotAvailabilityList.get(position).getContactNumber());
+                                        pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
+                                        spinnerText  = spinner.getSelectedItem().toString();
+                                            alertDialog2.dismiss();
+                                            mWebServices.postSkippedPilotInfo(pilotAvailabilityList.get(0).getPilotId(), spinnerText, etReason.getText().toString());
+                                        }
+                                    }
+                                });
                             }
                         }
                     });
@@ -443,10 +465,21 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
+
+                        }
+                    });
+                    dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), null);
+                    final AlertDialog alertDialog = dialogBuilder.create();
+                    alertDialog.getWindow().setLayout(600, LinearLayout.LayoutParams.WRAP_CONTENT);
+                    alertDialog.show();
+                    alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
                             if (availablePilots.getCheckedItemPosition() == -1) {
                                 Toast.makeText(mContext, mContext.getResources().getString(R.string.no_pilot_selected), Toast.LENGTH_SHORT).show();
+                                return;
                             } else {
+                                alertDialog.dismiss();
                                 TFUtils.showProgressBar(mContext, mContext.getResources().getString(R.string.please_wait));
                                 String existingPilotId = flag ? mDataSet.get(position).getPilotId() : null;
                                 mDataSet.get(position).setAssignedPilot(pilot.getPilotFirstName());
@@ -468,10 +501,6 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             }
                         }
                     });
-                    dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), null);
-                    final AlertDialog alertDialog = dialogBuilder.create();
-                    alertDialog.getWindow().setLayout(600, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    alertDialog.show();
 
                 } else {
                     Toast.makeText(mContext, "" + mContext.getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();

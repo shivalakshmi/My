@@ -408,8 +408,11 @@ public class WebServices implements TFConst {
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CHECKLIST_DETAILS);
     }
 
-    public void postSkippedPilotInfo(final String pilotId, final String reason, final String comment) {
+    public void postSkippedPilotInfo(final String pilotId, String reason, String comment) {
+        reason = reason.replaceAll(" ","%20");
+        comment = comment.replaceAll(" ","%20");
 
+        
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URL_SKIPPED_PILOT_INFO + "?pilotId="+ pilotId + "&reason="+ reason + "&comment=" + comment,
                 new Response.Listener<String>() {
