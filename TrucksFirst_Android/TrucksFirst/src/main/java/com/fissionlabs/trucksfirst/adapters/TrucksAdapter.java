@@ -272,10 +272,9 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             }
         });
 
-
     }
 
-    private CharSequence items[] = null;
+//    private CharSequence items[] = null;
     public void showPilotAssignAlertDialog(final int positioin, final TruckDetails obj/*final String pilotName, final String eta, final String nextHub*/) {
         if (obj.getAssignedPilot() == null || obj.getAssignedPilot().trim().equalsIgnoreCase("") || TextUtils.isEmpty(obj.getAssignedPilot()) || obj.getAssignedPilot().equalsIgnoreCase("null")) {
             if(obj.getNextHub() == null || obj.getNextHub().equals("null") || obj.getNextHub().equals("") ){
@@ -285,42 +284,46 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                 assignPilotAlertDialog(positioin, obj, false);
             }
         } else {
-
-            if(mDataSet.get(positioin).getNextHub() == null || mDataSet.get(positioin).getNextHub().equals("null"))
-            {
-                items= new CharSequence[]{String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:" + mDataSet.get(positioin).getContactNo().trim()),
-                        mContext.getString(R.string.pilot_release_pilot)};
-            } else {
-                items= new CharSequence[]{String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:"+ mDataSet.get(positioin).getContactNo().trim()),
-                        mContext.getString(R.string.pilot_release_pilot),
-                        mContext.getString(R.string.pilot_change_pilot)};
-            }
-
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
             dialogBuilder.setTitle(Html.fromHtml("<b>" + obj.getAssignedPilot() + "</b>"));
-            dialogBuilder.setItems(items, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    switch (which) {
-                        case 0:
-                            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + items[0].toString().split(":")[1]));
-                            mContext.startActivity(intent);
-                            break;
-                        case 1:
-                            releasePilotAlertDialog(positioin, obj);
-                            break;
-                        case 2:
-                            assignPilotAlertDialog(positioin, obj, true);
-                            break;
-                    }
-                }
-            });
+            View modifyPilot = LayoutInflater.from(mContext).inflate(R.layout.modify_pilot, null, false);
+            dialogBuilder.setView(modifyPilot);
+            if(mDataSet.get(positioin).getNextHub() == null || mDataSet.get(positioin).getNextHub().equals("null"))
+            {
+                ((Button)modifyPilot.findViewById(R.id.change_pilot)).setVisibility(View.GONE);
+            } else {
+                ((Button)modifyPilot.findViewById(R.id.change_pilot)).setVisibility(View.VISIBLE);
+            }
+            final TextView contactNo = (TextView)modifyPilot.findViewById(R.id.contact_no);
+            contactNo.setText(String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:" + mDataSet.get(positioin).getContactNo().trim()));
+
             dialogBuilder.setPositiveButton(mContext.getString(R.string.ok), null);
-            AlertDialog alertDialog = dialogBuilder.create();
+            final AlertDialog alertDialog = dialogBuilder.create();
             alertDialog.setCanceledOnTouchOutside(true);
             alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
             alertDialog.show();
+            modifyPilot.findViewById(R.id.contact_no).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                    Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + contactNo.getText().toString().split(":")[1]));
+                    mContext.startActivity(intent);
+                }
+            });
+            modifyPilot.findViewById(R.id.release_pilot).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                    releasePilotAlertDialog(positioin, obj);
+                }
+            });
+            modifyPilot.findViewById(R.id.change_pilot).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                    assignPilotAlertDialog(positioin, obj, true);
+                }
+            });
         }
     }
 

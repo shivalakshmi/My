@@ -1,5 +1,6 @@
 package com.fissionlabs.trucksfirst.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -65,11 +66,18 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
     private CheckListAdapter checkListAdapter;
     private List<String> checklistNextHub_AshokLeylandReasons = new ArrayList<>();
     private String notOkReason = "";
+    private Activity mActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = activity;
     }
 
     @Override
@@ -94,11 +102,11 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                     if (responseStr != null) {
                         mChecklistNew = new Gson().fromJson(responseStr, ChecklistNew.class);
                         checklistData();
-                        checkListAdapter = new CheckListAdapter(getActivity(), mChecklistArrayList, mChecklistNew);
+                        checkListAdapter = new CheckListAdapter(mActivity, mChecklistArrayList, mChecklistNew);
                         mLVChecklist.setAdapter(checkListAdapter);
                     }
                 } else {
-                    Toast.makeText(getActivity(), "" + getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mActivity, "" + getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
                 }
                 TFUtils.hideProgressBar();
             }
@@ -134,7 +142,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                     reason = reason +checklistNextHub_AshokLeylandReasons.get(i)+"\n";
                 }
                 try {
-                    TFSOSFragment.sendEmailAndSMS(getActivity(), reason,"Checklist Issue");
+                    TFSOSFragment.sendEmailAndSMS(mActivity, reason,"Checklist Issue");
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -294,7 +302,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
         final ArrayList<Integer> selectedItems = new ArrayList();
 //        boolean checkedItems[] = new boolean[items.length];
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mActivity);
 
         dialogBuilder.setTitle(Html.fromHtml("<b>" + title + "\t\t" + "</b>" + getResources().getString(R.string.notification_send_to)));
 //        dialogBuilder.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
@@ -307,7 +315,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
 //                }
 //            }
 //        });
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.checklist_popup,null,false);
+        View view = LayoutInflater.from(mActivity).inflate(R.layout.checklist_popup,null,false);
         final CheckBox nextHubCb = (CheckBox) view.findViewById(R.id.next_hub_cb);
         final CheckBox ashokLeylandCb = (CheckBox) view.findViewById(R.id.ashok_layout_cb);
         final EditText nextHubEt = (EditText) view.findViewById(R.id.next_hub_edt);
@@ -320,7 +328,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                     nextHubEt.setFocusable(true);
                 } else {
                     nextHubEt.setVisibility(View.GONE);
-                    TFUtils.hideKeyboard(getActivity());
+                    TFUtils.hideKeyboard(mActivity);
                 }
             }
         });
@@ -332,7 +340,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                     ashokLeylandEt.setFocusable(true);
                 } else {
                     ashokLeylandEt.setVisibility(View.GONE);
-                    TFUtils.hideKeyboard(getActivity());
+                    TFUtils.hideKeyboard(mActivity);
                 }
             }
         });
@@ -368,19 +376,19 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                     notOkReason = notOkReason + "\t" + ashokLeylandEt.getText().toString().trim();
                 }
                 if (!nextHubCb.isChecked() && !ashokLeylandCb.isChecked()) {
-                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.checklist_notok_select_atleastone), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mActivity, mActivity.getResources().getString(R.string.checklist_notok_select_atleastone), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if ((nextHubCb.isChecked() && nextHubEt.getText().toString().trim().length() == 0)
                         || (ashokLeylandCb.isChecked() && ashokLeylandEt.getText().toString().trim().length() == 0)) {
-                    Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.checklist_notok_reason), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mActivity, mActivity.getResources().getString(R.string.checklist_notok_reason), Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 checklistNextHub_AshokLeylandReasons.add(notOkReason);
 
                 mChecklistArrayList.get(position).setStatus(false);
-                checkListAdapter.updateStatus(position,false);
+                checkListAdapter.updateStatus(position, false);
                 checkListAdapter.notifyDataSetChanged();
                 alertDialog.dismiss();
             }
