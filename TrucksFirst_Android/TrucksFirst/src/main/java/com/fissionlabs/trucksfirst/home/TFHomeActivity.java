@@ -58,7 +58,7 @@ public class TFHomeActivity extends TFCommonActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        TFUtils.SORT_COLUMN_ENUM = -1;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

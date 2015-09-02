@@ -76,26 +76,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         mTVVehicleRoute.setOnClickListener(this);
         mTVVehicleNo.setOnClickListener(this);
         TFUtils.showProgressBar(getActivity(), getResources().getString(R.string.please_wait));
-        switch (TFUtils.TRUCK_PAGE_POSITION){
-            case 1:
-                trucksPostionView = mTVVehicleNo;
-                break;
-            case 2:
-                trucksPostionView = mTvClient;
-                break;
-            case 3:
-                trucksPostionView = mTVVehicleRoute;
-                break;
-            case 4:
-                trucksPostionView = mTVEta;
-                break;
-            case 5:
-                trucksPostionView = mTVAssignedPilot;
-                break;
-            default:
-                trucksPostionView = mTVEta;
-                break;
-        }
+
         WebServices mWebServices = new WebServices();
         mWebServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
             @Override
@@ -113,9 +94,18 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                         }.getType();
                         mTrucksList = new Gson().fromJson(responseStr, listType);
                         mAdapter = new TrucksAdapter(getActivity(), mTFragment, mTrucksList);
+                        if(TFUtils.SORT_COLUMN_ENUM != -1){
+                            Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.values()[TFUtils.SORT_COLUMN_ENUM],TFUtils.SORT_ORDER));
+                            refreshSortingArrowIcon();
+                        } else {
+                            TFUtils.SORT_COLUMN_ENUM = 3;
+                            TFUtils.SORT_ORDER = 0;
+                            Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.ETA,TFUtils.SORT_ORDER));
+                            refreshSortingArrowIcon();
+                        }
                         mTruckDetailsListView.setAdapter(mAdapter);
                         if (mTrucksList != null && mTrucksList.size() > 1) {
-                            changeIconStatus(trucksPostionView);
+                            changeIconStatus(mTVEta);
                         }
                     }
                 } else {
@@ -126,6 +116,47 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         });
 
         return view;
+    }
+
+    private void refreshSortingArrowIcon() {
+        int drawableID;
+        String tag;
+        if (TFUtils.SORT_ORDER == 0) {
+            drawableID=R.drawable.ic_arrow_up;
+            tag = "2";
+        }
+        else if (TFUtils.SORT_ORDER == 1) {
+            tag = "1";
+            drawableID = R.drawable.ic_arrow_down;
+        }
+        else {
+            // We should never be here
+            drawableID = R.drawable.ic_arrow_right;
+            tag = "1";
+        }
+
+        switch(TFUtils.SORT_COLUMN_ENUM) {
+            case 0:
+                mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(drawableID, 0, 0, 0);
+                mTVVehicleNo.setTag(tag);
+                break;
+            case 1:
+                mTvClient.setCompoundDrawablesWithIntrinsicBounds(drawableID, 0, 0, 0);
+                mTvClient.setTag(tag);
+                break;
+            case 2:
+                mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(drawableID, 0, 0, 0);
+                mTVVehicleRoute.setTag(tag);
+                break;
+            case 3:
+                mTVEta.setCompoundDrawablesWithIntrinsicBounds(drawableID, 0, 0, 0);
+                mTVEta.setTag(tag);
+                break;
+            case 4:
+                mTVAssignedPilot.setCompoundDrawablesWithIntrinsicBounds(drawableID, 0, 0, 0);
+                mTVAssignedPilot.setTag(tag);
+                break;
+        }
     }
 
     @Override
@@ -139,8 +170,9 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         int asc_desc;
         switch (v.getId()) {
             case R.id.vehicle_no:
-                TFUtils.TRUCK_PAGE_POSITION = 1;
                 asc_desc = getPresentIcon(mTVVehicleNo);
+                TFUtils.SORT_ORDER = asc_desc;
+                TFUtils.SORT_COLUMN_ENUM = 0;
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTvClient.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
@@ -149,8 +181,9 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.client:
-                TFUtils.TRUCK_PAGE_POSITION = 2;
                 asc_desc = getPresentIcon(mTvClient);
+                TFUtils.SORT_ORDER = asc_desc;
+                TFUtils.SORT_COLUMN_ENUM = 1;
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
@@ -159,8 +192,9 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.vehicle_route:
-                TFUtils.TRUCK_PAGE_POSITION = 3;
                 asc_desc = getPresentIcon(mTVVehicleRoute);
+                TFUtils.SORT_ORDER = asc_desc;
+                TFUtils.SORT_COLUMN_ENUM = 2;
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTvClient.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
@@ -169,8 +203,9 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.eta:
-                TFUtils.TRUCK_PAGE_POSITION = 4;
                 asc_desc = getPresentIcon(mTVEta);
+                TFUtils.SORT_ORDER = asc_desc;
+                TFUtils.SORT_COLUMN_ENUM = 3;
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTvClient.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
@@ -179,8 +214,9 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.assign_pilot:
-                TFUtils.TRUCK_PAGE_POSITION = 5;
                 asc_desc = getPresentIcon(mTVAssignedPilot);
+                TFUtils.SORT_ORDER = asc_desc;
+                TFUtils.SORT_COLUMN_ENUM = 4;
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTvClient.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
