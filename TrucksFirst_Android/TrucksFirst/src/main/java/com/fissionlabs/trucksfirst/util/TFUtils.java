@@ -23,7 +23,8 @@ import java.util.Calendar;
 public class TFUtils implements TFConst{
 
 	private static ProgressDialog mProgressDialog;
-
+    public static  int TRUCK_PAGE_POSITION = 4;
+    
     /**
      * This method is used to get the {@link String} data from the {@link SharedPreferences}.
      * @param _activity {@link Activity} instance

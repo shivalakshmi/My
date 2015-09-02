@@ -46,6 +46,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
     public static ArrayList<TruckDetails> mTrucksList = null;
     private TFTruckFragment mTFragment;
     private TrucksAdapter mAdapter;
+    private TextView trucksPostionView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,26 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         mTVVehicleRoute.setOnClickListener(this);
         mTVVehicleNo.setOnClickListener(this);
         TFUtils.showProgressBar(getActivity(), getResources().getString(R.string.please_wait));
+        switch (TFUtils.TRUCK_PAGE_POSITION){
+            case 1:
+                trucksPostionView = mTVVehicleNo;
+                break;
+            case 2:
+                trucksPostionView = mTvClient;
+                break;
+            case 3:
+                trucksPostionView = mTVVehicleRoute;
+                break;
+            case 4:
+                trucksPostionView = mTVEta;
+                break;
+            case 5:
+                trucksPostionView = mTVAssignedPilot;
+                break;
+            default:
+                trucksPostionView = mTVEta;
+                break;
+        }
         WebServices mWebServices = new WebServices();
         mWebServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
             @Override
@@ -94,7 +115,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                         mAdapter = new TrucksAdapter(getActivity(), mTFragment, mTrucksList);
                         mTruckDetailsListView.setAdapter(mAdapter);
                         if (mTrucksList != null && mTrucksList.size() > 1) {
-                            changeIconStatus(mTVEta);
+                            changeIconStatus(trucksPostionView);
                         }
                     }
                 } else {
@@ -118,6 +139,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         int asc_desc;
         switch (v.getId()) {
             case R.id.vehicle_no:
+                TFUtils.TRUCK_PAGE_POSITION = 1;
                 asc_desc = getPresentIcon(mTVVehicleNo);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTvClient.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
@@ -127,6 +149,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.client:
+                TFUtils.TRUCK_PAGE_POSITION = 2;
                 asc_desc = getPresentIcon(mTvClient);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
@@ -136,6 +159,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.vehicle_route:
+                TFUtils.TRUCK_PAGE_POSITION = 3;
                 asc_desc = getPresentIcon(mTVVehicleRoute);
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVEta.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
@@ -145,6 +169,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.eta:
+                TFUtils.TRUCK_PAGE_POSITION = 4;
                 asc_desc = getPresentIcon(mTVEta);
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
@@ -154,6 +179,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 mTruckDetailsListView.getAdapter().notifyDataSetChanged();
                 break;
             case R.id.assign_pilot:
+                TFUtils.TRUCK_PAGE_POSITION = 5;
                 asc_desc = getPresentIcon(mTVAssignedPilot);
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
                 mTVVehicleRoute.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_arrow_right, 0, 0, 0);
@@ -180,7 +206,6 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
             return 0;  //down bitmap
         }
     }
-
 
     private enum Sort {
         VEHICLE_NO,

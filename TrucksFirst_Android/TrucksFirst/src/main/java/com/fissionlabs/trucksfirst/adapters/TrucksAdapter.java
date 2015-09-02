@@ -295,7 +295,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                 ((Button)modifyPilot.findViewById(R.id.change_pilot)).setVisibility(View.VISIBLE);
             }
             final TextView contactNo = (TextView)modifyPilot.findViewById(R.id.contact_no);
-            contactNo.setText(String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:" + mDataSet.get(positioin).getContactNo().trim()));
+            contactNo.setText(String.format(mContext.getString(R.string.pilot_contact_info), "\nMobile Number:+91" + mDataSet.get(positioin).getContactNo().trim()));
 
             dialogBuilder.setPositiveButton(mContext.getString(R.string.ok), null);
             final AlertDialog alertDialog = dialogBuilder.create();
