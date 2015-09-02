@@ -349,6 +349,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mChecklistArrayList.get(position).setStatus(true);
+                checkListAdapter.updateStatus(position,true);
                 checkListAdapter.notifyDataSetChanged();
             }
         });
@@ -379,6 +380,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                 checklistNextHub_AshokLeylandReasons.add(notOkReason);
 
                 mChecklistArrayList.get(position).setStatus(false);
+                checkListAdapter.updateStatus(position,false);
                 checkListAdapter.notifyDataSetChanged();
                 alertDialog.dismiss();
             }
