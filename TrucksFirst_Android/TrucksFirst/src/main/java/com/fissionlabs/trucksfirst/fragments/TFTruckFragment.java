@@ -48,10 +48,10 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
     private TrucksAdapter mAdapter;
     private TextView trucksPostionView;
     private TextView mVehicleCount;
-    private TextView mDriversPlanned;
-    private TextView mDriversNotPlanned;
-    private int driverPlannedCount = 0;
-    private int drivetNotPlannedCount = 0;
+    public static TextView mDriversPlanned;
+    public static TextView mDriversNotPlanned;
+    public static int driverPlannedCount = 0;
+    public static int drivetNotPlannedCount = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -319,7 +319,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
         searchView.setOnQueryTextListener(this);
         searchView.findViewById(android.support.v7.appcompat.R.id.search_edit_frame).setBackgroundResource(R.drawable.abc_edit_text_material);
-            }
+    }
 
     @Override
     public boolean onQueryTextChange(String query) {
@@ -342,10 +342,10 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
 
         for (TruckDetails model : models) {
             boolean flag = ((model.getVehicleNumber() == null || model.getVehicleNumber().equals("null"))? false : model.getVehicleNumber().toLowerCase().contains(query))
-                || ((model.getClient() == null || model.getClient().equals("null"))? false : model.getClient().toLowerCase().contains(query))
-                || ((model.getVehicleRoute() == null || model.getVehicleRoute().equals("null"))? false : model.getVehicleRoute().toLowerCase().contains(query))
-                || ((model.getEta() == null || model.getEta().equals("null"))? false : TFUtils.changeTime(model.getEta()).toLowerCase().contains(query))
-                || ((model.getAssignedPilot() == null || model.getAssignedPilot().equals("null"))? false : model.getAssignedPilot().toLowerCase().contains(query));
+                    || ((model.getClient() == null || model.getClient().equals("null"))? false : model.getClient().toLowerCase().contains(query))
+                    || ((model.getVehicleRoute() == null || model.getVehicleRoute().equals("null"))? false : model.getVehicleRoute().toLowerCase().contains(query))
+                    || ((model.getEta() == null || model.getEta().equals("null"))? false : TFUtils.changeTime(model.getEta()).toLowerCase().contains(query))
+                    || ((model.getAssignedPilot() == null || model.getAssignedPilot().equals("null"))? false : model.getAssignedPilot().toLowerCase().contains(query));
             if (flag) {
                 filteredModelList.add(model);
             }

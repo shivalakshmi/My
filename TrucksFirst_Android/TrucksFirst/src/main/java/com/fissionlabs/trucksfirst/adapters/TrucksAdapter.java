@@ -523,6 +523,10 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                         super.onReceiveResult(resultCode, resultData);
                                         if (resultCode == TFConst.SUCCESS) {
                                             notifyItemChanged(trucksPosition);
+                                            TFTruckFragment.driverPlannedCount += 1;
+                                            TFTruckFragment.drivetNotPlannedCount -= 1;
+                                            TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned)+" "+TFTruckFragment.driverPlannedCount);
+                                            TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned)+" "+TFTruckFragment.drivetNotPlannedCount);
                                         } else {
                                             Toast.makeText(mContext, mContext.getResources().getString(R.string.problem_assign_pilot), Toast.LENGTH_SHORT).show();
                                         }
@@ -555,7 +559,10 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                         if (resultCode == 200) {
                             mDataSet.get(position).setAssignedPilot(null);
                             notifyItemChanged(position);
-
+                            TFTruckFragment.driverPlannedCount -= 1;
+                            TFTruckFragment.drivetNotPlannedCount += 1;
+                            TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned)+" "+TFTruckFragment.driverPlannedCount);
+                            TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned)+" "+TFTruckFragment.drivetNotPlannedCount);
                         } else {
                             Toast.makeText(mContext, mContext.getResources().getString(R.string.error_releasing_pilot), Toast.LENGTH_SHORT).show();
                         }
