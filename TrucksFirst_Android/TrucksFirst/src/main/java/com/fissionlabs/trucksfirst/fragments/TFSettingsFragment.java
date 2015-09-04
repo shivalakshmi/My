@@ -2,7 +2,6 @@ package com.fissionlabs.trucksfirst.fragments;
 
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -26,8 +25,6 @@ import android.widget.Toast;
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
 import com.fissionlabs.trucksfirst.common.TFConst;
-import com.fissionlabs.trucksfirst.home.TFHomeActivity;
-import com.fissionlabs.trucksfirst.model.LoginResponse;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
 import com.google.gson.Gson;
@@ -210,6 +207,9 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
                 protected void onReceiveResult(int resultCode, Bundle resultData) {
 
                     TFUtils.hideProgressBar();
+
+                    String responseStr = resultData.getString("response");
+                    Toast.makeText(getActivity(),"Password Changed Successfully!!",Toast.LENGTH_SHORT).show();
 
                     if (resultData != null) {
 

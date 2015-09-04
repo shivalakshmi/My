@@ -64,6 +64,8 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_truck, container, false);
         mTFragment = this;
+        driverPlannedCount = 0;
+        drivetNotPlannedCount = 0;
         mHomeActivity.mActionBar.setDisplayShowTitleEnabled(false);
         mTruckDetailsListView = (RecyclerView) view.findViewById(R.id.truck_details_list);
         mTruckDetailsListView.setHasFixedSize(true);

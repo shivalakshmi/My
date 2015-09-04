@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
+import com.fissionlabs.trucksfirst.fragments.TFForgotPassword;
 import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.model.LoginResponse;
 import com.fissionlabs.trucksfirst.util.TFUtils;
@@ -103,7 +104,8 @@ public class TFLoginActivity extends TFCommonActivity {
     }
 
     private void forgotPassword() {
-
+Intent i = new Intent(TFLoginActivity.this, TFForgotPassword.class);
+        startActivity(i);
     }
 
     private void userLoginChecking() {
