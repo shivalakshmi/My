@@ -41,6 +41,8 @@ public interface TFConst {
     String HUB_NAME = "hub_name";
     String EMP_ID = "emp_id";
     String HS_NAME = "hs_name";
+    String EMP_USER_NAME="hub_user_name";
+    String EMP_USER_PASSWORD="hub_user_password";
 //    String URL_PRINT_DOCUMENT = "https://s3-ap-southeast-1.amazonaws.com/rivigovehicledocuments/";
     String URL_PRINT_DOCUMENT = "http://52.76.55.8/";
 }

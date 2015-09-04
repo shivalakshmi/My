@@ -279,6 +279,9 @@ public class TFHomeActivity extends TFCommonActivity {
         TFUtils.deleteFromSP(TFHomeActivity.this,IS_USER_EXISTS);
         TFUtils.deleteFromSP(TFHomeActivity.this, HUB_NAME);
         TFUtils.deleteFromSP(TFHomeActivity.this, EMP_ID);
+        TFUtils.deleteFromSP(TFHomeActivity.this, EMP_USER_NAME);
+        TFUtils.deleteFromSP(TFHomeActivity.this, EMP_USER_PASSWORD);
+
         Intent intent = new Intent(TFHomeActivity.this, TFLoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

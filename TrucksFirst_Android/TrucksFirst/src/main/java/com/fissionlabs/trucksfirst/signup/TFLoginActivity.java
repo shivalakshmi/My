@@ -98,20 +98,20 @@ public class TFLoginActivity extends TFCommonActivity {
 
     private void userLoginChecking() {
 
-        if (TextUtils.isEmpty(mEtUserName.getText().toString()) || TextUtils.isEmpty(mEtPassword.getText().toString())) {
-            if (TextUtils.isEmpty(mEtUserName.getText().toString())) {
+        if (TextUtils.isEmpty(mEtUserName.getText().toString().trim()) || TextUtils.isEmpty(mEtPassword.getText().toString().trim())) {
+            if (TextUtils.isEmpty(mEtUserName.getText().toString().trim())) {
                 mEtUserName.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
                 mEtPassword.requestFocus();
             }
-            if (TextUtils.isEmpty(mEtPassword.getText().toString())) {
+            if (TextUtils.isEmpty(mEtPassword.getText().toString().trim())) {
                 mEtPassword.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
             }
             return;
         }
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("userName", mEtUserName.getText().toString());
-        params.put("password", mEtPassword.getText().toString());
+        params.put("userName", mEtUserName.getText().toString().trim());
+        params.put("password", mEtPassword.getText().toString().trim());
 
         TFUtils.showProgressBar(this, getString(R.string.please_wait));
 
@@ -129,6 +129,8 @@ public class TFLoginActivity extends TFCommonActivity {
                         TFUtils.saveStringInSP(TFLoginActivity.this, HUB_NAME, loginResponse.result.getHubName());
                         TFUtils.saveStringInSP(TFLoginActivity.this,HS_NAME, loginResponse.result.getUserName());
                         TFUtils.saveStringInSP(TFLoginActivity.this, EMP_ID, loginResponse.result.getEmpId());
+                        TFUtils.saveStringInSP(TFLoginActivity.this, EMP_USER_NAME, mEtUserName.getText().toString().trim());
+                        TFUtils.saveStringInSP(TFLoginActivity.this, EMP_USER_PASSWORD, mEtPassword.getText().toString().trim());
                         TFUtils.saveBooleanInSP(TFLoginActivity.this, IS_USER_EXISTS, true);
                         Intent i = new Intent(TFLoginActivity.this, TFHomeActivity.class);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

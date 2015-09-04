@@ -1,10 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:gravity="center"
               tools:context="com.fissionlabs.trucksfirst.fragments.TFSettingsFragment">
-
+<LinearLayout android:id="@+id/lang_spinner_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="visible"
+    android:gravity="center"
+    android:orientation="horizontal">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,4 +24,78 @@
         android:layout_width="@dimen/common_padding_large12"
         android:layout_height="wrap_content"
         android:entries="@array/language_arrays"/>
+</LinearLayout>
+    <Button
+        android:id="@+id/change_password_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:paddingRight="80dp"
+        android:visibility="visible"
+        android:paddingLeft="80dp"
+        android:text="Change Password"
+        style="@style/ButtonStyle"/>
+
+    <LinearLayout
+        android:id="@+id/change_password_layout"
+        android:layout_width="300dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/old_password"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:drawablePadding="5dp"
+            android:background="@drawable/edittext_selector"
+            android:hint="Enter old password"
+            android:imeOptions="actionNext"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/new_password"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:drawablePadding="5dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edittext_selector"
+            android:hint="Enter new password"
+            android:imeOptions="actionNext"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/confirm_new_password"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:drawablePadding="5dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edittext_selector"
+            android:hint="Re-Enter new password"
+            android:imeOptions="actionDone"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:paddingRight="80dp"
+            android:paddingLeft="80dp"
+            android:text="Submit"
+            style="@style/ButtonStyle"/>
+
+    </LinearLayout>
 </LinearLayout>

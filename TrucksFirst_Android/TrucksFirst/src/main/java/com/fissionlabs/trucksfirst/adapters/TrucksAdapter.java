@@ -387,7 +387,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                         public View getView(int position, View convertView, ViewGroup parent) {
                             TextView textView = (TextView) super.getView(position, convertView, parent);
                             if(sortedListItemsPilot.get(position).getPilotParentHub().equalsIgnoreCase(TFUtils.getStringFromSP(mContext,TFConst.HUB_NAME))){
-                                textView.setTextColor(Color.parseColor("#00FF00"));
+                                textView.setTextColor(Color.parseColor("#006700"));
                             }else{
                                 textView.setTextColor(Color.parseColor("#000000"));
                             }
