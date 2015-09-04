@@ -19,8 +19,10 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.pojo.Checklist;
 import com.fissionlabs.trucksfirst.pojo.ChecklistNew;
@@ -48,11 +50,13 @@ public class CheckListAdapter extends BaseAdapter {
     private final LayoutInflater mInflater;
     private final ChecklistNew mChecklistNew;
     private ProgressDialog dialog = null;
-    private String dwnload_file_path = "http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf";
+    private String vehcleNumber;
+    private String download_file_path =  "";
     private String dest_file_path = "/sdcard/dwnloaded_file2.pdf";
 
-    public CheckListAdapter(Activity context, ArrayList<Checklist> ChecklistArrayList, ChecklistNew checklistNew) {
+    public CheckListAdapter(Activity context, String vehicleNumber,ArrayList<Checklist> ChecklistArrayList, ChecklistNew checklistNew) {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.vehcleNumber  = vehicleNumber;
         this.mChecklistArrayList = ChecklistArrayList;
         this.context = context;
         this.mChecklistNew = checklistNew;
@@ -154,10 +158,27 @@ public class CheckListAdapter extends BaseAdapter {
                 holder.mImgPrint.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        String temp = vehcleNumber.substring(0,4)+"-"+vehcleNumber.substring(4,5)+"-"+vehcleNumber.substring(5);
+                        if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.registration_certificate))){
+                            temp = temp+"/"+temp +"_RC";
+                        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.fitness_certificate))){
+                            temp = temp+"/"+temp +"_Fitness";
+                        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.national_permit))){
+                            temp = temp+"/"+temp +"_NP";
+                        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.road_tax_booklet))){
+                            temp = temp+"/"+temp +"_RT";
+                        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.pollution_certificate))){
+                            temp = temp+"/"+temp +"_PUC";
+                        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.insurance))){
+                            temp = temp+"/"+temp +"_Insurance";
+                        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.grn_bilti))){
+                            temp = temp+"/"+temp +"_GRN";
+                        }
+                        download_file_path = TFConst.URL_PRINT_DOCUMENT+temp+".pdf";
                         dialog = ProgressDialog.show(context, "", "Downloading file...", true);
                         new Thread(new Runnable() {
                             public void run() {
-                                downloadFile(dwnload_file_path, dest_file_path);
+                                downloadFile(download_file_path, dest_file_path);
                             }
                         }).start();
 
@@ -379,14 +400,32 @@ public class CheckListAdapter extends BaseAdapter {
         } catch(FileNotFoundException e) {
             e.printStackTrace();
             hideProgressIndicator();
+            context.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context, context.getResources().getString(R.string.printing_file_not_found), Toast.LENGTH_SHORT).show();
+                }
+            });
             return;
         } catch (IOException e) {
             e.printStackTrace();
             hideProgressIndicator();
+            context.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context, context.getResources().getString(R.string.printing_issue_with_download), Toast.LENGTH_SHORT).show();
+                }
+            });
             return;
         }catch (Exception e){
             e.printStackTrace();
             hideProgressIndicator();
+            context.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context, context.getResources().getString(R.string.printing_issue_with_download), Toast.LENGTH_SHORT).show();
+                }
+            });
             return;
         }
     }

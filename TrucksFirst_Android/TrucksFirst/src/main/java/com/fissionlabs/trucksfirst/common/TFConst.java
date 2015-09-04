@@ -6,8 +6,8 @@ package com.fissionlabs.trucksfirst.common;
 public interface TFConst {
     String TAG = "TRUCKS_FIRST";
 
-    String BASE_IP = "rivigoapistg-env.elasticbeanstalk.com/"; // Stagging URL
-    //String BASE_IP = "rivigo-dev.elasticbeanstalk.com/"; // Dev URL
+//    String BASE_IP = "rivigoapistg-env.elasticbeanstalk.com/"; // Stagging URL
+    String BASE_IP = "rivigo-dev.elasticbeanstalk.com/"; // Dev URL
     //String BASE_IP = "172.168.0.223:8080/com.rivigo.controller/"; // Local URL
 
     String URL_TRUCK_DETAILS = "http://" + BASE_IP + "mobile/truckdetails";
@@ -40,4 +40,6 @@ public interface TFConst {
     String IS_USER_EXISTS = "is_user_exists";
     String HUB_NAME = "hub_name";
     String EMP_ID = "emp_id";
+//    String URL_PRINT_DOCUMENT = "https://s3-ap-southeast-1.amazonaws.com/rivigovehicledocuments/";
+    String URL_PRINT_DOCUMENT = "http://52.76.55.8/";
 }

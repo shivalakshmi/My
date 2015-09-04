@@ -88,6 +88,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
         View view = inflater.inflate(R.layout.fragment_check_list, container, false);
 
         bundle = this.getArguments();
+        final String vehicleNumber = bundle.getString("vehicle_number");
 
         mHomeActivity.isHomeFragment = false;
 
@@ -102,12 +103,12 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
             }
         });
 
-        mHomeActivity.mActionBar.setTitle(bundle.getString("vehicle_number"));
+        mHomeActivity.mActionBar.setTitle(vehicleNumber);
         mLVChecklist = (ListView) view.findViewById(R.id.listView);
         mChecklistArrayList.clear();
         mWebServices = new WebServices();
 //        mChecklistNew =new ChecklistNew();
-        mWebServices.getVehicleChecklistDetails(bundle.getString("vehicle_number"), new ResultReceiver(null) {
+        mWebServices.getVehicleChecklistDetails(vehicleNumber, new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
                 if (resultCode == SUCCESS) {
@@ -117,7 +118,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                     if (responseStr != null) {
                         mChecklistNew = new Gson().fromJson(responseStr, ChecklistNew.class);
                         checklistData();
-                        checkListAdapter = new CheckListAdapter(mActivity, mChecklistArrayList, mChecklistNew);
+                        checkListAdapter = new CheckListAdapter(mActivity, vehicleNumber,mChecklistArrayList, mChecklistNew);
                         mLVChecklist.setAdapter(checkListAdapter);
                     }
                 } else {

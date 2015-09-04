@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.format.DateFormat;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
+import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.fragments.TFCheckListFragment;
 import com.fissionlabs.trucksfirst.fragments.TFDashBoardFragment;
 import com.fissionlabs.trucksfirst.fragments.TFSOSFragment;
@@ -304,7 +306,7 @@ public class TFHomeActivity extends TFCommonActivity {
                 try {
                     Date date = new Date();
                     CharSequence dateFormat = DateFormat.format("dd/MM/yyyy k:mm:ss", date.getTime());
-                    mTvCurrentDateAndTime.setText(" " + dateFormat);
+                    mTvCurrentDateAndTime.setText(Html.fromHtml("Hub:<b>"+TFUtils.getStringFromSP(TFHomeActivity.this, HUB_NAME)+"</b>   " + dateFormat));
 
                 } catch (Exception e) {
                     e.printStackTrace();

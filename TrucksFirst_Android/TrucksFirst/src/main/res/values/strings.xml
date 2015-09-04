@@ -164,4 +164,6 @@
     <string name="checklist_notok_select_atleastone">Please select atleast one.</string>
     <string name="checklist_notok_reason">Please enter reason field.</string>
     <string name="final_hub_no_need_toassign_pilot">This is the final Hub, no need to assign Pilot.</string>
+    <string name="printing_file_not_found">Document not found in server, Please check with concern team.</string>
+    <string name="printing_issue_with_download">Issue with downloading file.</string>
 </resources>
