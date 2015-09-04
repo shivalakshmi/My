@@ -60,6 +60,7 @@ public class TFHomeActivity extends TFCommonActivity {
     public static  Toolbar toolbar;
     public static boolean isHomeFragment = true;
     public static ImageView imageView;
+    private TextView mHubSupervisorName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,9 @@ public class TFHomeActivity extends TFCommonActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mTvCurrentDateAndTime = (TextView) findViewById(R.id.tv_date_time);
+        mHubSupervisorName = (TextView)findViewById(R.id.hub_supervisor);
+
+        mHubSupervisorName.setText(TFUtils.getStringFromSP(TFHomeActivity.this,HS_NAME));
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         if (mNavigationView != null) {

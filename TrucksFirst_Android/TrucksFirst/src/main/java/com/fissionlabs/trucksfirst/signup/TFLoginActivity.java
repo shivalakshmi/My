@@ -127,6 +127,7 @@ public class TFLoginActivity extends TFCommonActivity {
 
                     if (loginResponse.success.equalsIgnoreCase("true")) {
                         TFUtils.saveStringInSP(TFLoginActivity.this, HUB_NAME, loginResponse.result.getHubName());
+                        TFUtils.saveStringInSP(TFLoginActivity.this,HS_NAME, loginResponse.result.getUserName());
                         TFUtils.saveStringInSP(TFLoginActivity.this, EMP_ID, loginResponse.result.getEmpId());
                         TFUtils.saveBooleanInSP(TFLoginActivity.this, IS_USER_EXISTS, true);
                         Intent i = new Intent(TFLoginActivity.this, TFHomeActivity.class);

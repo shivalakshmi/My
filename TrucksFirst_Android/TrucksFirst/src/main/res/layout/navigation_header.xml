@@ -27,10 +27,12 @@
     tools:ignore="Overdraw">
 
     <TextView
+        android:id="@+id/hub_supervisor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/hub_supervisor"
-        android:gravity="center_vertical"
+        android:gravity="center"
+        android:textSize="25sp"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
 </LinearLayout>
