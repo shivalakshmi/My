@@ -104,9 +104,6 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                             refreshSortingArrowIcon();
                         }
                         mTruckDetailsListView.setAdapter(mAdapter);
-                        if (mTrucksList != null && mTrucksList.size() > 1) {
-                            changeIconStatus(mTVEta);
-                        }
                     }
                 } else {
                     Toast.makeText(getActivity(), "" + getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
