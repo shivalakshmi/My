@@ -23,6 +23,7 @@ public interface TFConst {
     String URL_LOGIN = "http://" + BASE_IP + "user/login";
     String URL_CHANGE_PASSWORD = "http://" + BASE_IP + "user/changepassword";
     String URL_SKIPPED_PILOT_INFO = "http://" + BASE_IP + "pilot/updateskippedpilotinfo";
+    String URL_CHANGE_PASSWORD = "http://rivigo-dev.elasticbeanstalk.com/user/changepassword";
 
     String URL_SMS = "http://bhashsms.com/api/sendmsg.php";
 

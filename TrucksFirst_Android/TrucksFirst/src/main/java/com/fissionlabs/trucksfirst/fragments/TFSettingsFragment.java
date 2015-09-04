@@ -192,13 +192,34 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
             }
             return;
         }
-        if(!mOldPassword.getText().toString().trim().equals(TFUtils.getStringFromSP(getActivity(),EMP_USER_PASSWORD))){
+       else if(!mOldPassword.getText().toString().trim().equals(TFUtils.getStringFromSP(getActivity(),EMP_USER_PASSWORD))){
             Toast.makeText(getActivity(),"Old password is not matched.",Toast.LENGTH_SHORT).show();
             return;
         }
-        if(!mNewPassword.getText().toString().trim().equals(mConfirmNewPassword.getText().toString().trim())){
+       else if(!mNewPassword.getText().toString().trim().equals(mConfirmNewPassword.getText().toString().trim())){
             Toast.makeText(getActivity(),"New password  and confirm password is not matched.",Toast.LENGTH_SHORT).show();
             return;
+        }
+        else
+        {
+            HashMap<String, String> params = new HashMap<>();
+            params.put("userName", TFUtils.getStringFromSP(getActivity(), HS_NAME));
+            params.put("password", mNewPassword.getText().toString().trim());
+            new WebServices().changePassword(getActivity(), new JSONObject(params), new ResultReceiver(null) {
+                @Override
+                protected void onReceiveResult(int resultCode, Bundle resultData) {
+
+                    TFUtils.hideProgressBar();
+
+                    if (resultData != null) {
+
+                        mChangePasswordBtn.setVisibility(View.VISIBLE);
+                        mLangSpinnerLayout.setVisibility(View.VISIBLE);
+                        mChangePasswordLayout.setVisibility(View.GONE);
+                    }
+                }
+            });
+
         }
 
         HashMap<String, String> params = new HashMap<>();
@@ -220,9 +241,6 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
 
 
 
-        mChangePasswordBtn.setVisibility(View.VISIBLE);
-        mLangSpinnerLayout.setVisibility(View.VISIBLE);
-        mChangePasswordLayout.setVisibility(View.GONE);
     }
 
     private void setLocale(String lang) {
