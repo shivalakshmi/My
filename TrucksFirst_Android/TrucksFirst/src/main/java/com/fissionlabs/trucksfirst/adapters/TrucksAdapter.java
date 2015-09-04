@@ -3,6 +3,7 @@ package com.fissionlabs.trucksfirst.adapters;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ResultReceiver;
@@ -339,6 +340,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     }.getType();
 
                     final ArrayList<PilotAvailability> pilotAvailabilityList = new Gson().fromJson(responseStr, listType);
+                    final ArrayList<PilotAvailability> listItemsPilot = new ArrayList<PilotAvailability>();
+                    final ArrayList<PilotAvailability> sortedListItemsPilot = new ArrayList<PilotAvailability>();
                     final List<String> listItems = new ArrayList<>();
                     final List<String> sortedListItems = new ArrayList<>();
 
@@ -347,8 +350,10 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             // NextAvailabilityTime <= ETA-1hour
                             if (Long.parseLong(pilotAvailabilityList.get(i).getNextAvailabilityTime()) <= (Long.parseLong(obj.getEta()) - 3600000)) {
                                 sortedListItems.add(pilotAvailabilityList.get(i).getPilotFirstName() + "/" + pilotAvailabilityList.get(i).getPilotParentHub() + "\t\t" + TFUtils.changeTime(pilotAvailabilityList.get(i).getNextAvailabilityTime()));
+                                sortedListItemsPilot.add(pilotAvailabilityList.get(i));
                             }
                             listItems.add(pilotAvailabilityList.get(i).getPilotFirstName() + "/" + pilotAvailabilityList.get(i).getPilotParentHub() + "\t\t" + TFUtils.changeTime(pilotAvailabilityList.get(i).getNextAvailabilityTime()));
+                            listItemsPilot.add(pilotAvailabilityList.get(i));
                         }
                     }
                     if(listItems.size() == 0){
@@ -376,7 +381,18 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     alertDialog.show();
                     final ListView availablePilots = (ListView) view.findViewById(R.id.pilot_availability);
 
-                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_single_choice, sortedListItems);
+                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_single_choice, sortedListItems){
+                        @Override
+                        public View getView(int position, View convertView, ViewGroup parent) {
+                            TextView textView = (TextView) super.getView(position, convertView, parent);
+                            if(sortedListItemsPilot.get(position).getPilotParentHub().equalsIgnoreCase(TFUtils.getStringFromSP(mContext,TFConst.HUB_NAME))){
+                                textView.setTextColor(Color.parseColor("#00FF00"));
+                            }else{
+                                textView.setTextColor(Color.parseColor("#000000"));
+                            }
+                            return textView;
+                        }
+                    };
 
                     availablePilots.setAdapter(adapter);
 
@@ -390,6 +406,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                         public void onClick(View v) {
                             sortedListItems.clear();
                             sortedListItems.addAll(listItems);
+                            sortedListItemsPilot.clear();
+                            sortedListItemsPilot.addAll(listItemsPilot);
                             adapter.notifyDataSetChanged();
                             availablePilots.removeFooterView(footerView);
                         }

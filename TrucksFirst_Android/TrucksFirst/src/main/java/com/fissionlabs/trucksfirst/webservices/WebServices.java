@@ -98,7 +98,6 @@ public class WebServices implements TFConst {
     }
 
     public void getPilotAvailability(final Context context, final String eta, final String nextHub, final ResultReceiver resultReceiver) {
-        Log.e("murali",""+URL_PILOT_AVAILABILITY + "?currentHub=" + TFUtils.getStringFromSP(context, HUB_NAME) + "&ETA=" + eta + "&nextHub=" + nextHub);
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URL_PILOT_AVAILABILITY + "?currentHub=" + TFUtils.getStringFromSP(context, HUB_NAME) + "&ETA=" + eta + "&nextHub=" + nextHub,
                 new Response.Listener<String>() {
