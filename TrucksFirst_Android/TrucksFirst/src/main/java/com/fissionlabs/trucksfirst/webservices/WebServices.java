@@ -469,37 +469,6 @@ public class WebServices implements TFConst {
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CHECKLIST_DETAILS);
     }
 
-    public void changePassword(final Context context, final JSONObject jsonObject, final ResultReceiver resultReceiver) {
-
-        JsonObjectRequest request = new JsonObjectRequest(URL_CHANGE_PASSWORD, jsonObject,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        if (LogConfig.D) {
-                            Log.d(TAG, "================================ User login ==========================");
-                            Log.d(TAG, "" + response);
-                            Log.d(TAG, "================================ User login end ======================");
-                        }
-
-                        Bundle bundle = new Bundle();
-                        bundle.putString("response", response.toString());
-
-                        resultReceiver.send(SUCCESS, bundle);
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error: ", error.getMessage());
-                Toast.makeText(context, context.getResources().getString(R.string.server_not_responding), Toast.LENGTH_SHORT).show();
-                resultReceiver.send(ERROR, null);
-            }
-        });
-
-        TFApp.getInstance().addToRequestQueue(request, TAG_USER_LOGIN);
-
-    }
 
 }
 
