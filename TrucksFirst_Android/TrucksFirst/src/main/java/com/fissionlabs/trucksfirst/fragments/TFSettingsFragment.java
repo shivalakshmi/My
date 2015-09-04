@@ -222,7 +222,7 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
 
         }
 
-        HashMap<String, String> params = new HashMap<>();
+       /* HashMap<String, String> params = new HashMap<>();
         params.put("userName", TFUtils.getStringFromSP(getActivity(),EMP_USER_NAME));
         params.put("password", mConfirmNewPassword.getText().toString().trim());
 
@@ -237,7 +237,7 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
 
                 }
             }
-        });
+        });*/
 
 
 
