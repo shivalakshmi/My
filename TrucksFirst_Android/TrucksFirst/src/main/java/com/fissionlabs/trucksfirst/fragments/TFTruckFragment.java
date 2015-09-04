@@ -47,6 +47,11 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
     private TFTruckFragment mTFragment;
     private TrucksAdapter mAdapter;
     private TextView trucksPostionView;
+    private TextView mVehicleCount;
+    private TextView mDriversPlanned;
+    private TextView mDriversNotPlanned;
+    private int driverPlannedCount = 0;
+    private int drivetNotPlannedCount = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +64,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_truck, container, false);
         mTFragment = this;
-
+        mHomeActivity.mActionBar.setDisplayShowTitleEnabled(false);
         mTruckDetailsListView = (RecyclerView) view.findViewById(R.id.truck_details_list);
         mTruckDetailsListView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -70,6 +75,10 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         mTVEta = (TextView) view.findViewById(R.id.eta);
         mTvClient = (TextView) view.findViewById(R.id.client);
         mTVAssignedPilot = (TextView) view.findViewById(R.id.assign_pilot);
+        mVehicleCount = (TextView)view.findViewById(R.id.vehicle_count);
+        mDriversPlanned = (TextView)view.findViewById(R.id.drivers_planned);
+        mDriversNotPlanned = (TextView)view.findViewById(R.id.drivers_not_planned);
+
         mTVAssignedPilot.setOnClickListener(this);
         mTVEta.setOnClickListener(this);
         mTvClient.setOnClickListener(this);
@@ -94,6 +103,20 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                         }.getType();
                         mTrucksList = new Gson().fromJson(responseStr, listType);
                         mAdapter = new TrucksAdapter(getActivity(), mTFragment, mTrucksList);
+                        for(int i=0; i<mTrucksList.size(); i++)
+                        {
+                            if (mTrucksList.get(i).getAssignedPilot() == null || mTrucksList.get(i).getAssignedPilot().equalsIgnoreCase("null")) {
+                                drivetNotPlannedCount += 1;
+                            }else{
+                                driverPlannedCount += 1;
+                            }
+
+                        }
+
+                        mVehicleCount.setText(getActivity().getResources().getString(R.string.vehicle_count)+" "+mTrucksList.size());
+                        mDriversPlanned.setText(getActivity().getResources().getString(R.string.drivers_planned)+" "+driverPlannedCount);
+                        mDriversNotPlanned.setText(getActivity().getResources().getString(R.string.drivers_not_planned)+" "+drivetNotPlannedCount);
+
                         if(TFUtils.SORT_COLUMN_ENUM != -1){
                             Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.values()[TFUtils.SORT_COLUMN_ENUM],TFUtils.SORT_ORDER));
                             refreshSortingArrowIcon();

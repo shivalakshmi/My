@@ -17,11 +17,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.format.DateFormat;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +59,7 @@ public class TFHomeActivity extends TFCommonActivity {
     public static boolean isChangesMade;
     public static  Toolbar toolbar;
     public static boolean isHomeFragment = true;
+    public static ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,21 @@ public class TFHomeActivity extends TFCommonActivity {
             mActionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
             mActionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        mActionBar.setDisplayOptions(mActionBar.getDisplayOptions()
+                | ActionBar.DISPLAY_SHOW_CUSTOM);
+
+        imageView = new ImageView(mActionBar.getThemedContext());
+        imageView.setScaleType(ImageView.ScaleType.CENTER);
+        imageView.setImageResource(R.drawable.transparent);
+        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT, Gravity.RIGHT
+                | Gravity.CENTER_VERTICAL);
+        layoutParams.rightMargin = 40;
+        layoutParams.topMargin = 10;
+        imageView.setLayoutParams(layoutParams);
+        mActionBar.setCustomView(imageView);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mTvCurrentDateAndTime = (TextView) findViewById(R.id.tv_date_time);
@@ -305,7 +323,7 @@ public class TFHomeActivity extends TFCommonActivity {
             public void run() {
                 try {
                     Date date = new Date();
-                    CharSequence dateFormat = DateFormat.format("dd/MM/yyyy k:mm:ss", date.getTime());
+                    CharSequence dateFormat = DateFormat.format("dd MMM yyyy", date.getTime());
                     mTvCurrentDateAndTime.setText(Html.fromHtml("Hub:<b>"+TFUtils.getStringFromSP(TFHomeActivity.this, HUB_NAME)+"</b>   " + dateFormat));
 
                 } catch (Exception e) {

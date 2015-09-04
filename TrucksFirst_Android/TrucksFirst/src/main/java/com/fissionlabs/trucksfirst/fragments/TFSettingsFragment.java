@@ -32,6 +32,9 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
 
         mHomeActivity.isHomeFragment = false;
 
+        mHomeActivity.mActionBar.setDisplayShowTitleEnabled(true);
+        mHomeActivity.imageView.setVisibility(View.GONE);
+
         mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_back);
         mHomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +87,8 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
         super.onDestroyView();
         mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_menu);
         mHomeActivity.isHomeFragment = true;
+        mHomeActivity.mActionBar.setDisplayShowTitleEnabled(false);
+        mHomeActivity.imageView.setVisibility(View.VISIBLE);
     }
 
 }
