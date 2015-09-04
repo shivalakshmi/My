@@ -21,6 +21,15 @@ public class TruckDetails {
     private PilotAvailability pilotAvailability;
     private String contactNo;
     private String pilotId;
+    private String checkList;
+
+    public String getCheckList() {
+        return checkList;
+    }
+
+    public void setCheckList(String checkList) {
+        this.checkList = checkList;
+    }
 
     public String getPilotId() {
         return pilotId;

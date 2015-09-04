@@ -106,6 +106,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             holder.mVehicleNumber.setText(mDataSet.get(position).getVehicleNumber());
             holder.mVehicleRoute.setText(mDataSet.get(position).getVehicleRoute());
             holder.mClient.setText(mDataSet.get(position).getClient());
+            holder.mAssignedPilot.setTextColor(mContext.getResources().getColor(R.color.black));
             holder.mEta.setText(TFUtils.changeTime(mDataSet.get(position).getEta()));
             holder.mAssignedPilot.setText(mDataSet.get(position).getAssignedPilot());
             holder.mPilotInHub.setVisibility(View.VISIBLE);
@@ -183,9 +184,19 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putString("vehicle_number", holder.mVehicleNumber.getText().toString());
+                bundle.putString("vehicleTrackingId", mDataSet.get(position).getVehicleTrackingId());
                 mTfTruckFragment.startFragment(R.layout.fragment_check_list, bundle);
             }
         });
+
+        if(mDataSet.get(position).getCheckList()!=null) {
+            if (mDataSet.get(position).getCheckList().equals("true")) {
+                holder.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_done));
+                holder.mChecklist.setClickable(true);
+                holder.mChecklist.setEnabled(true);
+            }
+        }
+
 
     }
 

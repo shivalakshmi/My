@@ -69,6 +69,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
     private List<String> checklistNextHub_AshokLeylandReasons = new ArrayList<>();
     private String notOkReason = "";
     private Activity mActivity;
+    private String vehicleTrackingId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
         bundle = this.getArguments();
         final String vehicleNumber = bundle.getString("vehicle_number");
 
+        vehicleTrackingId = bundle.getString("vehicleTrackingId");
         mHomeActivity.isHomeFragment = false;
 
         mHomeActivity.mActionBar.setDisplayShowTitleEnabled(true);
@@ -153,6 +155,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                 String jsonObject = new Gson().toJson(mChecklistNew, ChecklistNew.class);
                 try {
                     mWebServices.updateVehicleChecklist(new JSONObject(jsonObject));
+                    mWebServices.getChecklistSave(getActivity(),true,vehicleTrackingId);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
