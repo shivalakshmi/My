@@ -39,8 +39,6 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
     private EditText mOldPassword;
     private EditText mNewPassword;
     private EditText mConfirmNewPassword;
-    private Button mSubmit;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,7 +68,6 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
         mOldPassword = (EditText) rootView.findViewById(R.id.old_password);
         mNewPassword = (EditText) rootView.findViewById(R.id.new_password);
         mConfirmNewPassword = (EditText) rootView.findViewById(R.id.confirm_new_password);
-        mSubmit = (Button) rootView.findViewById(R.id.submit);
 
         mOldPassword.addTextChangedListener(new TextWatcher() {
             @Override
@@ -127,11 +124,18 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
                 mChangePasswordLayout.setVisibility(View.VISIBLE);
             }
         });
-        mSubmit.setOnClickListener(new View.OnClickListener() {
+        rootView.findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 changePasswordSubmit();
-
+            }
+        });
+        rootView.findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mChangePasswordBtn.setVisibility(View.VISIBLE);
+                mLangSpinnerLayout.setVisibility(View.VISIBLE);
+                mChangePasswordLayout.setVisibility(View.GONE);
             }
         });
 
@@ -191,7 +195,9 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
 
 
 
-
+        mChangePasswordBtn.setVisibility(View.VISIBLE);
+        mLangSpinnerLayout.setVisibility(View.VISIBLE);
+        mChangePasswordLayout.setVisibility(View.GONE);
     }
 
     private void setLocale(String lang) {
