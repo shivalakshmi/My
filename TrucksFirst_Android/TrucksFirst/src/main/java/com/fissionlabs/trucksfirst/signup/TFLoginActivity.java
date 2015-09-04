@@ -48,6 +48,12 @@ public class TFLoginActivity extends TFCommonActivity {
                 userLoginChecking();
             }
         });
+        findViewById(R.id.btnForgotPassword).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                forgotPassword();
+            }
+        });
         mEtUserName.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -94,6 +100,10 @@ public class TFLoginActivity extends TFCommonActivity {
 
             }
         });
+    }
+
+    private void forgotPassword() {
+
     }
 
     private void userLoginChecking() {

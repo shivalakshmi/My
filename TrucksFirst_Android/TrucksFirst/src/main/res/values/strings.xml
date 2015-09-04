@@ -6,6 +6,7 @@
     <string name="password" tools:ignore="MissingTranslation">Password</string>
     <string name="error_msg" tools:ignore="MissingTranslation">This input requires a value!</string>
     <string name="login" tools:ignore="MissingTranslation">LOG IN</string>
+    <string name="forgot_password" tools:ignore="MissingTranslation">FORGOT PASSWORD</string>
     <string name="ok" tools:ignore="MissingTranslation">@android:string/ok</string>
     <string name="fetch_location" tools:ignore="MissingTranslation">Fetch Your Location</string>
     <string name="last_login" tools:ignore="MissingTranslation">Your last login: %1$s</string>

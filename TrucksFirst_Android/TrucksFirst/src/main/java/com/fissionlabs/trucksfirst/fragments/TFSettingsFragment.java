@@ -2,9 +2,11 @@ package com.fissionlabs.trucksfirst.fragments;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.support.v4.view.GravityCompat;
 import android.text.Editable;
 import android.text.Html;
@@ -24,8 +26,15 @@ import android.widget.Toast;
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
 import com.fissionlabs.trucksfirst.common.TFConst;
+import com.fissionlabs.trucksfirst.home.TFHomeActivity;
+import com.fissionlabs.trucksfirst.model.LoginResponse;
 import com.fissionlabs.trucksfirst.util.TFUtils;
+import com.fissionlabs.trucksfirst.webservices.WebServices;
+import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -192,6 +201,22 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
             return;
         }
 
+        HashMap<String, String> params = new HashMap<>();
+        params.put("userName", TFUtils.getStringFromSP(getActivity(),EMP_USER_NAME));
+        params.put("password", mConfirmNewPassword.getText().toString().trim());
+
+        TFUtils.showProgressBar(getActivity(), getString(R.string.please_wait));
+
+        new WebServices().changePassword(getActivity(), new JSONObject(params), new ResultReceiver(null) {
+            @Override
+            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                TFUtils.hideProgressBar();
+                if (resultData != null) {
+                    TFUtils.saveStringInSP(getActivity(), EMP_USER_PASSWORD, mConfirmNewPassword.getText().toString().trim());
+
+                }
+            }
+        });
 
 
 
