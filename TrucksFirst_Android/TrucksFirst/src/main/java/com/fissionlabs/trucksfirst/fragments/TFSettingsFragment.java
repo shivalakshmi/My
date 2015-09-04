@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,19 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        mHomeActivity.isHomeFragment = false;
+
+        mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_back);
+        mHomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mHomeActivity.isHomeFragment == false)
+                    mHomeActivity.onBackPressed();
+                else
+                    mHomeActivity.mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
         Spinner mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
         mSpinner.setSelection(TFUtils.getIntFromSP(getActivity(),LANG_SELECTION));
@@ -63,6 +77,13 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_menu);
+        mHomeActivity.isHomeFragment = true;
     }
 
 }

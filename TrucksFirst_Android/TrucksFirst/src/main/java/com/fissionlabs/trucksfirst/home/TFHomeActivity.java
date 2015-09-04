@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
@@ -39,7 +40,7 @@ import java.util.Date;
 
 public class TFHomeActivity extends TFCommonActivity {
 
-    private DrawerLayout mDrawerLayout;
+    public static DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
 
     private TFDashBoardFragment mTFDashBoardFragment;
@@ -52,14 +53,16 @@ public class TFHomeActivity extends TFCommonActivity {
     public ActionBar mActionBar;
     private TextView mTvCurrentDateAndTime;
     public static boolean isChangesMade;
-
+    public static  Toolbar toolbar;
+    public static boolean isHomeFragment = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         TFUtils.SORT_COLUMN_ENUM = -1;
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mActionBar = getSupportActionBar();

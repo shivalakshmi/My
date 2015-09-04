@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,20 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_sos,container,false);
+
+        mHomeActivity.isHomeFragment = false;
+
+        mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_back);
+        mHomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mHomeActivity.isHomeFragment == false)
+                    mHomeActivity.onBackPressed();
+                else
+                    mHomeActivity.mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
 //        mMail = new Mail("rivigodev@gmail.com", "fissionlabs");
         mEtVehivleNo = (AutoCompleteTextView) view.findViewById(R.id.vehicle_number_edt);
         mEtReason = (EditText) view.findViewById(R.id.reason_edt);
@@ -161,6 +176,13 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
             }
         });
         thread.start();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_menu);
+        mHomeActivity.isHomeFragment = true;
     }
 }
 

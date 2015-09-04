@@ -5,9 +5,11 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -86,6 +88,19 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
         View view = inflater.inflate(R.layout.fragment_check_list, container, false);
 
         bundle = this.getArguments();
+
+        mHomeActivity.isHomeFragment = false;
+
+        mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_back);
+        mHomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mHomeActivity.isHomeFragment == false)
+                    mHomeActivity.onBackPressed();
+                else
+                    mHomeActivity.mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
         mHomeActivity.mActionBar.setTitle(bundle.getString("vehicle_number"));
         mLVChecklist = (ListView) view.findViewById(R.id.listView);
@@ -166,7 +181,6 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
         });
         return view;
     }
-
 
     private void checklistData() {
         mDocumentStatusList.clear();
@@ -399,5 +413,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
     public void onDestroyView() {
         super.onDestroyView();
         mHomeActivity.mActionBar.setTitle(getResources().getString(R.string.app_name));
+        mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_menu);
+        mHomeActivity.isHomeFragment = true;
     }
 }
