@@ -72,6 +72,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
             android:onClick="forgot_password"
+            android:visibility="gone"
             android:text="@string/forgot_password"/>
     </LinearLayout>
 
