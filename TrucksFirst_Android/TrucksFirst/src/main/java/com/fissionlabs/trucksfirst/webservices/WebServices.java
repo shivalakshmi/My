@@ -113,7 +113,7 @@ public class WebServices implements TFConst {
                         bundle.putString("response", response);
 
                         Date date = new Date();
-                        CharSequence dateFormat = DateFormat.format("hh:mm:ss", date.getTime());
+                        CharSequence dateFormat = DateFormat.format("kk:mm ", date.getTime());
                         TFTruckFragment.mLastUpdatedTime.setText(context.getResources().getString(R.string.last_updated_time)+" "+dateFormat);
 
                         resultReceiver.send(SUCCESS, bundle);
