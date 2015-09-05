@@ -7,6 +7,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +31,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,6 +52,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
     private TextView mVehicleCount;
     public static TextView mDriversPlanned;
     public static TextView mDriversNotPlanned;
+    public static TextView mLastUpdatedTime;
     public static int driverPlannedCount = 0;
     public static int drivetNotPlannedCount = 0;
 
@@ -80,6 +83,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         mVehicleCount = (TextView)view.findViewById(R.id.vehicle_count);
         mDriversPlanned = (TextView)view.findViewById(R.id.drivers_planned);
         mDriversNotPlanned = (TextView)view.findViewById(R.id.drivers_not_planned);
+        mLastUpdatedTime = (TextView)view.findViewById(R.id.last_updated_time);
 
         mTVAssignedPilot.setOnClickListener(this);
         mTVEta.setOnClickListener(this);
@@ -118,6 +122,9 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                         mVehicleCount.setText(getActivity().getResources().getString(R.string.vehicle_count)+" "+mTrucksList.size());
                         mDriversPlanned.setText(getActivity().getResources().getString(R.string.drivers_planned)+" "+driverPlannedCount);
                         mDriversNotPlanned.setText(getActivity().getResources().getString(R.string.drivers_not_planned)+" "+drivetNotPlannedCount);
+                        Date date = new Date();
+                        CharSequence dateFormat = DateFormat.format("hh:mm:ss", date.getTime());
+                        mLastUpdatedTime.setText(getActivity().getResources().getString(R.string.last_updated_time)+" "+dateFormat);
 
                         if(TFUtils.SORT_COLUMN_ENUM != -1){
                             Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.values()[TFUtils.SORT_COLUMN_ENUM],TFUtils.SORT_ORDER));

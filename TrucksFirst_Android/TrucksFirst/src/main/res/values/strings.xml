@@ -170,7 +170,8 @@
     <string name="printing_issue_with_download">Issue with downloading file.</string>
 
     <string name="vehicle_count">Total incoming vehicles: </string>
-    <string name="drivers_planned">Drivers Planned: </string>
-    <string name="drivers_not_planned">Drivers yet to be planned: </string>
+    <string name="drivers_planned">Planned: </string>
+    <string name="drivers_not_planned">Yet to be planned: </string>
+    <string name="last_updated_time">Last updated time: </string>
 
 </resources>

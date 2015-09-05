@@ -3,6 +3,7 @@ package com.fissionlabs.trucksfirst.webservices;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,12 +17,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.TFApp;
 import com.fissionlabs.trucksfirst.common.TFConst;
+import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
 import com.fissionlabs.trucksfirst.util.LogConfig;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -108,6 +111,10 @@ public class WebServices implements TFConst {
                         }
                         Bundle bundle = new Bundle();
                         bundle.putString("response", response);
+
+                        Date date = new Date();
+                        CharSequence dateFormat = DateFormat.format("hh:mm:ss", date.getTime());
+                        TFTruckFragment.mLastUpdatedTime.setText(context.getResources().getString(R.string.last_updated_time)+" "+dateFormat);
 
                         resultReceiver.send(SUCCESS, bundle);
 

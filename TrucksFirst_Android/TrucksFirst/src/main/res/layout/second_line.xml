@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_primary"
-    android:minHeight="40dp"
-    android:weightSum="3"
+    android:minHeight="30dp"
+    android:weightSum="4"
     android:layout_marginTop="1dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
@@ -16,10 +16,11 @@
         android:id="@+id/vehicle_count"
         android:layout_width="0dp"
         android:layout_weight="1"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:text="@string/vehicle_count"
-        android:layout_gravity="left|center_vertical"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="center"
+        android:textSize="17sp"
         android:textColor="@android:color/white" />
 
     <TextView
@@ -28,18 +29,31 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:text="@string/drivers_planned"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="17sp"
         android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/drivers_not_planned"
         android:layout_width="0dp"
         android:layout_weight="1"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
-        android:layout_gravity="right|center_vertical"
+        android:gravity="center"
         android:text="@string/drivers_not_planned"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="17sp"
+        android:textColor="@android:color/white"  />
+
+    <TextView
+        android:id="@+id/last_updated_time"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:text="@string/last_updated_time"
+        android:gravity="center"
+        android:textSize="17sp"
         android:textColor="@android:color/white" />
 
 </LinearLayout>

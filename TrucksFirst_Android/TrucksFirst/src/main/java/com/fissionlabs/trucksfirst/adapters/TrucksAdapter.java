@@ -368,8 +368,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             listItemsPilot.add(pilotAvailabilityList.get(i));
                         }
                     }
-                    if(listItems.size() == 0){
-                        Toast.makeText(mContext,mContext.getResources().getString(R.string.no_pilots_available),Toast.LENGTH_SHORT).show();
+                    if (listItems.size() == 0) {
+                        Toast.makeText(mContext, mContext.getResources().getString(R.string.no_pilots_available), Toast.LENGTH_SHORT).show();
                         TFUtils.hideProgressBar();
                         return;
                     }
@@ -393,13 +393,13 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     alertDialog.show();
                     final ListView availablePilots = (ListView) view.findViewById(R.id.pilot_availability);
 
-                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_single_choice, sortedListItems){
+                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_single_choice, sortedListItems) {
                         @Override
                         public View getView(int position, View convertView, ViewGroup parent) {
                             TextView textView = (TextView) super.getView(position, convertView, parent);
-                            if(sortedListItemsPilot.get(position).getPilotParentHub().equalsIgnoreCase(TFUtils.getStringFromSP(mContext,TFConst.HUB_NAME))){
+                            if (sortedListItemsPilot.get(position).getPilotParentHub().equalsIgnoreCase(TFUtils.getStringFromSP(mContext, TFConst.HUB_NAME))) {
                                 textView.setTextColor(Color.parseColor("#006700"));
-                            }else{
+                            } else {
                                 textView.setTextColor(Color.parseColor("#000000"));
                             }
                             return textView;
@@ -428,37 +428,22 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     availablePilots.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                            if (position == 0) {
-                                pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
-                                pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
-                                pilot.setPilotLastName(pilotAvailabilityList.get(position).getPilotLastName());
-                                pilot.setNextAvailabilityTime(pilotAvailabilityList.get(position).getNextAvailabilityTime());
-                                pilot.setAvailabilityStatus(pilotAvailabilityList.get(position).getAvailabilityStatus());
-                                pilot.setContactNumber(pilotAvailabilityList.get(position).getContactNumber());
-                                pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
-                            } else {
-                                View view2 = LayoutInflater.from(mContext).inflate(R.layout.wrong_pilot_assignment, null, false);
+//                            if (position == 0) {
+                            pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
+                            pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
+                            pilot.setPilotLastName(pilotAvailabilityList.get(position).getPilotLastName());
+                            pilot.setNextAvailabilityTime(pilotAvailabilityList.get(position).getNextAvailabilityTime());
+                            pilot.setAvailabilityStatus(pilotAvailabilityList.get(position).getAvailabilityStatus());
+                            pilot.setContactNumber(pilotAvailabilityList.get(position).getContactNumber());
+                            pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
+//                            } else {
+                               /* View view2 = LayoutInflater.from(mContext).inflate(R.layout.wrong_pilot_assignment, null, false);
                                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
                                 dialogBuilder.setView(view2);
                                 TextView pilotName = (TextView) view2.findViewById(R.id.pilot_name);
                                 final EditText etReason = (EditText) view2.findViewById(R.id.reason_edt);
                                 final Spinner spinner = (Spinner) view2.findViewById(R.id.spinner);
 
-                               /* spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                        if (position == 4) {
-                                            etReason.setVisibility(View.VISIBLE);
-                                        } else {
-                                            etReason.setVisibility(View.GONE);
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> parent) {
-
-                                    }
-                                });*/
                                 etReason.setHint(mContext.getResources().getString(R.string.pilot_selection_warning, "" + pilotAvailabilityList.get(0).getPilotFirstName()));
                                 pilotName.setText(pilotAvailabilityList.get(0).getPilotFirstName());
                                 dialogBuilder.setTitle(Html.fromHtml("<b>" + mContext.getString(R.string.warning) + "</b>"));
@@ -511,7 +496,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                         }
                                     }
                                 });
-                            }
+                            }*/
                         }
                     });
                     alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -528,7 +513,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                 mDataSet.get(trucksPosition).setContactNo(pilot.getContactNumber());
                                 mDataSet.get(trucksPosition).setPilotId(pilot.getPilotId());
                                 mDataSet.get(trucksPosition).setPilotAvailability(pilot);
-                                new WebServices().getChangePilot(mContext, obj, flag, existingPilotId,new ResultReceiver(null) {
+                                new WebServices().getChangePilot(mContext, obj, flag, existingPilotId, new ResultReceiver(null) {
                                     @Override
                                     protected void onReceiveResult(int resultCode, Bundle resultData) {
                                         super.onReceiveResult(resultCode, resultData);
@@ -536,8 +521,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                             notifyItemChanged(trucksPosition);
                                             TFTruckFragment.driverPlannedCount += 1;
                                             TFTruckFragment.drivetNotPlannedCount -= 1;
-                                            TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned)+" "+TFTruckFragment.driverPlannedCount);
-                                            TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned)+" "+TFTruckFragment.drivetNotPlannedCount);
+                                            TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned) + " " + TFTruckFragment.driverPlannedCount);
+                                            TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned) + " " + TFTruckFragment.drivetNotPlannedCount);
                                         } else {
                                             Toast.makeText(mContext, mContext.getResources().getString(R.string.problem_assign_pilot), Toast.LENGTH_SHORT).show();
                                         }
@@ -563,7 +548,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                new WebServices().getPilotRelease(mContext, mDataSet.get(position).getCurrentHub(), mDataSet.get(position).getPilotId(),mDataSet.get(position).getVehicleTrackingId(), new ResultReceiver(null) {
+                new WebServices().getPilotRelease(mContext, mDataSet.get(position).getCurrentHub(), mDataSet.get(position).getPilotId(), mDataSet.get(position).getVehicleTrackingId(), new ResultReceiver(null) {
                     @Override
                     protected void onReceiveResult(int resultCode, Bundle resultData) {
                         super.onReceiveResult(resultCode, resultData);
@@ -572,8 +557,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                             notifyItemChanged(position);
                             TFTruckFragment.driverPlannedCount -= 1;
                             TFTruckFragment.drivetNotPlannedCount += 1;
-                            TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned)+" "+TFTruckFragment.driverPlannedCount);
-                            TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned)+" "+TFTruckFragment.drivetNotPlannedCount);
+                            TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned) + " " + TFTruckFragment.driverPlannedCount);
+                            TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned) + " " + TFTruckFragment.drivetNotPlannedCount);
                         } else {
                             Toast.makeText(mContext, mContext.getResources().getString(R.string.error_releasing_pilot), Toast.LENGTH_SHORT).show();
                         }

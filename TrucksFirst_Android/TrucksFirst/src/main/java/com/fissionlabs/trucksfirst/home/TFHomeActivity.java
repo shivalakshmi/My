@@ -89,7 +89,6 @@ public class TFHomeActivity extends TFCommonActivity {
                 ActionBar.LayoutParams.WRAP_CONTENT, Gravity.RIGHT
                 | Gravity.CENTER_VERTICAL);
         layoutParams.rightMargin = 40;
-        layoutParams.topMargin = 10;
         imageView.setLayoutParams(layoutParams);
         mActionBar.setCustomView(imageView);
 
@@ -331,7 +330,7 @@ public class TFHomeActivity extends TFCommonActivity {
                 try {
                     Date date = new Date();
                     CharSequence dateFormat = DateFormat.format("dd MMM yyyy", date.getTime());
-                    mTvCurrentDateAndTime.setText(Html.fromHtml("Hub:<b>"+TFUtils.getStringFromSP(TFHomeActivity.this, HUB_NAME)+"</b>   " + dateFormat));
+                    mTvCurrentDateAndTime.setText(Html.fromHtml("<b>"+TFUtils.getStringFromSP(TFHomeActivity.this, HUB_NAME)+"</b>   " + dateFormat));
 
                 } catch (Exception e) {
                     e.printStackTrace();
