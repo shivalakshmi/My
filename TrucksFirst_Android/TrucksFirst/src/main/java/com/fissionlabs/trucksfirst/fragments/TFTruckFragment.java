@@ -100,6 +100,9 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
             public void onRefresh() {
                 // Refresh items
 
+                driverPlannedCount = 0;
+                drivetNotPlannedCount = 0;
+
                 WebServices mWebServices = new WebServices();
                 mWebServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
                     @Override
@@ -186,7 +189,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                         mDriversPlanned.setText(getActivity().getResources().getString(R.string.drivers_planned)+" "+driverPlannedCount);
                         mDriversNotPlanned.setText(getActivity().getResources().getString(R.string.drivers_not_planned)+" "+drivetNotPlannedCount);
                         Date date = new Date();
-                        CharSequence dateFormat = DateFormat.format("hh:mm:ss", date.getTime());
+                        CharSequence dateFormat = DateFormat.format("kk:mm", date.getTime());
                         mLastUpdatedTime.setText(getActivity().getResources().getString(R.string.last_updated_time)+" "+dateFormat);
 
                         if(TFUtils.SORT_COLUMN_ENUM != -1){

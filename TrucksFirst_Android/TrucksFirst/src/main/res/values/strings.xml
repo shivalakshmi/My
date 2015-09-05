@@ -169,9 +169,9 @@
     <string name="printing_file_not_found">Document not found in server, Please check with concern team.</string>
     <string name="printing_issue_with_download">Issue with downloading file.</string>
 
-    <string name="vehicle_count">Total incoming vehicles: </string>
-    <string name="drivers_planned">Planned: </string>
-    <string name="drivers_not_planned">Yet to be planned: </string>
-    <string name="last_updated_time">Last updated : </string>
+    <string name="vehicle_count">Incoming Vehicles: </string>
+    <string name="drivers_planned">Drivers Planned: </string>
+    <string name="drivers_not_planned">Drivers to be Planned: </string>
+    <string name="last_updated_time">Last Updated : </string>
 
 </resources>
