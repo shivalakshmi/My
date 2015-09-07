@@ -212,7 +212,7 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
                     Toast.makeText(getActivity(),"Password Changed Successfully!!",Toast.LENGTH_SHORT).show();
 
                     if (resultData != null) {
-
+                        TFUtils.saveStringInSP(getActivity(), EMP_USER_PASSWORD, mConfirmNewPassword.getText().toString().trim());
                         mChangePasswordBtn.setVisibility(View.VISIBLE);
                         mLangSpinnerLayout.setVisibility(View.VISIBLE);
                         mChangePasswordLayout.setVisibility(View.GONE);

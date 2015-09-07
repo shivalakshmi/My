@@ -6,7 +6,7 @@
     <string name="password" tools:ignore="MissingTranslation">Password</string>
     <string name="error_msg" tools:ignore="MissingTranslation">This input requires a value!</string>
     <string name="login" tools:ignore="MissingTranslation">LOG IN</string>
-    <string name="forgot_password" tools:ignore="MissingTranslation">FORGOT PASSWORD</string>
+    <string name="forgot_password" tools:ignore="MissingTranslation"><u>FORGOT PASSWORD?</u></string>
     <string name="ok" tools:ignore="MissingTranslation">@android:string/ok</string>
     <string name="fetch_location" tools:ignore="MissingTranslation">Fetch Your Location</string>
     <string name="last_login" tools:ignore="MissingTranslation">Your last login: %1$s</string>
@@ -174,5 +174,9 @@
     <string name="drivers_not_planned">Drivers to be Planned: </string>
     <string name="last_updated_time">Last Updated : </string>
     <string name="printing_issue_with_download2">File downloaded. Can\'t print, please install HP ePrint.</string>
+    <string name="contact_no_ten_digits">contact number should be 10 digits.</string>
+    <string name="password_repassword_not_matched">new password and re-entered password is not matched.</string>
+    <string name="password_changed_sucess">Password Changed Successfully!!</string>
+    <string name="worng_user_info_found">Wrong user information found, Please try again!!</string>
 
 </resources>

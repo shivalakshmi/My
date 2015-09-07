@@ -2,11 +2,13 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="center_horizontal"
                 tools:context="com.fissionlabs.trucksfirst.signup.TFLoginActivity">
 
     <LinearLayout
-        android:id="@+id/userLogin"
+        android:id="@+id/userLoginLayout"
         android:layout_width="500dp"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_margin="20dp"
@@ -65,15 +67,116 @@
             android:onClick="userLoginChecking"
             android:text="@string/login"/>
 
-        <Button
-            android:id="@+id/btnForgotPassword"
-            style="@style/ButtonStyle"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="10dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="20dp"
             android:onClick="forgot_password"
-            android:visibility="gone"
+            android:textColor="@android:color/holo_blue_bright"
+            android:visibility="visible"
             android:text="@string/forgot_password"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/forgotPasswordLayout"
+        android:layout_width="500dp"
+        android:visibility="visible"
+        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/user_name_forgot"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="5dp"
+            android:background="@drawable/edittext_selector"
+            android:hint="Enter user name"
+            android:imeOptions="actionNext"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/contact_no"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:maxLength="10"
+            android:drawablePadding="5dp"
+            android:background="@drawable/edittext_selector"
+            android:hint="Enter 10 digits contact number"
+            android:imeOptions="actionNext"
+            android:paddingLeft="10dp"
+            android:inputType="number"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/new_password"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:drawablePadding="5dp"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext_selector"
+            android:hint="Enter new password"
+            android:imeOptions="actionNext"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"/>
+        <EditText
+            android:id="@+id/confirm_new_password"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:drawablePadding="5dp"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword"
+            android:background="@drawable/edittext_selector"
+            android:hint="Re-Enter new password"
+            android:imeOptions="actionDone"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textColor="@color/black"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:weightSum="2"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/back"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                style="@style/ButtonStyle"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="5dp"/>
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                style="@style/ButtonStyle"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="25dp"/>
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
