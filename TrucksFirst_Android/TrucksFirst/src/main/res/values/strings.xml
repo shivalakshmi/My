@@ -23,7 +23,7 @@
     <string name="checklist" tools:ignore="MissingTranslation">Checklist</string>
     <string name="driving_licence" tools:ignore="MissingTranslation">Driving Licence</string>
     <string name="uniform" tools:ignore="MissingTranslation">Uniform</string>
-    <string name="non_alcoholic" tools:ignore="MissingTranslation">Non Alcoholic</string>
+    <string name="non_alcoholic" tools:ignore="MissingTranslation">Not Sober</string>
     <string name="current_date_and_time">Date and Time:</string>
 
     <!-- Pilot details screen -->
