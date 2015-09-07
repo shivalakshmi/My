@@ -176,6 +176,7 @@ public class CheckListAdapter extends BaseAdapter {
                         }
                         download_file_path = TFConst.URL_PRINT_DOCUMENT+temp+".pdf";
                         dialog = ProgressDialog.show(context, "", "Downloading file...", true);
+                        dest_file_path = "/sdcard/"+temp.split("/")[1]+".pdf";
                         new Thread(new Runnable() {
                             public void run() {
                                 downloadFile(download_file_path, dest_file_path);
@@ -391,7 +392,7 @@ public class CheckListAdapter extends BaseAdapter {
             fos.flush();
             fos.close();
             hideProgressIndicator();
-            final Uri printFileUri = Uri.parse("file:///sdcard/dwnloaded_file2.pdf");
+            final Uri printFileUri = Uri.parse("file://"+dest_file_path);
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setPackage("com.hp.android.print");
             i.setDataAndType(printFileUri, "text/plain");
@@ -423,7 +424,7 @@ public class CheckListAdapter extends BaseAdapter {
             context.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(context, context.getResources().getString(R.string.printing_issue_with_download), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getResources().getString(R.string.printing_issue_with_download2), Toast.LENGTH_SHORT).show();
                 }
             });
             return;

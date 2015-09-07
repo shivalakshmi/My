@@ -173,5 +173,6 @@
     <string name="drivers_planned">Drivers Planned: </string>
     <string name="drivers_not_planned">Drivers to be Planned: </string>
     <string name="last_updated_time">Last Updated : </string>
+    <string name="printing_issue_with_download2">File downloaded. Can\'t print, please install HP ePrint.</string>
 
 </resources>
