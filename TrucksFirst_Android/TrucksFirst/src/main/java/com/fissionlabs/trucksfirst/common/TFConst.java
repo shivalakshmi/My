@@ -36,6 +36,7 @@ public interface TFConst {
 
     int SUCCESS = 200;
     int ERROR = 100;
+    int REFRESH_DASHBOARD_INTERVAL = 5*60*1000;
 
     String SHARED_PREFERENCES_NAME = "RIVIGO";
     String LANG_SELECTION = "lang_selection";

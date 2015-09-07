@@ -34,6 +34,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,11 +59,18 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
     public static int driverPlannedCount = 0;
     public static int drivetNotPlannedCount = 0;
     private SwipeRefreshLayout swipeRefreshLayout;
+    Timer timer = new Timer();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
     }
 
     @Override
@@ -103,61 +112,15 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                 driverPlannedCount = 0;
                 drivetNotPlannedCount = 0;
 
-                WebServices mWebServices = new WebServices();
-                mWebServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
-                    @Override
-                    protected void onReceiveResult(int resultCode, Bundle resultData) {
-                        if (resultCode == SUCCESS) {
-
-                            String responseStr = resultData.getString("response");
-
-                            if (responseStr != null) {
-                                String temp[] = responseStr.split("\\[");
-                                if (temp.length > 1)
-                                    responseStr = "[" + temp[1];
-
-                                Type listType = new TypeToken<ArrayList<TruckDetails>>() {
-                                }.getType();
-                                mTrucksList = new Gson().fromJson(responseStr, listType);
-                                mAdapter = new TrucksAdapter(getActivity(), mTFragment, mTrucksList);
-                                for (int i = 0; i < mTrucksList.size(); i++) {
-                                    if (mTrucksList.get(i).getAssignedPilot() == null || mTrucksList.get(i).getAssignedPilot().equalsIgnoreCase("null")) {
-                                        drivetNotPlannedCount += 1;
-                                    } else {
-                                        driverPlannedCount += 1;
-                                    }
-
-                                }
-
-                                mVehicleCount.setText(getActivity().getResources().getString(R.string.vehicle_count) + " " + mTrucksList.size());
-                                mDriversPlanned.setText(getActivity().getResources().getString(R.string.drivers_planned) + " " + driverPlannedCount);
-                                mDriversNotPlanned.setText(getActivity().getResources().getString(R.string.drivers_not_planned) + " " + drivetNotPlannedCount);
-                                Date date = new Date();
-                                CharSequence dateFormat = DateFormat.format("kk:mm", date.getTime());
-                                mLastUpdatedTime.setText(getActivity().getResources().getString(R.string.last_updated_time) + " " + dateFormat);
-
-                                if (TFUtils.SORT_COLUMN_ENUM != -1) {
-                                    Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.values()[TFUtils.SORT_COLUMN_ENUM], TFUtils.SORT_ORDER));
-                                    refreshSortingArrowIcon();
-                                } else {
-                                    TFUtils.SORT_COLUMN_ENUM = 3;
-                                    TFUtils.SORT_ORDER = 0;
-                                    Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.ETA, TFUtils.SORT_ORDER));
-                                    refreshSortingArrowIcon();
-                                }
-                                mTruckDetailsListView.setAdapter(mAdapter);
-                            }
-                        } else {
-                            Toast.makeText(getActivity(), "" + getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
-                        }
-                        TFUtils.hideProgressBar();
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                });
+                refreshDashBoardData(true);
             }
         });
+        timer.schedule(new RepeatEveryFiveMins(), 0, REFRESH_DASHBOARD_INTERVAL);
+        refreshDashBoardData(false);
+        return view;
+    }
 
-
+    private void refreshDashBoardData(final boolean flag){
         WebServices mWebServices = new WebServices();
         mWebServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
             @Override
@@ -175,30 +138,29 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                         }.getType();
                         mTrucksList = new Gson().fromJson(responseStr, listType);
                         mAdapter = new TrucksAdapter(getActivity(), mTFragment, mTrucksList);
-                        for(int i=0; i<mTrucksList.size(); i++)
-                        {
+                        for (int i = 0; i < mTrucksList.size(); i++) {
                             if (mTrucksList.get(i).getAssignedPilot() == null || mTrucksList.get(i).getAssignedPilot().equalsIgnoreCase("null")) {
                                 drivetNotPlannedCount += 1;
-                            }else{
+                            } else {
                                 driverPlannedCount += 1;
                             }
 
                         }
 
-                        mVehicleCount.setText(getActivity().getResources().getString(R.string.vehicle_count)+" "+mTrucksList.size());
-                        mDriversPlanned.setText(getActivity().getResources().getString(R.string.drivers_planned)+" "+driverPlannedCount);
-                        mDriversNotPlanned.setText(getActivity().getResources().getString(R.string.drivers_not_planned)+" "+drivetNotPlannedCount);
+                        mVehicleCount.setText(getActivity().getResources().getString(R.string.vehicle_count) + " " + mTrucksList.size());
+                        mDriversPlanned.setText(getActivity().getResources().getString(R.string.drivers_planned) + " " + driverPlannedCount);
+                        mDriversNotPlanned.setText(getActivity().getResources().getString(R.string.drivers_not_planned) + " " + drivetNotPlannedCount);
                         Date date = new Date();
                         CharSequence dateFormat = DateFormat.format("kk:mm", date.getTime());
-                        mLastUpdatedTime.setText(getActivity().getResources().getString(R.string.last_updated_time)+" "+dateFormat);
+                        mLastUpdatedTime.setText(getActivity().getResources().getString(R.string.last_updated_time) + " " + dateFormat);
 
-                        if(TFUtils.SORT_COLUMN_ENUM != -1){
-                            Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.values()[TFUtils.SORT_COLUMN_ENUM],TFUtils.SORT_ORDER));
+                        if (TFUtils.SORT_COLUMN_ENUM != -1) {
+                            Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.values()[TFUtils.SORT_COLUMN_ENUM], TFUtils.SORT_ORDER));
                             refreshSortingArrowIcon();
                         } else {
                             TFUtils.SORT_COLUMN_ENUM = 3;
                             TFUtils.SORT_ORDER = 0;
-                            Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.ETA,TFUtils.SORT_ORDER));
+                            Collections.sort(mAdapter.getUpdatedList(), new CustomComparator(Sort.ETA, TFUtils.SORT_ORDER));
                             refreshSortingArrowIcon();
                         }
                         mTruckDetailsListView.setAdapter(mAdapter);
@@ -207,10 +169,11 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                     Toast.makeText(getActivity(), "" + getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
                 }
                 TFUtils.hideProgressBar();
+                if(flag)
+                    swipeRefreshLayout.setRefreshing(false);
             }
         });
 
-        return view;
     }
 
     private void refreshSortingArrowIcon() {
@@ -427,4 +390,12 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         }
         return filteredModelList;
     }
+
+    class RepeatEveryFiveMins extends TimerTask {
+        public void run() {
+            refreshDashBoardData(false);
+        }
+    }
+
 }
+
