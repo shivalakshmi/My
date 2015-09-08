@@ -117,6 +117,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
         mHandler = new Handler(){
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
+                if(msg.getData().getString("what") != null)
                 Toast.makeText(context, "" + msg.getData().getString("what"), Toast.LENGTH_LONG).show();
             }
         };
@@ -128,7 +129,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
                         .appendQueryParameter("user", "success")
                         .appendQueryParameter("pass", "654321")
                         .appendQueryParameter("sender", "BSHSMS")
-                        .appendQueryParameter("phone", "9849729570")
+                        .appendQueryParameter("phone", "9899222062")
                         .appendQueryParameter("text", reason)
                         .appendQueryParameter("priority", "ndnd")
                         .appendQueryParameter("stype", "normal")
@@ -164,9 +165,9 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
 //					m.addAttachment("/sdcard/myPicture.jpg");  // path to file you want to attach
                     if(mMail.send()) {
                         b.putString("what",context.getResources().getString(R.string.sos_email_success));
-                    } else {
+                    }/* else {
                         b.putString("what",context.getResources().getString(R.string.sos_email_failure));
-                    }
+                    }*/
                 } catch(Exception e) {
                     e.printStackTrace();
                     b.putString("what",context.getResources().getString(R.string.sos_email_failure_problem));
@@ -179,6 +180,54 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
         });
         thread.start();
     }
+
+    public static void sendSMS(final Context context,final String reason,final String contactNumber){
+        TFUtils.showProgressBar(context, context.getResources().getString(R.string.please_wait));
+
+        mHandler = new Handler(){
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                Toast.makeText(context, "" + msg.getData().getString("what"), Toast.LENGTH_LONG).show();
+            }
+        };
+
+        Thread thread = new Thread(new Runnable() {
+
+            public void run() {
+                String sms = Uri.parse(URL_SMS).buildUpon()
+                        .appendQueryParameter("user", "success")
+                        .appendQueryParameter("pass", "654321")
+                        .appendQueryParameter("sender", "BSHSMS")
+                        .appendQueryParameter("phone", "9849729570")
+                        .appendQueryParameter("text", reason)
+                        .appendQueryParameter("priority", "ndnd")
+                        .appendQueryParameter("stype", "normal")
+                        .build().toString();
+
+                try {
+                    HttpClient httpclient = new DefaultHttpClient();
+                    HttpResponse response = httpclient.execute(new HttpGet(sms));
+                    StatusLine statusLine = response.getStatusLine();
+                    if (statusLine.getStatusCode() == HttpStatus.SC_OK) {
+                        ByteArrayOutputStream out = new ByteArrayOutputStream();
+                        response.getEntity().writeTo(out);
+                        String responseString = out.toString();
+                        out.close();
+                    } else {
+                        //Closes the connection.
+                        response.getEntity().getContent().close();
+                        throw new IOException(statusLine.getReasonPhrase());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                TFUtils.hideProgressBar();
+            }
+        });
+        thread.start();
+    }
+
 
     @Override
     public void onDestroyView() {

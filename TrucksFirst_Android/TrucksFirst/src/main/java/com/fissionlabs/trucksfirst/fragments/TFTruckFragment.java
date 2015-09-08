@@ -121,12 +121,14 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
     }
 
     private void refreshDashBoardData(final boolean flag){
+
         WebServices mWebServices = new WebServices();
         mWebServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
                 if (resultCode == SUCCESS) {
-
+                    driverPlannedCount = 0;
+                    drivetNotPlannedCount = 0;
                     String responseStr = resultData.getString("response");
 
                     if (responseStr != null) {
@@ -137,7 +139,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                         Type listType = new TypeToken<ArrayList<TruckDetails>>() {
                         }.getType();
                         mTrucksList = new Gson().fromJson(responseStr, listType);
-                        mAdapter = new TrucksAdapter(getActivity(), mTFragment, mTrucksList);
+                        mAdapter = new TrucksAdapter(getActivity(),getActivity(), mTFragment, mTrucksList);
                         for (int i = 0; i < mTrucksList.size(); i++) {
                             if (mTrucksList.get(i).getAssignedPilot() == null || mTrucksList.get(i).getAssignedPilot().equalsIgnoreCase("null")) {
                                 drivetNotPlannedCount += 1;

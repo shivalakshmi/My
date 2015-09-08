@@ -1,5 +1,6 @@
 package com.fissionlabs.trucksfirst.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFConst;
+import com.fissionlabs.trucksfirst.fragments.TFSOSFragment;
 import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
 import com.fissionlabs.trucksfirst.model.PilotAvailability;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
@@ -43,6 +45,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -52,14 +55,16 @@ import java.util.List;
 public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder> {
 
     private Context mContext;
+    private Activity mActivity;
     private ArrayList<TruckDetails> mDataSet;
     private TFTruckFragment mTfTruckFragment;
     private DriverChecklist mDriverChecklist;
     private WebServices mWebServices = new WebServices();
     private String spinnerText = "";
 
-    public TrucksAdapter(Context context, TFTruckFragment tfTruckFragment, ArrayList<TruckDetails> dataSet) {
+    public TrucksAdapter(Context context, Activity activity,TFTruckFragment tfTruckFragment, ArrayList<TruckDetails> dataSet) {
         mContext = context;
+        mActivity = activity;
         mTfTruckFragment = tfTruckFragment;
         mDataSet = dataSet;
     }
@@ -518,6 +523,17 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                     protected void onReceiveResult(int resultCode, Bundle resultData) {
                                         super.onReceiveResult(resultCode, resultData);
                                         if (resultCode == TFConst.SUCCESS) {
+
+                                            String dateTime[] =TFUtils.changeTime(mDataSet.get(trucksPosition).getEta()).split("\\s+");
+
+                                            String reason = "Vehicle No: "+ mDataSet.get(trucksPosition).getVehicleNumber()+
+                                                    " Date of Duty: "+dateTime[0]+
+                                                    " Time of Duty: "+dateTime[1]+
+                                                    " Source: "+TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME)+
+                                                    " Destination: "+mDataSet.get(trucksPosition).getNextHub();
+
+
+                                            TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(trucksPosition).getContactNo());
                                             notifyItemChanged(trucksPosition);
                                             TFTruckFragment.driverPlannedCount += 1;
                                             TFTruckFragment.drivetNotPlannedCount -= 1;

@@ -142,6 +142,14 @@ public class TFLoginActivity extends TFCommonActivity {
             public void onClick(View v) {
                 mUserLoginLayout.setVisibility(View.VISIBLE);
                 mUserForgotPasswordLayout.setVisibility(View.GONE);
+                usernameForgot.setText("");
+                contactNo.setText("");
+                newPassword.setText("");
+                newConfirmPassword.setText("");
+                usernameForgot.setError(null);
+                contactNo.setError(null);
+                newPassword.setError(null);
+                newConfirmPassword.setError(null);
             }
         });
         findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
@@ -234,6 +242,10 @@ public class TFLoginActivity extends TFCommonActivity {
                 if (resultData != null) {
                     String responseStr = resultData.getString("response");
                     Toast.makeText(TFLoginActivity.this, getResources().getString(R.string.password_changed_sucess), Toast.LENGTH_SHORT).show();
+                    usernameForgot.setText("");
+                    contactNo.setText("");
+                    newPassword.setText("");
+                    newConfirmPassword.setText("");
                     mUserLoginLayout.setVisibility(View.VISIBLE);
                     mUserForgotPasswordLayout.setVisibility(View.GONE);
                     mEtUserName.setText(" ");
