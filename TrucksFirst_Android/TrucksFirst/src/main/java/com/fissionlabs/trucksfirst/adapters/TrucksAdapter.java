@@ -98,8 +98,10 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             holder.mVehicleRoute.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
             holder.mClient.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
             holder.mEta.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
-            holder.mAssignedPilot.setText("Assign Pilot");
-            holder.mAssignedPilot.setTextColor(mContext.getResources().getColor(R.color.color_primary_light));
+            if (TFTruckFragment.isOutbound(mDataSet.get(position))) {
+                holder.mAssignedPilot.setText("Assign Pilot");
+                holder.mAssignedPilot.setTextColor(mContext.getResources().getColor(R.color.color_primary_light));
+            } else holder.mAssignedPilot.setVisibility(View.GONE);
             holder.mPilotInHub.setVisibility(View.GONE);
             holder.mVehicleInHub.setVisibility(View.GONE);
             holder.mChecklist.setVisibility(View.GONE);
