@@ -104,9 +104,11 @@ public class TFUpgradeFragment extends TFCommonFragment {
 
             } catch (FileNotFoundException ee) {
                 Log.e("File", "FileNotFoundException! " + ee);
+                ee.printStackTrace();
                 return false;
             } catch (Exception e) {
                 Log.e("UpdateAPP", "Exception " + e);
+                e.printStackTrace();
                 return false;
             }
             return true;
@@ -115,8 +117,8 @@ public class TFUpgradeFragment extends TFCommonFragment {
         @Override
         protected void onPostExecute(Boolean flag) {
             super.onPostExecute(flag);
+            TFUtils.hideProgressBar();
             if(flag) {
-                TFUtils.hideProgressBar();
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/download/" + "app.apk")), "application/vnd.android.package-archive");
                 startActivity(intent);
