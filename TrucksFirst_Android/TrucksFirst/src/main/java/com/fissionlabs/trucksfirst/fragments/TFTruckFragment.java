@@ -141,12 +141,13 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                         mTrucksList = new Gson().fromJson(responseStr, listType);
                         mAdapter = new TrucksAdapter(getActivity(),getActivity(), mTFragment, mTrucksList);
                         for (int i = 0; i < mTrucksList.size(); i++) {
-                            if (mTrucksList.get(i).getAssignedPilot() == null || mTrucksList.get(i).getAssignedPilot().equalsIgnoreCase("null")) {
-                                drivetNotPlannedCount += 1;
-                            } else {
-                                driverPlannedCount += 1;
+                            if (isOutbound(mTrucksList.get(i))){
+                                if (mTrucksList.get(i).getAssignedPilot() == null || mTrucksList.get(i).getAssignedPilot().equalsIgnoreCase("null")) {
+                                    drivetNotPlannedCount += 1;
+                                } else {
+                                    driverPlannedCount += 1;
+                                }
                             }
-
                         }
 
                         mVehicleCount.setText(getActivity().getResources().getString(R.string.vehicle_count) + " " + mTrucksList.size());
@@ -397,6 +398,12 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         public void run() {
             refreshDashBoardData(false);
         }
+    }
+
+    static public boolean isOutbound(TruckDetails td) {
+        String next = td.getNextHub();
+        if (next == null || next.equalsIgnoreCase("null") || next.equals("")) return false;
+        else return true;
     }
 
 }
