@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
@@ -120,6 +121,7 @@ public class TFUpgradeFragment extends TFCommonFragment {
                 intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/download/" + "app.apk")), "application/vnd.android.package-archive");
                 startActivity(intent);
             } else {
+                Toast.makeText(mActivity,getString(R.string.no_updates_found),Toast.LENGTH_LONG).show();
 
             }
         }

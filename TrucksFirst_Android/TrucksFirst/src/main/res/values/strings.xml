@@ -181,5 +181,6 @@
     <string name="password_repassword_not_matched">new password and re-entered password is not matched.</string>
     <string name="password_changed_sucess">Password Changed Successfully!!</string>
     <string name="worng_user_info_found">Wrong user information found, Please try again!!</string>
+    <string name="no_updates_found">No updates found.</string>
 
 </resources>
