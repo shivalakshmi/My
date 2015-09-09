@@ -40,6 +40,7 @@
     <string name="dashboard" tools:ignore="MissingTranslation">Dashboard</string>
     <string name="settings" tools:ignore="MissingTranslation">Settings</string>
     <string name="sos" tools:ignore="MissingTranslation">SOS</string>
+    <string name="upgrade" tools:ignore="MissingTranslation">Updates</string>
     <string name="logout" tools:ignore="MissingTranslation">Log out</string>
     <string name="are_you_sure" tools:ignore="MissingTranslation">Are you sure you want to log out?</string>
     <string name="discard_changes" tools:ignore="MissingTranslation">Are you sure you want to discard changes?</string>
@@ -140,6 +141,7 @@
     <string name="non_technical" tools:ignore="MissingTranslation">Non-Technical</string>
     <string name="reason">Reason :</string>
     <string name="send">Send</string>
+    <string name="check_updates">Check for updates</string>
 
     <string name="sos_vehicle_no">Please enter VehicleNo.</string>
     <string name="sos_reason">Enter enter Reason.</string>
@@ -168,6 +170,7 @@
 
     <string name="printing_file_not_found">Document not found in server, Please check with concern team.</string>
     <string name="printing_issue_with_download">Issue with downloading file.</string>
+    <string name="downloading_wait">Downloading, please wait...</string>
 
     <string name="vehicle_count">Incoming Vehicles: </string>
     <string name="drivers_planned">Drivers Planned: </string>
