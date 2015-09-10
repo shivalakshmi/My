@@ -368,7 +368,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     if (pilotAvailabilityList != null) {
                         for (int i = 0; i < pilotAvailabilityList.size(); i++) {
                             // NextAvailabilityTime <= ETA-1hour
-                            if (Long.parseLong(pilotAvailabilityList.get(i).getNextAvailabilityTime()) <= (Long.parseLong(obj.getEta()) - 3600000)) {
+                            if (i<4 && Long.parseLong(pilotAvailabilityList.get(i).getNextAvailabilityTime()) <= (Long.parseLong(obj.getEta()) - 3600000)) {
                                 sortedListItems.add(pilotAvailabilityList.get(i).getPilotFirstName() + "/" + pilotAvailabilityList.get(i).getPilotParentHub() + "\t\t" + TFUtils.changeTime(pilotAvailabilityList.get(i).getNextAvailabilityTime()));
                                 sortedListItemsPilot.add(pilotAvailabilityList.get(i));
                             }
