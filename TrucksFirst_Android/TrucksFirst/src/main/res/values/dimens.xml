@@ -4,6 +4,7 @@
     <dimen name="common_padding_smal09">1dp</dimen>
     <dimen name="common_padding_small0">2dp</dimen>
     <dimen name="common_padding_small1">5dp</dimen>
+    <dimen name="common_padding_small3">7dp</dimen>
     <dimen name="common_padding_small2">10dp</dimen>
     <dimen name="common_padding_large1">40dp</dimen>
     <dimen name="common_padding_large12">150dp</dimen>
