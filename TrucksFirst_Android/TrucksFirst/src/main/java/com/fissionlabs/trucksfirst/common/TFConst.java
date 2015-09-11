@@ -6,7 +6,7 @@ package com.fissionlabs.trucksfirst.common;
 public interface TFConst {
     String TAG = "TRUCKS_FIRST";
 
-//    String BASE_IP = "rivigoapistg-env.elasticbeanstalk.com/"; // Stagging URL
+    //String BASE_IP = "rivigoapistg-env.elasticbeanstalk.com/"; // Stagging URL
     String BASE_IP = "rivigo-dev.elasticbeanstalk.com/"; // Dev URL
     //String BASE_IP = "172.168.0.223:8080/com.rivigo.controller/"; // Local URL
 
@@ -24,8 +24,10 @@ public interface TFConst {
     String URL_CHANGE_PASSWORD = "http://" + BASE_IP + "user/changepassword";
     String URL_SKIPPED_PILOT_INFO = "http://" + BASE_IP + "pilot/updateskippedpilotinfo";
     String URL_CHECKLIST_SAVE = "http://" + BASE_IP + "mobile/checklist";
+    String URL_CHECKLIST_2 = "http://" + BASE_IP + "mobile/checklist2";
     String URL_FORGOT_PASSWORD = "http://" + BASE_IP + "user/resetpassword";
     String URL_SMS = "http://bhashsms.com/api/sendmsg.php";
+    String URL_APP_LOCK_TAMPER = "http://" + BASE_IP + "user/tamper";
 
     String TAG_TRUCK_DETAILS = "TRUCK_DETAILS";
     String TAG_PILOT_DETAILS = "PILOT_DETAILS";
@@ -33,6 +35,7 @@ public interface TFConst {
     String TAG_DRIVER_CHECKLIST = "DRIVER_CHECKLIST";
     String TAG_CHECKLIST_DETAILS = "CHECKLIST DETAILS";
     String TAG_USER_LOGIN = "USER_LOGIN";
+    String TAG_REPORT_TAMPER = "APP_LOCK_TAMPERED";
 
     int SUCCESS = 200;
     int ERROR = 100;

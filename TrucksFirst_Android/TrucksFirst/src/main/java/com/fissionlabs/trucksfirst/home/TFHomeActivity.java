@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.common.TFCheckLockService;
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
 import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.fragments.TFCheckListFragment;
@@ -110,6 +111,8 @@ public class TFHomeActivity extends TFCommonActivity {
         Thread thread = new Thread(new CountDownRunner());
         thread.start();
 
+        // Start service to detect lock app tampering
+        TFCheckLockService.checkLockApp(this);
     }
 
     @Override

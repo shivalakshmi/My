@@ -582,6 +582,24 @@ public class WebServices implements TFConst {
 
     }
 
+    public void reportAppLockTamper(Context ctx) {
+        String userId = TFUtils.getStringFromSP(ctx, EMP_ID);
+
+        StringRequest request = new StringRequest(Request.Method.GET, URL_APP_LOCK_TAMPER + "?user=" + userId, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                // Nothing to do
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Nothing to do
+            }
+        });
+
+        TFApp.getInstance().addToRequestQueue(request, TAG_REPORT_TAMPER);
+    }
+
 }
 
 
