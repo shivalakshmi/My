@@ -99,7 +99,7 @@ public class WebServices implements TFConst {
 
     public void forgotPasswordUrl(final Context context, final JSONObject jsonObject, final ResultReceiver resultReceiver) {
 
-        JsonObjectRequest request = new JsonObjectRequest(URL_CHANGE_PASSWORD, jsonObject,
+        JsonObjectRequest request = new JsonObjectRequest(URL_FORGOT_PASSWORD, jsonObject,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -216,6 +216,10 @@ public class WebServices implements TFConst {
     }
 
     public void getPilotRelease(final Context context, final String currentHub, final String pilotId, final String vehicleTrackingId, final ResultReceiver resultReceiver) {
+
+        String url =  URL_PILOT_RELEASE + "?currentHub=" + currentHub + "&pilotId=" + pilotId + "&vehicleTrackingId=" + vehicleTrackingId;
+
+        Log.e("Lakshmi", url);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URL_PILOT_RELEASE + "?currentHub=" + currentHub + "&pilotId=" + pilotId + "&vehicleTrackingId=" + vehicleTrackingId,

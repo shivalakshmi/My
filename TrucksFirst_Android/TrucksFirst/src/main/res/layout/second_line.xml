@@ -14,13 +14,12 @@
 
     <TextView
         android:id="@+id/vehicle_count"
+        style="@style/TextViewSecondHeaderStyle"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:textStyle="bold"
         android:layout_height="wrap_content"
         android:text="@string/vehicle_count"
-        android:gravity="center"
-        android:textSize="14sp"
         android:textColor="@android:color/white" />
 
     <TextView
@@ -30,8 +29,7 @@
         android:layout_height="wrap_content"
         android:text="@string/drivers_planned"
         android:textStyle="bold"
-        android:gravity="center"
-        android:textSize="14sp"
+        style="@style/TextViewSecondHeaderStyle"
         android:textColor="@android:color/white" />
 
     <TextView
@@ -40,9 +38,8 @@
         android:layout_weight="1"
         android:textStyle="bold"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        style="@style/TextViewSecondHeaderStyle"
         android:text="@string/drivers_not_planned"
-        android:textSize="14sp"
         android:textColor="@android:color/white"  />
 
     <TextView
@@ -52,8 +49,7 @@
         android:textStyle="bold"
         android:layout_height="wrap_content"
         android:text="@string/last_updated_time"
-        android:gravity="center"
-        android:textSize="14sp"
+        style="@style/TextViewSecondHeaderStyle"
         android:textColor="@android:color/white" />
 
 </LinearLayout>

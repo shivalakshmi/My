@@ -42,5 +42,14 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
+    <style name="TextViewSecondHeaderStyle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">@dimen/common_padding_small3</item>
+        <item name="android:paddingBottom">@dimen/common_padding_small3</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
 
 </resources>

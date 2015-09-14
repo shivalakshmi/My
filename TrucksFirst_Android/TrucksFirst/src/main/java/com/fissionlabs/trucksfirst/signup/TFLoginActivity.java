@@ -212,12 +212,15 @@ public class TFLoginActivity extends TFCommonActivity {
             }
             else if (TextUtils.isEmpty(contactNo.getText().toString().trim())) {
                 contactNo.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
+                contactNo.requestFocus();
             }
             else if (TextUtils.isEmpty(newPassword.getText().toString().trim())) {
                 newPassword.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
+                newPassword.requestFocus();
             }
             else if (TextUtils.isEmpty(newConfirmPassword.getText().toString().trim())) {
                 newConfirmPassword.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
+                newConfirmPassword.requestFocus();
             }
             return;
         }
