@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:weightSum="5"
+    android:weightSum="4.5"
     android:gravity="center"
     android:layout_marginTop="@dimen/common_padding_smal09"
     android:minHeight="@dimen/common_padding_large1"
@@ -38,7 +38,7 @@
         android:layout_weight="0.5"
         android:layout_marginEnd="@dimen/common_padding_smal09"
         style="@style/TextViewHeaderStyle"
-        android:text="@string/print"/>
+        android:text="Documents"/>
 
     <TextView
         android:layout_width="0dp"
@@ -46,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
         android:gravity="center"
+        android:visibility="gone"
         android:text="@string/email"/>
 
 

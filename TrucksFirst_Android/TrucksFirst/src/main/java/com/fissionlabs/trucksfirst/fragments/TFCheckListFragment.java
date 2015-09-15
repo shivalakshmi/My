@@ -70,6 +70,9 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
     private String notOkReason = "";
     private Activity mActivity;
     private String vehicleTrackingId;
+    private TFCheckListFragment mTFCheckListFragment;
+
+    private String vehicleNumber;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,10 +89,12 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_check_list, container, false);
 
         bundle = this.getArguments();
-        final String vehicleNumber = bundle.getString("vehicle_number");
+        mTFCheckListFragment = this;
+        vehicleNumber = bundle.getString("vehicle_number");
 
         vehicleTrackingId = bundle.getString("vehicleTrackingId");
         mHomeActivity.isHomeFragment = false;
@@ -123,7 +128,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                     if (responseStr != null) {
                         mChecklistNew = new Gson().fromJson(responseStr, ChecklistNew.class);
                         checklistData();
-                        checkListAdapter = new CheckListAdapter(mActivity, vehicleNumber,mChecklistArrayList, mChecklistNew);
+                        checkListAdapter = new CheckListAdapter(mActivity, mTFCheckListFragment, vehicleNumber,mChecklistArrayList, mChecklistNew);
                         mLVChecklist.setAdapter(checkListAdapter);
                     }
                 } else {

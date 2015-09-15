@@ -117,6 +117,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             holder.mEta.setText(TFUtils.changeTime(mDataSet.get(position).getEta()));
             holder.mAssignedPilot.setText(mDataSet.get(position).getAssignedPilot());
             holder.mPilotInHub.setVisibility(View.VISIBLE);
+            holder.mAssignedPilot.setVisibility(View.VISIBLE);
             holder.mVehicleInHub.setVisibility(View.VISIBLE);
             holder.mChecklist.setVisibility(View.VISIBLE);
         }
@@ -530,10 +531,10 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                             String dateTime[] =TFUtils.changeTime(mDataSet.get(trucksPosition).getEta()).split("\\s+");
 
                                             String reason = "Vehicle No: "+ mDataSet.get(trucksPosition).getVehicleNumber()+
-                                                    " Date of Duty: "+dateTime[0]+
-                                                    " Time of Duty: "+dateTime[1]+
-                                                    " Source: "+TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME)+
-                                                    " Destination: "+mDataSet.get(trucksPosition).getNextHub();
+                                                    "\nDate of Duty: "+dateTime[0]+
+                                                    "\nTime of Duty: "+dateTime[1]+
+                                                    "\nSource: "+TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME)+
+                                                    "\nDestination: "+mDataSet.get(trucksPosition).getNextHub();
 
 
                                             TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(trucksPosition).getContactNo());
@@ -572,6 +573,19 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     protected void onReceiveResult(int resultCode, Bundle resultData) {
                         super.onReceiveResult(resultCode, resultData);
                         if (resultCode == 200) {
+
+                            String dateTime[] =TFUtils.changeTime(mDataSet.get(position).getEta()).split("\\s+");
+
+                            String reason = "Duty Cancelled..\nVehicle No: "+ mDataSet.get(position).getVehicleNumber()+
+                                    "\nDate of Duty: "+dateTime[0]+
+                                    "\nTime of Duty: "+dateTime[1]+
+                                    "\nSource: "+TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME)+
+                                    "\nDestination: "+mDataSet.get(position).getNextHub();
+
+
+                            TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(position).getContactNo());
+
+
                             mDataSet.get(position).setAssignedPilot(null);
                             notifyItemChanged(position);
                             TFTruckFragment.driverPlannedCount -= 1;

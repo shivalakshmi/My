@@ -37,6 +37,7 @@ import com.fissionlabs.trucksfirst.fragments.TFSOSFragment;
 import com.fissionlabs.trucksfirst.fragments.TFSettingsFragment;
 import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
 import com.fissionlabs.trucksfirst.fragments.TFUpgradeFragment;
+import com.fissionlabs.trucksfirst.fragments.TFpdfViewer;
 import com.fissionlabs.trucksfirst.signup.TFLoginActivity;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 
@@ -55,6 +56,7 @@ public class TFHomeActivity extends TFCommonActivity {
     private TFCheckListFragment mTFCheckListFragment;
     private TFSOSFragment mTFSOSFragment;
     private TFUpgradeFragment mTFUpgradeFragment;
+    private TFpdfViewer mTFpdfViewer;
     private Fragment mSelectedFragment;
 
     public ActionBar mActionBar;
@@ -243,6 +245,14 @@ public class TFHomeActivity extends TFCommonActivity {
                 }
 
                 selectedFragment = mTFUpgradeFragment;
+
+                break;
+            case R.layout.pdf_viewer:
+                if (mTFpdfViewer == null) {
+                    mTFpdfViewer = new TFpdfViewer();
+                }
+
+                selectedFragment = mTFpdfViewer;
 
                 break;
         }

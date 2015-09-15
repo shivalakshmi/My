@@ -10,6 +10,7 @@ import android.content.pm.LabeledIntent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFConst;
+import com.fissionlabs.trucksfirst.fragments.TFCheckListFragment;
 import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.pojo.Checklist;
 import com.fissionlabs.trucksfirst.pojo.ChecklistNew;
@@ -53,13 +55,16 @@ public class CheckListAdapter extends BaseAdapter {
     private String vehcleNumber;
     private String download_file_path =  "";
     private String dest_file_path = "/sdcard/dwnloaded_file2.pdf";
+    public static Uri printFileUri;
+    private TFCheckListFragment mTfCheckListFragment;
 
-    public CheckListAdapter(Activity context, String vehicleNumber,ArrayList<Checklist> ChecklistArrayList, ChecklistNew checklistNew) {
+    public CheckListAdapter(Activity context, TFCheckListFragment mTfCheckListFragment,String vehicleNumber,ArrayList<Checklist> ChecklistArrayList, ChecklistNew checklistNew) {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.vehcleNumber  = vehicleNumber;
         this.mChecklistArrayList = ChecklistArrayList;
         this.context = context;
         this.mChecklistNew = checklistNew;
+        this.mTfCheckListFragment = mTfCheckListFragment;
     }
 
     @Override
@@ -139,9 +144,9 @@ public class CheckListAdapter extends BaseAdapter {
                 } else {
                     holder.mRadioBtnNo.setChecked(true);
                 }
-                holder.mImgEmail.setVisibility(View.INVISIBLE);
+//                holder.mImgEmail.setVisibility(View.INVISIBLE);
                 if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.grn_bilti))) {
-                    holder.mImgEmail.setVisibility(View.VISIBLE);
+//                    holder.mImgEmail.setVisibility(View.VISIBLE);
                 }
                 if (position < 6 || position == 7) {
                     holder.mImgPrint.setVisibility(View.VISIBLE);
@@ -151,7 +156,7 @@ public class CheckListAdapter extends BaseAdapter {
                 holder.mImgEmail.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sendEmail();
+                        sendEmail(context);
                     }
                 });
 
@@ -182,6 +187,13 @@ public class CheckListAdapter extends BaseAdapter {
                                 downloadFile(download_file_path, dest_file_path);
                             }
                         }).start();
+
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pdf",download_file_path);
+                        bundle.putString("file", dest_file_path);
+                        bundle.putString("vehicle_number",vehcleNumber);
+                        mTfCheckListFragment.startFragment(R.layout.pdf_viewer, bundle);
 
                     }
                 });
@@ -338,14 +350,17 @@ public class CheckListAdapter extends BaseAdapter {
         public RadioGroup mRadioGroup;
     }
 
-    private void sendEmail() {
+    public static void sendEmail(Context con) {
         Intent emailIntent = new Intent();
         emailIntent.setAction(Intent.ACTION_SEND);
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Documents- GRN/Bilti");
+        if (printFileUri != null) {
+            emailIntent.putExtra(Intent.EXTRA_STREAM, printFileUri);
+        }
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "");
         emailIntent.setType("message/rfc822");
 
-        PackageManager pm = context.getPackageManager();
+        PackageManager pm = con.getPackageManager();
         Intent sendIntent = new Intent(Intent.ACTION_SEND);
         sendIntent.setType("text/plain");
 
@@ -364,6 +379,10 @@ public class CheckListAdapter extends BaseAdapter {
                 intent.setAction(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_TEXT, "");
+                if (printFileUri != null) {
+                    intent.putExtra(Intent.EXTRA_STREAM, printFileUri);
+                }
+
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Documents- GRN/Bilti");
                 intent.setType("message/rfc822");
                 intentList.add(new LabeledIntent(intent, packageName, ri.loadLabel(pm), ri.icon));
@@ -373,7 +392,7 @@ public class CheckListAdapter extends BaseAdapter {
         LabeledIntent[] extraIntents = intentList.toArray(new LabeledIntent[intentList.size()]);
 
         openInChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, extraIntents);
-        context.startActivity(openInChooser);
+        con.startActivity(openInChooser);
     }
 
     public void downloadFile(String url, String dest_file_path) {
@@ -392,11 +411,12 @@ public class CheckListAdapter extends BaseAdapter {
             fos.flush();
             fos.close();
             hideProgressIndicator();
-            final Uri printFileUri = Uri.parse("file://"+dest_file_path);
-            Intent i = new Intent(Intent.ACTION_VIEW);
+
+            printFileUri = Uri.parse("file://" + dest_file_path);
+            /*Intent i = new Intent(Intent.ACTION_VIEW);
             i.setPackage("com.hp.android.print");
             i.setDataAndType(printFileUri, "text/plain");
-            context.startActivity(i);
+            context.startActivity(i);*/
 
         } catch(FileNotFoundException e) {
             e.printStackTrace();
