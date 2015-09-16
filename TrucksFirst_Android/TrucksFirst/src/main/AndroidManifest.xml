@@ -1,46 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    package="com.fissionlabs.trucksfirst"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fissionlabs.trucksfirst" >
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"/>
-    <uses-permission android:name="android.permission.INSTALL_PACKAGES"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+
     <application
         android:name=".TFApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Design">
+        android:theme="@style/Theme.Design" >
         <activity
             android:name=".TFSplashActivity"
-            android:label="@string/app_name"
             android:configChanges="locale|orientation"
-            android:screenOrientation="sensorLandscape">
+            android:label="@string/app_name"
+            android:screenOrientation="sensorLandscape" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".home.TFHomeActivity"
-            android:label="@string/app_name"
             android:configChanges="locale|orientation"
-            android:screenOrientation="sensorLandscape">
+            android:label="@string/app_name"
+            android:screenOrientation="sensorLandscape" >
         </activity>
-
         <activity
             android:name=".signup.TFLoginActivity"
-            android:label="@string/app_name"
             android:configChanges="locale|orientation"
-            android:screenOrientation="sensorLandscape">
+            android:label="@string/app_name"
+            android:screenOrientation="sensorLandscape" >
         </activity>
+
+        <service
+            android:name=".common.TFPilotDelayAlertService"
+            android:enabled="true"
+            android:exported="true" >
+        </service>
     </application>
 
 </manifest>

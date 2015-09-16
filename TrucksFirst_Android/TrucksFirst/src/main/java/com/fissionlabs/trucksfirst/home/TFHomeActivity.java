@@ -1,10 +1,13 @@
 package com.fissionlabs.trucksfirst.home;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -25,12 +28,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCheckLockService;
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
-import com.fissionlabs.trucksfirst.common.TFConst;
+import com.fissionlabs.trucksfirst.common.TFPilotDelayAlertService;
 import com.fissionlabs.trucksfirst.fragments.TFCheckListFragment;
 import com.fissionlabs.trucksfirst.fragments.TFDashBoardFragment;
 import com.fissionlabs.trucksfirst.fragments.TFSOSFragment;
@@ -66,6 +68,7 @@ public class TFHomeActivity extends TFCommonActivity {
     public static boolean isHomeFragment = true;
     public static ImageView imageView;
     private TextView mHubSupervisorName;
+    private TFPilotDelayAlertService pilotDelayAlertService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +118,8 @@ public class TFHomeActivity extends TFCommonActivity {
 
         // Start service to detect lock app tampering
         TFCheckLockService.checkLockApp(this);
+        Intent delayServiceIntent = new Intent(this, TFPilotDelayAlertService.class);
+        bindService(delayServiceIntent, mDelayServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
@@ -412,5 +417,38 @@ public class TFHomeActivity extends TFCommonActivity {
         }
     }
 
+    private ServiceConnection mDelayServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            TFPilotDelayAlertService.PDASBinder binder = (TFPilotDelayAlertService.PDASBinder)service;
+            pilotDelayAlertService = binder.getService();
+        }
 
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            pilotDelayAlertService = null;
+        }
+    };
+
+    public void startDelayTracking(String pilot, String eta) {
+        long etaMillis = Long.parseLong(eta);
+        etaMillis-=3000000;// Set alert for 50 mins before ETA
+        etaMillis-=(330*60*1000); // Date object will add 5h30min to time
+        Date d = new Date(etaMillis);
+        if (pilotDelayAlertService!=null) {
+            pilotDelayAlertService.startWaiting(pilot, d, true);
+        }
+    }
+
+    public void stopDelayTracking(String pilot) {
+        if (pilotDelayAlertService!=null) {
+            pilotDelayAlertService.stopWaiting(pilot);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(mDelayServiceConnection);
+    }
 }

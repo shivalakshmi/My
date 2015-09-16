@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.fragments.TFSOSFragment;
 import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
+import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.model.PilotAvailability;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
 import com.fissionlabs.trucksfirst.pojo.DriverChecklist;
@@ -55,14 +57,14 @@ import java.util.List;
 public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder> {
 
     private Context mContext;
-    private Activity mActivity;
+    private TFHomeActivity mActivity;
     private ArrayList<TruckDetails> mDataSet;
     private TFTruckFragment mTfTruckFragment;
     private DriverChecklist mDriverChecklist;
     private WebServices mWebServices = new WebServices();
     private String spinnerText = "";
 
-    public TrucksAdapter(Context context, Activity activity,TFTruckFragment tfTruckFragment, ArrayList<TruckDetails> dataSet) {
+    public TrucksAdapter(Context context, TFHomeActivity activity,TFTruckFragment tfTruckFragment, ArrayList<TruckDetails> dataSet) {
         mContext = context;
         mActivity = activity;
         mTfTruckFragment = tfTruckFragment;
@@ -177,6 +179,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             public void onClick(View view) {
                 mDataSet.get(position).setPilotInHub("false");
                 notifyItemChanged(position);
+                // Pilot hasn't arrived
+                mActivity.startDelayTracking(mDataSet.get(position).getAssignedPilot(), mDataSet.get(position).getEta());
             }
         });
         holder.mAssignedPilot.setOnClickListener(new View.OnClickListener() {
@@ -265,6 +269,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                 mWebServices.updateDriverChecklist(new JSONObject(jsonObject));
                                 mWebServices.getPilotInHub(mDataSet.get(position).getVehicleTrackingId(),"true");
                                 holder.mRadioPilotInHubYes.setChecked(true);
+                                // Pilot has arrived.
+                                mActivity.stopDelayTracking(mDataSet.get(position).getAssignedPilot());
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -527,22 +533,23 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                                     protected void onReceiveResult(int resultCode, Bundle resultData) {
                                         super.onReceiveResult(resultCode, resultData);
                                         if (resultCode == TFConst.SUCCESS) {
-
-                                            String dateTime[] =TFUtils.changeTime(mDataSet.get(trucksPosition).getEta()).split("\\s+");
-
+                                            String reportingTime = mDataSet.get(trucksPosition).getEta();
+                                            long reportingTimeMillis = Long.parseLong(reportingTime);
+                                            reportingTimeMillis-=3600000l; // adjust time to get correct value
+                                            String dateTime[] =TFUtils.changeTime(Long.toString(reportingTimeMillis)).split("\\s+");
                                             String reason = "Vehicle No: "+ mDataSet.get(trucksPosition).getVehicleNumber()+
                                                     "\nDate of Duty: "+dateTime[0]+
                                                     "\nTime of Duty: "+dateTime[1]+
                                                     "\nSource: "+TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME)+
                                                     "\nDestination: "+mDataSet.get(trucksPosition).getNextHub();
-
-
                                             TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(trucksPosition).getContactNo());
                                             notifyItemChanged(trucksPosition);
                                             TFTruckFragment.driverPlannedCount += 1;
                                             TFTruckFragment.drivetNotPlannedCount -= 1;
                                             TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned) + " " + TFTruckFragment.driverPlannedCount);
                                             TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned) + " " + TFTruckFragment.drivetNotPlannedCount);
+                                            // Pilot has been assigned. Start delay tracking.
+                                            mActivity.startDelayTracking(mDataSet.get(trucksPosition).getAssignedPilot(), mDataSet.get(trucksPosition).getEta());
                                         } else {
                                             Toast.makeText(mContext, mContext.getResources().getString(R.string.problem_assign_pilot), Toast.LENGTH_SHORT).show();
                                         }
@@ -573,9 +580,10 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
                     protected void onReceiveResult(int resultCode, Bundle resultData) {
                         super.onReceiveResult(resultCode, resultData);
                         if (resultCode == 200) {
-
-                            String dateTime[] =TFUtils.changeTime(mDataSet.get(position).getEta()).split("\\s+");
-
+                            String reportingTime = mDataSet.get(position).getEta();
+                            long reportingTimeMillis = Long.parseLong(reportingTime);
+                            reportingTimeMillis-=3600000l; // adjust time to get correct value
+                            String dateTime[] =TFUtils.changeTime(Long.toString(reportingTimeMillis)).split("\\s+");
                             String reason = "Duty Cancelled..\nVehicle No: "+ mDataSet.get(position).getVehicleNumber()+
                                     "\nDate of Duty: "+dateTime[0]+
                                     "\nTime of Duty: "+dateTime[1]+
@@ -584,7 +592,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
 
 
                             TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(position).getContactNo());
-
+                            //Pilot is released, stop delay tracking.
+                            mActivity.stopDelayTracking(mDataSet.get(position).getAssignedPilot());
 
                             mDataSet.get(position).setAssignedPilot(null);
                             notifyItemChanged(position);

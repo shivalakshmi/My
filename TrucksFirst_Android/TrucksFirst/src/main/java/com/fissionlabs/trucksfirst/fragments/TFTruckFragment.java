@@ -1,5 +1,6 @@
 package com.fissionlabs.trucksfirst.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.support.v4.app.Fragment;
@@ -22,6 +23,7 @@ import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.adapters.TrucksAdapter;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
 import com.fissionlabs.trucksfirst.common.TFConst;
+import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
@@ -50,6 +52,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
     private TextView mTVAssignedPilot;
     public static ArrayList<TruckDetails> mTrucksList = null;
     private TFTruckFragment mTFragment;
+    private TFHomeActivity homeActivity;
     private TrucksAdapter mAdapter;
     private TextView trucksPostionView;
     private TextView mVehicleCount;
@@ -120,6 +123,12 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         return view;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        homeActivity = (TFHomeActivity) activity;
+    }
+
     private void refreshDashBoardData(final boolean flag){
 
         WebServices mWebServices = new WebServices();
@@ -139,7 +148,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                         Type listType = new TypeToken<ArrayList<TruckDetails>>() {
                         }.getType();
                         mTrucksList = new Gson().fromJson(responseStr, listType);
-                        mAdapter = new TrucksAdapter(getActivity(),getActivity(), mTFragment, mTrucksList);
+                        mAdapter = new TrucksAdapter(getActivity(), homeActivity, mTFragment, mTrucksList);
                         for (int i = 0; i < mTrucksList.size(); i++) {
                             if (isOutbound(mTrucksList.get(i))){
                                 if (mTrucksList.get(i).getAssignedPilot() == null || mTrucksList.get(i).getAssignedPilot().equalsIgnoreCase("null")) {
