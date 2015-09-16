@@ -1,6 +1,5 @@
 package com.fissionlabs.trucksfirst.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,21 +11,17 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,7 +42,6 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -122,6 +116,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<TrucksAdapter.ViewHolder
             holder.mAssignedPilot.setVisibility(View.VISIBLE);
             holder.mVehicleInHub.setVisibility(View.VISIBLE);
             holder.mChecklist.setVisibility(View.VISIBLE);
+            // Need to track delay of pilot assigned by other HS also
+            mActivity.startDelayTracking(mDataSet.get(position).getAssignedPilot(), mDataSet.get(position).getEta());
         }
 
         if (mDataSet.get(position).getVehicleInHub() != null && mDataSet.get(position).getVehicleInHub().equals("true")) {

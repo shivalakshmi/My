@@ -10,11 +10,9 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
-import android.util.Log;
 
 import com.fissionlabs.trucksfirst.R;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,20 +33,17 @@ public class TFPilotDelayAlertService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.v("Kanj","onBind");
         return mBinder;
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
-        Log.v("Kanj", "onUnbind");
         t.cancel();
         return super.onUnbind(intent);
     }
 
     public void startWaiting(String pilot, Date date, boolean persist) {
-        if (!persist) Log.v("Kanj","waiting from old data");
-        Log.v("Kanj","Start waiting - pilot "+pilot+" date="+date.toString());
+        if (timerTaskHashMap.containsKey(pilot)) return;
         AlertTimerTask task = new AlertTimerTask(pilot, date);
         timerTaskHashMap.put(pilot, task);
         t.schedule(task, date);
@@ -73,7 +68,6 @@ public class TFPilotDelayAlertService extends Service {
     public void onCreate() {
         super.onCreate();
         // Load old data
-        Log.v("Kanj","onCreate");
         t = new Timer("PILOT_DELAY_ALERT_SERVICE");
         sPref = getSharedPreferences("PILOT_DELAY_ALERT_SERVICE", Context.MODE_PRIVATE);
         Map<String, ?> oldData = sPref.getAll();
@@ -83,8 +77,7 @@ public class TFPilotDelayAlertService extends Service {
                 l = Long.parseLong(oldData.get(s).toString());
                 startWaiting(s, new Date(l), false);
             } catch (Exception e) {
-                Log.e("Kanj",e.toString());
-                Log.e("Kanj","value was "+oldData.get(s).toString());
+                e.printStackTrace();
             }
         }
     }
@@ -119,9 +112,7 @@ public class TFPilotDelayAlertService extends Service {
     }
 
     public void showNotification(String pilot, String time) {
-        Log.v("Kanj", "alert");
         if (!timerTaskHashMap.containsKey(pilot)) {
-            Log.v("Kanj",pilot+" is not in hashmap");
             return;
         }
         stopWaiting(pilot);
