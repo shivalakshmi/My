@@ -94,7 +94,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
                 }
                 int selectedId = mRadioGroup.getCheckedRadioButtonId();
                 RadioButton radioButton = (RadioButton) view.findViewById(selectedId);
-                String reason = "\nVehivleNo::"+mEtVehivleNo.getText().toString().trim()+"\nIncident::"+radioButton.getText()+"\nReason::"+mEtReason.getText().toString().trim();
+                String reason = "\nVehicleNo: "+mEtVehivleNo.getText().toString().trim()+"\nIncident: "+radioButton.getText()+"\nReason: "+mEtReason.getText().toString().trim();
 
                 sendEmailAndSMS(mActivity,reason,"SOS Issue");
                 mEtVehivleNo.setText("");
@@ -153,7 +153,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
                     e.printStackTrace();
                 }
 
-                String[] toArr = {"sowjanya.guddeti@fissionlabs.com","shivalakshmi.yella@fissionlabs.com","murali.naru@fissionlabs.com"}; // This is an array, you can add more emails, just separate them with a coma
+                String[] toArr = {"sowjanya.guddeti@fissionlabs.com","shivalakshmi.yella@fissionlabs.com","nikkhil@rivigo.com","alok@rivigo.com"}; // This is an array, you can add more emails, just separate them with a coma
                 mMail.setTo(toArr); // load array to setTo function
                 mMail.setFrom("rivigodev@gmail.com"); // who is sending the email
                 mMail.setSubject(subject);
