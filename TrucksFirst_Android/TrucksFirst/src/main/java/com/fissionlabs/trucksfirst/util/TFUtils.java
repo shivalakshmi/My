@@ -189,7 +189,6 @@ public class TFUtils implements TFConst{
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long milliSeconds= Long.parseLong(etaInMills);
         Calendar calendar = Calendar.getInstance();
-        milliSeconds-=calendar.getTimeZone().getRawOffset();
         calendar.setTimeInMillis(milliSeconds);
         return formatter.format(calendar.getTime());
     }
