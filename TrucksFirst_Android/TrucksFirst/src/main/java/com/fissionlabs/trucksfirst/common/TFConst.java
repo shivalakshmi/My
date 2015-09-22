@@ -8,7 +8,7 @@ public interface TFConst {
 
     String BASE_IP = "rivigoapistg-env.elasticbeanstalk.com/"; // Stagging URL
 //    String BASE_IP = "rivigo-dev.elasticbeanstalk.com/"; // Dev URL
-    //String BASE_IP = "172.168.0.223:8080/com.rivigo.controller/"; // Local URL
+//    String BASE_IP = "172.168.1.32:8080/com.rivigo.controller/"; // Local URL
 
     String URL_TRUCK_DETAILS = "http://" + BASE_IP + "mobile/truckdetails";
     String URL_PILOT_AVAILABILITY = "http://" + BASE_IP + "pilot/availablepilots";

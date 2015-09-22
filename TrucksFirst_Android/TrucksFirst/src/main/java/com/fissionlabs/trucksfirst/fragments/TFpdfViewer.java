@@ -8,10 +8,10 @@ import android.support.v4.view.GravityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.adapters.CheckListAdapter;
@@ -61,6 +61,7 @@ public class TFpdfViewer extends TFCommonFragment implements TFConst {
             pdf = bundle.getString("pdf");
             file = bundle.getString("file");
             webView.getSettings().setJavaScriptEnabled(true);
+            webView.setWebViewClient(new WebViewClient());
             if (savedInstanceState == null) {
                 webView.loadUrl("http://docs.google.com/gview?embedded=true&url=" + pdf);
             }
@@ -71,10 +72,21 @@ public class TFpdfViewer extends TFCommonFragment implements TFConst {
         print.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setPackage("com.hp.android.print");
-                i.setDataAndType(Uri.parse("file://" + file), "text/plain");
-                getActivity().startActivity(i);
+                try {
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setPackage("com.hp.android.print");
+                    i.setDataAndType(Uri.parse("file://" + file), "text/plain");
+                    getActivity().startActivity(i);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.printing_issue_with_download2), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    return;
+                }
             }
         });
 

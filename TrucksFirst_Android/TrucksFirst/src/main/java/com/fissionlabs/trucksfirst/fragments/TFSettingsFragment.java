@@ -75,7 +75,7 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
         mNewPassword = (EditText) rootView.findViewById(R.id.new_password);
         mConfirmNewPassword = (EditText) rootView.findViewById(R.id.confirm_new_password);
 
-        mOldPassword.addTextChangedListener(new TextWatcher() {
+       /* mOldPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) { }
             @Override
@@ -116,7 +116,7 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
                     mConfirmNewPassword.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
                 }
             }
-        });
+        });*/
 
         mChangePasswordBtn.setVisibility(View.VISIBLE);
         mLangSpinnerLayout.setVisibility(View.VISIBLE);
@@ -142,6 +142,15 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
                 mChangePasswordBtn.setVisibility(View.VISIBLE);
                 mLangSpinnerLayout.setVisibility(View.VISIBLE);
                 mChangePasswordLayout.setVisibility(View.GONE);
+
+                mOldPassword.setError(null);
+                mNewPassword.setError(null);
+                mConfirmNewPassword.setError(null);
+
+                mOldPassword.setText("");
+                mNewPassword.setText("");
+                mConfirmNewPassword.setText("");
+
             }
         });
 
@@ -183,9 +192,11 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
             }
             if (TextUtils.isEmpty(mNewPassword.getText().toString().trim())) {
                 mNewPassword.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
+                mNewPassword.requestFocus();
             }
             if (TextUtils.isEmpty(mConfirmNewPassword.getText().toString().trim())) {
                 mConfirmNewPassword.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
+                mConfirmNewPassword.requestFocus();
             }
             return;
         }

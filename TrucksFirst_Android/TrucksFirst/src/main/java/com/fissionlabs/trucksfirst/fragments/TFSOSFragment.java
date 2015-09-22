@@ -72,7 +72,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
         mEtReason = (EditText) view.findViewById(R.id.reason_edt);
         mRadioGroup = (RadioGroup) view.findViewById(R.id.sos_radiogroup);
 
-        if(TFTruckFragment.mTrucksList.size()>0 && TFTruckFragment.mTrucksList!=null) {
+        if( TFTruckFragment.mTrucksList!=null && TFTruckFragment.mTrucksList.size()>0) {
             vehicleNumberList.clear();
             for (int i = 0; i < TFTruckFragment.mTrucksList.size(); i++) {
                 vehicleNumberList.add(TFTruckFragment.mTrucksList.get(i).getVehicleNumber());
@@ -198,7 +198,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
                         .appendQueryParameter("user", "success")
                         .appendQueryParameter("pass", "654321")
                         .appendQueryParameter("sender", "BSHSMS")
-                        .appendQueryParameter("phone", "9908133566")
+                        .appendQueryParameter("phone", "9899222062")
                         .appendQueryParameter("text", reason)
                         .appendQueryParameter("priority", "ndnd")
                         .appendQueryParameter("stype", "normal")
