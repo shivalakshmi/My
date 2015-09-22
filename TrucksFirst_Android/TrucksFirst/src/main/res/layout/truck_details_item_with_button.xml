@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:minHeight="70dp"
+    android:gravity="center_vertical"
+    android:weightSum="8">
+
+    <TextView
+        android:id="@+id/vehicle_number"
+        style="@style/TextViewStyle2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.05" />
+    <TextView
+        android:id="@+id/client"
+        style="@style/TextViewStyle2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.7" />
+    <TextView
+        android:id="@+id/vehicle_route"
+        style="@style/TextViewStyle2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.32" />
+
+    <TextView
+        android:id="@+id/eta"
+        style="@style/TextViewStyle2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/assign_pilot"
+        android:layout_width="0dp"
+        android:textColor="@color/color_accent"
+        android:textStyle="bold"
+        android:text="Assign Pilot"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.15" />
+
+</LinearLayout>
