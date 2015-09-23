@@ -159,7 +159,9 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                             }
                         }
 
-                        mVehicleCount.setText(getActivity().getResources().getString(R.string.vehicle_count) + " " + mTrucksList.size());
+                        if(mTrucksList!=null) {
+                            mVehicleCount.setText(getActivity().getResources().getString(R.string.vehicle_count) + " " + mTrucksList.size());
+                        }
                         mDriversPlanned.setText(getActivity().getResources().getString(R.string.drivers_planned) + " " + driverPlannedCount);
                         mDriversNotPlanned.setText(getActivity().getResources().getString(R.string.drivers_not_planned) + " " + drivetNotPlannedCount);
                         Date date = new Date();

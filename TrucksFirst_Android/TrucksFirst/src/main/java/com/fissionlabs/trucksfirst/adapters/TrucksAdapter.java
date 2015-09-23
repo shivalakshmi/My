@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -471,7 +472,17 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     dialogBuilder.setView(view);
                     dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), null);
 
-                    dialogBuilder.setTitle(Html.fromHtml("<b>" + mContext.getString(R.string.pilot_availability_title) + "</b>"));
+                    TextView title = new TextView(mContext);
+// You Can Customise your Title here
+                    title.setText(Html.fromHtml("<b>" + "Assign Pilot" + "</b>"));
+                    title.setPadding(10, 10, 10, 10);
+                    title.setGravity(Gravity.CENTER);
+                    title.setTextColor(Color.BLACK);
+                    title.setTextSize(20);
+
+                    dialogBuilder.setCustomTitle(title);
+
+//                    dialogBuilder.setTitle(Html.fromHtml("<b>" + mContext.getString(R.string.pilot_availability_title) + "</b>"));
                     dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -502,6 +513,9 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     final View footerView = ((LayoutInflater) mContext.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.pilot_availability_footer, null, false);
                     Button more_pilots = (Button) footerView.findViewById(R.id.more_pilots);
                     availablePilots.addFooterView(footerView);
+
+                    final View header = ((LayoutInflater) mContext.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.pilot_available_header, null, false);
+                    availablePilots.addHeaderView(header);
 
 
                     more_pilots.setOnClickListener(new View.OnClickListener() {
