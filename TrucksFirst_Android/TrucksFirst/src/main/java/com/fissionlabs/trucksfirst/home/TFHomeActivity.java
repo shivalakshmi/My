@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.checklist.CheckListBaseFragment;
 import com.fissionlabs.trucksfirst.common.TFCheckLockService;
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
 import com.fissionlabs.trucksfirst.common.TFPilotDelayAlertService;
@@ -60,6 +61,8 @@ public class TFHomeActivity extends TFCommonActivity {
     private TFUpgradeFragment mTFUpgradeFragment;
     private TFpdfViewer mTFpdfViewer;
     private Fragment mSelectedFragment;
+    private CheckListBaseFragment mCheckListBaseFragment;
+
 
     public ActionBar mActionBar;
     private TextView mTvCurrentDateAndTime;
@@ -258,6 +261,15 @@ public class TFHomeActivity extends TFCommonActivity {
                 }
 
                 selectedFragment = mTFpdfViewer;
+
+                break;
+
+            case R.layout.fragment_base_checklist:
+                if (mCheckListBaseFragment == null) {
+                    mCheckListBaseFragment = new CheckListBaseFragment();
+                }
+
+                selectedFragment = mCheckListBaseFragment;
 
                 break;
         }
