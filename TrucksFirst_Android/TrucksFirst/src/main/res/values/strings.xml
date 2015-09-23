@@ -16,7 +16,7 @@
     <string name="vehicle_number" tools:ignore="MissingTranslation">Vehicle No.</string>
     <string name="vehicle_route" tools:ignore="MissingTranslation">Route</string>
     <string name="client" tools:ignore="MissingTranslation">Client</string>
-    <string name="eta" tools:ignore="MissingTranslation">ETA</string>
+    <string name="eta" tools:ignore="MissingTranslation">Expected Arrival Time</string>
     <string name="assigned_pilots" tools:ignore="MissingTranslation">Assigned Pilot</string>
     <string name="pilot_in_hub" tools:ignore="MissingTranslation">Pilot In Hub</string>
     <string name="vehicle_in_hub" tools:ignore="MissingTranslation">Vehicle In Hub</string>

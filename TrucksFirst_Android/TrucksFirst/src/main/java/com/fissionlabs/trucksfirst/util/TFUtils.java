@@ -16,6 +16,7 @@ import com.fissionlabs.trucksfirst.R;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 
 /**
  * Created by Ashok on 7/8/2015.
@@ -25,6 +26,7 @@ public class TFUtils implements TFConst{
 	private static ProgressDialog mProgressDialog;
     public static int SORT_ORDER = -1;
     public static int SORT_COLUMN_ENUM = -1;
+    public static HashMap<String, String> hubCodeCityMap;
 
     /**
      * This method is used to get the {@link String} data from the {@link SharedPreferences}.
@@ -198,6 +200,47 @@ public class TFUtils implements TFConst{
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), 0);
         }
+    }
+
+    static {
+        hubCodeCityMap = new HashMap<String, String>();
+        hubCodeCityMap.put("AHMD","Ahmedabad");
+        hubCodeCityMap.put("BGM","Belgaum");
+        hubCodeCityMap.put("BHL","Bhilwara");
+        hubCodeCityMap.put("BNG","Banglore");
+        hubCodeCityMap.put("BRD","Baroda");
+        hubCodeCityMap.put("BWD","Bhiwandi");
+        hubCodeCityMap.put("DHU","Dhule");
+        hubCodeCityMap.put("HBL","Hubli");
+        hubCodeCityMap.put("HYD","Hyderabad");
+        hubCodeCityMap.put("JPR","Jaipur");
+        hubCodeCityMap.put("KHR","Kherwara");
+        hubCodeCityMap.put("PTD","Pataudi");
+        hubCodeCityMap.put("PUN","Pune");
+        hubCodeCityMap.put("SLM","Salem");
+        hubCodeCityMap.put("SLPR","Solapur");
+        hubCodeCityMap.put("SRT","Surat");
+        hubCodeCityMap.put("VAP","Vapi");
+        hubCodeCityMap.put("PTR","Pitampura");
+        hubCodeCityMap.put("INDR","Indore");
+        hubCodeCityMap.put("AGRA","Agra");
+        hubCodeCityMap.put("KOP","Kolhapur");
+        hubCodeCityMap.put("JKR","Jakkur");
+        hubCodeCityMap.put("MPR","Malkapur");
+        hubCodeCityMap.put("NDR","Nanded");
+        hubCodeCityMap.put("KPR","Kanpur");
+        hubCodeCityMap.put("VARNS","Varanasi");
+        hubCodeCityMap.put("AUGB","Aurangabad");
+        hubCodeCityMap.put("DHB","Dhanbad");
+        hubCodeCityMap.put("KOL","Kolkata");
+        hubCodeCityMap.put("CHN","Chennai");
+        hubCodeCityMap.put("JDH","Jodhpur");
+        hubCodeCityMap.put("PTN","Patna");
+        hubCodeCityMap.put("SSB","Shamsabad");
+        hubCodeCityMap.put("PNVL","Panvel");
+        hubCodeCityMap.put("LKNW","Lucknow");
+        hubCodeCityMap.put("BPL","Bhopal");
+        hubCodeCityMap.put("BHI","Bhiwani");
     }
 
 }

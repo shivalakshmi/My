@@ -604,6 +604,119 @@ public class WebServices implements TFConst {
         TFApp.getInstance().addToRequestQueue(request, TAG_REPORT_TAMPER);
     }
 
+    public void getPilotsForWarehouse(final Context context, final String eta, final ResultReceiver resultReceiver) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_PILOT_AVAILABILITY_WAREHOUSE + "?currentHub=" + TFUtils.getStringFromSP(context, HUB_NAME) + "&ETA=" + eta,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Pilot details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Pilot details end ======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+                        resultReceiver.send(SUCCESS, bundle);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                resultReceiver.send(ERROR, null);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                return headers;
+            }
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_PILOT_DETAILS);
+    }
+
+    public void updatePilotWarehouse(TruckDetails obj, boolean flag, String existingPilotId, final ResultReceiver resultReceiver) {
+        String params = "?vehicleTrackingId=" + obj.getVehicleTrackingId() + "&currentHub=" + obj.getCurrentHub()
+                + "&currentHubEta=" + TFUtils.sendServerTime(obj.getEta()) +
+                (flag ? "&existingPilotId=" + existingPilotId : "") + "&pilotId=" + obj.getPilotAvailability().getPilotId();
+        params = params.replaceAll(" ", "%20");
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_CHANGE_PILOT_WAREHOUSE + params,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Pilot details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Pilot details end ======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+                        resultReceiver.send(SUCCESS, bundle);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                resultReceiver.send(ERROR, null);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+//                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_PILOT_DETAILS);
+    }
+
+    public void releasePilotWarehouse (final String currentHub, final String pilotId, final String vehicleTrackingId, final ResultReceiver resultReceiver) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_PILOT_RELEASE_WAREHOUSE + "?currentHub=" + currentHub + "&pilotId=" + pilotId + "&vehicleTrackingId=" + vehicleTrackingId,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Pilot details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Pilot details end ======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+                        resultReceiver.send(SUCCESS, bundle);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                resultReceiver.send(ERROR, null);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+//                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_PILOT_DETAILS);
+    }
 }
 
 
