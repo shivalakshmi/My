@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.view.LayoutInflater;
@@ -18,12 +19,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.android.volley.toolbox.StringRequest;
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.Mail;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
 import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.util.TFUtils;
+import com.fissionlabs.trucksfirst.webservices.WebServices;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -31,13 +32,15 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class TFSOSFragment extends TFCommonFragment implements TFConst{
+public class TFSOSFragment extends TFCommonFragment implements TFConst {
 
     private static Mail mMail;
     private static Handler mHandler;
@@ -46,11 +49,15 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
     private RadioGroup mRadioGroup;
     private ArrayList<String> vehicleNumberList = new ArrayList<>();
     private Activity mActivity;
+    ArrayList<String> list;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_sos,container,false);
+        final View view = inflater.inflate(R.layout.fragment_sos, container, false);
+
+        vehicleNumberList.clear();
 
         mHomeActivity.isHomeFragment = false;
         mHomeActivity.mActionBar.setDisplayShowTitleEnabled(true);
@@ -60,7 +67,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
         mHomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mHomeActivity.isHomeFragment == false)
+                if (mHomeActivity.isHomeFragment == false)
                     mHomeActivity.onBackPressed();
                 else
                     mHomeActivity.mDrawerLayout.openDrawer(GravityCompat.START);
@@ -72,35 +79,58 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
         mEtReason = (EditText) view.findViewById(R.id.reason_edt);
         mRadioGroup = (RadioGroup) view.findViewById(R.id.sos_radiogroup);
 
-        if( TFTruckFragment.mTrucksList!=null && TFTruckFragment.mTrucksList.size()>0) {
-            vehicleNumberList.clear();
-            for (int i = 0; i < TFTruckFragment.mTrucksList.size(); i++) {
-                vehicleNumberList.add(TFTruckFragment.mTrucksList.get(i).getVehicleNumber());
-            }
-            ArrayAdapter<String> adapter =  new ArrayAdapter<String>(mActivity,android.R.layout.simple_list_item_1, vehicleNumberList);
-            mEtVehivleNo.setThreshold(1);
-            mEtVehivleNo.setAdapter(adapter);
-        }
-
         view.findViewById(R.id.send_mail_sms).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mEtVehivleNo.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(mActivity,""+getResources().getString(R.string.sos_vehicle_no),Toast.LENGTH_SHORT).show();
+                if (mEtVehivleNo.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(mActivity, "" + getResources().getString(R.string.sos_vehicle_no), Toast.LENGTH_SHORT).show();
                     return;
-                } else if(mEtReason.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(mActivity,""+getResources().getString(R.string.sos_reason),Toast.LENGTH_SHORT).show();
+                } else if (mEtReason.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(mActivity, "" + getResources().getString(R.string.sos_reason), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 int selectedId = mRadioGroup.getCheckedRadioButtonId();
                 RadioButton radioButton = (RadioButton) view.findViewById(selectedId);
-                String reason = "\nVehicleNo: "+mEtVehivleNo.getText().toString().trim()+"\nIncident: "+radioButton.getText()+"\nReason: "+mEtReason.getText().toString().trim();
+                String reason = "\nVehicleNo: " + mEtVehivleNo.getText().toString().trim() + "\nIncident: " + radioButton.getText() + "\nReason: " + mEtReason.getText().toString().trim();
 
-                sendEmailAndSMS(mActivity,reason,"SOS Issue");
+                sendEmailAndSMS(mActivity, reason, "SOS Issue");
                 mEtVehivleNo.setText("");
                 mEtReason.setText("");
             }
         });
+
+        TFUtils.showProgressBar(getActivity(), getResources().getString(R.string.please_wait));
+
+        new WebServices().getSOSTrucksList(getActivity(), new ResultReceiver(null) {
+            @Override
+            protected void onReceiveResult(int resultCode, Bundle resultData) {
+
+                TFUtils.hideProgressBar();
+
+                if (resultData != null && resultCode == TFConst.SUCCESS) {
+
+                    JSONArray jsonArray = null;
+
+                    try {
+                        jsonArray = new JSONArray(resultData.getString("response"));
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            vehicleNumberList.add(jsonArray.getString(i));
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(mActivity, android.R.layout.simple_list_item_1, vehicleNumberList);
+                    mEtVehivleNo.setThreshold(1);
+                    mEtVehivleNo.setAdapter(adapter);
+
+                }
+
+            }
+        });
+
+
         return view;
     }
 
@@ -110,22 +140,22 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
         mActivity = activity;
     }
 
-    public static void sendEmailAndSMS(final Context context,final String reason,final String subject){
+    public static void sendEmailAndSMS(final Context context, final String reason, final String subject) {
         TFUtils.showProgressBar(context, context.getResources().getString(R.string.please_wait));
         mMail = new Mail("rivigodev@gmail.com", "fissionlabs");
 
-        mHandler = new Handler(){
+        mHandler = new Handler() {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                if(msg.getData().getString("what") != null)
-                Toast.makeText(context, "" + msg.getData().getString("what"), Toast.LENGTH_LONG).show();
+                if (msg.getData().getString("what") != null)
+                    Toast.makeText(context, "" + msg.getData().getString("what"), Toast.LENGTH_LONG).show();
             }
         };
 
         Thread thread = new Thread(new Runnable() {
 
             public void run() {
-                 String sms = Uri.parse(URL_SMS).buildUpon()
+                String sms = Uri.parse(URL_SMS).buildUpon()
                         .appendQueryParameter("user", "success")
                         .appendQueryParameter("pass", "654321")
                         .appendQueryParameter("sender", "BSHSMS")
@@ -153,7 +183,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
                     e.printStackTrace();
                 }
 
-                String[] toArr = {"sowjanya.guddeti@fissionlabs.com","shivalakshmi.yella@fissionlabs.com","nikkhil@rivigo.com","alok@rivigo.com"}; // This is an array, you can add more emails, just separate them with a coma
+                String[] toArr = {"sowjanya.guddeti@fissionlabs.com", "shivalakshmi.yella@fissionlabs.com", "nikkhil@rivigo.com", "alok@rivigo.com"}; // This is an array, you can add more emails, just separate them with a coma
                 mMail.setTo(toArr); // load array to setTo function
                 mMail.setFrom("rivigodev@gmail.com"); // who is sending the email
                 mMail.setSubject(subject);
@@ -163,14 +193,14 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
                 try {
 //                    new URL(sms).openConnection().connect();
 //					m.addAttachment("/sdcard/myPicture.jpg");  // path to file you want to attach
-                    if(mMail.send()) {
-                        b.putString("what",context.getResources().getString(R.string.sos_email_success));
+                    if (mMail.send()) {
+                        b.putString("what", context.getResources().getString(R.string.sos_email_success));
                     }/* else {
                         b.putString("what",context.getResources().getString(R.string.sos_email_failure));
                     }*/
-                } catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
-                    b.putString("what",context.getResources().getString(R.string.sos_email_failure_problem));
+                    b.putString("what", context.getResources().getString(R.string.sos_email_failure_problem));
                 }
                 message.setData(b);
                 mHandler.sendMessage(message);
@@ -181,10 +211,10 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst{
         thread.start();
     }
 
-    public static void sendSMS(final Context context,final String reason,final String contactNumber){
+    public static void sendSMS(final Context context, final String reason, final String contactNumber) {
         TFUtils.showProgressBar(context, context.getResources().getString(R.string.please_wait));
 
-        mHandler = new Handler(){
+        mHandler = new Handler() {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 Toast.makeText(context, "" + msg.getData().getString("what"), Toast.LENGTH_LONG).show();
