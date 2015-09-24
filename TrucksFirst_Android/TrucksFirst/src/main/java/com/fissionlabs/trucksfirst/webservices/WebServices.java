@@ -262,8 +262,9 @@ public class WebServices implements TFConst {
 
     public void getChangePilot(final Context context, TruckDetails obj, boolean flag, String existingPilotId, final ResultReceiver resultReceiver) {
         String params = "?vehicleTrackingId=" + obj.getVehicleTrackingId() + "&currentHub=" + obj.getCurrentHub()
-                + "&currentHubEta=" + TFUtils.sendServerTime(obj.getEta()) + "&nextHub=" + obj.getNextHub()
-                + "&nextHubEta=" + TFUtils.sendServerTime(obj.getNextHubEta()) +
+                + "&currentHubEta=" + TFUtils.sendServerTime(Long.toString(Long.parseLong(obj.getEta()) - 19800000l))
+                + "&nextHub=" + obj.getNextHub()
+                + "&nextHubEta=" + TFUtils.sendServerTime(Long.toString(Long.parseLong(obj.getNextHubEta()) - 19800000l)) +
                 (flag ? "&existingPilotId=" + existingPilotId : "") + "&pilotId=" + obj.getPilotAvailability().getPilotId();
         params = params.replaceAll(" ", "%20");
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
@@ -642,8 +643,9 @@ public class WebServices implements TFConst {
 
     public void updatePilotWarehouse(TruckDetails obj, boolean flag, String existingPilotId, final ResultReceiver resultReceiver) {
         String params = "?vehicleTrackingId=" + obj.getVehicleTrackingId() + "&currentHub=" + obj.getCurrentHub()
-                + "&currentHubEta=" + TFUtils.sendServerTime(obj.getEta()) +
+                + "&currentHubEta=" + TFUtils.sendServerTime(Long.toString(Long.parseLong(obj.getEta()) - 19800000l))+
                 (flag ? "&existingPilotId=" + existingPilotId : "") + "&pilotId=" + obj.getPilotAvailability().getPilotId();
+        Log.v("Kanj",params + TFUtils.changeTime(obj.getEta()));
         params = params.replaceAll(" ", "%20");
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URL_CHANGE_PILOT_WAREHOUSE + params,

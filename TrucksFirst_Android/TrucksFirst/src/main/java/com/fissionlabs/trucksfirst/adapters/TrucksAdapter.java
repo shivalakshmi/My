@@ -420,6 +420,10 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
+                if (TFUtils.getStringFromSP(mContext, TFConst.HUB_NAME).equals("PTD") && isInPTDNoEntry(obj.getEta())) {
+                    releaseWarehousePilotAlertDialog(position, obj);
+                    return;
+                }
                 releasePilotAlertDialog(position, obj);
             }
         });
@@ -429,6 +433,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 alertDialog.dismiss();
                 if (TFUtils.getStringFromSP(mContext, TFConst.HUB_NAME).equals("PTD") && isInPTDNoEntry(obj.getEta())) {
                     assignWarehousePilotPTD(position, obj, true);
+                    return;
                 }
                 assignPilotAlertDialog(position, obj, true);
                 }
@@ -447,7 +452,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     }.getType();
 
                     ArrayList<PilotAvailability> pilotAvailabilityList = new Gson().fromJson(responseStr, listType);
-                    showAvailbalePilots(trucksPosition, obj, flag, pilotAvailabilityList);
+                    showAvailbalePilots(trucksPosition, obj, flag, pilotAvailabilityList, false);
                 } else {
                     Toast.makeText(mContext, "" + mContext.getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
                 }
@@ -455,7 +460,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         });
     }
 
-    public void showAvailbalePilots(final int trucksPosition, final TruckDetails obj, final boolean flag, final ArrayList<PilotAvailability> list) {
+    public void showAvailbalePilots(final int trucksPosition, final TruckDetails obj, final boolean flag, final ArrayList<PilotAvailability> list,
+                                    final boolean isWarehouse) {
         final ArrayList<PilotAvailability> listItemsPilot = new ArrayList<PilotAvailability>();
         final ArrayList<PilotAvailability> sortedListItemsPilot = new ArrayList<PilotAvailability>();
         final List<String> listItems = new ArrayList<>();
@@ -485,7 +491,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         TextView title = new TextView(mContext);
         // You Can Customise your Title here
-        title.setText(Html.fromHtml("<b>" + "Assign Pilot" + "</b>"));
+        if (isWarehouse) title.setText(Html.fromHtml("<b>" + "Assign Pilot for "+obj.getClient()+" warehouse" + "</b>"));
+        else title.setText(Html.fromHtml("<b>" + "Assign Pilot" + "</b>"));
         title.setPadding(10, 10, 10, 10);
         title.setGravity(Gravity.CENTER);
         title.setTextColor(Color.BLACK);
@@ -562,38 +569,74 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     mDataSet.get(trucksPosition).setContactNo(pilot.getContactNumber());
                     mDataSet.get(trucksPosition).setPilotId(pilot.getPilotId());
                     mDataSet.get(trucksPosition).setPilotAvailability(pilot);
-                    new WebServices().getChangePilot(mContext, obj, flag, existingPilotId, new ResultReceiver(null) {
-                        @Override
-                        protected void onReceiveResult(int resultCode, Bundle resultData) {
-                            super.onReceiveResult(resultCode, resultData);
-                            if (resultCode == TFConst.SUCCESS) {
-                                String reportingTime = mDataSet.get(trucksPosition).getEta();
-                                long reportingTimeMillis = Long.parseLong(reportingTime);
-                                reportingTimeMillis -= 3600000l; // adjust time to get correct value
-                                String dateTime[] = TFUtils.changeTime(Long.toString(reportingTimeMillis)).split("\\s+");
-                                String from = TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME);
-                                if (TFUtils.hubCodeCityMap.containsKey(from)) from = TFUtils.hubCodeCityMap.get(from);
-                                String to = mDataSet.get(trucksPosition).getNextHub();
-                                if (TFUtils.hubCodeCityMap.containsKey(to)) to = TFUtils.hubCodeCityMap.get(to);
-                                String reason = "Vehicle No: " + mDataSet.get(trucksPosition).getVehicleNumber() +
-                                        "\nDate of Duty: " + dateTime[0] +
-                                        "\nTime of Duty: " + dateTime[1] +
-                                        "\nSource: " + from +
-                                        "\nDestination: " + to;
-                                TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(trucksPosition).getContactNo());
-                                notifyItemChanged(trucksPosition);
-                                TFTruckFragment.driverPlannedCount += 1;
-                                TFTruckFragment.drivetNotPlannedCount -= 1;
-                                TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned) + " " + TFTruckFragment.driverPlannedCount);
-                                TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned) + " " + TFTruckFragment.drivetNotPlannedCount);
-                                // Pilot has been assigned. Start delay tracking.
-                                mActivity.startDelayTracking(mDataSet.get(trucksPosition).getAssignedPilot(), mDataSet.get(trucksPosition).getEta());
-                            } else {
-                                Toast.makeText(mContext, mContext.getResources().getString(R.string.problem_assign_pilot), Toast.LENGTH_SHORT).show();
+                    if (isWarehouse) {
+                        new WebServices().updatePilotWarehouse(obj, flag, existingPilotId, new ResultReceiver(null){
+                            @Override
+                            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                                super.onReceiveResult(resultCode, resultData);
+                                if (resultCode == TFConst.SUCCESS) {
+                                    String reportingTime = mDataSet.get(trucksPosition).getEta();
+                                    long reportingTimeMillis = Long.parseLong(reportingTime);
+                                    reportingTimeMillis -= 3600000l; // adjust time to get correct value
+                                    String dateTime[] = TFUtils.changeTime(Long.toString(reportingTimeMillis)).split("\\s+");
+                                    String from = TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME);
+                                    if (TFUtils.hubCodeCityMap.containsKey(from))
+                                        from = TFUtils.hubCodeCityMap.get(from);
+                                    String reason = "Vehicle No: " + mDataSet.get(trucksPosition).getVehicleNumber() +
+                                            "\nDate of Duty: " + dateTime[0] +
+                                            "\nTime of Duty: " + dateTime[1] +
+                                            "\nSource: " + from +
+                                            "\nDestination: " + mDataSet.get(trucksPosition).getClient() + " warehouse";
+                                    TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(trucksPosition).getContactNo());
+                                    notifyItemChanged(trucksPosition);
+                                    TFTruckFragment.driverPlannedCount += 1;
+                                    TFTruckFragment.drivetNotPlannedCount -= 1;
+                                    TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned) + " " + TFTruckFragment.driverPlannedCount);
+                                    TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned) + " " + TFTruckFragment.drivetNotPlannedCount);
+                                    // Pilot has been assigned. Start delay tracking.
+                                    mActivity.startDelayTracking(mDataSet.get(trucksPosition).getAssignedPilot(), mDataSet.get(trucksPosition).getEta());
+                                } else {
+                                    Toast.makeText(mContext, mContext.getResources().getString(R.string.problem_assign_pilot), Toast.LENGTH_SHORT).show();
+                                }
+                                TFUtils.hideProgressBar();
                             }
-                            TFUtils.hideProgressBar();
-                        }
-                    });
+                        });
+                    } else {
+                        new WebServices().getChangePilot(mContext, obj, flag, existingPilotId, new ResultReceiver(null) {
+                            @Override
+                            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                                super.onReceiveResult(resultCode, resultData);
+                                if (resultCode == TFConst.SUCCESS) {
+                                    String reportingTime = mDataSet.get(trucksPosition).getEta();
+                                    long reportingTimeMillis = Long.parseLong(reportingTime);
+                                    reportingTimeMillis -= 3600000l; // adjust time to get correct value
+                                    String dateTime[] = TFUtils.changeTime(Long.toString(reportingTimeMillis)).split("\\s+");
+                                    String from = TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME);
+                                    if (TFUtils.hubCodeCityMap.containsKey(from))
+                                        from = TFUtils.hubCodeCityMap.get(from);
+                                    String to = mDataSet.get(trucksPosition).getNextHub();
+                                    if (TFUtils.hubCodeCityMap.containsKey(to))
+                                        to = TFUtils.hubCodeCityMap.get(to);
+                                    String reason = "Vehicle No: " + mDataSet.get(trucksPosition).getVehicleNumber() +
+                                            "\nDate of Duty: " + dateTime[0] +
+                                            "\nTime of Duty: " + dateTime[1] +
+                                            "\nSource: " + from +
+                                            "\nDestination: " + to;
+                                    TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(trucksPosition).getContactNo());
+                                    notifyItemChanged(trucksPosition);
+                                    TFTruckFragment.driverPlannedCount += 1;
+                                    TFTruckFragment.drivetNotPlannedCount -= 1;
+                                    TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned) + " " + TFTruckFragment.driverPlannedCount);
+                                    TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned) + " " + TFTruckFragment.drivetNotPlannedCount);
+                                    // Pilot has been assigned. Start delay tracking.
+                                    mActivity.startDelayTracking(mDataSet.get(trucksPosition).getAssignedPilot(), mDataSet.get(trucksPosition).getEta());
+                                } else {
+                                    Toast.makeText(mContext, mContext.getResources().getString(R.string.problem_assign_pilot), Toast.LENGTH_SHORT).show();
+                                }
+                                TFUtils.hideProgressBar();
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -612,13 +655,63 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     Type listType = new TypeToken<ArrayList<PilotAvailability>>() {
                     }.getType();
                     ArrayList<PilotAvailability> pilotAvailabilityList = new Gson().fromJson(responseStr, listType);
-                    showAvailbalePilots(pos,td, change, pilotAvailabilityList);
+                    showAvailbalePilots(pos,td, change, pilotAvailabilityList, true);
                 } else {
                     TFUtils.hideProgressBar();
                     Toast.makeText(mContext, "" + mContext.getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    public void releaseWarehousePilotAlertDialog(final int position, TruckDetails obj) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
+        dialogBuilder.setTitle(Html.fromHtml(String.format(mContext.getString(R.string.are_you_sure_release), obj.getAssignedPilot())));
+        dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                new WebServices().releasePilotWarehouse(mDataSet.get(position).getCurrentHub(), mDataSet.get(position).getPilotId(),
+                        mDataSet.get(position).getVehicleTrackingId(),
+                        new ResultReceiver(null) {
+                            @Override
+                            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                                super.onReceiveResult(resultCode, resultData);
+                                if (resultCode == 200) {
+                                    String reportingTime = mDataSet.get(position).getEta();
+                                    long reportingTimeMillis = Long.parseLong(reportingTime);
+                                    reportingTimeMillis -= 3600000l; // adjust time to get correct value
+                                    String dateTime[] = TFUtils.changeTime(Long.toString(reportingTimeMillis)).split("\\s+");
+                                    String from = TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME);
+                                    if (TFUtils.hubCodeCityMap.containsKey(from))
+                                        from = TFUtils.hubCodeCityMap.get(from);
+                                    String reason = "Duty Cancelled..\nVehicle No: " + mDataSet.get(position).getVehicleNumber() +
+                                            "\nDate of Duty: " + dateTime[0] +
+                                            "\nTime of Duty: " + dateTime[1] +
+                                            "\nSource: " + from +
+                                            "\nDestination: " + mDataSet.get(position).getClient() + " warehouse";
+                                    TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(position).getContactNo());
+                                    //Pilot is released, stop delay tracking.
+                                    mActivity.stopDelayTracking(mDataSet.get(position).getAssignedPilot());
+
+                                    mDataSet.get(position).setAssignedPilot(null);
+                                    notifyItemChanged(position);
+                                    TFTruckFragment.driverPlannedCount -= 1;
+                                    TFTruckFragment.drivetNotPlannedCount += 1;
+                                    TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned) + " " + TFTruckFragment.driverPlannedCount);
+                                    TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned) + " " + TFTruckFragment.drivetNotPlannedCount);
+                                } else {
+                                    Toast.makeText(mContext, mContext.getResources().getString(R.string.error_releasing_pilot), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+            }
+        });
+        dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.no), null);
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
+        alertDialog.show();
     }
 
     public void releasePilotAlertDialog(final int position, TruckDetails obj) {
