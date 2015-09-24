@@ -301,7 +301,8 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             Bundle bundle = new Bundle();
             bundle.putString("vehicle_number", holder.mVehicleNumber.getText().toString());
             bundle.putString("vehicleTrackingId", td.getVehicleTrackingId());
-            mTfTruckFragment.startFragment(R.layout.fragment_check_list, bundle);
+          //  mTfTruckFragment.startFragment(R.layout.fragment_check_list, bundle);
+            mTfTruckFragment.startFragment(R.layout.fragment_base_checklist, bundle);
         }
     }
 

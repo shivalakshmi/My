@@ -9,11 +9,10 @@ import android.widget.Button;
 
 import com.fissionlabs.trucksfirst.R;
 
-
 /**
  * @author ashok on 9/23/15.
  */
-public class FirstScreenFragment extends CheckListCommonFragment {
+public class FifthScreenFragment extends CheckListCommonFragment {
 
     private  Button btnNext;
     @Nullable
@@ -22,21 +21,8 @@ public class FirstScreenFragment extends CheckListCommonFragment {
 
 
 
-    /*   // CheckListBaseFragment.moveToNext();
-        View view = inflater.inflate(R.layo, container, false);
-
-        btnNext = (Button) view.findViewById(R.id.btnNext);
-
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                CheckListBaseFragment.moveToNext();
-            }
-        });*/
-
-        //CheckListBaseFragment.moveToNext();
-        View view = inflater.inflate(R.layout.firstscreenchecklist, container, false);
+       // CheckListBaseFragment.moveToNext();
+        View view = inflater.inflate(R.layout.fragment_fifth_screen_checklist, container, false);
         btnNext = (Button) view.findViewById(R.id.btnNext);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +32,7 @@ public class FirstScreenFragment extends CheckListCommonFragment {
                 CheckListBaseFragment.moveToNext();
             }
         });
+
         return view;
     }
 

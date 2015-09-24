@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/changeover_complete_heading"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textView5"
+        android:layout_marginRight="50dp"
+        android:text="10s"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <!--<RelativeLayout
+        android:id="@+id/newone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
+        android:gravity="center_horizontal|center_vertical"
+        >-->
+
+
+    <RelativeLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"
+        >
+
+        <RadioGroup
+            android:id="@+id/radioBtnGroup_driver_onboard_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- <RadioButton
+                 android:id="@+id/radioBtn_driver_onboard_ok"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:checked="false"
+
+                 android:text="ok" />
+
+             <RadioButton
+                 android:id="@+id/radioBtn_driver_onboard_notok"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignBottom="@+id/radioBtn_driver_onboard_ok"
+                 android:layout_toEndOf="@+id/radioBtn_driver_onboard_ok"
+                 android:checked="false"
+                 android:text="Not ok" />-->
+
+            <RadioButton
+                android:id="@+id/radioBtn_driver_onboard_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/ok"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/radioBtn_driver_onboard_notok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/not_ok"
+                android:textSize="15sp" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView71"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/radioBtnGroup_driver_onboard_ok"
+            android:layout_marginStart="57dp"
+            android:layout_toEndOf="@+id/radioBtnGroup_driver_onboard_ok"
+            android:text="@string/clean_condition"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>
+
+
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_roundcorner"
+        android:text="@string/chk_next"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8/11"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textView8"
+        android:layout_above="@+id/top_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="178dp" />
+</RelativeLayout>

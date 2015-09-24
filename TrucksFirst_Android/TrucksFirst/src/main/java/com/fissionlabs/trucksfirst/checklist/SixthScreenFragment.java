@@ -9,34 +9,21 @@ import android.widget.Button;
 
 import com.fissionlabs.trucksfirst.R;
 
-
 /**
  * @author ashok on 9/23/15.
  */
-public class FirstScreenFragment extends CheckListCommonFragment {
+public class SixthScreenFragment extends CheckListCommonFragment {
 
-    private  Button btnNext;
+    private Button btnNext;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
 
-    /*   // CheckListBaseFragment.moveToNext();
-        View view = inflater.inflate(R.layo, container, false);
+       // CheckListBaseFragment.moveToNext();
 
-        btnNext = (Button) view.findViewById(R.id.btnNext);
-
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                CheckListBaseFragment.moveToNext();
-            }
-        });*/
-
-        //CheckListBaseFragment.moveToNext();
-        View view = inflater.inflate(R.layout.firstscreenchecklist, container, false);
+        View view = inflater.inflate(R.layout.fragment_sixth_screen_checklist, container, false);
         btnNext = (Button) view.findViewById(R.id.btnNext);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +33,7 @@ public class FirstScreenFragment extends CheckListCommonFragment {
                 CheckListBaseFragment.moveToNext();
             }
         });
+
         return view;
     }
 
