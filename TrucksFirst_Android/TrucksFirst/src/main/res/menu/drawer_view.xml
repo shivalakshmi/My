@@ -34,10 +34,13 @@
             android:icon="@drawable/ic_update"
             android:title="@string/upgrade"/>
         <item
+            android:id="@+id/pending_pod"
+            android:icon="@drawable/ic_dashboard"
+            android:title="Pending POD"/>
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"
             android:title="@string/logout"/>
-
     </group>
 
 

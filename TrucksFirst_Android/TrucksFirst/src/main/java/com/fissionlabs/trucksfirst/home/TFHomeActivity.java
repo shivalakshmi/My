@@ -34,6 +34,7 @@ import com.fissionlabs.trucksfirst.common.TFCheckLockService;
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
 import com.fissionlabs.trucksfirst.common.TFPilotDelayAlertService;
 import com.fissionlabs.trucksfirst.fragments.TFCheckListFragment;
+import com.fissionlabs.trucksfirst.fragments.TFClosedTripsFragment;
 import com.fissionlabs.trucksfirst.fragments.TFDashBoardFragment;
 import com.fissionlabs.trucksfirst.fragments.TFSOSFragment;
 import com.fissionlabs.trucksfirst.fragments.TFSettingsFragment;
@@ -59,6 +60,7 @@ public class TFHomeActivity extends TFCommonActivity {
     private TFSOSFragment mTFSOSFragment;
     private TFUpgradeFragment mTFUpgradeFragment;
     private TFpdfViewer mTFpdfViewer;
+    private TFClosedTripsFragment mClosedTripFragment;
     private Fragment mSelectedFragment;
 
     public ActionBar mActionBar;
@@ -183,6 +185,9 @@ public class TFHomeActivity extends TFCommonActivity {
                 alertDialog.show();
 
                 break;
+            case R.id.pending_pod:
+                loadFragment(R.layout.fragment_closed_trips, null);
+                break;
             default:
                 break;
         }
@@ -259,6 +264,12 @@ public class TFHomeActivity extends TFCommonActivity {
 
                 selectedFragment = mTFpdfViewer;
 
+                break;
+            case R.layout.fragment_closed_trips:
+                if (mClosedTripFragment == null) {
+                    mClosedTripFragment = new TFClosedTripsFragment();
+                }
+                selectedFragment = mClosedTripFragment;
                 break;
         }
 

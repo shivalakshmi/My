@@ -27,7 +27,8 @@ public interface TFConst {
     String URL_CHANGE_PASSWORD = "http://" + BASE_IP + "user/changepassword";
     String URL_SKIPPED_PILOT_INFO = "http://" + BASE_IP + "pilot/updateskippedpilotinfo";
     String URL_CHECKLIST_SAVE = "http://" + BASE_IP + "mobile/checklist";
-    String URL_CHECKLIST_2 = "http://" + BASE_IP + "mobile/checklist2";
+    String URL_CLOSED_TRIPS = "http://" + BASE_IP + "mobile/closedtrips";
+    String URL_CLOSED_TRIP_POD = "http://" + BASE_IP + "mobile/closedtrippod";
     String URL_FORGOT_PASSWORD = "http://" + BASE_IP + "user/resetpassword";
     String URL_SMS = "http://bhashsms.com/api/sendmsg.php";
     String URL_APP_LOCK_TAMPER = "http://" + BASE_IP + "user/tamper";
@@ -41,6 +42,11 @@ public interface TFConst {
     String TAG_USER_LOGIN = "USER_LOGIN";
     String TAG_REPORT_TAMPER = "APP_LOCK_TAMPERED";
     String TAG_SOS_TRUCKS_LIST = "SOS_TRUCKS_LIST";
+    String TAG_PILOT_DETAILS_WAREHOUSE = "TAG_PILOT_DETAILS_WAREHOUSE";
+    String TAG_ASSIGN_PILOT_WAREHOUSE = "TAG_ASSIGN_PILOT_WAREHOUSE";
+    String TAG_RELEASE_PILOT_WAREHOUSE = "TAG_RELEASE_PILOT_WAREHOUSE";
+    String TAG_CLOSED_TRIP_DETAILS = "TAG_CLOSED_TRIP_DETAILS";
+    String TAG_CLOSED_TRIP_POD = "TAG_CLOSED_TRIP_POD";
 
     int SUCCESS = 200;
     int ERROR = 100;

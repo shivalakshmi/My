@@ -638,7 +638,7 @@ public class WebServices implements TFConst {
                 return headers;
             }
         };
-        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_PILOT_DETAILS);
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_PILOT_DETAILS_WAREHOUSE);
     }
 
     public void updatePilotWarehouse(TruckDetails obj, boolean flag, String existingPilotId, final ResultReceiver resultReceiver) {
@@ -680,7 +680,7 @@ public class WebServices implements TFConst {
             }
 
         };
-        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_PILOT_DETAILS);
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_ASSIGN_PILOT_WAREHOUSE);
     }
 
     public void releasePilotWarehouse(final String currentHub, final String pilotId, final String vehicleTrackingId, final ResultReceiver resultReceiver) {
@@ -718,7 +718,7 @@ public class WebServices implements TFConst {
             }
 
         };
-        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_PILOT_DETAILS);
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_RELEASE_PILOT_WAREHOUSE);
     }
 
     public void getSOSTrucksList(final Context context, final ResultReceiver resultReceiver) {
@@ -749,6 +749,76 @@ public class WebServices implements TFConst {
         });
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_SOS_TRUCKS_LIST);
 
+    }
+
+    public void getClosedTrips(String hub, final ResultReceiver r) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_CLOSED_TRIPS + "?currentHub=" + hub,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Closed Trips ===========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Closed Trips end =======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+                        r.send(SUCCESS, bundle);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                r.send(ERROR, null);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                return headers;
+            }
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CLOSED_TRIP_DETAILS);
+    }
+
+    public void setClosedTripPOD(String id, final ResultReceiver r) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_CLOSED_TRIP_POD + "?planningId=" + id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Pilot details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Pilot details end ======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+                        r.send(SUCCESS, bundle);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                r.send(ERROR, null);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<>();
+                return headers;
+            }
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CLOSED_TRIP_POD);
     }
 }
 
