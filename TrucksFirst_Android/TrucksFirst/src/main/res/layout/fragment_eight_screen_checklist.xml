@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/page_number"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/tvTime"
@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:gravity="end"
             android:text="@string/timer"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
     </LinearLayout>
@@ -40,7 +40,7 @@
         android:layout_gravity="center"
         android:visibility="gone"
         android:text="@string/walk_aroundcheck"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="25sp"
         android:textStyle="bold" />
 

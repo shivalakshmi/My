@@ -54,7 +54,6 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@color/color_primary_light</item>
-        <item name="android:padding">@dimen/common_padding_small3</item>
         <item name="android:gravity">center_vertical</item>
     </style>
 

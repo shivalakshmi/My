@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
@@ -23,6 +24,7 @@ public class FirstScreenFragment extends CheckListCommonFragment {
     private int count = 10;
     private boolean timeOver;
     private int timeTaken = 0;
+    private RadioGroup radio_group_wiperL,radio_group_wiperR,radio_group_headlightL,radio_group_headlightR,radio_group_side_indicatorL,radio_group_side_indicatorR,radio_group_brack_light,radio_group_horn;
 
 
     @Nullable
@@ -35,6 +37,16 @@ public class FirstScreenFragment extends CheckListCommonFragment {
 
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
+        radio_group_wiperL = (RadioGroup)view.findViewById(R.id.radio_group_wiperL);
+        radio_group_wiperR = (RadioGroup)view.findViewById(R.id.radio_group_wiperR);
+        radio_group_headlightL = (RadioGroup)view.findViewById(R.id.radio_group_headlightL);
+        radio_group_headlightR = (RadioGroup)view.findViewById(R.id.radio_group_headlightR);
+        radio_group_side_indicatorL = (RadioGroup)view.findViewById(R.id.radio_group_side_indicatorL);
+        radio_group_side_indicatorR = (RadioGroup)view.findViewById(R.id.radio_group_side_indicatorR);
+        radio_group_brack_light = (RadioGroup)view.findViewById(R.id.radio_group_brack_light);
+        radio_group_horn = (RadioGroup)view.findViewById(R.id.radio_group_horn);
+
+
 
         tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 1, 11));
         mTvTime.setText(String.format(getResources().getString(R.string.timer), count));

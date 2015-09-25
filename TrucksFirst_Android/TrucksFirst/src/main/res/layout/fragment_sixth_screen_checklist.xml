@@ -133,7 +133,7 @@
                         android:layout_marginStart="80dp"
                         android:layout_toEndOf="@+id/radio_group_wiperL"
                         android:text="@string/isthe_tollcash"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </RelativeLayout>
 
@@ -179,7 +179,7 @@
                         android:layout_marginStart="80dp"
                         android:layout_toEndOf="@+id/radio_group_wiperR"
                         android:text="@string/toll_receipt"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </RelativeLayout>
 
@@ -224,7 +224,7 @@
 
                         android:layout_toEndOf="@+id/radio_group_headlightL"
                         android:text="@string/toll_receipt_note"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </RelativeLayout>
 
@@ -269,7 +269,7 @@
                         android:layout_marginStart="80dp"
                         android:layout_toEndOf="@+id/radio_group_headlightR"
                         android:text="@string/toll_reason"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </RelativeLayout>
 
@@ -313,7 +313,7 @@
                         android:layout_marginStart="80dp"
                         android:layout_toEndOf="@+id/radio_group_side_indicatorL"
                         android:text="@string/mechanical"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </RelativeLayout>
 
@@ -357,7 +357,7 @@
                         android:layout_marginStart="80dp"
                         android:layout_toEndOf="@+id/radio_group_side_indicatorR"
                         android:text="@string/repair"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </RelativeLayout>
 
@@ -403,7 +403,7 @@
                         android:layout_marginStart="80dp"
                         android:layout_toEndOf="@+id/radio_group_brack_light"
                         android:text="@string/unapproved_rto"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </RelativeLayout>
 
@@ -448,7 +448,7 @@
                         android:layout_marginStart="80dp"
                         android:layout_toEndOf="@+id/radio_group_horn11"
                         android:text="@string/challan"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </RelativeLayout>
 
@@ -492,7 +492,7 @@
                         android:layout_marginStart="80dp"
                         android:layout_toEndOf="@+id/radio_group_horn"
                         android:text="@string/unapproved_expenses"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </RelativeLayout>
 
@@ -535,7 +535,7 @@
                         android:layout_marginStart="80dp"
                         android:layout_toEndOf="@+id/radio_group_horn1"
                         android:text="@string/toll_cash_topup"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
                         android:id="@+id/edittext"
@@ -544,7 +544,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="150dp"
                         android:layout_toEndOf="@+id/tvHorn11"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </RelativeLayout>
             </LinearLayout>

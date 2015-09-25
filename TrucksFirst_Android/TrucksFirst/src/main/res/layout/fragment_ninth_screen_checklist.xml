@@ -96,7 +96,7 @@
                 android:layout_marginStart="80dp"
                 android:layout_toEndOf="@+id/radio_group"
                 android:text="@string/leakage_engineoil"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </RelativeLayout>
 
@@ -141,7 +141,7 @@
                 android:layout_marginStart="80dp"
                 android:layout_toEndOf="@+id/radio_wipergroup"
                 android:text="@string/leakage_steeringoil"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </RelativeLayout>
 
@@ -185,7 +185,7 @@
                 android:layout_marginStart="80dp"
                 android:layout_toEndOf="@+id/radio_Headlightgroup1"
                 android:text="@string/temp_check"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </RelativeLayout>
 
@@ -229,7 +229,7 @@
                 android:layout_marginStart="80dp"
                 android:layout_toEndOf="@+id/radio_Headlightgroup"
                 android:text="@string/leakage_diesel_tank"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </RelativeLayout>
 
@@ -273,7 +273,7 @@
                 android:layout_marginStart="80dp"
                 android:layout_toEndOf="@+id/radio_Lslidegroup"
                 android:text="@string/coolant_level"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </RelativeLayout>
 
@@ -317,7 +317,7 @@
                 android:layout_marginStart="80dp"
                 android:layout_toEndOf="@+id/radio_txtRslidegroup"
                 android:text="@string/visual_inspection"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </RelativeLayout>
 
@@ -363,7 +363,7 @@
                                 android:layout_marginStart="80dp"
                                 android:layout_toEndOf="@+id/radio_txtBrakelightgroup1"
                                 android:text="@string/chk_brakelight"
-                                android:textAppearance="?android:attr/textAppearanceLarge" />
+                                android:textAppearance="?android:attr/textAppearanceMedium" />
 
                         </RelativeLayout>
 
