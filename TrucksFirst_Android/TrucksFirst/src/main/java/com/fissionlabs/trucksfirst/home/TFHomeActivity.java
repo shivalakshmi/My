@@ -109,6 +109,7 @@ public class TFHomeActivity extends TFCommonActivity {
         mHubSupervisorName.setText(TFUtils.getStringFromSP(TFHomeActivity.this,HS_NAME));
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mNavigationView.getMenu().getItem(6).setTitle(R.string.app_ver);
         if (mNavigationView != null) {
             setupDrawerContent(mNavigationView);
         }

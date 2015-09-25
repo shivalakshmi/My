@@ -30,17 +30,20 @@
             android:icon="@drawable/alert"
             android:title="@string/sos"/>
         <item
-            android:id="@+id/nav_upgrade"
-            android:icon="@drawable/ic_update"
-            android:title="@string/upgrade"/>
-        <item
             android:id="@+id/pending_pod"
             android:icon="@drawable/ic_pod"
             android:title="Pending POD"/>
         <item
+            android:id="@+id/nav_upgrade"
+            android:icon="@drawable/ic_update"
+            android:title="@string/upgrade"/>
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"
             android:title="@string/logout"/>
+        <item
+            android:id="@+id/version_label"
+            android:title="@string/app_ver"/>
     </group>
 
 

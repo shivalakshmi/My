@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Scanner;
 
 public class TFUpgradeFragment extends TFCommonFragment {
     private Activity mActivity;
@@ -76,13 +77,11 @@ public class TFUpgradeFragment extends TFCommonFragment {
     class SimpleTask extends AsyncTask<Void,Void,Boolean> {
         @Override
         protected Boolean doInBackground(Void... params) {
-//            URL url = new URL("http://52.76.55.8/rivigo/Rivigo.apk");
-//        URL url = new URL("https://www.dropbox.com/s/50932rdsk9nwlhq/Rivigo.apk");
+            if (!isUpdateAvailable()) {return  false;}
             try {
                 URL url = new URL("https://s3-ap-southeast-1.amazonaws.com/rivigo-dev/Rivigo.apk");
                 HttpURLConnection c = (HttpURLConnection) url.openConnection();
                 c.setRequestMethod("GET");
-//            c.setDoOutput(true);
                 c.connect();
 
                 String PATH = Environment.getExternalStorageDirectory() + "/download/";
@@ -124,11 +123,40 @@ public class TFUpgradeFragment extends TFCommonFragment {
                 startActivity(intent);
             } else {
                 Toast.makeText(mActivity,getString(R.string.no_updates_found),Toast.LENGTH_LONG).show();
-
             }
         }
+
+        private boolean isUpdateAvailable(){
+            String ver = getString(R.string.app_ver);
+            int majorVer = Integer.parseInt(ver.substring(13, ver.indexOf(".")));
+            int minorVer = Integer.parseInt(ver.substring(ver.indexOf(".")+1));
+            String newVer = "";
+
+            try {
+                URL url = new URL("https://s3-ap-southeast-1.amazonaws.com/rivigo-dev/latest_app_ver");
+                HttpURLConnection c = (HttpURLConnection) url.openConnection();
+                c.setRequestMethod("GET");
+                c.connect();
+
+                int status = c.getResponseCode();
+                Log.e("connection status", "" + status);
+                InputStream is = c.getInputStream();
+                Scanner s = new Scanner(is);
+                if (s.hasNext()) newVer = s.next();
+                s.close();
+                is.close();
+                int majorNew = Integer.parseInt(newVer.substring(0, newVer.indexOf(".")));
+                int minorNew = Integer.parseInt(newVer.substring(newVer.indexOf(".")+1));
+                if ((majorNew>majorVer) || (majorNew == majorVer && minorNew>minorVer)) return true;
+
+            } catch (FileNotFoundException fnfe) {
+                Log.e("File", "FileNotFoundException! " + fnfe);
+                fnfe.printStackTrace();
+            } catch (Exception e) {
+                Log.e("UpdateAPP", "Exception " + e);
+                e.printStackTrace();
+            }
+            return false;
+        }
     }
-
 }
-
-
