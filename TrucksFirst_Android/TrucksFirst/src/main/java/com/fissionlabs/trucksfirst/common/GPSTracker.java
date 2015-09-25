@@ -19,26 +19,20 @@ import com.fissionlabs.trucksfirst.R;
 @SuppressLint("Registered")
 public class GPSTracker extends Service implements LocationListener {
 
+    // The minimum distance to change Updates in meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
+    // The minimum time between updates in milliseconds
+    private static final long MIN_TIME_BW_UPDATES = 15000; // for every 15 seconds
     private final Context mContext;
-
     // flag for GPS status
     private boolean isGPSEnabled = false;
-
     // flag for network status
     private boolean isNetworkEnabled = false;
-
     // flag for GPS status
     private boolean canGetLocation = false;
     private Location location; // location
     private double latitude; // latitude
     private double longitude; // longitude
-
-    // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-
-    // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 15000; // for every 15 seconds
-
     // Declaring a Location Manager
     private LocationManager locationManager;
 

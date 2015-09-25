@@ -24,9 +24,9 @@ import java.util.TimerTask;
 public class TFPilotDelayAlertService extends Service {
 
     private final IBinder mBinder = new PDASBinder();
+    SharedPreferences sPref;
     private HashMap<String, AlertTimerTask> timerTaskHashMap = new HashMap<String, AlertTimerTask>();
     private Timer t;
-    SharedPreferences sPref;
 
     public TFPilotDelayAlertService() {
     }
@@ -72,14 +72,30 @@ public class TFPilotDelayAlertService extends Service {
         sPref = getSharedPreferences("PILOT_DELAY_ALERT_SERVICE", Context.MODE_PRIVATE);
         Map<String, ?> oldData = sPref.getAll();
         long l;
-        for (String s:oldData.keySet()) {
-            try{
+        for (String s : oldData.keySet()) {
+            try {
                 l = Long.parseLong(oldData.get(s).toString());
                 startWaiting(s, new Date(l), false);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void showNotification(String pilot, String time) {
+        if (!timerTaskHashMap.containsKey(pilot)) {
+            return;
+        }
+        stopWaiting(pilot);
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Notification.Builder mNotiBuilder = new Notification.Builder(this)
+                .setSmallIcon(R.drawable.ic_dashboard)
+                .setContentTitle(pilot + " is late")
+                .setContentText("Reporting time of " + pilot + " was " + time)
+                .setSound(sound);
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(pilot.hashCode(), mNotiBuilder.build());
     }
 
     public class PDASBinder extends Binder {
@@ -109,21 +125,5 @@ public class TFPilotDelayAlertService extends Service {
         public long getTime() {
             return time.getTime();
         }
-    }
-
-    public void showNotification(String pilot, String time) {
-        if (!timerTaskHashMap.containsKey(pilot)) {
-            return;
-        }
-        stopWaiting(pilot);
-        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Notification.Builder mNotiBuilder = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.ic_dashboard)
-                .setContentTitle(pilot+" is late")
-                .setContentText("Reporting time of "+pilot+" was "+time)
-                .setSound(sound);
-        NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(pilot.hashCode(), mNotiBuilder.build());
     }
 }

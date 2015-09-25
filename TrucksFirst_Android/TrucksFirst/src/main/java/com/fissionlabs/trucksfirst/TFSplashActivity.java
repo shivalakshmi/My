@@ -37,8 +37,8 @@ public class TFSplashActivity extends TFCommonActivity {
     }
 
 
-    private void launchHome(){
-        if(TFUtils.getBooleanFromSP(TFSplashActivity.this,IS_USER_EXISTS)){
+    private void launchHome() {
+        if (TFUtils.getBooleanFromSP(TFSplashActivity.this, IS_USER_EXISTS)) {
             startActivity(new Intent(TFSplashActivity.this, TFHomeActivity.class));
             finish();
         } else {

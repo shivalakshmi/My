@@ -21,7 +21,7 @@ public class FourthScreenFragment extends CheckListCommonFragment {
 
     private Button btnNext;
     private TextView mTvTime;
-    private int count = 10;
+    private int count = 20;
     private boolean timeOver;
     private int timeTaken = 0;
 

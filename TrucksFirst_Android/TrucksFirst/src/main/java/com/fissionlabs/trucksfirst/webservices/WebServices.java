@@ -128,6 +128,7 @@ public class WebServices implements TFConst {
         TFApp.getInstance().addToRequestQueue(request, TAG_USER_LOGIN);
 
     }
+
     public void getTruckDetails(final Context context, final ResultReceiver resultReceiver) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_TRUCK_DETAILS + "?hubName=" + TFUtils.getStringFromSP(context, HUB_NAME),
@@ -144,7 +145,7 @@ public class WebServices implements TFConst {
 
                         Date date = new Date();
                         CharSequence dateFormat = DateFormat.format("kk:mm ", date.getTime());
-                        TFTruckFragment.mLastUpdatedTime.setText(context.getResources().getString(R.string.last_updated_time)+" "+dateFormat);
+                        TFTruckFragment.mLastUpdatedTime.setText(context.getResources().getString(R.string.last_updated_time) + " " + dateFormat);
 
                         resultReceiver.send(SUCCESS, bundle);
 
@@ -217,7 +218,7 @@ public class WebServices implements TFConst {
 
     public void getPilotRelease(final Context context, final String currentHub, final String pilotId, final String vehicleTrackingId, final ResultReceiver resultReceiver) {
 
-        String url =  URL_PILOT_RELEASE + "?currentHub=" + currentHub + "&pilotId=" + pilotId + "&vehicleTrackingId=" + vehicleTrackingId;
+        String url = URL_PILOT_RELEASE + "?currentHub=" + currentHub + "&pilotId=" + pilotId + "&vehicleTrackingId=" + vehicleTrackingId;
 
         Log.e("Lakshmi", url);
 
@@ -521,12 +522,12 @@ public class WebServices implements TFConst {
     }
 
     public void postSkippedPilotInfo(final String pilotId, String reason, String comment) {
-        reason = reason.replaceAll(" ","%20");
-        comment = comment.replaceAll(" ","%20");
+        reason = reason.replaceAll(" ", "%20");
+        comment = comment.replaceAll(" ", "%20");
 
-        
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                URL_SKIPPED_PILOT_INFO + "?pilotId="+ pilotId + "&reason="+ reason + "&comment=" + comment,
+                URL_SKIPPED_PILOT_INFO + "?pilotId=" + pilotId + "&reason=" + reason + "&comment=" + comment,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -551,10 +552,10 @@ public class WebServices implements TFConst {
     }
 
 
-    public void getChecklistSave(final Context context,final boolean status, final String vehicleTrackingId) {
+    public void getChecklistSave(final Context context, final boolean status, final String vehicleTrackingId) {
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_CHECKLIST_SAVE + "?vehicleTrackingId="+vehicleTrackingId+ "&checkList=" +status ,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_CHECKLIST_SAVE + "?vehicleTrackingId=" + vehicleTrackingId + "&checkList=" + status,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

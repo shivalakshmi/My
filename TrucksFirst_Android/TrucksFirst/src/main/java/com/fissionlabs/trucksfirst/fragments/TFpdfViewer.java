@@ -27,15 +27,15 @@ public class TFpdfViewer extends TFCommonFragment implements TFConst {
     private Button print, email;
     private Bundle bundle;
     private String pdf;
-    private String file,vehicleNum;
+    private String file, vehicleNum;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.pdf_viewer, container, false);
-        webView = (WebView)view.findViewById(R.id.webView);
-        print = (Button)view.findViewById(R.id.print);
-        email = (Button)view.findViewById(R.id.email);
+        webView = (WebView) view.findViewById(R.id.webView);
+        print = (Button) view.findViewById(R.id.print);
+        email = (Button) view.findViewById(R.id.email);
         bundle = this.getArguments();
 
 
@@ -48,7 +48,7 @@ public class TFpdfViewer extends TFCommonFragment implements TFConst {
         mHomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mHomeActivity.isHomeFragment == false)
+                if (mHomeActivity.isHomeFragment == false)
                     mHomeActivity.onBackPressed();
                 else
                     mHomeActivity.mDrawerLayout.openDrawer(GravityCompat.START);
@@ -57,7 +57,7 @@ public class TFpdfViewer extends TFCommonFragment implements TFConst {
 
         vehicleNum = bundle.getString("vehicle_number");
 
-        if(bundle.getString("pdf")!=null) {
+        if (bundle.getString("pdf") != null) {
             pdf = bundle.getString("pdf");
             file = bundle.getString("file");
             webView.getSettings().setJavaScriptEnabled(true);
@@ -77,7 +77,7 @@ public class TFpdfViewer extends TFCommonFragment implements TFConst {
                     i.setPackage("com.hp.android.print");
                     i.setDataAndType(Uri.parse("file://" + file), "text/plain");
                     getActivity().startActivity(i);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
@@ -101,8 +101,7 @@ public class TFpdfViewer extends TFCommonFragment implements TFConst {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState)
-    {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
         // Save the state of the WebView

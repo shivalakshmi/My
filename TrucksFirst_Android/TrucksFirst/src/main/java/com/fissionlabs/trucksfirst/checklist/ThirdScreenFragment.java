@@ -20,7 +20,7 @@ public class ThirdScreenFragment extends CheckListCommonFragment {
 
     private Button btnNext;
     private TextView mTvTime;
-    private int count = 10;
+    private int count = 20;
     private boolean timeOver;
     private int timeTaken = 0;
 
@@ -37,7 +37,7 @@ public class ThirdScreenFragment extends CheckListCommonFragment {
         tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 3, 11));
         mTvTime.setText(String.format(getResources().getString(R.string.timer), count));
 
-        ((TextView)view.findViewById(R.id.tvScreenName)).setText(getResources().getString(R.string.truck_docs));
+        ((TextView) view.findViewById(R.id.tvScreenName)).setText(getResources().getString(R.string.truck_docs));
 
 
         btnNext.setOnClickListener(new View.OnClickListener() {

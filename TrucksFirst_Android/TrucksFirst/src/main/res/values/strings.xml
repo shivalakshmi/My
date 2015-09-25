@@ -231,25 +231,13 @@
     <string name="bodyandtoolrelated">Body Tool related</string>
 
     <!--dropdown list items-->
-    <string-array name="mechnical_issues_array">
-        <item>Clutch</item>
-        <item>Brake</item>
-        <item>Accelarator</item>
-        <item>Body Tool related</item>
-    </string-array>
-    <string-array name="tyreoil_issues_array">
-        <item>Tyre condition</item>
-        <item>Stepeney condition</item>
-    </string-array>
-    <string-array name="electrical_issues_array">
-        <item>Panel board lights</item>
-    </string-array>
-    <string-array name="Engine_issues_array">
-        <item>Abnormal Sound</item>
-        <item>Gear operation</item>
-        <item>Steering related</item>
-        <item>Engine heatingrelated</item>
-    </string-array>
+        <string name="tyre_condition">Tyre condition</string>
+        <string  name="stepeny">Stepeney condition</string>
+        <string name="panelboard">Panel board lights</string>
+        <string name="abnormal">Abnormal Sound</string>
+        <string name="gear">Gear operation</string>
+        <string name="steering">Steering related</string>
+        <string name="engine_heating">Engine heatingrelated</string>
     <string name="rc">RC</string>
     <string name="national_permit_check"> National Permit</string>
     <string name="goods_tax">Goods Tax</string>
@@ -284,6 +272,17 @@
     <string name="page_number">%1$d/%2$d</string>
     <string name="timer">%1$d s</string>
     <string name="page_title">Title</string>
+    <string name="tollcash">Toll Cash Reconciliation</string>
+    <string name="isthe_tollcash">Is the toll cash with the driver Rs 6566 (e.g)?</string>
+    <string name="toll_receipt">Toll receipts of  Rs. 377 (e.g) submitted?</string>
+    <string name="toll_receipt_note">If tally then finance gets an alert. Cut from driver s salary</string>
+    <string name="toll_reason">Reason for toll cash shortage, if any</string>
+    <string name="mechanical">Mechanical</string>
+    <string name="repair">Repair Expenses en route</string>
+    <string name="unapproved_rto">Unapproved RTO expense</string>
+    <string name="challan">Challan</string>
+    <string name="unapproved_expenses">Unapproved expenses</string>
+    <string name="toll_cash_topup">Toll cash top up done</string>
 
-
+<string name="walk_aroundcheck">Walk around the truck to check</string>
 </resources>

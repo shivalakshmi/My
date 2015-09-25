@@ -46,25 +46,70 @@ public class CheckListAdapter extends BaseAdapter {
     private static final int OPERATIONAL_ITEM = 1;
     private static final int TECHNICAL_ITEM = 2;
     private static final int TYPE_MAX_COUNT = TECHNICAL_ITEM + 1;
-    private ArrayList<Checklist> mChecklistArrayList = null;
+    public static Uri printFileUri;
     private final Activity context;
 
     private final LayoutInflater mInflater;
     private final ChecklistNew mChecklistNew;
+    private ArrayList<Checklist> mChecklistArrayList = null;
     private ProgressDialog dialog = null;
     private String vehcleNumber;
-    private String download_file_path =  "";
+    private String download_file_path = "";
     private String dest_file_path = "/sdcard/dwnloaded_file2.pdf";
-    public static Uri printFileUri;
     private TFCheckListFragment mTfCheckListFragment;
 
-    public CheckListAdapter(Activity context, TFCheckListFragment mTfCheckListFragment,String vehicleNumber,ArrayList<Checklist> ChecklistArrayList, ChecklistNew checklistNew) {
+    public CheckListAdapter(Activity context, TFCheckListFragment mTfCheckListFragment, String vehicleNumber, ArrayList<Checklist> ChecklistArrayList, ChecklistNew checklistNew) {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.vehcleNumber  = vehicleNumber;
+        this.vehcleNumber = vehicleNumber;
         this.mChecklistArrayList = ChecklistArrayList;
         this.context = context;
         this.mChecklistNew = checklistNew;
         this.mTfCheckListFragment = mTfCheckListFragment;
+    }
+
+    public static void sendEmail(Context con) {
+        Intent emailIntent = new Intent();
+        emailIntent.setAction(Intent.ACTION_SEND);
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Documents- GRN/Bilti");
+        if (printFileUri != null) {
+            emailIntent.putExtra(Intent.EXTRA_STREAM, printFileUri);
+        }
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "");
+        emailIntent.setType("message/rfc822");
+
+        PackageManager pm = con.getPackageManager();
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.setType("text/plain");
+
+        Intent openInChooser = Intent.createChooser(emailIntent, "Share Via");
+
+        List<ResolveInfo> resInfo = pm.queryIntentActivities(sendIntent, 0);
+        List<LabeledIntent> intentList = new ArrayList<>();
+        for (int i = 0; i < resInfo.size(); i++) {
+            ResolveInfo ri = resInfo.get(i);
+            String packageName = ri.activityInfo.packageName;
+            if (packageName.contains("android.email")) {
+                emailIntent.setPackage(packageName);
+            } else if (packageName.contains("android.gm")) {
+                Intent intent = new Intent();
+                intent.setComponent(new ComponentName(packageName, ri.activityInfo.name));
+                intent.setAction(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, "");
+                if (printFileUri != null) {
+                    intent.putExtra(Intent.EXTRA_STREAM, printFileUri);
+                }
+
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Documents- GRN/Bilti");
+                intent.setType("message/rfc822");
+                intentList.add(new LabeledIntent(intent, packageName, ri.loadLabel(pm), ri.icon));
+            }
+        }
+
+        LabeledIntent[] extraIntents = intentList.toArray(new LabeledIntent[intentList.size()]);
+
+        openInChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, extraIntents);
+        con.startActivity(openInChooser);
     }
 
     @Override
@@ -163,25 +208,25 @@ public class CheckListAdapter extends BaseAdapter {
                 holder.mImgPrint.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String temp = vehcleNumber.substring(0,4)+"-"+vehcleNumber.substring(4,5)+"-"+vehcleNumber.substring(5);
-                        if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.registration_certificate))){
-                            temp = temp+"/"+temp +"_RC";
-                        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.fitness_certificate))){
-                            temp = temp+"/"+temp +"_Fitness";
-                        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.national_permit))){
-                            temp = temp+"/"+temp +"_NP";
-                        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.road_tax_booklet))){
-                            temp = temp+"/"+temp +"_RT";
-                        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.pollution_certificate))){
-                            temp = temp+"/"+temp +"_PUC";
-                        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.insurance))){
-                            temp = temp+"/"+temp +"_Insurance";
-                        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.grn_bilti))){
-                            temp = temp+"/"+temp +"_GRN";
+                        String temp = vehcleNumber.substring(0, 4) + "-" + vehcleNumber.substring(4, 5) + "-" + vehcleNumber.substring(5);
+                        if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.registration_certificate))) {
+                            temp = temp + "/" + temp + "_RC";
+                        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.fitness_certificate))) {
+                            temp = temp + "/" + temp + "_Fitness";
+                        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.national_permit))) {
+                            temp = temp + "/" + temp + "_NP";
+                        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.road_tax_booklet))) {
+                            temp = temp + "/" + temp + "_RT";
+                        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.pollution_certificate))) {
+                            temp = temp + "/" + temp + "_PUC";
+                        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.insurance))) {
+                            temp = temp + "/" + temp + "_Insurance";
+                        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.grn_bilti))) {
+                            temp = temp + "/" + temp + "_GRN";
                         }
-                        download_file_path = TFConst.URL_PRINT_DOCUMENT+temp+".pdf";
+                        download_file_path = TFConst.URL_PRINT_DOCUMENT + temp + ".pdf";
                         dialog = ProgressDialog.show(context, "", "Downloading file...", true);
-                        dest_file_path = "/sdcard/"+temp.split("/")[1]+".pdf";
+                        dest_file_path = "/sdcard/" + temp.split("/")[1] + ".pdf";
                         new Thread(new Runnable() {
                             public void run() {
                                 downloadFile(download_file_path, dest_file_path);
@@ -190,9 +235,9 @@ public class CheckListAdapter extends BaseAdapter {
 
 
                         Bundle bundle = new Bundle();
-                        bundle.putString("pdf",download_file_path);
+                        bundle.putString("pdf", download_file_path);
                         bundle.putString("file", dest_file_path);
-                        bundle.putString("vehicle_number",vehcleNumber);
+                        bundle.putString("vehicle_number", vehcleNumber);
                         mTfCheckListFragment.startFragment(R.layout.pdf_viewer, bundle);
 
                     }
@@ -267,132 +312,77 @@ public class CheckListAdapter extends BaseAdapter {
     }
 
     public void updateStatus(int position, boolean flag) {
-        if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.registration_certificate))){
+        if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.registration_certificate))) {
             mChecklistNew.setRegistrationCertificate(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.fitness_certificate))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.fitness_certificate))) {
             mChecklistNew.setFitnessCertificate(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.national_permit))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.national_permit))) {
             mChecklistNew.setNationalPermit(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.road_tax_booklet))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.road_tax_booklet))) {
             mChecklistNew.setRoadTaxBooklet(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.pollution_certificate))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.pollution_certificate))) {
             mChecklistNew.setPollutionCertificate(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.insurance))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.insurance))) {
             mChecklistNew.setInsurance(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.toll_tax_receipt_and_cash_balance))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.toll_tax_receipt_and_cash_balance))) {
             mChecklistNew.setTollTaxReceiptAndCashBalance(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.grn_bilti))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.grn_bilti))) {
             mChecklistNew.setGrnOrBilti(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.seal_intactness))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.seal_intactness))) {
             mChecklistNew.setSealIntactness(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.tool_kit))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.tool_kit))) {
             mChecklistNew.setToolKit(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.others))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.others))) {
             mChecklistNew.setToolKit(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.cabin_cleanliness))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.cabin_cleanliness))) {
             mChecklistNew.setCabinCleanliness(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.engine_starting))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.engine_starting))) {
             mChecklistNew.setEngineStarting(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.engine_sound))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.engine_sound))) {
             mChecklistNew.setEngineSound(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.exhaust_emission))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.exhaust_emission))) {
             mChecklistNew.setExhaustEmission(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.clutch_working))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.clutch_working))) {
             mChecklistNew.setClutchWorking(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.gear_movement))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.gear_movement))) {
             mChecklistNew.setGearMovement(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.brake_effectiveness))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.brake_effectiveness))) {
             mChecklistNew.setBrakeEffectiveness(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.tyres))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.tyres))) {
             mChecklistNew.setTyres(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.coolant_leakage))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.coolant_leakage))) {
             mChecklistNew.setCoolantLeakage(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.engine_oil_leakage))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.engine_oil_leakage))) {
             mChecklistNew.setEngineOilLeakage(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.gear_oil_leakage))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.gear_oil_leakage))) {
             mChecklistNew.setGearOilLeakage(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.fuel_diesel_leakage))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.fuel_diesel_leakage))) {
             mChecklistNew.setFuelDieselLeakage(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.differential_oil_leakage))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.differential_oil_leakage))) {
             mChecklistNew.setDifferentialOilLeakage(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.headlight))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.headlight))) {
             mChecklistNew.setHeadlight(flag);
-        } else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.indicator_and_hazard))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.indicator_and_hazard))) {
             mChecklistNew.setIndicatorAndHazard(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.horn))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.horn))) {
             mChecklistNew.setHorn(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.wiper))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.wiper))) {
             mChecklistNew.setWiper(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.temperature_on_temperature_gauge))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.temperature_on_temperature_gauge))) {
             mChecklistNew.setTemperatureOnTemperatureGauge(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.alternator_charger_light))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.alternator_charger_light))) {
             mChecklistNew.setAlternatorChargerLight(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.oil_pressure_warning_light))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.oil_pressure_warning_light))) {
             mChecklistNew.setOilPressureWarningLight(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.front))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.front))) {
             mChecklistNew.setFront(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.left))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.left))) {
             mChecklistNew.setLeft(flag);
-        } else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.rear))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.rear))) {
             mChecklistNew.setRear(flag);
-        }else if(mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.right))){
+        } else if (mChecklistArrayList.get(position).getChecklistItem().equalsIgnoreCase(context.getResources().getString(R.string.right))) {
             mChecklistNew.setRight(flag);
         }
-    }
-
-    public class ViewHolder {
-        TextView mTvOperational;
-        TextView mTvChecklistItem;
-        RadioButton mRadioBtnYes;
-        RadioButton mRadioBtnNo;
-        ImageView mImgPrint;
-        ImageView mImgEmail;
-        public RadioGroup mRadioGroup;
-    }
-
-    public static void sendEmail(Context con) {
-        Intent emailIntent = new Intent();
-        emailIntent.setAction(Intent.ACTION_SEND);
-        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Documents- GRN/Bilti");
-        if (printFileUri != null) {
-            emailIntent.putExtra(Intent.EXTRA_STREAM, printFileUri);
-        }
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "");
-        emailIntent.setType("message/rfc822");
-
-        PackageManager pm = con.getPackageManager();
-        Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        sendIntent.setType("text/plain");
-
-        Intent openInChooser = Intent.createChooser(emailIntent, "Share Via");
-
-        List<ResolveInfo> resInfo = pm.queryIntentActivities(sendIntent, 0);
-        List<LabeledIntent> intentList = new ArrayList<>();
-        for (int i = 0; i < resInfo.size(); i++) {
-            ResolveInfo ri = resInfo.get(i);
-            String packageName = ri.activityInfo.packageName;
-            if (packageName.contains("android.email")) {
-                emailIntent.setPackage(packageName);
-            } else if (packageName.contains("android.gm")) {
-                Intent intent = new Intent();
-                intent.setComponent(new ComponentName(packageName, ri.activityInfo.name));
-                intent.setAction(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, "");
-                if (printFileUri != null) {
-                    intent.putExtra(Intent.EXTRA_STREAM, printFileUri);
-                }
-
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Documents- GRN/Bilti");
-                intent.setType("message/rfc822");
-                intentList.add(new LabeledIntent(intent, packageName, ri.loadLabel(pm), ri.icon));
-            }
-        }
-
-        LabeledIntent[] extraIntents = intentList.toArray(new LabeledIntent[intentList.size()]);
-
-        openInChooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, extraIntents);
-        con.startActivity(openInChooser);
     }
 
     public void downloadFile(String url, String dest_file_path) {
@@ -418,7 +408,7 @@ public class CheckListAdapter extends BaseAdapter {
             i.setDataAndType(printFileUri, "text/plain");
             context.startActivity(i);*/
 
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
             hideProgressIndicator();
             context.runOnUiThread(new Runnable() {
@@ -438,7 +428,7 @@ public class CheckListAdapter extends BaseAdapter {
                 }
             });
             return;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             hideProgressIndicator();
             context.runOnUiThread(new Runnable() {
@@ -457,6 +447,16 @@ public class CheckListAdapter extends BaseAdapter {
                 dialog.dismiss();
             }
         });
+    }
+
+    public class ViewHolder {
+        public RadioGroup mRadioGroup;
+        TextView mTvOperational;
+        TextView mTvChecklistItem;
+        RadioButton mRadioBtnYes;
+        RadioButton mRadioBtnNo;
+        ImageView mImgPrint;
+        ImageView mImgEmail;
     }
 
 }

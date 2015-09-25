@@ -1,247 +1,291 @@
 <?xml version="1.0"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tvPageNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/page_number"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/timer"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/txtHeaderName"
+        android:id="@+id/tvHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="TechnicalIssues"
+        android:layout_gravity="center"
+        android:text="@string/tech_report"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="25sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/txtHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtHeaderName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/truckchk_desc"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:visibility="gone" />
-
-
-    <RelativeLayout
-        android:id="@+id/lay_main_layout"
+    <LinearLayout
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtHeader"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="30dp">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <!-- <TextView android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentStart="true" android:layout_alignParentTop="true" android:layout_marginStart="20dp" android:text="@string/status" android:textAppearance="?android:attr/textAppearanceLarge" />-->
-
-
-        <RelativeLayout
-            android:id="@+id/layout1"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView2"
-            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:orientation="horizontal">
-
-
-            <RadioGroup
-                android:id="@+id/radio_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radio_BtnOk"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/ok"
-                    android:textSize="15sp" />
-
-                <RadioButton
-                    android:id="@+id/radio_BtnNotok"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:text="@string/not_ok"
-                    android:textSize="15sp" />
-
-            </RadioGroup>
-
-            <!-- <RadioButton android:id="@+id/radioButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="New RadioButton" /> <RadioButton android:id="@+id/radioButton2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignTop="@+id/radioButton" android:layout_toEndOf="@+id/radioButton" android:text="New RadioButton" />-->
-
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
-                android:id="@+id/txtWiperLeft"
+                android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:text="@string/status"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvChecklistItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
-                android:layout_toEndOf="@+id/radio_group"
-                android:text="@string/technical_issues_by_driver_desc"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:text="@string/checklist_item"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
 
-            <RelativeLayout
-                android:id="@+id/relative_dropdown_layout"
-                android:layout_width="wrap_content"
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtWiperLeft"
                 android:layout_marginTop="20dp"
-                android:visibility="invisible">
+                android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:id="@+id/dropdown_layout"
+
+                <RadioGroup
+                    android:id="@+id/radio_group_wiperL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/headingText"
-                    android:layout_marginTop="10dp"
-                    android:visibility="visible">
+                    android:orientation="horizontal">
 
-                    <Spinner
-                        android:id="@+id/sp_mechnical_clutch"
-                        android:layout_width="150dp"
+                    <RadioButton
+                        android:id="@+id/rbWiperLOk"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp" />
+                        android:checked="false"
+                        android:text="@string/ok"
+                         />
 
-                    <Spinner
-                        android:id="@+id/sp_tyre"
-                        android:layout_width="150dp"
+                    <RadioButton
+                        android:id="@+id/rbWiperLNotOk"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_toEndOf="@+id/sp_mechnical_clutch" />
+                        android:checked="true"
+                        android:text="@string/not_ok"
+                         />
 
-                    <Spinner
-                        android:id="@+id/sp_electrical"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_toEndOf="@+id/sp_tyre" />
+                </RadioGroup>
 
-                    <Spinner
-                        android:id="@+id/sp_engine"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_toEndOf="@+id/sp_electrical"
-                        android:entries="@array/Engine_issues_array" />
-                </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/headingText"
+                <TextView
+                    android:id="@+id/tvWiperL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="80dp"
+                    android:layout_toEndOf="@+id/radio_group_wiperL"
+                    android:text="@string/technical_issues_by_driver_desc"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                    android:visibility="visible">
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/head1"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:text="Mechanical"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                    <TextView
-                        android:id="@+id/head2"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_toEndOf="@+id/head1"
-                        android:text="Tyre/oil"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:shrinkColumns="*"
+                android:stretchColumns="*">
 
-                    <TextView
-                        android:id="@+id/head3"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_toEndOf="@+id/head2"
-                        android:text="Electrical"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TableRow
+                    android:id="@+id/tableRow2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
 
                     <TextView
-                        android:id="@+id/head4"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_toEndOf="@+id/head3"
-                        android:entries="@array/Engine_issues_array"
-                        android:text="Engine"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
-                </RelativeLayout>
+                        android:id="@+id/TextView21"
+                        android:text="@string/technical_issues_by_driver_mechanical"
+                        android:textSize="20sp"
+                        android:textStyle="bold">
 
-            </RelativeLayout>
-        </RelativeLayout>
+                    </TextView>
 
+                    <TextView
+                        android:id="@+id/TextView22"
+                        android:text="@string/tyre_oil"
+                        android:textSize="20sp"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/TextView23"
+                        android:text="@string/electrical"
+                        android:textSize="20sp"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/TextView24"
+                        android:text="@string/engine_sound"
+                        android:textSize="20sp"
+                        android:textStyle="bold"></TextView>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <CheckBox
+                        android:id="@+id/textView31"
+                        android:text="@string/clutch"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/textView32"
+                        android:text="@string/tyre_condition"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/textView33"
+                        android:text="@string/panelboard">
+
+                    </CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/textView34"
+                        android:text="@string/abnormal"></CheckBox>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/textView41"
+                        android:text="@string/brake"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/textView42"
+                        android:text="@string/stepeny"></CheckBox>
+
+                    <TextView
+                        android:id="@+id/textView43"
+                        android:text=""></TextView>
+
+                    <CheckBox
+                        android:id="@+id/textView44"
+                        android:text="@string/gear"></CheckBox>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <CheckBox
+                        android:id="@+id/textView8"
+                        android:text="@string/accelerator"></CheckBox>
+
+                    <TextView></TextView>
+
+                    <TextView></TextView>
+
+                    <CheckBox android:text="@string/steering"></CheckBox>
+
+                    <TextView></TextView>
+
+                    <TextView></TextView>
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox android:text="@string/bodyandtoolrelated"></CheckBox>
+
+                    <TextView></TextView>
+
+                    <TextView></TextView>
+
+                    <CheckBox
+                        android:id="@+id/imageView3"
+                        android:text="@string/engine_heating"></CheckBox>
+
+
+                    <TextView></TextView>
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_margin="20dp"
+        android:gravity="bottom|end">
 
         <Button
             android:id="@+id/btnNext"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="40dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="50dp"
+            android:layout_gravity="bottom|end"
             android:background="@drawable/button_roundcorner"
             android:text="@string/chk_next"
             android:textColor="#ffffff" />
-
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="50dp"
-        android:layout_toEndOf="@+id/txtHeader"
-        android:text="10s"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtHeader"
-        android:layout_alignEnd="@+id/lay_main_layout"
-        android:layout_marginEnd="79dp"
-        android:layout_marginTop="20dp"
-        android:text="10s"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/txtHeaderName"
-        android:layout_marginLeft="20dp"
-        android:text="2/11"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-</RelativeLayout><!---->
+    </LinearLayout>
+</LinearLayout>

@@ -44,25 +44,31 @@ import java.util.TimerTask;
  */
 public class TFTruckFragment extends TFCommonFragment implements TFConst, View.OnClickListener, SearchView.OnQueryTextListener {
 
+    public static ArrayList<TruckDetails> mTrucksList = null;
+    public static TextView mDriversPlanned;
+    public static TextView mDriversNotPlanned;
+    public static TextView mLastUpdatedTime;
+    public static int driverPlannedCount = 0;
+    public static int drivetNotPlannedCount = 0;
+    Timer timer = new Timer();
     private RecyclerView mTruckDetailsListView;
     private TextView mTVVehicleNo;
     private TextView mTVVehicleRoute;
     private TextView mTVEta;
     private TextView mTvClient;
     private TextView mTVAssignedPilot;
-    public static ArrayList<TruckDetails> mTrucksList = null;
     private TFTruckFragment mTFragment;
     private TFHomeActivity homeActivity;
     private TrucksAdapter mAdapter;
     private TextView trucksPostionView;
     private TextView mVehicleCount;
-    public static TextView mDriversPlanned;
-    public static TextView mDriversNotPlanned;
-    public static TextView mLastUpdatedTime;
-    public static int driverPlannedCount = 0;
-    public static int drivetNotPlannedCount = 0;
     private SwipeRefreshLayout swipeRefreshLayout;
-    Timer timer = new Timer();
+
+    static public boolean isOutbound(TruckDetails td) {
+        String next = td.getNextHub();
+        if (next == null || next.equalsIgnoreCase("null") || next.equals("")) return false;
+        else return true;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,11 +100,11 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         mTVEta = (TextView) view.findViewById(R.id.eta);
         mTvClient = (TextView) view.findViewById(R.id.client);
         mTVAssignedPilot = (TextView) view.findViewById(R.id.assign_pilot);
-        mVehicleCount = (TextView)view.findViewById(R.id.vehicle_count);
-        mDriversPlanned = (TextView)view.findViewById(R.id.drivers_planned);
-        mDriversNotPlanned = (TextView)view.findViewById(R.id.drivers_not_planned);
-        mLastUpdatedTime = (TextView)view.findViewById(R.id.last_updated_time);
-        swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
+        mVehicleCount = (TextView) view.findViewById(R.id.vehicle_count);
+        mDriversPlanned = (TextView) view.findViewById(R.id.drivers_planned);
+        mDriversNotPlanned = (TextView) view.findViewById(R.id.drivers_not_planned);
+        mLastUpdatedTime = (TextView) view.findViewById(R.id.last_updated_time);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
 
         mTVAssignedPilot.setOnClickListener(this);
         mTVEta.setOnClickListener(this);
@@ -129,7 +135,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         homeActivity = (TFHomeActivity) activity;
     }
 
-    private void refreshDashBoardData(final boolean flag){
+    private void refreshDashBoardData(final boolean flag) {
 
         WebServices mWebServices = new WebServices();
         mWebServices.getTruckDetails(getActivity(), new ResultReceiver(null) {
@@ -150,7 +156,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                         mTrucksList = new Gson().fromJson(responseStr, listType);
                         mAdapter = new TrucksAdapter(getActivity(), homeActivity, mTFragment, mTrucksList);
                         for (int i = 0; i < mTrucksList.size(); i++) {
-                            if (isOutbound(mTrucksList.get(i))){
+                            if (isOutbound(mTrucksList.get(i))) {
                                 if (mTrucksList.get(i).getAssignedPilot() == null || mTrucksList.get(i).getAssignedPilot().equalsIgnoreCase("null")) {
                                     drivetNotPlannedCount += 1;
                                 } else {
@@ -181,7 +187,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                     Toast.makeText(getActivity(), "" + getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
                 }
                 TFUtils.hideProgressBar();
-                if(flag)
+                if (flag)
                     swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -192,20 +198,18 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         int drawableID;
         String tag;
         if (TFUtils.SORT_ORDER == 0) {
-            drawableID=R.drawable.ic_arrow_up;
+            drawableID = R.drawable.ic_arrow_up;
             tag = "2";
-        }
-        else if (TFUtils.SORT_ORDER == 1) {
+        } else if (TFUtils.SORT_ORDER == 1) {
             tag = "1";
             drawableID = R.drawable.ic_arrow_down;
-        }
-        else {
+        } else {
             // We should never be here
             drawableID = R.drawable.ic_arrow_right;
             tag = "1";
         }
 
-        switch(TFUtils.SORT_COLUMN_ENUM) {
+        switch (TFUtils.SORT_COLUMN_ENUM) {
             case 0:
                 mTVVehicleNo.setCompoundDrawablesWithIntrinsicBounds(drawableID, 0, 0, 0);
                 mTVVehicleNo.setTag(tag);
@@ -313,6 +317,53 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_main, menu);
+
+        final MenuItem item = menu.findItem(R.id.menu_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(this);
+        searchView.findViewById(android.support.v7.appcompat.R.id.search_edit_frame).setBackgroundResource(R.drawable.abc_edit_text_material);
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        final ArrayList<TruckDetails> filteredModelList = filter(mTrucksList, query);
+        if (mAdapter != null) {
+            mAdapter.setUpdateList(filteredModelList);
+            mTruckDetailsListView.getAdapter().notifyDataSetChanged();
+            mTruckDetailsListView.scrollToPosition(0);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    private ArrayList<TruckDetails> filter(List<TruckDetails> models, String query) {
+        query = query.toLowerCase();
+
+        ArrayList<TruckDetails> filteredModelList = new ArrayList<>();
+
+        if (models != null) {
+
+            for (TruckDetails model : models) {
+                boolean flag = ((model.getVehicleNumber() == null || model.getVehicleNumber().equals("null")) ? false : model.getVehicleNumber().toLowerCase().contains(query))
+                        || ((model.getClient() == null || model.getClient().equals("null")) ? false : model.getClient().toLowerCase().contains(query))
+                        || ((model.getVehicleRoute() == null || model.getVehicleRoute().equals("null")) ? false : model.getVehicleRoute().toLowerCase().contains(query))
+                        || ((model.getEta() == null || model.getEta().equals("null")) ? false : TFUtils.changeTime(model.getEta()).toLowerCase().contains(query))
+                        || ((model.getAssignedPilot() == null || model.getAssignedPilot().equals("null")) ? false : model.getAssignedPilot().toLowerCase().contains(query));
+                if (flag) {
+                    filteredModelList.add(model);
+                }
+            }
+        }
+        return filteredModelList;
+    }
+
     private enum Sort {
         VEHICLE_NO,
         CLIENT,
@@ -361,63 +412,10 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         }
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_main, menu);
-
-        final MenuItem item = menu.findItem(R.id.menu_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
-        searchView.setOnQueryTextListener(this);
-        searchView.findViewById(android.support.v7.appcompat.R.id.search_edit_frame).setBackgroundResource(R.drawable.abc_edit_text_material);
-    }
-
-    @Override
-    public boolean onQueryTextChange(String query) {
-        final ArrayList<TruckDetails> filteredModelList = filter(mTrucksList, query);
-        if(mAdapter!=null) {
-            mAdapter.setUpdateList(filteredModelList);
-            mTruckDetailsListView.getAdapter().notifyDataSetChanged();
-            mTruckDetailsListView.scrollToPosition(0);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    private ArrayList<TruckDetails> filter(List<TruckDetails> models, String query) {
-        query = query.toLowerCase();
-
-        ArrayList<TruckDetails> filteredModelList = new ArrayList<>();
-
-        if(models!=null) {
-
-            for (TruckDetails model : models) {
-                boolean flag = ((model.getVehicleNumber() == null || model.getVehicleNumber().equals("null")) ? false : model.getVehicleNumber().toLowerCase().contains(query))
-                        || ((model.getClient() == null || model.getClient().equals("null")) ? false : model.getClient().toLowerCase().contains(query))
-                        || ((model.getVehicleRoute() == null || model.getVehicleRoute().equals("null")) ? false : model.getVehicleRoute().toLowerCase().contains(query))
-                        || ((model.getEta() == null || model.getEta().equals("null")) ? false : TFUtils.changeTime(model.getEta()).toLowerCase().contains(query))
-                        || ((model.getAssignedPilot() == null || model.getAssignedPilot().equals("null")) ? false : model.getAssignedPilot().toLowerCase().contains(query));
-                if (flag) {
-                    filteredModelList.add(model);
-                }
-            }
-        }
-        return filteredModelList;
-    }
-
     class RepeatEveryFiveMins extends TimerTask {
         public void run() {
             refreshDashBoardData(false);
         }
-    }
-
-    static public boolean isOutbound(TruckDetails td) {
-        String next = td.getNextHub();
-        if (next == null || next.equalsIgnoreCase("null") || next.equals("")) return false;
-        else return true;
     }
 
 }

@@ -9,7 +9,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -106,7 +105,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
         mHomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mHomeActivity.isHomeFragment == false)
+                if (mHomeActivity.isHomeFragment == false)
                     mHomeActivity.onBackPressed();
                 else
                     mHomeActivity.mDrawerLayout.openDrawer(GravityCompat.START);
@@ -128,7 +127,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                     if (responseStr != null) {
                         mChecklistNew = new Gson().fromJson(responseStr, ChecklistNew.class);
                         checklistData();
-                        checkListAdapter = new CheckListAdapter(mActivity, mTFCheckListFragment, vehicleNumber,mChecklistArrayList, mChecklistNew);
+                        checkListAdapter = new CheckListAdapter(mActivity, mTFCheckListFragment, vehicleNumber, mChecklistArrayList, mChecklistNew);
                         mLVChecklist.setAdapter(checkListAdapter);
                     }
                 } else {
@@ -160,20 +159,19 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                 String jsonObject = new Gson().toJson(mChecklistNew, ChecklistNew.class);
                 try {
                     mWebServices.updateVehicleChecklist(new JSONObject(jsonObject));
-                    mWebServices.getChecklistSave(getActivity(),true,vehicleTrackingId);
+                    mWebServices.getChecklistSave(getActivity(), true, vehicleTrackingId);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 String reason = "";
-                for(int i=0;i<checklistNextHub_AshokLeylandReasons.size();i++){
-                    reason = reason +checklistNextHub_AshokLeylandReasons.get(i)+"\n";
+                for (int i = 0; i < checklistNextHub_AshokLeylandReasons.size(); i++) {
+                    reason = reason + checklistNextHub_AshokLeylandReasons.get(i) + "\n";
                 }
                 try {
-                    TFSOSFragment.sendEmailAndSMS(mActivity, reason,"Checklist Issue");
-                }catch (Exception e){
+                    TFSOSFragment.sendEmailAndSMS(mActivity, reason, "Checklist Issue");
+                } catch (Exception e) {
                     e.printStackTrace();
-                }
-                finally {
+                } finally {
                     mHomeActivity.onBackPressed();
                 }
             }
@@ -185,7 +183,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
                 long viewId = view.getId();
                 notOkReason = notOkReason + mChecklistArrayList.get(position).getChecklistItem();
                 if (viewId == R.id.cross) {
-                    showStatusAlertDialog(bundle.getString("vehicle_number"),position);
+                    showStatusAlertDialog(bundle.getString("vehicle_number"), position);
                 }
 
 
@@ -341,7 +339,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
 //                }
 //            }
 //        });
-        View view = LayoutInflater.from(mActivity).inflate(R.layout.checklist_popup,null,false);
+        View view = LayoutInflater.from(mActivity).inflate(R.layout.checklist_popup, null, false);
         final CheckBox nextHubCb = (CheckBox) view.findViewById(R.id.next_hub_cb);
         final CheckBox ashokLeylandCb = (CheckBox) view.findViewById(R.id.ashok_layout_cb);
         final EditText nextHubEt = (EditText) view.findViewById(R.id.next_hub_edt);
@@ -349,7 +347,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
         nextHubCb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(nextHubCb.isChecked()){
+                if (nextHubCb.isChecked()) {
                     nextHubEt.setVisibility(View.VISIBLE);
                     nextHubEt.setFocusable(true);
                 } else {
@@ -383,7 +381,7 @@ public class TFCheckListFragment extends TFCommonFragment implements TFConst {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mChecklistArrayList.get(position).setStatus(true);
-                checkListAdapter.updateStatus(position,true);
+                checkListAdapter.updateStatus(position, true);
                 checkListAdapter.notifyDataSetChanged();
             }
         });

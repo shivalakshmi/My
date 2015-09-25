@@ -1,57 +1,61 @@
 <?xml version="1.0"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tvPageNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/page_number"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/timer"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/txtHeaderName"
+        android:id="@+id/tvScreenName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/walkarounddesc"
+        android:layout_gravity="center"
+        android:text="@string/walk_aroundcheck"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="25sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/txtHeader"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtHeaderName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/truckchk_desc"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-
-
-    <RelativeLayout
-        android:id="@+id/lay_main_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtHeader"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="20dp">
-
-        <!-- <TextView android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentStart="true" android:layout_alignParentTop="true" android:layout_marginStart="20dp" android:text="@string/status" android:textAppearance="?android:attr/textAppearanceLarge" />-->
-
-
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView2"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
-
-            -
 
             <RadioGroup
                 android:id="@+id/radio_group"
@@ -65,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/ok"
-                    android:textSize="15sp" />
+                     />
 
                 <RadioButton
                     android:id="@+id/cross"
@@ -73,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="@string/not_ok"
-                    android:textSize="15sp" />
+                     />
 
             </RadioGroup>
 
@@ -117,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/ok"
-                    android:textSize="15sp" />
+                     />
 
                 <RadioButton
                     android:id="@+id/rdWipercross"
@@ -125,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="@string/not_ok"
-                    android:textSize="15sp" />
+                     />
 
             </RadioGroup>
 
@@ -166,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/ok"
-                    android:textSize="15sp" />
+                     />
 
                 <RadioButton
                     android:id="@+id/rdHeadlightcross"
@@ -174,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="@string/not_ok"
-                    android:textSize="15sp" />
+                     />
 
             </RadioGroup>
 
@@ -214,7 +218,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/ok"
-                    android:textSize="15sp" />
+                     />
 
                 <RadioButton
                     android:id="@+id/rdRHeadlightcross"
@@ -222,7 +226,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="@string/not_ok"
-                    android:textSize="15sp" />
+                     />
 
             </RadioGroup>
 
@@ -262,7 +266,7 @@
                     android:layout_height="wrap_content"
                     android:checked="false"
                     android:text="@string/ok"
-                    android:textSize="15sp" />
+                     />
 
                 <RadioButton
                     android:id="@+id/rdLslidecross"
@@ -270,7 +274,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="@string/not_ok"
-                    android:textSize="15sp" />
+                     />
 
             </RadioGroup>
 
@@ -284,57 +288,50 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
         </RelativeLayout>
+    </LinearLayout>
 
-        <!-- <RelativeLayout android:id="@+id/layout6" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/layout5" android:orientation="horizontal"> <RadioGroup android:id="@+id/radio_txtRslidegroup" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal"> <RadioButton android:id="@+id/txtRslidetick" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="@string/ok" android:textSize="15sp" /> <RadioButton android:id="@+id/rdRslidecross" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/not_ok" android:textSize="15sp" /> </RadioGroup> <TextView android:id="@+id/txtRslide" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="80dp" android:layout_toEndOf="@+id/radio_txtRslidegroup" android:text="@string/chk_Rslide" android:textAppearance="?android:attr/textAppearanceLarge" /> </RelativeLayout> <RelativeLayout android:id="@+id/layout7" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/layout6" android:orientation="horizontal"> <RadioGroup android:id="@+id/radio_txtBrakelightgroup1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal"> <RadioButton android:id="@+id/rdBrakelighttick1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="@string/ok" android:textSize="15sp" /> <RadioButton android:id="@+id/rdBrakelightcross1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/not_ok" android:textSize="15sp" /> </RadioGroup> <TextView android:id="@+id/txtBrakelight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="80dp" android:layout_toEndOf="@+id/radio_txtBrakelightgroup1" android:text="@string/chk_brakelight" android:textAppearance="?android:attr/textAppearanceLarge" /> </RelativeLayout> <RelativeLayout android:id="@+id/layout8" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/layout7" android:orientation="horizontal"> <RadioGroup android:id="@+id/radio_txtHomgroup1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal"> <RadioButton android:id="@+id/rdHomtick1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="@string/ok" android:textSize="15sp" /> <RadioButton android:id="@+id/rdHomcross1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/not_ok" android:textSize="15sp" /> </RadioGroup> <TextView android:id="@+id/txtHom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_marginStart="80dp" android:layout_toEndOf="@+id/radio_txtHomgroup1" android:text="@string/chk_hom" android:textAppearance="?android:attr/textAppearanceLarge" /> </RelativeLayout> -->
+
+    <LinearLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
 
-        <!-- <TextView android:id="@+id/textView4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/checklist_item" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_alignParentTop="true" android:layout_toEndOf="@+id/textView2" android:layout_marginStart="120dp" />-->
+        <!-- <TextView android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentStart="true" android:layout_alignParentTop="true" android:layout_marginStart="20dp" android:text="@string/status" android:textAppearance="?android:attr/textAppearanceLarge" />-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
 
+
+            <!-- <RelativeLayout android:id="@+id/layout6" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/layout5" android:orientation="horizontal"> <RadioGroup android:id="@+id/radio_txtRslidegroup" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal"> <RadioButton android:id="@+id/txtRslidetick" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="@string/ok"  /> <RadioButton android:id="@+id/rdRslidecross" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/not_ok"  /> </RadioGroup> <TextView android:id="@+id/txtRslide" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="80dp" android:layout_toEndOf="@+id/radio_txtRslidegroup" android:text="@string/chk_Rslide" android:textAppearance="?android:attr/textAppearanceLarge" /> </RelativeLayout> <RelativeLayout android:id="@+id/layout7" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/layout6" android:orientation="horizontal"> <RadioGroup android:id="@+id/radio_txtBrakelightgroup1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal"> <RadioButton android:id="@+id/rdBrakelighttick1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="@string/ok"  /> <RadioButton android:id="@+id/rdBrakelightcross1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/not_ok"  /> </RadioGroup> <TextView android:id="@+id/txtBrakelight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="80dp" android:layout_toEndOf="@+id/radio_txtBrakelightgroup1" android:text="@string/chk_brakelight" android:textAppearance="?android:attr/textAppearanceLarge" /> </RelativeLayout> <RelativeLayout android:id="@+id/layout8" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/layout7" android:orientation="horizontal"> <RadioGroup android:id="@+id/radio_txtHomgroup1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal"> <RadioButton android:id="@+id/rdHomtick1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="@string/ok"  /> <RadioButton android:id="@+id/rdHomcross1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/not_ok"  /> </RadioGroup> <TextView android:id="@+id/txtHom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_marginStart="80dp" android:layout_toEndOf="@+id/radio_txtHomgroup1" android:text="@string/chk_hom" android:textAppearance="?android:attr/textAppearanceLarge" /> </RelativeLayout> -->
+
+
+            <!-- <TextView android:id="@+id/textView4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/checklist_item" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_alignParentTop="true" android:layout_toEndOf="@+id/textView2" android:layout_marginStart="120dp" />-->
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_margin="20dp"
+        android:gravity="bottom|end">
 
         <Button
             android:id="@+id/btnNext"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="40dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="50dp"
+            android:layout_gravity="bottom|end"
             android:background="@drawable/button_roundcorner"
             android:text="@string/chk_next"
             android:textColor="#ffffff" />
+    </LinearLayout>
 
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="50dp"
-        android:layout_toEndOf="@+id/txtHeader"
-        android:text="10s"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:visibility="gone" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="10s"
-        android:id="@+id/textView9"
-        android:layout_above="@+id/txtHeader"
-        android:layout_alignEnd="@+id/lay_main_layout"
-        android:layout_marginEnd="79dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="7/11"
-        android:id="@+id/textView10"
-        android:layout_marginLeft="20dp"
-        android:layout_alignTop="@+id/txtHeaderName"
-        android:layout_alignParentStart="true" />
-
-</RelativeLayout><!---->
+</LinearLayout><!---->

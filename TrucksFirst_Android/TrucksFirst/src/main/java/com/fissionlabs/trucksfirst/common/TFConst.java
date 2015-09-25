@@ -39,7 +39,7 @@ public interface TFConst {
 
     int SUCCESS = 200;
     int ERROR = 100;
-    int REFRESH_DASHBOARD_INTERVAL = 5*60*1000;
+    int REFRESH_DASHBOARD_INTERVAL = 5 * 60 * 1000;
 
     String SHARED_PREFERENCES_NAME = "RIVIGO";
     String LANG_SELECTION = "lang_selection";
@@ -47,8 +47,8 @@ public interface TFConst {
     String HUB_NAME = "hub_name";
     String EMP_ID = "emp_id";
     String HS_NAME = "hs_name";
-    String EMP_USER_NAME="hub_user_name";
-    String EMP_USER_PASSWORD="hub_user_password";
-//    String URL_PRINT_DOCUMENT = "https://s3-ap-southeast-1.amazonaws.com/rivigovehicledocuments/";
+    String EMP_USER_NAME = "hub_user_name";
+    String EMP_USER_PASSWORD = "hub_user_password";
+    //    String URL_PRINT_DOCUMENT = "https://s3-ap-southeast-1.amazonaws.com/rivigovehicledocuments/";
     String URL_PRINT_DOCUMENT = "http://52.76.55.8/";
 }

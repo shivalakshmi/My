@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/page_title"
+        android:text="@string/truck_docs"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="25sp"
         android:textStyle="bold" />
@@ -66,7 +66,7 @@
                 android:layout_below="@+id/txtHeader"
                 android:layout_marginLeft="60dp"
                 android:layout_marginRight="60dp"
-                android:layout_marginTop="40dp">
+                android:layout_marginTop="20dp">
 
 
                 <RelativeLayout
@@ -156,8 +156,9 @@
                         android:layout_centerHorizontal="true"
                         android:layout_centerInParent="true"
                         android:paddingRight="100dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="@string/rc"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                         />
 
                     <ImageView
                         android:id="@+id/imageView"
@@ -210,12 +211,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_centerHorizontal="true"
                         android:layout_centerInParent="true"
                         android:layout_centerVertical="true"
-                        android:paddingLeft="15dp"
                         android:text="@string/national_permit"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                         />
 
                     <ImageView
                         android:id="@+id/imageView11"
@@ -266,11 +267,12 @@
                         android:id="@+id/txt_HeadLightLeft"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_centerInParent="true"
                         android:layout_centerVertical="true"
-                        android:paddingRight="40dp"
+                        android:paddingRight="50dp"
                         android:text="@string/insurance"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                         />
 
                     <ImageView
                         android:id="@+id/imageView1"
@@ -321,9 +323,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:paddingRight="35dp"
                         android:text="@string/goods_tax"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                         />
 
                     <ImageView
                         android:id="@+id/imageViewlk"
@@ -375,10 +378,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_centerInParent="true"
                         android:paddingRight="45dp"
                         android:text="@string/road_tax"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                         />
 
                     <ImageView
                         android:id="@+id/imageView12"
@@ -430,11 +434,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_centerVertical="true"
-                        android:paddingLeft="45dp"
+                        android:paddingLeft="30dp"
                         android:text="@string/pollution_certificate"
 
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                         />
 
                     <ImageView
                         android:id="@+id/imageView234"
@@ -486,10 +491,11 @@
                         android:id="@+id/txtBrakelight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_centerInParent="true"
-                        android:paddingLeft="65dp"
+                        android:paddingLeft="55dp"
                         android:text="@string/dharam_kaanta_parchi"
-                        android:textAppearance="?android:attr/textAppearanceLarge" />
+                         />
 
                     <ImageView
                         android:id="@+id/imageViewh"
@@ -570,20 +576,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="end"
         android:layout_margin="20dp"
-        android:gravity="end">
+        android:gravity="bottom|end">
 
         <Button
             android:id="@+id/btnNext"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="bottom|end"
             android:background="@drawable/button_roundcorner"
             android:text="@string/chk_next"
             android:textColor="#ffffff" />
     </LinearLayout>
-
 
 </LinearLayout>

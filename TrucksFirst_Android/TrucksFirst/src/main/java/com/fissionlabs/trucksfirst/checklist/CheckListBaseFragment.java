@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,10 @@ public class CheckListBaseFragment extends CheckListCommonFragment {
     private ScreenSlidePagerAdapter mPagerAdapter;
     private ArrayList<CheckListCommonFragment> fragmentArrayList = new ArrayList<>();
 
+    public static void moveToNext() {
+
+        mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+    }
 
     @Nullable
     @Override
@@ -36,13 +41,29 @@ public class CheckListBaseFragment extends CheckListCommonFragment {
 
 
         mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.setPagingEnabled(false);
+         mViewPager.setPagingEnabled(false);
         return view;
     }
 
-    public static void moveToNext() {
+    private ArrayList<CheckListCommonFragment> getFragmentArrayList() {
 
-        mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+        ArrayList<CheckListCommonFragment> fragmentArrayList = new ArrayList<>();
+
+        fragmentArrayList.add(new FirstScreenFragment());
+        fragmentArrayList.add(new SecondScreenFragment());
+        fragmentArrayList.add(new ThirdScreenFragment());
+        fragmentArrayList.add(new FourthScreenFragment());
+        fragmentArrayList.add(new FifthScreenFragment());
+        fragmentArrayList.add(new SixthScreenFragment());
+        fragmentArrayList.add(new SeventhScreenFragment());
+        fragmentArrayList.add(new EighthScreenFragment());
+        fragmentArrayList.add(new NinthScreenFragment());
+        fragmentArrayList.add(new TenthScreenFragment());
+        fragmentArrayList.add(new EleventhScreenFragment());
+
+        return fragmentArrayList;
+
+
     }
 
     private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
@@ -60,26 +81,6 @@ public class CheckListBaseFragment extends CheckListCommonFragment {
         public int getCount() {
             return fragmentArrayList.size();
         }
-    }
-
-    private ArrayList<CheckListCommonFragment> getFragmentArrayList() {
-
-        ArrayList<CheckListCommonFragment> fragmentArrayList = new ArrayList<>();
-
-        fragmentArrayList.add(new FirstScreenFragment());
-        fragmentArrayList.add(new SecondScreenFragment());
-        fragmentArrayList.add(new ThirdScreenFragment());
-        fragmentArrayList.add(new FourthScreenFragment());
-        fragmentArrayList.add(new FifthScreenFragment());
-        fragmentArrayList.add(new SixthScreenFragment());
-        fragmentArrayList.add(new SeventhScreenFragment());
-        fragmentArrayList.add(new EighthScreenFragment());
-        fragmentArrayList.add(new NinthScreenFragment());
-        fragmentArrayList.add(new TenthScreenFragment());
-
-        return fragmentArrayList;
-
-
     }
 
 }

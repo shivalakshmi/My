@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/page_title"
+        android:visibility="gone"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="25sp"
         android:textStyle="bold" />
@@ -104,7 +105,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="@string/ok"
-                        android:textSize="15sp" />
+                         />
 
                     <RadioButton
                         android:id="@+id/rbWiperLNotOk"
@@ -112,7 +113,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="@string/not_ok"
-                        android:textSize="15sp" />
+                         />
 
                 </RadioGroup>
 
@@ -125,7 +126,7 @@
                     android:layout_marginStart="80dp"
                     android:layout_toEndOf="@+id/radio_group_wiperL"
                     android:text="@string/chkLeft_wiper"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                     />
 
             </RelativeLayout>
 
@@ -149,7 +150,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="@string/ok"
-                        android:textSize="15sp" />
+                         />
 
                     <RadioButton
                         android:id="@+id/rbWiperRNotOk"
@@ -157,7 +158,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="@string/not_ok"
-                        android:textSize="15sp" />
+                         />
 
                 </RadioGroup>
 
@@ -169,7 +170,7 @@
                     android:layout_marginStart="80dp"
                     android:layout_toEndOf="@+id/radio_group_wiperR"
                     android:text="@string/chkRight_wiper"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                     />
 
             </RelativeLayout>
 
@@ -193,7 +194,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="@string/ok"
-                        android:textSize="15sp" />
+                         />
 
                     <RadioButton
                         android:id="@+id/rbHeadLightLNotOk"
@@ -201,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="@string/not_ok"
-                        android:textSize="15sp" />
+                         />
 
                 </RadioGroup>
 
@@ -213,7 +214,7 @@
 
                     android:layout_toEndOf="@+id/radio_group_headlightL"
                     android:text="@string/chk_Lheadlight"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                     />
 
             </RelativeLayout>
 
@@ -238,7 +239,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="@string/ok"
-                        android:textSize="15sp" />
+                         />
 
                     <RadioButton
                         android:id="@+id/rbHeadLightRNotOk"
@@ -246,7 +247,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="@string/not_ok"
-                        android:textSize="15sp" />
+                         />
 
                 </RadioGroup>
 
@@ -257,7 +258,7 @@
                     android:layout_marginStart="80dp"
                     android:layout_toEndOf="@+id/radio_group_headlightR"
                     android:text="@string/chk_Rheadlight"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                     />
 
             </RelativeLayout>
 
@@ -281,7 +282,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="@string/ok"
-                        android:textSize="15sp" />
+                         />
 
                     <RadioButton
                         android:id="@+id/rbSideIndicatorLNotOk"
@@ -289,7 +290,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="@string/not_ok"
-                        android:textSize="15sp" />
+                         />
 
                 </RadioGroup>
 
@@ -300,7 +301,7 @@
                     android:layout_marginStart="80dp"
                     android:layout_toEndOf="@+id/radio_group_side_indicatorL"
                     android:text="@string/chk_Lslide"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                     />
 
             </RelativeLayout>
 
@@ -324,7 +325,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="@string/ok"
-                        android:textSize="15sp" />
+                         />
 
                     <RadioButton
                         android:id="@+id/rbSideIndicatorRNotOk"
@@ -332,7 +333,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="@string/not_ok"
-                        android:textSize="15sp" />
+                         />
 
                 </RadioGroup>
 
@@ -343,7 +344,7 @@
                     android:layout_marginStart="80dp"
                     android:layout_toEndOf="@+id/radio_group_side_indicatorR"
                     android:text="@string/chk_Rslide"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                     />
 
             </RelativeLayout>
 
@@ -369,7 +370,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="@string/ok"
-                        android:textSize="15sp" />
+                         />
 
                     <RadioButton
                         android:id="@+id/rdBrakelightcross1"
@@ -377,7 +378,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="@string/not_ok"
-                        android:textSize="15sp" />
+                         />
 
                 </RadioGroup>
 
@@ -388,7 +389,7 @@
                     android:layout_marginStart="80dp"
                     android:layout_toEndOf="@+id/radio_group_brack_light"
                     android:text="@string/chk_brakelight"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                     />
 
             </RelativeLayout>
 
@@ -412,7 +413,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="@string/ok"
-                        android:textSize="15sp" />
+                         />
 
                     <RadioButton
                         android:id="@+id/rbHornNotOk"
@@ -420,7 +421,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="@string/not_ok"
-                        android:textSize="15sp" />
+                         />
 
                 </RadioGroup>
 
@@ -432,7 +433,7 @@
                     android:layout_marginStart="80dp"
                     android:layout_toEndOf="@+id/radio_group_horn"
                     android:text="@string/chk_horn"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                     />
 
             </RelativeLayout>
         </LinearLayout>
@@ -443,16 +444,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="end"
         android:layout_margin="20dp"
-        android:gravity="end">
+        android:gravity="bottom|end">
 
         <Button
             android:id="@+id/btnNext"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="bottom|end"
             android:background="@drawable/button_roundcorner"
             android:text="@string/chk_next"
             android:textColor="#ffffff" />

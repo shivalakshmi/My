@@ -1,167 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tvPageNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/page_number"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/timer"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tvHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/changeover_complete_heading"
-        android:textSize="25sp"
+        android:layout_gravity="center"
+        android:text="Changeover Complete"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView6"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/textView5"
-        android:layout_marginRight="50dp"
-        android:text="10s"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    <!--<RelativeLayout
-        android:id="@+id/newone"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView5"
+            android:layout_marginTop="50dp"
+            android:gravity="center_horizontal">
+
+            <RadioGroup
+                android:id="@+id/radioBtnGroup_driver_onboard_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- <RadioButton
+                     android:id="@+id/radioBtn_driver_onboard_ok"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:checked="false"
+
+                     android:text="ok" />
+
+                 <RadioButton
+                     android:id="@+id/radioBtn_driver_onboard_notok"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignBottom="@+id/radioBtn_driver_onboard_ok"
+                     android:layout_toEndOf="@+id/radioBtn_driver_onboard_ok"
+                     android:checked="false"
+                     android:text="Not ok" />-->
+
+                <RadioButton
+                    android:id="@+id/radioBtn_driver_onboard_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/ok"
+                     />
+
+                <RadioButton
+                    android:id="@+id/radioBtn_driver_onboard_notok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/not_ok"
+                     />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView71"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/radioBtnGroup_driver_onboard_ok"
+                android:layout_marginStart="57dp"
+                android:layout_toEndOf="@+id/radioBtnGroup_driver_onboard_ok"
+                android:text="@string/changeover_complete_driver_onboard"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/top_layout"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <RadioGroup
+                android:id="@+id/radioBtnGroup_truck_ready"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioBtn_truck_ready_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/ok"
+                     />
+
+                <RadioButton
+                    android:id="@+id/radioBtn_truck_ready_notok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/not_ok"
+                     />
+
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/radioBtnGroup_truck_ready"
+                android:layout_marginStart="57dp"
+                android:layout_toEndOf="@+id/radioBtnGroup_truck_ready"
+                android:text="@string/changeover_complete_truck_mov"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView5"
-        android:gravity="center_horizontal|center_vertical"
-        >-->
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_margin="20dp"
+        android:gravity="bottom|end">
 
-
-    <RelativeLayout
-        android:id="@+id/top_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView5"
-        android:layout_marginTop="50dp"
-        android:gravity="center_horizontal"
-        >
-
-        <RadioGroup
-            android:id="@+id/radioBtnGroup_driver_onboard_ok"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <!-- <RadioButton
-                 android:id="@+id/radioBtn_driver_onboard_ok"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:checked="false"
-
-                 android:text="ok" />
-
-             <RadioButton
-                 android:id="@+id/radioBtn_driver_onboard_notok"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_alignBottom="@+id/radioBtn_driver_onboard_ok"
-                 android:layout_toEndOf="@+id/radioBtn_driver_onboard_ok"
-                 android:checked="false"
-                 android:text="Not ok" />-->
-
-            <RadioButton
-                android:id="@+id/radioBtn_driver_onboard_ok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="@string/ok"
-                android:textSize="15sp" />
-
-            <RadioButton
-                android:id="@+id/radioBtn_driver_onboard_notok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/not_ok"
-                android:textSize="15sp" />
-
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/textView71"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/radioBtnGroup_driver_onboard_ok"
-            android:layout_marginStart="57dp"
-            android:layout_toEndOf="@+id/radioBtnGroup_driver_onboard_ok"
-            android:text="@string/changeover_complete_driver_onboard"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/top_layout"
-        android:layout_centerInParent="true"
-        android:layout_marginRight="70dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal">
-
-        <RadioGroup
-            android:id="@+id/radioBtnGroup_truck_ready"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioBtn_truck_ready_ok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="@string/ok"
-                android:textSize="15sp" />
-
-            <RadioButton
-                android:id="@+id/radioBtn_truck_ready_notok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/not_ok"
-                android:textSize="15sp" />
-
-
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/radioBtnGroup_truck_ready"
-            android:layout_marginStart="57dp"
-            android:layout_toEndOf="@+id/radioBtnGroup_truck_ready"
-            android:text="@string/changeover_complete_truck_mov"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </RelativeLayout>
-    <Button
-        android:id="@+id/btnNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/button_roundcorner"
-        android:text="Submit"
-        android:textColor="#ffffff" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="11/11"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/textView8"
-        android:layout_above="@+id/top_layout"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="178dp" />
-</RelativeLayout>
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/button_roundcorner"
+            android:text="@string/save"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+</LinearLayout>

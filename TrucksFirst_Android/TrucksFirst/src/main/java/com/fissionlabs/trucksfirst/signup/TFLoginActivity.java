@@ -64,10 +64,12 @@ public class TFLoginActivity extends TFCommonActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() > 0) {
@@ -81,10 +83,12 @@ public class TFLoginActivity extends TFCommonActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() > 0) {
@@ -98,10 +102,12 @@ public class TFLoginActivity extends TFCommonActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() > 0) {
@@ -170,10 +176,12 @@ public class TFLoginActivity extends TFCommonActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() > 0) {
@@ -187,10 +195,12 @@ public class TFLoginActivity extends TFCommonActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() > 0) {
@@ -205,34 +215,31 @@ public class TFLoginActivity extends TFCommonActivity {
 
     private void forgotPassword() {
         if (TextUtils.isEmpty(usernameForgot.getText().toString().trim()) || TextUtils.isEmpty(contactNo.getText().toString().trim())
-              || TextUtils.isEmpty(newPassword.getText().toString().trim()) || TextUtils.isEmpty(newConfirmPassword.getText().toString().trim())) {
+                || TextUtils.isEmpty(newPassword.getText().toString().trim()) || TextUtils.isEmpty(newConfirmPassword.getText().toString().trim())) {
             if (TextUtils.isEmpty(usernameForgot.getText().toString().trim())) {
                 usernameForgot.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
                 usernameForgot.requestFocus();
-            }
-            else if (TextUtils.isEmpty(contactNo.getText().toString().trim())) {
+            } else if (TextUtils.isEmpty(contactNo.getText().toString().trim())) {
                 contactNo.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
                 contactNo.requestFocus();
-            }
-            else if (TextUtils.isEmpty(newPassword.getText().toString().trim())) {
+            } else if (TextUtils.isEmpty(newPassword.getText().toString().trim())) {
                 newPassword.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
                 newPassword.requestFocus();
-            }
-            else if (TextUtils.isEmpty(newConfirmPassword.getText().toString().trim())) {
+            } else if (TextUtils.isEmpty(newConfirmPassword.getText().toString().trim())) {
                 newConfirmPassword.setError(Html.fromHtml("<font color='white'><big><b>" + getResources().getString(R.string.error_msg) + "</b></big></font>"));
                 newConfirmPassword.requestFocus();
             }
             return;
         }
-        if(contactNo.getText().toString().trim().length()<10){
-            Toast.makeText(TFLoginActivity.this,getResources().getString(R.string.contact_no_ten_digits),Toast.LENGTH_LONG).show();
+        if (contactNo.getText().toString().trim().length() < 10) {
+            Toast.makeText(TFLoginActivity.this, getResources().getString(R.string.contact_no_ten_digits), Toast.LENGTH_LONG).show();
             return;
         }
-        if(!newPassword.getText().toString().trim().equals(newConfirmPassword.getText().toString().trim())){
-            Toast.makeText(TFLoginActivity.this,getResources().getString(R.string.password_repassword_not_matched),Toast.LENGTH_LONG).show();
+        if (!newPassword.getText().toString().trim().equals(newConfirmPassword.getText().toString().trim())) {
+            Toast.makeText(TFLoginActivity.this, getResources().getString(R.string.password_repassword_not_matched), Toast.LENGTH_LONG).show();
             return;
         }
-        TFUtils.showProgressBar(TFLoginActivity.this,getResources().getString(R.string.please_wait));
+        TFUtils.showProgressBar(TFLoginActivity.this, getResources().getString(R.string.please_wait));
         HashMap<String, String> params = new HashMap<>();
         params.put("userName", usernameForgot.getText().toString().trim());
         params.put("contactNo", contactNo.getText().toString().trim());
@@ -252,7 +259,7 @@ public class TFLoginActivity extends TFCommonActivity {
                     mUserLoginLayout.setVisibility(View.VISIBLE);
                     mUserForgotPasswordLayout.setVisibility(View.GONE);
                     mEtUserName.setText(" ");
-                }else{
+                } else {
                     Toast.makeText(TFLoginActivity.this, getResources().getString(R.string.worng_user_info_found), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -290,7 +297,7 @@ public class TFLoginActivity extends TFCommonActivity {
 
                     if (loginResponse.success.equalsIgnoreCase("true")) {
                         TFUtils.saveStringInSP(TFLoginActivity.this, HUB_NAME, loginResponse.result.getHubName());
-                        TFUtils.saveStringInSP(TFLoginActivity.this,HS_NAME, loginResponse.result.getUserName());
+                        TFUtils.saveStringInSP(TFLoginActivity.this, HS_NAME, loginResponse.result.getUserName());
                         TFUtils.saveStringInSP(TFLoginActivity.this, EMP_ID, loginResponse.result.getEmpId());
                         TFUtils.saveStringInSP(TFLoginActivity.this, EMP_USER_NAME, mEtUserName.getText().toString().trim());
                         TFUtils.saveStringInSP(TFLoginActivity.this, EMP_USER_PASSWORD, mEtPassword.getText().toString().trim());

@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="@string/ok"
-                        android:textSize="15sp" />
+                         />
 
                     <RadioButton
                         android:id="@+id/cross"
@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="@string/not_ok"
-                        android:textSize="15sp" />
+                         />
 
                 </RadioGroup>
 
@@ -143,7 +143,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="@string/ok"
-                        android:textSize="15sp" />
+                         />
 
                     <RadioButton
                         android:id="@+id/rdWipercross"
@@ -151,7 +151,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="@string/not_ok"
-                        android:textSize="15sp" />
+                         />
 
                 </RadioGroup>
 
@@ -188,7 +188,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="@string/ok"
-                        android:textSize="15sp" />
+                         />
 
                     <RadioButton
                         android:id="@+id/rdHeadlightcross"
@@ -196,7 +196,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="@string/not_ok"
-                        android:textSize="15sp" />
+                         />
 
                 </RadioGroup>
 
@@ -232,7 +232,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:text="@string/ok"
-                        android:textSize="15sp" />
+                         />
 
                     <RadioButton
                         android:id="@+id/rdRHeadlightcross"
@@ -240,7 +240,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="@string/not_ok"
-                        android:textSize="15sp" />
+                         />
 
                 </RadioGroup>
 
@@ -264,20 +264,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="end"
         android:layout_margin="20dp"
-        android:gravity="end">
+        android:gravity="bottom|end">
 
         <Button
             android:id="@+id/btnNext"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="bottom|end"
             android:background="@drawable/button_roundcorner"
             android:text="@string/chk_next"
             android:textColor="#ffffff" />
     </LinearLayout>
-
 
 </LinearLayout>

@@ -1,188 +1,298 @@
 <?xml version="1.0"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tvPageNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/page_number"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/timer"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/txtHeaderName"
+        android:id="@+id/tvHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
         android:text="@string/final_approvalscreen"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="25sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/txtHeader"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtHeaderName"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="@string/missingvalues"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/relative_dropdown_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtHeader"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:visibility="visible">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
-        <RelativeLayout
-            android:id="@+id/dropdown_layout"
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/status"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvChecklistItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:text="@string/checklist_item"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/headingText"
-            android:layout_marginTop="10dp"
-            android:visibility="visible">
+            android:layout_gravity="center"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/sp_mechnical_clutch"
-                android:layout_width="150dp"
+            <LinearLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp" />
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/sp_tyre"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toEndOf="@+id/sp_mechnical_clutch" />
 
-            <Spinner
-                android:id="@+id/sp_electrical"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toEndOf="@+id/sp_tyre" />
+                <RadioGroup
+                    android:id="@+id/radio_group_wiperL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/sp_engine"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toEndOf="@+id/sp_electrical"
-                android:entries="@array/Engine_issues_array" />
-        </RelativeLayout>
+                    <RadioButton
+                        android:id="@+id/rbWiperLOk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="@string/ok"
+                         />
 
-        <RelativeLayout
-            android:id="@+id/headingText"
-            android:layout_width="wrap_content"
+                    <RadioButton
+                        android:id="@+id/rbWiperLNotOk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/not_ok"
+                         />
+
+                </RadioGroup>
+
+
+                <TextView
+                    android:id="@+id/tvWiperL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="80dp"
+                    android:layout_toEndOf="@+id/radio_group_wiperL"
+                    android:text="For all missing/ negative mandatory checklist items
+"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </LinearLayout>
+
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:shrinkColumns="*"
+                android:stretchColumns="*">
+                <TextView
+                    android:id="@+id/TextView22"
+                    android:text="All notok fields will be displayed here in this field"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></TextView>
+
+<!--
+                <TableRow
+                    android:id="@+id/tableRow2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:id="@+id/TextView21"
+                        android:text="@string/technical_issues_by_driver_mechanical"
+                        android:textSize="20sp"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/TextView22"
+                        android:text="@string/tyre_oil"
+                        android:textSize="20sp"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/TextView23"
+                        android:text="@string/electrical"
+                        android:textSize="20sp"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/TextView24"
+                        android:text="@string/engine_sound"
+                        android:textSize="20sp"
+                        android:textStyle="bold"></TextView>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <CheckBox
+                        android:id="@+id/textView31"
+                        android:text="@string/clutch"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/textView32"
+                        android:text="@string/tyre_condition"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/textView33"
+                        android:text="@string/panelboard">
+
+                    </CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/textView34"
+                        android:text="@string/abnormal"></CheckBox>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/textView41"
+                        android:text="@string/brake"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/textView42"
+                        android:text="@string/stepeny"></CheckBox>
+
+                    <TextView
+                        android:id="@+id/textView43"
+                        android:text=""></TextView>
+
+                    <CheckBox
+                        android:id="@+id/textView44"
+                        android:text="@string/gear"></CheckBox>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <CheckBox
+                        android:id="@+id/textView8"
+                        android:text="@string/accelerator"></CheckBox>
+
+                    <TextView></TextView>
+
+                    <TextView></TextView>
+
+                    <CheckBox android:text="@string/steering"></CheckBox>
+
+                    <TextView></TextView>
+
+                    <TextView></TextView>
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox android:text="@string/bodyandtoolrelated"></CheckBox>
+
+                    <TextView></TextView>
+
+                    <TextView></TextView>
+
+                    <CheckBox
+                        android:id="@+id/imageView3"
+                        android:text="@string/engine_heating"></CheckBox>
+
+
+                    <TextView></TextView>
+                </TableRow>-->
+
+            </TableLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_margin="20dp"
+        android:gravity="bottom|end">
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-
-            android:visibility="visible">
-
-            <TextView
-                android:id="@+id/head1"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:text="Mechanical"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/head2"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_toEndOf="@+id/head1"
-                android:text="Tyre/oil"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/head3"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_toEndOf="@+id/head2"
-                android:text="Electrical"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/head4"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_toEndOf="@+id/head3"
-                android:entries="@array/Engine_issues_array"
-                android:text="Engine"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-    <!-- <RelativeLayout android:id="@+id/layout6" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/layout5" android:orientation="horizontal"> <RadioGroup android:id="@+id/radio_txtRslidegroup" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal"> <RadioButton android:id="@+id/txtRslidetick" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="@string/ok" android:textSize="15sp" /> <RadioButton android:id="@+id/rdRslidecross" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/not_ok" android:textSize="15sp" /> </RadioGroup> <TextView android:id="@+id/txtRslide" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="80dp" android:layout_toEndOf="@+id/radio_txtRslidegroup" android:text="@string/chk_Rslide" android:textAppearance="?android:attr/textAppearanceLarge" /> </RelativeLayout> <RelativeLayout android:id="@+id/layout7" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/layout6" android:orientation="horizontal"> <RadioGroup android:id="@+id/radio_txtBrakelightgroup1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal"> <RadioButton android:id="@+id/rdBrakelighttick1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="@string/ok" android:textSize="15sp" /> <RadioButton android:id="@+id/rdBrakelightcross1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/not_ok" android:textSize="15sp" /> </RadioGroup> <TextView android:id="@+id/txtBrakelight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="80dp" android:layout_toEndOf="@+id/radio_txtBrakelightgroup1" android:text="@string/chk_brakelight" android:textAppearance="?android:attr/textAppearanceLarge" /> </RelativeLayout> <RelativeLayout android:id="@+id/layout8" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/layout7" android:orientation="horizontal"> <RadioGroup android:id="@+id/radio_txtHomgroup1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal"> <RadioButton android:id="@+id/rdHomtick1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="@string/ok" android:textSize="15sp" /> <RadioButton android:id="@+id/rdHomcross1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/not_ok" android:textSize="15sp" /> </RadioGroup> <TextView android:id="@+id/txtHom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_marginStart="80dp" android:layout_toEndOf="@+id/radio_txtHomgroup1" android:text="@string/chk_hom" android:textAppearance="?android:attr/textAppearanceLarge" /> </RelativeLayout> -->
-
-
-    <!-- <TextView android:id="@+id/textView4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/checklist_item" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_alignParentTop="true" android:layout_toEndOf="@+id/textView2" android:layout_marginStart="120dp" />-->
-
-
-    <Button
-        android:id="@+id/btnNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView9"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="70dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/button_roundcorner"
-        android:text="@string/chk_next"
-        android:textColor="#ffffff" />
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="50dp"
-        android:layout_toEndOf="@+id/txtHeader"
-        android:text="10s"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/txtHeader"
-        android:layout_alignEnd="@+id/lay_main_layout"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="70dp"
-        android:text="10s"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/txtHeaderName"
-        android:layout_marginLeft="20dp"
-        android:text="10/11"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-</RelativeLayout><!---->
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/button_roundcorner"
+            android:text="@string/chk_next"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+</LinearLayout>

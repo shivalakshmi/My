@@ -1,7 +1,5 @@
 package com.fissionlabs.trucksfirst.model;
 
-import java.util.ArrayList;
-
 /**
  * @author ashok on 8/8/15.
  */
@@ -10,7 +8,8 @@ public class LoginResponse {
     public String message;
     public String success;
     public HubDetails result;
-    public class HubDetails{
+
+    public class HubDetails {
 
         public String roleName;
         public String empId;
