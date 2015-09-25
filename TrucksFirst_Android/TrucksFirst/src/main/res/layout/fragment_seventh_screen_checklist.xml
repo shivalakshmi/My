@@ -58,7 +58,7 @@
 
 
             <RadioGroup
-                android:id="@+id/radio_group"
+                android:id="@+id/radio_group_anytiuchExternaldamage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="80dp"
-                android:layout_toEndOf="@+id/radio_group"
+                android:layout_toEndOf="@+id/radio_group_anytiuchExternaldamage"
                 android:text="@string/truckchk"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -110,7 +110,7 @@
             -
 
             <RadioGroup
-                android:id="@+id/radio_wipergroup"
+                android:id="@+id/radio_group_sealIntact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -139,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="80dp"
-                android:layout_toEndOf="@+id/radio_wipergroup"
+                android:layout_toEndOf="@+id/radio_group_sealIntact"
                 android:text="@string/truckchk_seal"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -159,7 +159,7 @@
             -
 
             <RadioGroup
-                android:id="@+id/radio_Headlightgroup1"
+                android:id="@+id/radio_group_stepeney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -187,7 +187,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
-                android:layout_toEndOf="@+id/radio_Headlightgroup1"
+                android:layout_toEndOf="@+id/radio_group_stepeney"
                 android:text="@string/truckchk_stepheney"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -207,7 +207,7 @@
             -
 
             <RadioGroup
-                android:id="@+id/radio_Headlightgroup"
+                android:id="@+id/radio_group_tyreCondition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -235,7 +235,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
-                android:layout_toEndOf="@+id/radio_Headlightgroup"
+                android:layout_toEndOf="@+id/radio_group_tyreCondition"
                 android:text="@string/truckchk_tyre"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -255,7 +255,7 @@
             -
 
             <RadioGroup
-                android:id="@+id/radio_Lslidegroup"
+                android:id="@+id/radio_group_tyrePressure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -283,7 +283,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
-                android:layout_toEndOf="@+id/radio_Lslidegroup"
+                android:layout_toEndOf="@+id/radio_group_tyrePressure"
                 android:text="@string/truckchk_pressure"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
@@ -23,6 +24,7 @@ public class EleventhScreenFragment extends CheckListCommonFragment {
     private int count = 10;
     private boolean timeOver;
     private int timeTaken = 0;
+    private RadioGroup radioBtnGroup_driver_onboard_ok,radioBtnGroup_truck_ready;
 
     @Nullable
     @Override
@@ -36,6 +38,9 @@ public class EleventhScreenFragment extends CheckListCommonFragment {
 
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
+        radioBtnGroup_driver_onboard_ok = (RadioGroup)view.findViewById(R.id.radioBtnGroup_truck_ready);
+        radioBtnGroup_truck_ready = (RadioGroup)view.findViewById(R.id.radioBtnGroup_truck_ready);
+
 
         tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 11, 11));
         mTvTime.setText(String.format(getResources().getString(R.string.timer), count));

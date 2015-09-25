@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
@@ -25,6 +26,8 @@ public class NinthScreenFragment extends CheckListCommonFragment {
     private boolean timeOver;
     private int timeTaken = 0;
 
+    private RadioGroup radio_group_tempcheck,radio_group_leakageOil,radio_group_leakageSteeringOil,radio_group_leakageDieselTank,radio_group_collantLevel,radio_group_visualInspection;
+
 
     @Nullable
     @Override
@@ -35,6 +38,15 @@ public class NinthScreenFragment extends CheckListCommonFragment {
 
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
+
+        radio_group_tempcheck = (RadioGroup)view.findViewById(R.id.radio_group_tempcheck);
+        radio_group_leakageOil = (RadioGroup)view.findViewById(R.id.radio_group_leakageOil);
+        radio_group_leakageSteeringOil = (RadioGroup)view.findViewById(R.id.radio_group_leakageSteeringOil);
+        radio_group_leakageDieselTank = (RadioGroup)view.findViewById(R.id.radio_group_leakageDieselTank);
+        radio_group_collantLevel = (RadioGroup)view.findViewById(R.id.radio_group_collantLevel);
+
+
+
 
         tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 9, 11));
         mTvTime.setText(String.format(getResources().getString(R.string.timer), count));

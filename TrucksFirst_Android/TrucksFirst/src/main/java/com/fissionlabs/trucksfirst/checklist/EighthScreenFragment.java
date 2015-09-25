@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
@@ -22,6 +23,7 @@ public class EighthScreenFragment extends CheckListCommonFragment {
     private int count = 10;
     private boolean timeOver;
     private int timeTaken = 0;
+    private RadioGroup radioBtnGroup_cabincleanCondition;
 
     @Nullable
     @Override
@@ -32,7 +34,7 @@ public class EighthScreenFragment extends CheckListCommonFragment {
 
         View view = inflater.inflate(R.layout.fragment_eight_screen_checklist, container, false);
         btnNext = (Button) view.findViewById(R.id.btnNext);
-
+        radioBtnGroup_cabincleanCondition = (RadioGroup)view.findViewById(R.id.radioBtnGroup_cabincleanCondition);
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
 

@@ -101,7 +101,7 @@
 
 
                     <RadioGroup
-                        android:id="@+id/radio_group_wiperL"
+                        android:id="@+id/radio_group_tollcash"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -131,7 +131,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_marginStart="80dp"
-                        android:layout_toEndOf="@+id/radio_group_wiperL"
+                        android:layout_toEndOf="@+id/radio_group_tollcash"
                         android:text="@string/isthe_tollcash"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -148,7 +148,7 @@
 
 
                     <RadioGroup
-                        android:id="@+id/radio_group_wiperR"
+                        android:id="@+id/radio_group_tollReceipt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -177,7 +177,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_marginStart="80dp"
-                        android:layout_toEndOf="@+id/radio_group_wiperR"
+                        android:layout_toEndOf="@+id/radio_group_tollReceipt"
                         android:text="@string/toll_receipt"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -307,7 +307,7 @@
                     </RadioGroup>
 
                     <CheckBox
-                        android:id="@+id/tvSideIndicatorL"
+                        android:id="@+id/chkMechanical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="80dp"
@@ -351,7 +351,7 @@
                     </RadioGroup>
 
                     <CheckBox
-                        android:id="@+id/tvSideIndicatorR"
+                        android:id="@+id/chkRepairExp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="80dp"
@@ -397,7 +397,7 @@
                     </RadioGroup>
 
                     <CheckBox
-                        android:id="@+id/tvBrakeLight"
+                        android:id="@+id/chkUnapprovedRtoExp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="80dp"
@@ -441,7 +441,7 @@
                     </RadioGroup>
 
                     <CheckBox
-                        android:id="@+id/tvHorn"
+                        android:id="@+id/chkChallan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -485,7 +485,7 @@
                     </RadioGroup>
 
                     <CheckBox
-                        android:id="@+id/tvHorn1"
+                        android:id="@+id/chkUnapprovedExp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -504,7 +504,7 @@
 
 
                     <RadioGroup
-                        android:id="@+id/radio_group_horn1"
+                        android:id="@+id/radio_group_tollcashtopup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
@@ -533,14 +533,14 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_marginStart="80dp"
-                        android:layout_toEndOf="@+id/radio_group_horn1"
+                        android:layout_toEndOf="@+id/radio_group_tollcashtopup"
                         android:text="@string/toll_cash_topup"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <EditText
-                        android:id="@+id/edittext"
+                        android:id="@+id/edittext_tollcash"
                         android:layout_width="150dp"
-                        android:text="enter value"
+                        android:hint="Enter Value"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="150dp"
                         android:layout_toEndOf="@+id/tvHorn11"

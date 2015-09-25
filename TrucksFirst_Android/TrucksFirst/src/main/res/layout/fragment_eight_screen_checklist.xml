@@ -68,7 +68,7 @@
             android:gravity="center_horizontal">
 
             <RadioGroup
-                android:id="@+id/radioBtnGroup_driver_onboard_ok"
+                android:id="@+id/radioBtnGroup_cabincleanCondition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -112,9 +112,8 @@
                 android:id="@+id/textView71"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/radioBtnGroup_driver_onboard_ok"
                 android:layout_marginStart="57dp"
-                android:layout_toEndOf="@+id/radioBtnGroup_driver_onboard_ok"
+                android:layout_toEndOf="@+id/radioBtnGroup_cabincleanCondition"
                 android:text="@string/clean_condition"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </RelativeLayout>

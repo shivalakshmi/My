@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
@@ -23,6 +25,7 @@ public class SeventhScreenFragment extends CheckListCommonFragment {
     private int count = 10;
     private boolean timeOver;
     private int timeTaken = 0;
+    private RadioGroup radio_group_anytiuchExternaldamage,radio_group_sealIntact,radio_group_stepeney,radio_group_tyreCondition,radio_group_tyrePressure;
 
     @Nullable
     @Override
@@ -37,6 +40,82 @@ public class SeventhScreenFragment extends CheckListCommonFragment {
 
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
+        radio_group_anytiuchExternaldamage =(RadioGroup)view.findViewById(R.id.radio_group_anytiuchExternaldamage);
+        radio_group_sealIntact =(RadioGroup)view.findViewById(R.id.radio_group_sealIntact);
+        radio_group_stepeney =(RadioGroup)view.findViewById(R.id.radio_group_stepeney);
+        radio_group_tyreCondition =(RadioGroup)view.findViewById(R.id.radio_group_tyreCondition);
+        radio_group_tyrePressure = (RadioGroup)view.findViewById(R.id.radio_group_tyrePressure);
+        radio_group_anytiuchExternaldamage.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+
+                    } else {
+
+                    }
+                }
+
+            }
+        });
+        radio_group_sealIntact.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+
+                    } else {
+
+                    }
+                }
+
+            }
+        });
+        radio_group_stepeney.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+
+                    } else {
+
+                    }
+                }
+
+            }
+        });
+        radio_group_tyreCondition.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+
+                    } else {
+
+                    }
+                }
+
+            }
+        });
+        radio_group_tyrePressure.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+
+                    } else {
+
+                    }
+                }
+
+            }
+        });
+
 
         tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 7, 11));
         mTvTime.setText(String.format(getResources().getString(R.string.timer), count));
