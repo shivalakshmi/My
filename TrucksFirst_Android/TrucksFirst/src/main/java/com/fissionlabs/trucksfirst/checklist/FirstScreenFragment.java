@@ -6,8 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -15,31 +19,28 @@ import com.fissionlabs.trucksfirst.R;
  */
 public class FirstScreenFragment extends CheckListCommonFragment {
 
-    private  Button btnNext;
+    private TextView mTvTime;
+    private int count = 10;
+    private boolean timeOver;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
+        View view = inflater.inflate(R.layout.first_screen_checklist, container, false);
+        Button next = (Button) view.findViewById(R.id.btnNext);
 
-    /*   // CheckListBaseFragment.moveToNext();
-        View view = inflater.inflate(R.layo, container, false);
+        mTvTime = (TextView) view.findViewById(R.id.tvTime);
+        TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
 
-        btnNext = (Button) view.findViewById(R.id.btnNext);
+        tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 1, 11));
+        mTvTime.setText(String.format(getResources().getString(R.string.timer), count));
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        startTimer();
 
-                CheckListBaseFragment.moveToNext();
-            }
-        });*/
-
-        //CheckListBaseFragment.moveToNext();
-        View view = inflater.inflate(R.layout.firstscreenchecklist, container, false);
-        btnNext = (Button) view.findViewById(R.id.btnNext);
-
-        btnNext.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -49,5 +50,37 @@ public class FirstScreenFragment extends CheckListCommonFragment {
         return view;
     }
 
+    private void startTimer() {
+        Timer T = new Timer();
+        T.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+
+                if (mHomeActivity == null) {
+                    return;
+                }
+
+                mHomeActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (count == 0) {
+                            timeOver = true;
+                        }
+
+                        if (timeOver) {
+                            mTvTime.setTextColor(mHomeActivity.getResources().getColor(R.color.red));
+                            mTvTime.setText(String.format(mHomeActivity.getResources().getString(R.string.timer), count));
+                            count++;
+                        } else {
+                            mTvTime.setTextColor(mHomeActivity.getResources().getColor(R.color.black));
+                            mTvTime.setText(String.format(mHomeActivity.getResources().getString(R.string.timer), count));
+                            count--;
+                        }
+                    }
+                });
+            }
+        }, 20, 1000);
+    }
 
 }
