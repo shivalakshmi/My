@@ -22,6 +22,7 @@ public class FirstScreenFragment extends CheckListCommonFragment {
     private TextView mTvTime;
     private int count = 10;
     private boolean timeOver;
+    private int timeTaken = 0;
 
 
     @Nullable
@@ -29,7 +30,7 @@ public class FirstScreenFragment extends CheckListCommonFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.first_screen_checklist, container, false);
+        View view = inflater.inflate(R.layout.fragment_first_screen_checklist, container, false);
         Button next = (Button) view.findViewById(R.id.btnNext);
 
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
@@ -77,6 +78,8 @@ public class FirstScreenFragment extends CheckListCommonFragment {
                             mTvTime.setText(String.format(mHomeActivity.getResources().getString(R.string.timer), count));
                             count--;
                         }
+
+                        timeTaken++;
                     }
                 });
             }
