@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -43,6 +44,17 @@ public class TFClosedTripsFragment  extends TFCommonFragment implements TFConst 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mHomeActivity.isHomeFragment = false;
+        mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_back);
+        mHomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mHomeActivity.isHomeFragment == false)
+                    mHomeActivity.onBackPressed();
+                else
+                    mHomeActivity.mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
         View view = inflater.inflate(R.layout.fragment_closed_trips, container, false);
         listView = (RecyclerView) view.findViewById(R.id.closed_trip_list);
         listView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -182,5 +194,13 @@ public class TFClosedTripsFragment  extends TFCommonFragment implements TFConst 
             alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
             alertDialog.show();
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_menu);
+        mHomeActivity.isHomeFragment = true;
+        mHomeActivity.mActionBar.setDisplayShowTitleEnabled(false);
     }
 }
