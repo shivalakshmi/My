@@ -23,25 +23,25 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Vehicle#"
+            android:text=" Vehicle#"
             android:layout_weight="0.5"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Trip Code"
+            android:text=" Trip Code"
             android:layout_weight="1.7"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Route"
+            android:text=" Route"
             android:layout_weight="1.3"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Arrival Time"
+            android:text=" Arrival Time"
             android:layout_weight="1"/>
         <TextView
             android:layout_width="0dp"

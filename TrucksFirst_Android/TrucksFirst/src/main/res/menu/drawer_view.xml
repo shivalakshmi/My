@@ -35,7 +35,7 @@
             android:title="@string/upgrade"/>
         <item
             android:id="@+id/pending_pod"
-            android:icon="@drawable/ic_dashboard"
+            android:icon="@drawable/ic_pod"
             android:title="Pending POD"/>
         <item
             android:id="@+id/nav_logout"

@@ -27,7 +27,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.FieldPosition;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Kanj on 24-09-2015.
@@ -96,7 +100,19 @@ public class TFClosedTripsFragment  extends TFCommonFragment implements TFConst 
             holder.truckNo.setText(trip.getTruckNumber());
             holder.tripCode.setText(trip.getTripCode());
             holder.route.setText(trip.getRoute());
-            holder.arrivalTime.setText(trip.getArrivalTime());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+            String time;
+            try {
+                Date d = sdf.parse(trip.getArrivalTime());
+                sdf.applyPattern("hh:mm a, dd-MM-yyyy");
+                StringBuffer buf = new StringBuffer();
+                buf = sdf.format(d, buf, new FieldPosition(0));
+                time = buf.toString();
+            } catch (ParseException pe) {
+                pe.printStackTrace();
+                time = trip.getArrivalTime();
+            }
+            holder.arrivalTime.setText(time);
             holder.podStatus.setChecked(trip.isPod()); //Should always be false
 
             //holder.podStatus.setOnClickListener(holder);
