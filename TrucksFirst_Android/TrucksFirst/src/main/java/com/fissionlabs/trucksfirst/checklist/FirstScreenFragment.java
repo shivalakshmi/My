@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -46,6 +47,119 @@ public class FirstScreenFragment extends CheckListCommonFragment {
         radio_group_brack_light = (RadioGroup)view.findViewById(R.id.radio_group_brack_light);
         radio_group_horn = (RadioGroup)view.findViewById(R.id.radio_group_horn);
 
+        radio_group_wiperL.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+
+                    } else {
+
+                    }
+                }
+
+            }
+        });
+        radio_group_wiperR.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+
+                    } else {
+
+                    }
+                }
+
+            }
+        });
+        radio_group_headlightL.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+
+                    } else {
+
+                    }
+                }
+
+            }
+        });
+        radio_group_headlightR.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+
+                    } else {
+
+                    }
+                }
+
+            }
+        });
+        radio_group_side_indicatorL.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+
+                    } else {
+
+                    }
+                }
+
+            }
+        });
+        radio_group_side_indicatorR.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+
+                    } else {
+
+                    }
+                }
+
+            }
+        });
+        radio_group_brack_light.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+
+                    } else {
+
+                    }
+                }
+
+            }
+        });
+        radio_group_horn.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+
+
+                    } else {
+
+                    }
+                }
+
+            }
+        });
 
 
         tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 1, 11));

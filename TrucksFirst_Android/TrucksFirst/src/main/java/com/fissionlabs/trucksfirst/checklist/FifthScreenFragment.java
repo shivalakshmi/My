@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
@@ -24,7 +25,7 @@ public class FifthScreenFragment extends CheckListCommonFragment {
     private int count = 10;
     private boolean timeOver;
     private int timeTaken = 0;
-
+    private RadioGroup radio_group_jack, radio_group_jackrod,radio_group_tyreever,radio_group_stepenyRemover;
 
     @Nullable
     @Override
@@ -35,7 +36,10 @@ public class FifthScreenFragment extends CheckListCommonFragment {
 
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
-
+        radio_group_jack = (RadioGroup)view.findViewById(R.id.radio_group_jack);
+        radio_group_jackrod = (RadioGroup)view.findViewById(R.id.radio_group_jackrod);
+        radio_group_tyreever = (RadioGroup)view.findViewById(R.id.radio_group_tyreever);
+        radio_group_stepenyRemover = (RadioGroup)view.findViewById(R.id.radio_group_stepenyRemover);
         tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 5, 11));
         mTvTime.setText(String.format(getResources().getString(R.string.timer), count));
 

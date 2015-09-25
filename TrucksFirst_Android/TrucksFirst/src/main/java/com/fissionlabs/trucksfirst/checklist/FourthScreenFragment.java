@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
@@ -24,6 +25,8 @@ public class FourthScreenFragment extends CheckListCommonFragment {
     private int count = 20;
     private boolean timeOver;
     private int timeTaken = 0;
+    private RadioGroup radio_group_manifest,radioGroup_LR,radioGroup_gati,
+            radioGroup_tp,radioGroup_docAvail,radioGroup_docgiventoDriver;
 
     @Nullable
     @Override
@@ -34,7 +37,12 @@ public class FourthScreenFragment extends CheckListCommonFragment {
 
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
-
+        radio_group_manifest = (RadioGroup)view.findViewById(R.id.radio_group_manifest);
+        radioGroup_LR = (RadioGroup)view.findViewById(R.id.radioGroup_LR);
+        radioGroup_gati = (RadioGroup)view.findViewById(R.id.radioGroup_gati);
+        radioGroup_tp = (RadioGroup)view.findViewById(R.id.radioGroup_tp);
+        radioGroup_docAvail = (RadioGroup)view.findViewById(R.id.radio_group_manifest);
+        radioGroup_docgiventoDriver = (RadioGroup)view.findViewById(R.id.radioGroup_docgiventoDriver);
         tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 4, 11));
         mTvTime.setText(String.format(getResources().getString(R.string.timer), count));
 
@@ -49,7 +57,6 @@ public class FourthScreenFragment extends CheckListCommonFragment {
         });
 
         return view;
-
     }
 
     @Override

@@ -97,7 +97,7 @@
 
 
                 <RadioGroup
-                    android:id="@+id/radio_group"
+                    android:id="@+id/radio_group_manifest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="180dp"
-                    android:layout_toEndOf="@+id/radio_group"
+                    android:layout_toEndOf="@+id/radio_group_manifest"
                     android:text="@string/manifest"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                      />
@@ -146,7 +146,7 @@
 
 
                 <RadioGroup
-                    android:id="@+id/radio_wipergroup"
+                    android:id="@+id/radioGroup_LR"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -175,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="180dp"
-                    android:layout_toEndOf="@+id/radio_wipergroup"
+                    android:layout_toEndOf="@+id/radioGroup_LR"
                     android:text="@string/lr"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                      />
@@ -190,7 +190,7 @@
 
 
                 <RadioGroup
-                    android:id="@+id/radio_wipergroup1"
+                    android:id="@+id/radioGroup_gati"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -219,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="180dp"
-                    android:layout_toEndOf="@+id/radio_wipergroup1"
+                    android:layout_toEndOf="@+id/radioGroup_gati"
                     android:text="Gati Documentation Bag (if applicable)"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     />
@@ -236,7 +236,7 @@
 
 
                 <RadioGroup
-                    android:id="@+id/radio_Headlightgroup1"
+                    android:id="@+id/radioGroup_tp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -265,7 +265,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="80dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_toEndOf="@+id/radio_Headlightgroup1"
+                    android:layout_toEndOf="@+id/radioGroup_tp"
                     android:text="@string/tp"
                      />
 
@@ -281,7 +281,7 @@
 
 
                 <RadioGroup
-                    android:id="@+id/radio_Headlightgroup"
+                    android:id="@+id/radioGroup_docAvail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -309,7 +309,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="180dp"
-                    android:layout_toEndOf="@+id/radio_Headlightgroup"
+                    android:layout_toEndOf="@+id/radioGroup_docAvail"
                     android:text="@string/docs_available"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                      />
@@ -326,7 +326,7 @@
 
 
                 <RadioGroup
-                    android:id="@+id/radio_Lslidegroup"
+                    android:id="@+id/radioGroup_docgiventoDriver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -354,7 +354,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="180dp"
-                    android:layout_toEndOf="@+id/radio_Lslidegroup"
+                    android:layout_toEndOf="@+id/radioGroup_docgiventoDriver"
                     android:text="@string/document_driver"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     />

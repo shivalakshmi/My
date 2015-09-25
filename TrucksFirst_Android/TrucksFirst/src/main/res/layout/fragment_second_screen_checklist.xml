@@ -105,16 +105,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="false"
-                        android:text="@string/ok"
-                         />
+                        android:text="@string/ok" />
 
                     <RadioButton
                         android:id="@+id/rbWiperLNotOk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="@string/not_ok"
-                         />
+                        android:text="@string/not_ok" />
 
                 </RadioGroup>
 
@@ -144,8 +142,7 @@
                 <TableRow
                     android:id="@+id/tableRow2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/TextView21"
@@ -183,21 +180,21 @@
                     android:layout_marginTop="10dp">
 
                     <CheckBox
-                        android:id="@+id/textView31"
+                        android:id="@+id/chkBoxClutch"
                         android:text="@string/clutch"></CheckBox>
 
                     <CheckBox
-                        android:id="@+id/textView32"
+                        android:id="@+id/chkBoxTyre_condition"
                         android:text="@string/tyre_condition"></CheckBox>
 
                     <CheckBox
-                        android:id="@+id/textView33"
+                        android:id="@+id/chkBoxpanelboard_lights"
                         android:text="@string/panelboard">
 
                     </CheckBox>
 
                     <CheckBox
-                        android:id="@+id/textView34"
+                        android:id="@+id/chkBoxabnormal_sound"
                         android:text="@string/abnormal"></CheckBox>
 
 
@@ -209,11 +206,11 @@
                     android:layout_height="wrap_content">
 
                     <CheckBox
-                        android:id="@+id/textView41"
+                        android:id="@+id/chkBoxBrake"
                         android:text="@string/brake"></CheckBox>
 
                     <CheckBox
-                        android:id="@+id/textView42"
+                        android:id="@+id/chkBoxStepeney"
                         android:text="@string/stepeny"></CheckBox>
 
                     <TextView
@@ -221,7 +218,7 @@
                         android:text=""></TextView>
 
                     <CheckBox
-                        android:id="@+id/textView44"
+                        android:id="@+id/chkBoxgear_operation"
                         android:text="@string/gear"></CheckBox>
 
 
@@ -234,14 +231,16 @@
                     android:gravity="center">
 
                     <CheckBox
-                        android:id="@+id/textView8"
+                        android:id="@+id/chkBoxAccelerator"
                         android:text="@string/accelerator"></CheckBox>
 
                     <TextView></TextView>
 
                     <TextView></TextView>
 
-                    <CheckBox android:text="@string/steering"></CheckBox>
+                    <CheckBox
+                        android:id="@+id/chkBoxsteering_related"
+                        android:text="@string/steering"></CheckBox>
 
                     <TextView></TextView>
 
@@ -253,14 +252,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <CheckBox android:text="@string/bodyandtoolrelated"></CheckBox>
+                    <CheckBox
+                        android:id="@+id/chkBoxBodytollRelated"
+                        android:text="@string/bodyandtoolrelated"></CheckBox>
 
                     <TextView></TextView>
 
                     <TextView></TextView>
 
                     <CheckBox
-                        android:id="@+id/imageView3"
+                        android:id="@+id/chkBoxengine_heat_related"
                         android:text="@string/engine_heating"></CheckBox>
 
 

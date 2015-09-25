@@ -121,7 +121,7 @@
                     android:orientation="horizontal">
 
                     <RadioGroup
-                        android:id="@+id/radio_group"
+                        android:id="@+id/radio_group_rc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -182,7 +182,7 @@
 
 
                     <RadioGroup
-                        android:id="@+id/radio_wipergroup"
+                        android:id="@+id/radioBtnNationalPermit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -239,7 +239,7 @@
 
 
                     <RadioGroup
-                        android:id="@+id/radio_Headlightgroup1"
+                        android:id="@+id/radioBtnInsurance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -294,14 +294,14 @@
 
 
                     <RadioGroup
-                        android:id="@+id/radio_Headlightgroup"
+                        android:id="@+id/radioBtnGoodsTax"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/rdRHeadLight"
+                            android:id="@+id/radioBtnGoodsTax1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="false"
@@ -349,7 +349,7 @@
 
 
                     <RadioGroup
-                        android:id="@+id/radio_Lslidegroup"
+                        android:id="@+id/radioBtnRoadTax"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -405,7 +405,7 @@
 
 
                     <RadioGroup
-                        android:id="@+id/radio_txtRslidegroup"
+                        android:id="@+id/radioBtnPollutionCerti"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -463,7 +463,7 @@
 
 
                     <RadioGroup
-                        android:id="@+id/radio_txtBrakelightgroup1"
+                        android:id="@+id/radioBtnDharamKaat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"

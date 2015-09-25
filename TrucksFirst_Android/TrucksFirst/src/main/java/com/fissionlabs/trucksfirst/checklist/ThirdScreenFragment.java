@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
@@ -23,7 +24,8 @@ public class ThirdScreenFragment extends CheckListCommonFragment {
     private int count = 20;
     private boolean timeOver;
     private int timeTaken = 0;
-
+    private RadioGroup radio_group_rc,radioBtnNationalPermit,radioBtnInsurance,radioBtnPollutionCerti,radioBtnDharamKaat,
+            radioBtnRoadTax,radioBtnGoodsTax;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +35,15 @@ public class ThirdScreenFragment extends CheckListCommonFragment {
 
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
+
+
+        radio_group_rc = (RadioGroup)view.findViewById(R.id.radio_group_rc);
+        radioBtnNationalPermit = (RadioGroup)view.findViewById(R.id.radioBtnNationalPermit);
+        radioBtnInsurance = (RadioGroup)view.findViewById(R.id.radioBtnInsurance);
+        radioBtnPollutionCerti = (RadioGroup)view.findViewById(R.id.radioBtnPollutionCerti);
+        radioBtnDharamKaat = (RadioGroup)view.findViewById(R.id.radioBtnDharamKaat);
+        radioBtnRoadTax = (RadioGroup)view.findViewById(R.id.radioBtnRoadTax);
+        radioBtnGoodsTax = (RadioGroup)view.findViewById(R.id.radioBtnGoodsTax);
 
         tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 3, 11));
         mTvTime.setText(String.format(getResources().getString(R.string.timer), count));

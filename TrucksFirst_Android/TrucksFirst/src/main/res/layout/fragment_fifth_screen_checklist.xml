@@ -84,7 +84,7 @@
 
 
                 <RadioGroup
-                    android:id="@+id/radio_group"
+                    android:id="@+id/radio_group_jack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="80dp"
-                    android:layout_toEndOf="@+id/radio_group"
+                    android:layout_toEndOf="@+id/radio_group_jack"
                     android:text="@string/jack"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -132,7 +132,7 @@
 
 
                 <RadioGroup
-                    android:id="@+id/radio_wipergroup"
+                    android:id="@+id/radio_group_jackrod"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -161,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="80dp"
-                    android:layout_toEndOf="@+id/radio_wipergroup"
+                    android:layout_toEndOf="@+id/radio_group_jackrod"
                     android:text="@string/jackrod"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -177,7 +177,7 @@
 
 
                 <RadioGroup
-                    android:id="@+id/radio_Headlightgroup1"
+                    android:id="@+id/radio_group_tyreever"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -205,7 +205,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="80dp"
-                    android:layout_toEndOf="@+id/radio_Headlightgroup1"
+                    android:layout_toEndOf="@+id/radio_group_tyreever"
                     android:text="@string/tyelever"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -221,7 +221,7 @@
 
 
                 <RadioGroup
-                    android:id="@+id/radio_Headlightgroup"
+                    android:id="@+id/radio_group_stepenyRemover"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -249,7 +249,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="80dp"
-                    android:layout_toEndOf="@+id/radio_Headlightgroup"
+                    android:layout_toEndOf="@+id/radio_group_stepenyRemover"
                     android:text="@string/stepeney_remover"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -19,6 +20,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SecondScreenFragment extends CheckListCommonFragment {
+
+
+
 
     private final String[] mechanical_issues_array = {
             "Clutch",
@@ -44,6 +48,10 @@ public class SecondScreenFragment extends CheckListCommonFragment {
     private TextView mTvTime;
     private int count = 10;
     private boolean timeOver;
+    private RadioGroup radio_group_wiperL,radio_group_wiperR,radio_group_headlightL,radio_group_headlightR,radio_group_side_indicatorL,radio_group_side_indicatorR,radio_group_brack_light,radio_group_horn;
+    private CheckBox chkBoxClutch,chkBoxTyre_condition,chkBoxpanelboard_lights,chkBoxabnormal_sound,chkBoxgear_operation,
+                    chkBoxStepeney,chkBoxAccelerator, chkBoxsteering_related,chkBoxBodytollRelated,chkBoxengine_heat_related,chkBoxBrake;
+
 
     @Nullable
     @Override
@@ -55,8 +63,22 @@ public class SecondScreenFragment extends CheckListCommonFragment {
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
 
+        chkBoxClutch = (CheckBox)view.findViewById(R.id.chkBoxClutch);
+        chkBoxBrake = (CheckBox)view.findViewById(R.id.chkBoxBrake);
+        chkBoxTyre_condition = (CheckBox)view.findViewById(R.id.chkBoxTyre_condition);
+        chkBoxpanelboard_lights = (CheckBox)view.findViewById(R.id.chkBoxpanelboard_lights);
+        chkBoxabnormal_sound = (CheckBox)view.findViewById(R.id.chkBoxabnormal_sound);
+        chkBoxgear_operation = (CheckBox)view.findViewById(R.id.chkBoxgear_operation);
+        chkBoxStepeney = (CheckBox)view.findViewById(R.id.chkBoxStepeney);
+        chkBoxAccelerator = (CheckBox)view.findViewById(R.id.chkBoxAccelerator);
+        chkBoxsteering_related = (CheckBox)view.findViewById(R.id.chkBoxsteering_related);
+        chkBoxBodytollRelated = (CheckBox)view.findViewById(R.id.chkBoxBodytollRelated);
+        chkBoxengine_heat_related = (CheckBox)view.findViewById(R.id.chkBoxengine_heat_related);
+        chkBoxpanelboard_lights = (CheckBox)view.findViewById(R.id.chkBoxpanelboard_lights);
+
         tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 2, 11));
         mTvTime.setText(String.format(getResources().getString(R.string.timer), count));
+
 
         relative_dropdown_layout = (TableLayout) view.findViewById(R.id.tableLayout);
 
