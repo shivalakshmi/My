@@ -16,7 +16,7 @@ import java.util.TimerTask;
 /**
  * @author ashok on 9/23/15.
  */
-public class FifthScreenFragment extends CheckListCommonFragment {
+public class NinthScreenFragment extends CheckListCommonFragment {
 
 
     private Button btnNext;
@@ -30,13 +30,13 @@ public class FifthScreenFragment extends CheckListCommonFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_fifth_screen_checklist, container, false);
+        View view = inflater.inflate(R.layout.fragment_ninth_screen_checklist, container, false);
         btnNext = (Button) view.findViewById(R.id.btnNext);
 
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
 
-        tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 5, 11));
+        tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 9, 11));
         mTvTime.setText(String.format(getResources().getString(R.string.timer), count));
 
 

@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +74,7 @@ public class CheckListBaseFragment extends CheckListCommonFragment {
         fragmentArrayList.add(new SixthScreenFragment());
         fragmentArrayList.add(new SeventhScreenFragment());
         fragmentArrayList.add(new EighthScreenFragment());
-        fragmentArrayList.add(new NinethScreenFragment());
+        fragmentArrayList.add(new NinthScreenFragment());
         fragmentArrayList.add(new TenthScreenFragment());
 
         return fragmentArrayList;
