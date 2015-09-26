@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.model.checklist.Screen8;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,9 +19,10 @@ import java.util.TimerTask;
  * @author ashok on 9/23/15.
  */
 public class EighthScreenFragment extends CheckListCommonFragment {
+    Screen8 s8;
     private Button btnNext;
     private TextView mTvTime;
-    private int count = 10;
+    transient private int count = 10;
     private boolean timeOver;
     private int timeTaken = 0;
     private RadioGroup radioBtnGroup_cabincleanCondition;
@@ -34,7 +36,29 @@ public class EighthScreenFragment extends CheckListCommonFragment {
 
         View view = inflater.inflate(R.layout.fragment_eight_screen_checklist, container, false);
         btnNext = (Button) view.findViewById(R.id.btnNext);
+
+        s8 = checklist.data.screen8;
+        if (s8 == null) s8 = new Screen8();
+
         radioBtnGroup_cabincleanCondition = (RadioGroup)view.findViewById(R.id.radioBtnGroup_cabincleanCondition);
+        if(s8.isCabinClean){
+            radioBtnGroup_cabincleanCondition.check(R.id.radioBtn_driver_onboard_ok);
+        } else{
+            radioBtnGroup_cabincleanCondition.check(R.id.radioBtn_driver_onboard_notok);
+        }
+        radioBtnGroup_cabincleanCondition.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                if (checkedId > -1 && checkedId == R.id.radioBtn_driver_onboard_ok) {
+                    s8.isCabinClean = true;
+                } else if (checkedId > -1 && checkedId == R.id.radioBtn_driver_onboard_notok) {
+                    {
+                        s8.isCabinClean = false;
+                    }
+                }
+            }
+        });
+
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
 
@@ -45,7 +69,8 @@ public class EighthScreenFragment extends CheckListCommonFragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                s8.timeTaken = 10 - count;
+                checklist.data.screen8 = s8;
                 CheckListBaseFragment.moveToNext();
             }
         });

@@ -58,7 +58,7 @@
 
 
             <RadioGroup
-                android:id="@+id/radio_group_anytiuchExternaldamage"
+                android:id="@+id/radio_group_anytouchExternaldamage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="80dp"
-                android:layout_toEndOf="@+id/radio_group_anytiuchExternaldamage"
+                android:layout_toEndOf="@+id/radio_group_anytouchExternaldamage"
                 android:text="@string/truckchk"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
