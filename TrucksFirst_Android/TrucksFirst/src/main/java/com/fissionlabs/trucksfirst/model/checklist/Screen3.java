@@ -14,4 +14,14 @@ public class Screen3 {
     public boolean dharamKaantaParchi;
     public int timeTaken;
 
+    public Screen3 (){
+        registrationCertificate = true;
+        nationalPermit = true;
+        insurance = true;
+        pollutionCertificate = true;
+        goodsTaxRecipiet = true;
+        roadTaxBooklet = true;
+        dharamKaantaParchi = true;
+        timeTaken = 0;
+    }
 }

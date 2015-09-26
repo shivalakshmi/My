@@ -8,4 +8,11 @@ public class Screen4 {
     public boolean lr;
     public boolean tp;
     public int timeTaken;
+
+    public Screen4() {
+        invoice = true;
+        lr = true;
+        tp = true;
+        timeTaken = 0;
+    }
 }

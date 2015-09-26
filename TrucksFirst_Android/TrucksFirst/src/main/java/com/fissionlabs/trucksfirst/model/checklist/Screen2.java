@@ -6,7 +6,7 @@ package com.fissionlabs.trucksfirst.model.checklist;
 public class Screen2 {
 
     public boolean mechanicalIssue;
-    public boolean mechanicalIssueList;
+    public String mechanicalIssueList;
     public boolean tyreOilIssue;
     public String tyreOilIssueList;
     public boolean electricalIssue;
@@ -15,5 +15,15 @@ public class Screen2 {
     public String engineIssueList;
     public int timeTaken;
 
-
+    public Screen2() {
+        mechanicalIssue = false;
+        mechanicalIssueList = "";
+        tyreOilIssue = false;
+        tyreOilIssueList = "";
+        electricalIssue = false;
+        electricalIssueList = "";
+        engineIssue = false;
+        engineIssueList = "";
+        timeTaken = 0;
+    }
 }

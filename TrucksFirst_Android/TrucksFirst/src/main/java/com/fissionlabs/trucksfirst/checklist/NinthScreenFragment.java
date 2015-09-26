@@ -45,9 +45,6 @@ public class NinthScreenFragment extends CheckListCommonFragment {
         radio_group_leakageDieselTank = (RadioGroup)view.findViewById(R.id.radio_group_leakageDieselTank);
         radio_group_collantLevel = (RadioGroup)view.findViewById(R.id.radio_group_collantLevel);
 
-
-
-
         tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 9, 11));
         mTvTime.setText(String.format(getResources().getString(R.string.timer), count));
 

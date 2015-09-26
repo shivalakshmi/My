@@ -16,5 +16,4 @@ public class Data {
     public Screen9 screen9 = new Screen9();
     public Screen10 screen10 = new Screen10();
 
-
 }

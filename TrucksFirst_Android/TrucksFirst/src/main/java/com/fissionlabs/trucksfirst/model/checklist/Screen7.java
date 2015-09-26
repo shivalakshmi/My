@@ -11,4 +11,13 @@ public class Screen7 {
     public boolean tyrePuncture;
     public boolean tyrePressure;
     public int timeTaken;
+
+    public Screen7() {
+        touchingDamage = false;
+        sealIntactness = true;
+        stepeneyInPlace = true;
+        tyrePuncture = false;
+        tyrePressure = true;
+        timeTaken = 0;
+    }
 }

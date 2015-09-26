@@ -10,7 +10,16 @@ public class Screen9 {
     public boolean temperatureCheck;
     public boolean fuelDieselLeakage;
     public boolean coolantLevel;
-    public boolean ddd;
     public boolean visualInspection;
     public int timeTaken;
+
+    public Screen9() {
+        engineOilLeakage = false;
+        steeringOilLeakage = false;
+        temperatureCheck = true;
+        fuelDieselLeakage = false;
+        coolantLevel = true;
+        visualInspection = true;
+        timeTaken = 0;
+    }
 }

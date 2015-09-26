@@ -10,4 +10,12 @@ public class Screen5 {
     public boolean tyreLever;
     public boolean stepeneyRemover;
     public int timeTaken;
+
+    public Screen5 () {
+        jack = true;
+        jackRod = true;
+        tyreLever = true;
+        stepeneyRemover = true;
+        timeTaken = 0;
+    }
 }
