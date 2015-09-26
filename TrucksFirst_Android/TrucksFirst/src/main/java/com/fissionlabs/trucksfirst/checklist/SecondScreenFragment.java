@@ -2,6 +2,7 @@ package com.fissionlabs.trucksfirst.checklist;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -55,10 +57,10 @@ public class SecondScreenFragment extends CheckListCommonFragment {
     private CheckBox mechanicalClutch, tyreOilCondition, electricalPanelBoardLights, engineAbnormalSound, engineGearOperation,
             tyreOilStepeney, mechanicalAccelerator, engineSteeringRelated, mechanicalBodyTollRelated, engineHeatingRelated, mechanicalBrake;
 
-    private String[] mechanicalResult = new String[4];
-    private String[] tyreeOilResult = new String[2];
-    private String[] electricalResult = new String[1];
-    private String[] engineSoundResult = new String[4];
+    private ArrayList<String> mechanicalResult = new ArrayList<>();
+    private ArrayList<String> tyreeOilResult = new ArrayList<>();
+    private ArrayList<String> electricalResult = new ArrayList<>();
+    private ArrayList<String> engineSoundResult = new ArrayList<>();
 
     @Nullable
     @Override
@@ -113,10 +115,9 @@ public class SecondScreenFragment extends CheckListCommonFragment {
         mechanicalClutch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mechanicalResult[0] = mechanicalClutch.getText().toString();
+                    mechanicalResult.add(mechanicalClutch.getText().toString());
                 } else {
-                    if (mechanicalResult[0].equals("Clutch"))
-                        mechanicalResult[0] = null;
+                    mechanicalResult.remove("Clutch");
 
                 }
 
@@ -126,10 +127,9 @@ public class SecondScreenFragment extends CheckListCommonFragment {
         mechanicalBrake.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mechanicalResult[1] = mechanicalBrake.getText().toString();
+                    mechanicalResult.add(mechanicalBrake.getText().toString());
                 } else {
-                    if (mechanicalResult[1].equals("Brake"))
-                        mechanicalResult[1] = null;
+                    mechanicalResult.remove("Brake");
 
                 }
 
@@ -140,10 +140,9 @@ public class SecondScreenFragment extends CheckListCommonFragment {
         mechanicalAccelerator.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mechanicalResult[2] = mechanicalAccelerator.getText().toString();
+                    mechanicalResult.add(mechanicalAccelerator.getText().toString());
                 } else {
-                    if (mechanicalResult[2].equals("Accelarator"))
-                        mechanicalResult[2] = null;
+                    mechanicalResult.remove("Accelarator");
 
                 }
 
@@ -153,10 +152,9 @@ public class SecondScreenFragment extends CheckListCommonFragment {
         mechanicalBodyTollRelated.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mechanicalResult[3] = mechanicalBodyTollRelated.getText().toString();
+                    mechanicalResult.add(mechanicalBodyTollRelated.getText().toString());
                 } else {
-                    if (mechanicalResult[3].equals("Body Tool related"))
-                        mechanicalResult[3] = null;
+                    mechanicalResult.remove("Body Tool related");
 
                 }
             }
@@ -165,10 +163,9 @@ public class SecondScreenFragment extends CheckListCommonFragment {
         tyreOilCondition.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    tyreeOilResult[0] = tyreOilCondition.getText().toString();
+                    tyreeOilResult.add(tyreOilCondition.getText().toString());
                 } else {
-                    if (tyreeOilResult[0].equals("Tyre condition"))
-                        tyreeOilResult[0] = null;
+                    tyreeOilResult.remove("Tyre condition");
 
                 }
 
@@ -178,11 +175,9 @@ public class SecondScreenFragment extends CheckListCommonFragment {
         tyreOilStepeney.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    tyreeOilResult[1] = tyreOilStepeney.getText().toString();
+                    tyreeOilResult.add(tyreOilStepeney.getText().toString());
                 } else {
-                    if (tyreeOilResult[1].equals("Stepeney condition"))
-                        tyreeOilResult[1] = null;
-
+                    tyreeOilResult.remove("Stepeney condition");
                 }
 
             }
@@ -191,11 +186,9 @@ public class SecondScreenFragment extends CheckListCommonFragment {
         electricalPanelBoardLights.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    electricalResult[0] = electricalPanelBoardLights.getText().toString();
+                    electricalResult.add(electricalPanelBoardLights.getText().toString());
                 } else {
-                    if (electricalResult[0].equals("Panel board lights"))
-                        electricalResult[0] = null;
-
+                    electricalResult.remove("Panel board lights");
                 }
 
             }
@@ -204,10 +197,9 @@ public class SecondScreenFragment extends CheckListCommonFragment {
         engineAbnormalSound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    engineSoundResult[0] = engineAbnormalSound.getText().toString();
+                    engineSoundResult.add(engineAbnormalSound.getText().toString());
                 } else {
-                    if (engineSoundResult[0].equals("Abnormal Sound"))
-                        engineSoundResult[0] = null;
+                    engineSoundResult.remove("Abnormal Sound");
 
                 }
             }
@@ -216,10 +208,9 @@ public class SecondScreenFragment extends CheckListCommonFragment {
         engineGearOperation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    engineSoundResult[1] = engineGearOperation.getText().toString();
+                    engineSoundResult.add(engineGearOperation.getText().toString());
                 } else {
-                    if (engineSoundResult[1].equals("Gear operation"))
-                        engineSoundResult[1] = null;
+                    engineSoundResult.remove("Gear operation");
 
                 }
             }
@@ -228,11 +219,9 @@ public class SecondScreenFragment extends CheckListCommonFragment {
         engineSteeringRelated.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    engineSoundResult[2] = engineSteeringRelated.getText().toString();
+                    engineSoundResult.add(engineSteeringRelated.getText().toString());
                 } else {
-                    if (engineSoundResult[2].equals("Steering related"))
-                        engineSoundResult[2] = null;
-
+                    engineSoundResult.remove("Steering related");
                 }
             }
         });
@@ -240,10 +229,9 @@ public class SecondScreenFragment extends CheckListCommonFragment {
         engineHeatingRelated.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    engineSoundResult[3] = engineHeatingRelated.getText().toString();
+                    engineSoundResult.add(engineHeatingRelated.getText().toString());
                 } else {
-                    if (engineSoundResult[3].equals("Engine heatingrelated"))
-                        engineSoundResult[3] = null;
+                    engineSoundResult.remove("Engine heatingrelated");
 
                 }
 
@@ -274,8 +262,39 @@ public class SecondScreenFragment extends CheckListCommonFragment {
                 else
                     newChecklist.data.screen2.engineIssue = false;
 
-                Toast.makeText(getActivity(),""+ Arrays.toString(mechanicalResult),Toast.LENGTH_LONG).show();
+                if(mechanicalResult!=null) {
+                    newChecklist.data.screen2.mechanicalIssueList = mechanicalResult.toString().replace("[", "").replace("]", "")
+                            .replace(", ", ",");
+                }
+                else{
+                    newChecklist.data.screen2.mechanicalIssueList = "";
+                }
 
+                if(electricalResult!=null) {
+                    newChecklist.data.screen2.electricalIssueList = electricalResult.toString().replace("[", "").replace("]", "")
+                            .replace(", ", ",");
+                }
+                else{
+                    newChecklist.data.screen2.electricalIssueList = "";
+                }
+
+                if(tyreeOilResult!=null) {
+                    newChecklist.data.screen2.tyreOilIssueList = tyreeOilResult.toString().replace("[", "").replace("]", "")
+                            .replace(", ", ",");
+                }
+                else{
+                    newChecklist.data.screen2.tyreOilIssueList = "";
+                }
+
+                if(engineSoundResult!=null) {
+                    newChecklist.data.screen2.engineIssueList = engineSoundResult.toString().replace("[", "").replace("]", "")
+                            .replace(", ", ",");
+                }
+                else{
+                    newChecklist.data.screen2.engineIssueList = "";
+                }
+
+                newChecklist.data.screen2.timeTaken = timeTaken;
 
                 CheckListBaseFragment.moveToNext();
             }
