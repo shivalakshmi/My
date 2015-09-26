@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -26,6 +28,7 @@ public class ThirdScreenFragment extends CheckListCommonFragment {
     private int timeTaken = 0;
     private RadioGroup radio_group_rc,radioBtnNationalPermit,radioBtnInsurance,radioBtnPollutionCerti,radioBtnDharamKaat,
             radioBtnRoadTax,radioBtnGoodsTax;
+    private NewChecklist newChecklist = FirstScreenFragment.newChecklist;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,11 +53,117 @@ public class ThirdScreenFragment extends CheckListCommonFragment {
 
         ((TextView) view.findViewById(R.id.tvScreenName)).setText(getResources().getString(R.string.truck_docs));
 
+        radio_group_rc.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+                        newChecklist.data.screen3.registrationCertificate = true;
+                    } else {
+                        newChecklist.data.screen3.registrationCertificate = false;
+                    }
+                }
+
+            }
+        });
+
+        radioBtnNationalPermit.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+                        newChecklist.data.screen3.nationalPermit = true;
+                    } else {
+                        newChecklist.data.screen3.nationalPermit = false;
+                    }
+                }
+
+            }
+        });
+
+        radioBtnInsurance.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+                        newChecklist.data.screen3.insurance = true;
+                    } else {
+                        newChecklist.data.screen3.insurance = false;
+                    }
+                }
+
+            }
+        });
+
+        radioBtnGoodsTax.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+                        newChecklist.data.screen3.goodsTaxRecipiet= true;
+                    } else {
+                        newChecklist.data.screen3.goodsTaxRecipiet = false;
+                    }
+                }
+
+            }
+        });
+
+        radioBtnRoadTax.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+                        newChecklist.data.screen3.roadTaxBooklet = true;
+                    } else {
+                        newChecklist.data.screen3.roadTaxBooklet = false;
+                    }
+                }
+
+            }
+        });
+
+        radioBtnPollutionCerti.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+                        newChecklist.data.screen3.pollutionCertificate = true;
+                    } else {
+                        newChecklist.data.screen3.pollutionCertificate = false;
+                    }
+                }
+
+            }
+        });
+
+        radioBtnDharamKaat.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+                        newChecklist.data.screen3.dharamKaantaParchi = true;
+                    } else {
+                        newChecklist.data.screen3.dharamKaantaParchi = false;
+                    }
+                }
+
+            }
+        });
+
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                newChecklist.data.screen3.timeTaken = timeTaken;
                 CheckListBaseFragment.moveToNext();
             }
         });

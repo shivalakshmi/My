@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,6 +29,7 @@ public class FourthScreenFragment extends CheckListCommonFragment {
     private int timeTaken = 0;
     private RadioGroup radio_group_manifest,radioGroup_LR,radioGroup_gati,
             radioGroup_tp,radioGroup_docAvail,radioGroup_docgiventoDriver;
+    private NewChecklist newChecklist = FirstScreenFragment.newChecklist;
 
     @Nullable
     @Override
@@ -48,9 +51,103 @@ public class FourthScreenFragment extends CheckListCommonFragment {
 
         ((TextView) view.findViewById(R.id.tvScreenName)).setText(getResources().getString(R.string.truck_docs));
 
+        radio_group_manifest.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+                        newChecklist.data.screen4.invoice = true;
+                    } else {
+                        newChecklist.data.screen4.invoice = false;
+                    }
+                }
+
+            }
+        });
+
+        radioGroup_LR.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+                        newChecklist.data.screen4.lr = true;
+                    } else {
+                        newChecklist.data.screen4.lr = false;
+                    }
+                }
+
+            }
+        });
+
+//        radioGroup_gati.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+//                if (null != rb && checkedId > -1) {
+//                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+//                        newChecklist.data.screen4.dharamKaantaParchi = true;
+//                    } else {
+//                        newChecklist.data.screen4.dharamKaantaParchi = false;
+//                    }
+//                }
+//
+//            }
+//        });
+
+        radioGroup_tp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+                        newChecklist.data.screen4.tp = true;
+                    } else {
+                        newChecklist.data.screen4.tp = false;
+                    }
+                }
+
+            }
+        });
+
+//        radioGroup_docAvail.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+//                if (null != rb && checkedId > -1) {
+//                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+//                        newChecklist.data.screen4.dharamKaantaParchi = true;
+//                    } else {
+//                        newChecklist.data.screen4.dharamKaantaParchi = false;
+//                    }
+//                }
+//
+//            }
+//        });
+//        radioGroup_docgiventoDriver.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+//                if (null != rb && checkedId > -1) {
+//                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+//                        newChecklist.data.screen4.dharamKaantaParchi = true;
+//                    } else {
+//                        newChecklist.data.screen4.dharamKaantaParchi = false;
+//                    }
+//                }
+//
+//            }
+//        });
+
+
+
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                newChecklist.data.screen4.timeTaken = timeTaken;
 
                 CheckListBaseFragment.moveToNext();
             }
