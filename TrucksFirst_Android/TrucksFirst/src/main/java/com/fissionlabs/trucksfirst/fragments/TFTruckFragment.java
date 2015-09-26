@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +26,7 @@ import com.fissionlabs.trucksfirst.common.TFCommonFragment;
 import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
+import com.fissionlabs.trucksfirst.newrequirement.NewChecklist;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
 import com.google.gson.Gson;
@@ -89,6 +91,21 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         mTFragment = this;
         driverPlannedCount = 0;
         drivetNotPlannedCount = 0;
+
+        // for testing purpose. Will remove once every thing done
+
+        NewChecklist newChecklist = new NewChecklist();
+
+        newChecklist.data.screen1.horn = true;
+
+        String json = new Gson().toJson(newChecklist, NewChecklist.class);
+
+        Toast.makeText(getActivity(), "Test Json for new Checklist" + json, Toast.LENGTH_LONG).show();
+        Log.e("Lucky", json);
+
+        /////
+
+
         mHomeActivity.mActionBar.setDisplayShowTitleEnabled(false);
         mTruckDetailsListView = (RecyclerView) view.findViewById(R.id.truck_details_list);
         mTruckDetailsListView.setHasFixedSize(true);
@@ -165,7 +182,11 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                             }
                         }
 
-                        mVehicleCount.setText(getActivity().getResources().getString(R.string.vehicle_count) + " " + mTrucksList.size());
+
+                        if (mTrucksList != null) {
+                            mVehicleCount.setText(getActivity().getResources().getString(R.string.vehicle_count) + " " + mTrucksList.size());
+                        }
+
                         mDriversPlanned.setText(getActivity().getResources().getString(R.string.drivers_planned) + " " + driverPlannedCount);
                         mDriversNotPlanned.setText(getActivity().getResources().getString(R.string.drivers_not_planned) + " " + drivetNotPlannedCount);
                         Date date = new Date();
