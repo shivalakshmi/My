@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
+import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.google.gson.Gson;
 
 import java.util.Timer;
@@ -38,6 +39,7 @@ public class FirstScreenFragment extends CheckListCommonFragment {
 
 
         View view = inflater.inflate(R.layout.fragment_first_screen_checklist, container, false);
+        newChecklist.vehicleNumber = TFUtils.getStringFromSP(getActivity(), "vehicle_number");
         Button next = (Button) view.findViewById(R.id.btnNext);
 
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
@@ -170,12 +172,12 @@ public class FirstScreenFragment extends CheckListCommonFragment {
 
         startTimer();
 
-        newChecklist.data.screen1.timeTaken = timeTaken;
+
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                newChecklist.data.screen1.timeTaken = timeTaken;
                 CheckListBaseFragment.moveToNext();
             }
         });

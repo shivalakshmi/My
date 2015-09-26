@@ -161,7 +161,7 @@
                          />
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/rc_doc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -219,7 +219,7 @@
                          />
 
                     <ImageView
-                        android:id="@+id/imageView11"
+                        android:id="@+id/np_doc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -275,7 +275,7 @@
                          />
 
                     <ImageView
-                        android:id="@+id/imageView1"
+                        android:id="@+id/insurance_doc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -329,7 +329,7 @@
                          />
 
                     <ImageView
-                        android:id="@+id/imageViewlk"
+                        android:id="@+id/gt_docs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -385,7 +385,7 @@
                          />
 
                     <ImageView
-                        android:id="@+id/imageView12"
+                        android:id="@+id/rt_doc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -442,7 +442,7 @@
                          />
 
                     <ImageView
-                        android:id="@+id/imageView234"
+                        android:id="@+id/pc_doc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"

@@ -5,12 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.v4.view.GravityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.util.TFUtils;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,8 @@ public class CheckListBaseFragment extends CheckListCommonFragment {
     private static CustomViewPager mViewPager;
     private ScreenSlidePagerAdapter mPagerAdapter;
     private ArrayList<CheckListCommonFragment> fragmentArrayList = new ArrayList<>();
+    private Bundle bundle;
+    private String vehicleNumber;
 
     public static void moveToNext() {
 
@@ -34,6 +37,30 @@ public class CheckListBaseFragment extends CheckListCommonFragment {
 
         View view = inflater.inflate(R.layout.fragment_base_checklist, container, false);
         mViewPager = (CustomViewPager) view.findViewById(R.id.vpBaseChecklist);
+
+        bundle = this.getArguments();
+        vehicleNumber = bundle.getString("vehicle_number");
+        TFUtils.saveStringInSP(getActivity(), "vehicle_number", vehicleNumber);
+
+        mHomeActivity.isHomeFragment = false;
+
+        mHomeActivity.mActionBar.setDisplayShowTitleEnabled(true);
+        mHomeActivity.imageView.setVisibility(View.GONE);
+
+        mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_back);
+        mHomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mHomeActivity.isHomeFragment == false)
+                    mHomeActivity.onBackPressed();
+                else
+                    mHomeActivity.mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        mHomeActivity.mActionBar.setTitle(vehicleNumber);
+
+
 
         fragmentArrayList = getFragmentArrayList();
 
@@ -81,6 +108,16 @@ public class CheckListBaseFragment extends CheckListCommonFragment {
         public int getCount() {
             return fragmentArrayList.size();
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mHomeActivity.mActionBar.setTitle(getResources().getString(R.string.app_name));
+        mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_menu);
+        mHomeActivity.isHomeFragment = true;
+        mHomeActivity.mActionBar.setDisplayShowTitleEnabled(false);
+        mHomeActivity.imageView.setVisibility(View.VISIBLE);
     }
 
 }
