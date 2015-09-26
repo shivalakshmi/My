@@ -81,20 +81,20 @@ public class FourthScreenFragment extends CheckListCommonFragment {
             }
         });
 
-//        radioGroup_gati.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                RadioButton rb = (RadioButton) group.findViewById(checkedId);
-//                if (null != rb && checkedId > -1) {
-//                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
-//                        newChecklist.data.screen4.dharamKaantaParchi = true;
-//                    } else {
-//                        newChecklist.data.screen4.dharamKaantaParchi = false;
-//                    }
-//                }
-//
-//            }
-//        });
+        radioGroup_gati.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+                        newChecklist.data.screen4.gatiDocBag = true;
+                    } else {
+                        newChecklist.data.screen4.gatiDocBag = false;
+                    }
+                }
+
+            }
+        });
 
         radioGroup_tp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -111,34 +111,34 @@ public class FourthScreenFragment extends CheckListCommonFragment {
             }
         });
 
-//        radioGroup_docAvail.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                RadioButton rb = (RadioButton) group.findViewById(checkedId);
-//                if (null != rb && checkedId > -1) {
-//                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
-//                        newChecklist.data.screen4.dharamKaantaParchi = true;
-//                    } else {
-//                        newChecklist.data.screen4.dharamKaantaParchi = false;
-//                    }
-//                }
-//
-//            }
-//        });
-//        radioGroup_docgiventoDriver.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                RadioButton rb = (RadioButton) group.findViewById(checkedId);
-//                if (null != rb && checkedId > -1) {
-//                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
-//                        newChecklist.data.screen4.dharamKaantaParchi = true;
-//                    } else {
-//                        newChecklist.data.screen4.dharamKaantaParchi = false;
-//                    }
-//                }
-//
-//            }
-//        });
+        radioGroup_docAvail.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+                        newChecklist.data.screen4.areDocsAvailable = true;
+                    } else {
+                        newChecklist.data.screen4.areDocsAvailable = false;
+                    }
+                }
+
+            }
+        });
+        radioGroup_docgiventoDriver.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = (RadioButton) group.findViewById(checkedId);
+                if (null != rb && checkedId > -1) {
+                    if (rb.getText().toString().equalsIgnoreCase("OK")) {
+                        newChecklist.data.screen4.docsGivenToDriver = true;
+                    } else {
+                        newChecklist.data.screen4.docsGivenToDriver = false;
+                    }
+                }
+
+            }
+        });
 
 
 
