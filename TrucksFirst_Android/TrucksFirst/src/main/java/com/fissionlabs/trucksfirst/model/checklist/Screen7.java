@@ -1,4 +1,4 @@
-package com.fissionlabs.trucksfirst.newrequirement;
+package com.fissionlabs.trucksfirst.model.checklist;
 
 /**
  * Created by Lakshmi on 26-09-2015.

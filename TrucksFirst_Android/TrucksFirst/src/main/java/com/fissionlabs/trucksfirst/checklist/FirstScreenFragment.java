@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
-import com.fissionlabs.trucksfirst.newrequirement.NewChecklist;
+import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
 import com.google.gson.Gson;
 
 import java.util.Timer;
@@ -28,9 +28,9 @@ public class FirstScreenFragment extends CheckListCommonFragment {
     private TextView mTvTime;
     private int count = 10;
     private boolean timeOver;
-    private int timeTaken = 10;
+    private int timeTaken = 0;
     private RadioGroup radio_group_wiperL,radio_group_wiperR,radio_group_headlightL,radio_group_headlightR,radio_group_side_indicatorL,radio_group_side_indicatorR,radio_group_brack_light,radio_group_horn;
-    private NewChecklist newChecklist = new NewChecklist();
+    public static NewChecklist newChecklist = new NewChecklist();
 
     @Nullable
     @Override

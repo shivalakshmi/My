@@ -26,7 +26,7 @@ import com.fissionlabs.trucksfirst.common.TFCommonFragment;
 import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
-import com.fissionlabs.trucksfirst.newrequirement.NewChecklist;
+import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
 import com.google.gson.Gson;
@@ -34,6 +34,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
