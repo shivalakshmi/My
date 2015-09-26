@@ -9,5 +9,5 @@ public class Screen5 {
     public boolean jackRod;
     public boolean tyreLever;
     public boolean stepeneyRemover;
-    public String timeTaken;
+    public int timeTaken;
 }

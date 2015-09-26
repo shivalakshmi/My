@@ -12,5 +12,5 @@ public class Screen9 {
     public boolean coolantLevel;
     public boolean ddd;
     public boolean visualInspection;
-    public String timeTaken;
+    public int timeTaken;
 }

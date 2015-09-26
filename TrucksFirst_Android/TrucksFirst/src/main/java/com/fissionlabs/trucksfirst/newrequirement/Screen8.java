@@ -5,5 +5,5 @@ package com.fissionlabs.trucksfirst.newrequirement;
  */
 public class Screen8 {
     public boolean isCabinClean;
-    public String timeTaken;
+    public int timeTaken;
 }

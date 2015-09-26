@@ -13,7 +13,7 @@ public class Screen2 {
     public String electricalIssueList;
     public boolean engineIssue;
     public String engineIssueList;
-    public String timeTaken;
+    public int timeTaken;
 
 
 }

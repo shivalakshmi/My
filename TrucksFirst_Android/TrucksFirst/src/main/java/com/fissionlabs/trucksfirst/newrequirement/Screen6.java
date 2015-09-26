@@ -10,5 +10,5 @@ public class Screen6 {
     public String cashShortageReason;
     public boolean isTopUpDone;
     public String inputAmount;
-    public String timeTaken;
+    public int timeTaken;
 }

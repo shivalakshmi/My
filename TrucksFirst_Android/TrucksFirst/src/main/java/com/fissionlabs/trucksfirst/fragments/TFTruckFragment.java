@@ -92,20 +92,6 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
         driverPlannedCount = 0;
         drivetNotPlannedCount = 0;
 
-        // for testing purpose. Will remove once every thing done
-
-        NewChecklist newChecklist = new NewChecklist();
-
-        newChecklist.data.screen1.horn = true;
-
-        String json = new Gson().toJson(newChecklist, NewChecklist.class);
-
-        Toast.makeText(getActivity(), "Test Json for new Checklist" + json, Toast.LENGTH_LONG).show();
-        Log.e("Lucky", json);
-
-        /////
-
-
         mHomeActivity.mActionBar.setDisplayShowTitleEnabled(false);
         mTruckDetailsListView = (RecyclerView) view.findViewById(R.id.truck_details_list);
         mTruckDetailsListView.setHasFixedSize(true);

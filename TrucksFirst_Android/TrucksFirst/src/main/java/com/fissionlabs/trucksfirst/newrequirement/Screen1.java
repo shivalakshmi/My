@@ -13,6 +13,6 @@ public class Screen1 {
     public boolean rightSideIndicator;
     public boolean brakeLight;
     public boolean horn;
-    public String timeTaken;
+    public int timeTaken;
 
 }

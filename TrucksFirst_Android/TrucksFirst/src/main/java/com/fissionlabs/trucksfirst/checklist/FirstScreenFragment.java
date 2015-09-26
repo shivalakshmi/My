@@ -2,6 +2,7 @@ package com.fissionlabs.trucksfirst.checklist;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,11 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.newrequirement.NewChecklist;
+import com.google.gson.Gson;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,9 +28,9 @@ public class FirstScreenFragment extends CheckListCommonFragment {
     private TextView mTvTime;
     private int count = 10;
     private boolean timeOver;
-    private int timeTaken = 0;
+    private int timeTaken = 10;
     private RadioGroup radio_group_wiperL,radio_group_wiperR,radio_group_headlightL,radio_group_headlightR,radio_group_side_indicatorL,radio_group_side_indicatorR,radio_group_brack_light,radio_group_horn;
-
+    private NewChecklist newChecklist = new NewChecklist();
 
     @Nullable
     @Override
@@ -53,9 +57,9 @@ public class FirstScreenFragment extends CheckListCommonFragment {
                 RadioButton rb = (RadioButton) group.findViewById(checkedId);
                 if (null != rb && checkedId > -1) {
                     if (rb.getText().toString().equalsIgnoreCase("OK")) {
-
+                        newChecklist.data.screen1.leftWiper = true;
                     } else {
-
+                        newChecklist.data.screen1.leftWiper = false;
                     }
                 }
 
@@ -67,9 +71,9 @@ public class FirstScreenFragment extends CheckListCommonFragment {
                 RadioButton rb = (RadioButton) group.findViewById(checkedId);
                 if (null != rb && checkedId > -1) {
                     if (rb.getText().toString().equalsIgnoreCase("OK")) {
-
+                        newChecklist.data.screen1.rightWiper = true;
                     } else {
-
+                        newChecklist.data.screen1.rightWiper = false;
                     }
                 }
 
@@ -81,9 +85,9 @@ public class FirstScreenFragment extends CheckListCommonFragment {
                 RadioButton rb = (RadioButton) group.findViewById(checkedId);
                 if (null != rb && checkedId > -1) {
                     if (rb.getText().toString().equalsIgnoreCase("OK")) {
-
+                        newChecklist.data.screen1.lowBeamHeadlight = true;
                     } else {
-
+                        newChecklist.data.screen1.lowBeamHeadlight = false;
                     }
                 }
 
@@ -95,9 +99,9 @@ public class FirstScreenFragment extends CheckListCommonFragment {
                 RadioButton rb = (RadioButton) group.findViewById(checkedId);
                 if (null != rb && checkedId > -1) {
                     if (rb.getText().toString().equalsIgnoreCase("OK")) {
-
+                        newChecklist.data.screen1.highBeamHeadlight = true;
                     } else {
-
+                        newChecklist.data.screen1.highBeamHeadlight = false;
                     }
                 }
 
@@ -109,9 +113,9 @@ public class FirstScreenFragment extends CheckListCommonFragment {
                 RadioButton rb = (RadioButton) group.findViewById(checkedId);
                 if (null != rb && checkedId > -1) {
                     if (rb.getText().toString().equalsIgnoreCase("OK")) {
-
+                        newChecklist.data.screen1.leftSideIndicator = true;
                     } else {
-
+                        newChecklist.data.screen1.leftSideIndicator = false;
                     }
                 }
 
@@ -123,9 +127,9 @@ public class FirstScreenFragment extends CheckListCommonFragment {
                 RadioButton rb = (RadioButton) group.findViewById(checkedId);
                 if (null != rb && checkedId > -1) {
                     if (rb.getText().toString().equalsIgnoreCase("OK")) {
-
+                        newChecklist.data.screen1.rightSideIndicator = true;
                     } else {
-
+                        newChecklist.data.screen1.rightSideIndicator = false;
                     }
                 }
 
@@ -137,9 +141,9 @@ public class FirstScreenFragment extends CheckListCommonFragment {
                 RadioButton rb = (RadioButton) group.findViewById(checkedId);
                 if (null != rb && checkedId > -1) {
                     if (rb.getText().toString().equalsIgnoreCase("OK")) {
-
+                        newChecklist.data.screen1.brakeLight = true;
                     } else {
-
+                        newChecklist.data.screen1.brakeLight = false;
                     }
                 }
 
@@ -151,10 +155,9 @@ public class FirstScreenFragment extends CheckListCommonFragment {
                 RadioButton rb = (RadioButton) group.findViewById(checkedId);
                 if (null != rb && checkedId > -1) {
                     if (rb.getText().toString().equalsIgnoreCase("OK")) {
-
-
+                        newChecklist.data.screen1.horn = true;
                     } else {
-
+                        newChecklist.data.screen1.horn = false;
                     }
                 }
 
@@ -166,6 +169,8 @@ public class FirstScreenFragment extends CheckListCommonFragment {
         mTvTime.setText(String.format(getResources().getString(R.string.timer), count));
 
         startTimer();
+
+        newChecklist.data.screen1.timeTaken = timeTaken;
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override

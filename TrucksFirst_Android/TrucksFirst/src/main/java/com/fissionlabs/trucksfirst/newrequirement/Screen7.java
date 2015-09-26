@@ -10,5 +10,5 @@ public class Screen7 {
     public boolean stepeneyInPlace;
     public boolean tyrePuncture;
     public boolean tyrePressure;
-    public String timeTaken;
+    public int timeTaken;
 }

@@ -6,5 +6,5 @@ package com.fissionlabs.trucksfirst.newrequirement;
 public class Screen10 {
     public boolean driverOnBoarded;
     public boolean readyToMove;
-    public String timeTaken;
+    public int timeTaken;
 }

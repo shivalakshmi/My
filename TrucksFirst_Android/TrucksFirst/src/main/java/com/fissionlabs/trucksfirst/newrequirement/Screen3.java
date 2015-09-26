@@ -12,6 +12,6 @@ public class Screen3 {
     public boolean goodsTaxRecipiet;
     public boolean roadTaxBooklet;
     public boolean dharamKaantaParchi;
-    public String timeTaken;
+    public int timeTaken;
 
 }
