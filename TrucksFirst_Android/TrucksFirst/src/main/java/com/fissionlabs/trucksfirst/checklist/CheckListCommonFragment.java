@@ -7,11 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
+import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
 
 /**
  * @author ashok on 9/23/15.
  */
 public class CheckListCommonFragment extends TFCommonFragment {
+    protected NewChecklist checklist;
+    // TODO: Initialise it in createView of CheckListBaseFragement
 
     @Nullable
     @Override

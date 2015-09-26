@@ -12,7 +12,9 @@ public class NewChecklist {
     public Data data;
 
     public NewChecklist(String vehicleNumber, BigInteger trackingId){
-
+        this.vehicleNumber = vehicleNumber;
+        id = trackingId;
+        data = new Data();
     }
 
 }
