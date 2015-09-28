@@ -15,16 +15,4 @@ public class Screen1 {
     public boolean horn;
     public int timeTaken;
 
-    public Screen1 () {
-        leftWiper = true;
-        rightWiper = true;
-        lowBeamHeadlight = true;
-        highBeamHeadlight = true;
-        leftSideIndicator = true;
-        rightSideIndicator = true;
-        brakeLight = true;
-        horn = true;
-        timeTaken = 0;
-    }
-
 }

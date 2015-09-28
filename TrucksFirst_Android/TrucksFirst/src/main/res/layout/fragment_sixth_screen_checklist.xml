@@ -126,7 +126,7 @@
 
 
                     <TextView
-                        android:id="@+id/tvWiperL"
+                        android:id="@+id/remaining_toll_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"

@@ -12,13 +12,4 @@ public class Screen4 {
     public boolean docsGivenToDriver;
     public int timeTaken;
 
-    public Screen4() {
-        invoice = true;
-        lr = true;
-        tp = true;
-        gatiDocBag = true;
-        areDocsAvailable = true;
-        docsGivenToDriver = true;
-        timeTaken = 0;
-    }
 }

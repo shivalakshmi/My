@@ -28,6 +28,7 @@ public interface TFConst {
     String URL_FORGOT_PASSWORD = "http://" + BASE_IP + "user/resetpassword";
     String URL_SMS = "http://bhashsms.com/api/sendmsg.php";
     String URL_APP_LOCK_TAMPER = "http://" + BASE_IP + "user/tamper";
+    String URL_GET_TOLL_AMOUNT = "http://" + BASE_IP + "checklist/gettollamount";
 
     String TAG_TRUCK_DETAILS = "TRUCK_DETAILS";
     String TAG_PILOT_DETAILS = "PILOT_DETAILS";

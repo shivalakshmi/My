@@ -273,8 +273,8 @@
     <string name="timer">%1$d s</string>
     <string name="page_title">Title</string>
     <string name="tollcash">Toll Cash Reconciliation</string>
-    <string name="isthe_tollcash">Is the toll cash with the driver Rs 6566 (e.g)?</string>
-    <string name="toll_receipt">Toll receipts of  Rs. 377 (e.g) submitted?</string>
+    <string name="isthe_tollcash">Is the toll cash with the driver Rs %1$s (e.g)?</string>
+    <string name="toll_receipt">Toll receipts of  Rs. %1$s (e.g) submitted?</string>
     <string name="toll_receipt_note">If tally then finance gets an alert. Cut from driver s salary</string>
     <string name="toll_reason">Reason for toll cash shortage, if any</string>
     <string name="mechanical">Mechanical</string>

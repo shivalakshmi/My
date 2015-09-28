@@ -7,8 +7,4 @@ public class Screen8 {
     public boolean isCabinClean;
     public int timeTaken;
 
-    public Screen8() {
-        isCabinClean = true;
-        timeTaken = 0;
-    }
 }

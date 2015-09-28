@@ -8,15 +8,8 @@ import java.math.BigInteger;
 public class NewChecklist {
 
     public String vehicleNumber;
-    public BigInteger id;
-    public Data data;
-
-    public NewChecklist(String vehicleNumber, BigInteger trackingId){
-        this.vehicleNumber = vehicleNumber;
-        id = trackingId;
-        data = new Data();
-    }
-
+    public String trackingId;
+    public Data data = new Data();
 }
 
 

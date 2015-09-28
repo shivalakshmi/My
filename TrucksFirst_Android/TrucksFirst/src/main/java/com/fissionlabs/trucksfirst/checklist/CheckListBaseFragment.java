@@ -41,6 +41,7 @@ public class CheckListBaseFragment extends CheckListCommonFragment {
         bundle = this.getArguments();
         vehicleNumber = bundle.getString("vehicle_number");
         TFUtils.saveStringInSP(getActivity(), "vehicle_number", vehicleNumber);
+        TFUtils.saveStringInSP(getActivity(),"vehicleTrackingId",bundle.getString("vehicleTrackingId"));
 
         mHomeActivity.isHomeFragment = false;
 

@@ -7,10 +7,4 @@ public class Screen10 {
     public boolean driverOnBoarded;
     public boolean readyToMove;
     public int timeTaken;
-
-    public Screen10() {
-        driverOnBoarded = true;
-        readyToMove = true;
-        timeTaken = 0;
-    }
 }

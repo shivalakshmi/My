@@ -605,6 +605,46 @@ public class WebServices implements TFConst {
         TFApp.getInstance().addToRequestQueue(request, TAG_REPORT_TAMPER);
     }
 
+
+    public void getTollAmount(final Context context,final ResultReceiver resultReceiver) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_GET_TOLL_AMOUNT + "/" + TFUtils.getStringFromSP(context,"vehicleTrackingId"),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Checklist details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Checklist details end ======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+
+                        resultReceiver.send(SUCCESS, bundle);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                resultReceiver.send(ERROR, null);
+            }
+        }) {
+
+           /* @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("vehicleNo", vehicleNumber);
+                return params;
+            }*/
+
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CHECKLIST_DETAILS);
+    }
+
 }
 
 

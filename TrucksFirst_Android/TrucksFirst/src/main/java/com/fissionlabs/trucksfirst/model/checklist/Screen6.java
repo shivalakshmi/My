@@ -11,13 +11,4 @@ public class Screen6 {
     public boolean isTopUpDone;
     public String inputAmount;
     public int timeTaken;
-
-    public Screen6() {
-        tollCashWithDriver = "";
-        tollReceipts = true;
-        cashShortageReason = "";
-        isTopUpDone = false;
-        inputAmount = "";
-        timeTaken = 0;
-    }
 }
