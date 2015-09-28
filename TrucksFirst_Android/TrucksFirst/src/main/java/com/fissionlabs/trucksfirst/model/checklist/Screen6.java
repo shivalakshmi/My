@@ -5,7 +5,7 @@ package com.fissionlabs.trucksfirst.model.checklist;
  */
 public class Screen6 {
 
-    public String tollCashWithDriver;
+    public int tollCashWithDriver;
     public boolean tollReceipts;
     public String cashShortageReason;
     public boolean isTopUpDone;
