@@ -933,5 +933,6 @@ public class WebServices implements TFConst {
             }
         });
         Log.v("Kanj",URL_PREVIOUS_CHECKLIST + "?trackingId=" + tid);
+        TFApp.getInstance().addToRequestQueue(req, TAG_PREVIOUS_CHECKLIST);
     }
 }

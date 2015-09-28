@@ -11,8 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +33,6 @@ import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
 import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.model.PilotAvailability;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
-import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
 import com.fissionlabs.trucksfirst.pojo.DriverChecklist;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
@@ -46,8 +44,6 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,8 +52,6 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final int WITH_PILOT = 0;
-    private final int WITH_BUTTON = 1;
     private Context mContext;
     private TFHomeActivity mActivity;
     private ArrayList<TruckDetails> mDataSet;
@@ -65,8 +59,10 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private DriverChecklist mDriverChecklist;
     private WebServices mWebServices = new WebServices();
     private String spinnerText = "";
+    private final int WITH_PILOT = 0;
+    private final int WITH_BUTTON = 1;
 
-    public TrucksAdapter(Context context, TFHomeActivity activity, TFTruckFragment tfTruckFragment, ArrayList<TruckDetails> dataSet) {
+    public TrucksAdapter(Context context, TFHomeActivity activity,TFTruckFragment tfTruckFragment, ArrayList<TruckDetails> dataSet) {
         mContext = context;
         mActivity = activity;
         mTfTruckFragment = tfTruckFragment;
@@ -105,8 +101,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemViewType(int position) {
         //return super.getItemViewType(position);
-        if (mDataSet.get(position).getAssignedPilot() == null || mDataSet.get(position).getAssignedPilot().equalsIgnoreCase("null"))
-            return WITH_BUTTON;
+        if (mDataSet.get(position).getAssignedPilot() == null || mDataSet.get(position).getAssignedPilot().equalsIgnoreCase("null")) return WITH_BUTTON;
         else return WITH_PILOT;
     }
 
@@ -115,7 +110,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         switch (holder.getItemViewType()) {
             case WITH_BUTTON:
-                ViewHolderWithButton vb = (ViewHolderWithButton) holder;
+                ViewHolderWithButton vb = (ViewHolderWithButton)holder;
                 loadViewWithButton(vb, position);
                 break;
             case WITH_PILOT:
@@ -129,7 +124,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         TruckDetails td = mDataSet.get(p);
         vb.mVehicleNumber.setText(td.getVehicleNumber());
         vb.mVehicleNumber.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
-        vb.mVehicleNumber.setOnClickListener(new VehicleNumberListener(td));
+        vb.mAssignPilot.setOnClickListener(new AssignedPilotListener(td, p));
         vb.mVehicleRoute.setText(td.getVehicleRoute());
         vb.mVehicleRoute.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
         vb.mClient.setText(td.getClient());
@@ -139,7 +134,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         vb.mAssignPilot.setOnClickListener(new AssignedPilotListener(td, p));
     }
 
-    private void loadViewWithPilot(ViewHolderWithPilot vp, final int p) {
+    private void loadViewWithPilot (ViewHolderWithPilot vp, final int p) {
         TruckDetails td = mDataSet.get(p);
         vp.mRadioVehicleInHubYes.setTag(vp);
         vp.mRadioVehicleInHubNo.setTag(vp);
@@ -171,7 +166,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             mWebServices.getPilotInHub(td.getVehicleTrackingId(), "false");
         }
 
-        if (td.getCheckList() != null) {
+        if(td.getCheckList()!=null) {
             if (td.getCheckList().equals("true")) {
                 vp.mChecklist.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_check_list_done));
                 vp.mChecklist.setClickable(true);
@@ -188,12 +183,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         vp.mVehicleNumber.setOnClickListener(new VehicleNumberListener(td));
     }
 
-    @Override
-    public int getItemCount() {
-        return mDataSet.size();
-    }
-
-    public void showPilotInHubAlertDialog(final String title, final int position, final RadioButton yes, final RadioButton no, final String vehicleNo, final String pilotNo, final ViewHolderWithPilot holder) {
+    public void showPilotInHubAlertDialog(final String title, final int position, final RadioButton yes, final RadioButton no, final String vehicleNo, final String pilotNo,final ViewHolderWithPilot holder) {
         mWebServices.getDriverChecklistDetails(vehicleNo, pilotNo, new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
@@ -270,19 +260,20 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     //    private CharSequence items[] = null;
-    public void showPilotAssignAlertDialog(final int positioin, final TruckDetails obj/*final String pilotName, final String eta, final String nextHub*/) {
+    public void showPilotAssignAlertDialog(final int position, final TruckDetails obj/*final String pilotName, final String eta, final String nextHub*/) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
         dialogBuilder.setTitle(Html.fromHtml("<b>" + obj.getAssignedPilot() + "</b>"));
         View modifyPilot = LayoutInflater.from(mContext).inflate(R.layout.modify_pilot, null, false);
         dialogBuilder.setView(modifyPilot);
-        if (mDataSet.get(positioin).getNextHub() == null || mDataSet.get(positioin).getNextHub().equals("null")) {
-            ((Button) modifyPilot.findViewById(R.id.change_pilot)).setVisibility(View.GONE);
+        if(mDataSet.get(position).getNextHub() == null || mDataSet.get(position).getNextHub().equals("null"))
+        {
+            ((Button)modifyPilot.findViewById(R.id.change_pilot)).setVisibility(View.GONE);
         } else {
-            ((Button) modifyPilot.findViewById(R.id.change_pilot)).setVisibility(View.VISIBLE);
+            ((Button)modifyPilot.findViewById(R.id.change_pilot)).setVisibility(View.VISIBLE);
         }
-        final TextView contactNo = (TextView) modifyPilot.findViewById(R.id.contact_no);
-        String contact = "\nMobile Number:+91" + ((mDataSet.get(positioin).getContactNo() == null || mDataSet.get(positioin).getContactNo().equals("null")) ? "" : mDataSet.get(positioin).getContactNo());
-        contactNo.setText(String.format(mContext.getString(R.string.pilot_contact_info), contact));
+        final TextView contactNo = (TextView)modifyPilot.findViewById(R.id.contact_no);
+        String contact = "\nMobile Number:+91" + ((mDataSet.get(position).getContactNo() == null || mDataSet.get(position).getContactNo().equals("null"))?"":mDataSet.get(position).getContactNo());
+        contactNo.setText(String.format(mContext.getString(R.string.pilot_contact_info),contact ));
 
         dialogBuilder.setPositiveButton(mContext.getString(R.string.ok), null);
         final AlertDialog alertDialog = dialogBuilder.create();
@@ -301,21 +292,233 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                releasePilotAlertDialog(positioin, obj);
+                if (TFUtils.getStringFromSP(mContext, TFConst.HUB_NAME).equals("PTD") && isInPTDNoEntry(obj.getEta())) {
+                    releaseWarehousePilotAlertDialog(position, obj);
+                    return;
+                }
+                releasePilotAlertDialog(position, obj);
             }
         });
         modifyPilot.findViewById(R.id.change_pilot).setOnClickListener(new View.OnClickListener() {
+                                                                           @Override
+                                                                           public void onClick(View v) {
+                                                                               alertDialog.dismiss();
+                                                                               if (TFUtils.getStringFromSP(mContext, TFConst.HUB_NAME).equals("PTD") && isInPTDNoEntry(obj.getEta())) {
+                                                                                   assignWarehousePilotPTD(position, obj, true);
+                                                                                   return;
+                                                                               }
+                                                                               assignPilotAlertDialog(position, obj, true);
+                                                                           }
+                                                                       }
+        );
+    }
+
+    public void assignPilotAlertDialog(final int trucksPosition, final TruckDetails obj, final boolean flag) {
+        TFUtils.showProgressBar(mContext, mContext.getString(R.string.loading));
+        new WebServices().getPilotAvailability(mContext, obj.getEta(), obj.getNextHub(), new ResultReceiver(null) {
             @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-                assignPilotAlertDialog(positioin, obj, true);
+            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                if (resultCode == TFConst.SUCCESS) {
+                    String responseStr = resultData.getString("response");
+                    Type listType = new TypeToken<ArrayList<PilotAvailability>>() {
+                    }.getType();
+
+                    ArrayList<PilotAvailability> pilotAvailabilityList = new Gson().fromJson(responseStr, listType);
+                    showAvailbalePilots(trucksPosition, obj, flag, pilotAvailabilityList, false);
+                } else {
+                    Toast.makeText(mContext, "" + mContext.getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
-    public void assignPilotAlertDialog(final int trucksPosition, final TruckDetails obj, final boolean flag /*final String eta, final String nextHub*/) {
+    public void showAvailbalePilots(final int trucksPosition, final TruckDetails obj, final boolean flag, final ArrayList<PilotAvailability> list,
+                                    final boolean isWarehouse) {
+        final ArrayList<PilotAvailability> listItemsPilot = new ArrayList<PilotAvailability>();
+        final ArrayList<PilotAvailability> sortedListItemsPilot = new ArrayList<PilotAvailability>();
+        final List<String> listItems = new ArrayList<>();
+        final List<String> sortedListItems = new ArrayList<>();
+
+        PilotAvailability pa;
+
+        for (int i = 0; i < list.size(); i++) {
+            pa = list.get(i);
+            if (i < 4) {
+                sortedListItems.add(pa.getPilotFirstName() + "/" + pa.getPilotParentHub() + "\t\t" + TFUtils.changeTime(pa.getNextAvailabilityTime()));
+                sortedListItemsPilot.add(pa);
+            }
+            listItems.add(pa.getPilotFirstName() + "/" + pa.getPilotParentHub() + "\t\t" + TFUtils.changeTime(pa.getNextAvailabilityTime()));
+            listItemsPilot.add(pa);
+        }
+        if (listItems.size() == 0) {
+            Toast.makeText(mContext, mContext.getResources().getString(R.string.no_pilots_available), Toast.LENGTH_SHORT).show();
+            TFUtils.hideProgressBar();
+            return;
+        }
+
+        View view = LayoutInflater.from(mContext).inflate(R.layout.pilot_availability, null, false);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
+        dialogBuilder.setView(view);
+        dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), null);
+
+        TextView title = new TextView(mContext);
+        // You Can Customise your Title here
+        if (isWarehouse) title.setText(Html.fromHtml("<b>" + "Assign Pilot for "+obj.getClient()+" warehouse" + "</b>"));
+        else title.setText(Html.fromHtml("<b>" + "Assign Pilot" + "</b>"));
+        title.setPadding(10, 10, 10, 10);
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.BLACK);
+        title.setTextSize(20);
+
+        dialogBuilder.setCustomTitle(title);
+
+        //dialogBuilder.setTitle(Html.fromHtml("<b>" + mContext.getString(R.string.pilot_availability_title) + "</b>"));
+        dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.getWindow().setLayout(600, LinearLayout.LayoutParams.WRAP_CONTENT);
+        alertDialog.show();
+        final ListView availablePilots = (ListView) view.findViewById(R.id.pilot_availability);
+
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_single_choice, sortedListItems) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                TextView textView = (TextView) super.getView(position, convertView, parent);
+                if (sortedListItemsPilot.get(position).getPilotParentHub().equalsIgnoreCase(TFUtils.getStringFromSP(mContext, TFConst.HUB_NAME))) {
+                    textView.setTextColor(Color.parseColor("#006700"));
+                } else {
+                    textView.setTextColor(Color.parseColor("#000000"));
+                }
+                return textView;
+            }
+        };
+
+        availablePilots.setAdapter(adapter);
+
+        final View footerView = ((LayoutInflater) mContext.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.pilot_availability_footer, null, false);
+        Button more_pilots = (Button) footerView.findViewById(R.id.more_pilots);
+        availablePilots.addFooterView(footerView);
+
+        more_pilots.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sortedListItems.clear();
+                sortedListItems.addAll(listItems);
+                sortedListItemsPilot.clear();
+                sortedListItemsPilot.addAll(listItemsPilot);
+                adapter.notifyDataSetChanged();
+                availablePilots.removeFooterView(footerView);
+            }
+        });
+        final PilotAvailability pilot = new PilotAvailability();
+        availablePilots.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                pilot.setPilotId(list.get(position).getPilotId());
+                pilot.setPilotFirstName(list.get(position).getPilotFirstName());
+                pilot.setPilotLastName(list.get(position).getPilotLastName());
+                pilot.setNextAvailabilityTime(list.get(position).getNextAvailabilityTime());
+                pilot.setAvailabilityStatus(list.get(position).getAvailabilityStatus());
+                pilot.setContactNumber(list.get(position).getContactNumber());
+                pilot.setPilotParentHub(list.get(position).getPilotParentHub());
+            }
+        });
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (availablePilots.getCheckedItemPosition() == -1) {
+                    Toast.makeText(mContext, mContext.getResources().getString(R.string.no_pilot_selected), Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    alertDialog.dismiss();
+                    TFUtils.showProgressBar(mContext, mContext.getResources().getString(R.string.please_wait));
+                    String existingPilotId = flag ? mDataSet.get(trucksPosition).getPilotId() : null;
+                    mDataSet.get(trucksPosition).setAssignedPilot(pilot.getPilotFirstName());
+                    mDataSet.get(trucksPosition).setContactNo(pilot.getContactNumber());
+                    mDataSet.get(trucksPosition).setPilotId(pilot.getPilotId());
+                    mDataSet.get(trucksPosition).setPilotAvailability(pilot);
+                    if (isWarehouse) {
+                        new WebServices().updatePilotWarehouse(obj, flag, existingPilotId, new ResultReceiver(null){
+                            @Override
+                            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                                super.onReceiveResult(resultCode, resultData);
+                                if (resultCode == TFConst.SUCCESS) {
+                                    String reportingTime = mDataSet.get(trucksPosition).getEta();
+                                    long reportingTimeMillis = Long.parseLong(reportingTime);
+                                    reportingTimeMillis -= 3600000l; // adjust time to get correct value
+                                    String dateTime[] = TFUtils.changeTime(Long.toString(reportingTimeMillis)).split("\\s+");
+                                    String from = TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME);
+                                    if (TFUtils.hubCodeCityMap.containsKey(from))
+                                        from = TFUtils.hubCodeCityMap.get(from);
+                                    String reason = "Vehicle No: " + mDataSet.get(trucksPosition).getVehicleNumber() +
+                                            "\nDate of Duty: " + dateTime[0] +
+                                            "\nTime of Duty: " + dateTime[1] +
+                                            "\nSource: " + from +
+                                            "\nDestination: " + mDataSet.get(trucksPosition).getClient() + " warehouse";
+                                    TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(trucksPosition).getContactNo());
+                                    notifyItemChanged(trucksPosition);
+                                    TFTruckFragment.driverPlannedCount += 1;
+                                    TFTruckFragment.drivetNotPlannedCount -= 1;
+                                    TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned) + " " + TFTruckFragment.driverPlannedCount);
+                                    TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned) + " " + TFTruckFragment.drivetNotPlannedCount);
+                                    // Pilot has been assigned. Start delay tracking.
+                                    mActivity.startDelayTracking(mDataSet.get(trucksPosition).getAssignedPilot(), mDataSet.get(trucksPosition).getEta());
+                                } else {
+                                    Toast.makeText(mContext, mContext.getResources().getString(R.string.problem_assign_pilot), Toast.LENGTH_SHORT).show();
+                                }
+                                TFUtils.hideProgressBar();
+                            }
+                        });
+                    } else {
+                        new WebServices().getChangePilot(mContext, obj, flag, existingPilotId, new ResultReceiver(null) {
+                            @Override
+                            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                                super.onReceiveResult(resultCode, resultData);
+                                if (resultCode == TFConst.SUCCESS) {
+                                    String reportingTime = mDataSet.get(trucksPosition).getEta();
+                                    long reportingTimeMillis = Long.parseLong(reportingTime);
+                                    reportingTimeMillis -= 3600000l; // adjust time to get correct value
+                                    String dateTime[] = TFUtils.changeTime(Long.toString(reportingTimeMillis)).split("\\s+");
+                                    String from = TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME);
+                                    if (TFUtils.hubCodeCityMap.containsKey(from))
+                                        from = TFUtils.hubCodeCityMap.get(from);
+                                    String to = mDataSet.get(trucksPosition).getNextHub();
+                                    if (TFUtils.hubCodeCityMap.containsKey(to))
+                                        to = TFUtils.hubCodeCityMap.get(to);
+                                    String reason = "Vehicle No: " + mDataSet.get(trucksPosition).getVehicleNumber() +
+                                            "\nDate of Duty: " + dateTime[0] +
+                                            "\nTime of Duty: " + dateTime[1] +
+                                            "\nSource: " + from +
+                                            "\nDestination: " + to;
+                                    TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(trucksPosition).getContactNo());
+                                    notifyItemChanged(trucksPosition);
+                                    TFTruckFragment.driverPlannedCount += 1;
+                                    TFTruckFragment.drivetNotPlannedCount -= 1;
+                                    TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned) + " " + TFTruckFragment.driverPlannedCount);
+                                    TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned) + " " + TFTruckFragment.drivetNotPlannedCount);
+                                    // Pilot has been assigned. Start delay tracking.
+                                    mActivity.startDelayTracking(mDataSet.get(trucksPosition).getAssignedPilot(), mDataSet.get(trucksPosition).getEta());
+                                } else {
+                                    Toast.makeText(mContext, mContext.getResources().getString(R.string.problem_assign_pilot), Toast.LENGTH_SHORT).show();
+                                }
+                                TFUtils.hideProgressBar();
+                            }
+                        });
+                    }
+                }
+            }
+        });
+        TFUtils.hideProgressBar();
+    }
+
+    public void assignWarehousePilotPTD(final int pos, final TruckDetails td, final boolean change) {
+        //Toast.makeText(mContext,"Warehouse pilot at PTD not implemented",Toast.LENGTH_SHORT).show();
         TFUtils.showProgressBar(mContext, mContext.getString(R.string.loading));
-        new WebServices().getPilotAvailability(mContext, obj.getEta(), obj.getNextHub(), new ResultReceiver(null) {
+        new WebServices().getPilotsForWarehouse(mContext, td.getEta(), new ResultReceiver(null) {
             @Override
             protected void onReceiveResult(int resultCode, Bundle resultData) {
                 if (resultCode == TFConst.SUCCESS) {
@@ -323,211 +526,64 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                     Type listType = new TypeToken<ArrayList<PilotAvailability>>() {
                     }.getType();
-
-                    final ArrayList<PilotAvailability> pilotAvailabilityList = new Gson().fromJson(responseStr, listType);
-                    final ArrayList<PilotAvailability> listItemsPilot = new ArrayList<PilotAvailability>();
-                    final ArrayList<PilotAvailability> sortedListItemsPilot = new ArrayList<PilotAvailability>();
-                    final List<String> listItems = new ArrayList<>();
-                    final List<String> sortedListItems = new ArrayList<>();
-
-                    if (pilotAvailabilityList != null) {
-                        for (int i = 0; i < pilotAvailabilityList.size(); i++) {
-                            // NextAvailabilityTime <= ETA-1hour
-                            if (i < 4 && Long.parseLong(pilotAvailabilityList.get(i).getNextAvailabilityTime()) <= (Long.parseLong(obj.getEta()) - 3600000)) {
-                                sortedListItems.add(pilotAvailabilityList.get(i).getPilotFirstName() + "/" + pilotAvailabilityList.get(i).getPilotParentHub() + "\t\t" + TFUtils.changeTime(pilotAvailabilityList.get(i).getNextAvailabilityTime()));
-                                sortedListItemsPilot.add(pilotAvailabilityList.get(i));
-                            }
-                            listItems.add(pilotAvailabilityList.get(i).getPilotFirstName() + "/" + pilotAvailabilityList.get(i).getPilotParentHub() + "\t\t" + TFUtils.changeTime(pilotAvailabilityList.get(i).getNextAvailabilityTime()));
-                            listItemsPilot.add(pilotAvailabilityList.get(i));
-                        }
-                    }
-                    if (listItems.size() == 0) {
-                        Toast.makeText(mContext, mContext.getResources().getString(R.string.no_pilots_available), Toast.LENGTH_SHORT).show();
-                        TFUtils.hideProgressBar();
-                        return;
-                    }
-//                    final CharSequence[] items = listItems.toArray(new CharSequence[listItems.size()]);
-
-                    View view = LayoutInflater.from(mContext).inflate(R.layout.pilot_availability, null, false);
-                    AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
-                    dialogBuilder.setView(view);
-                    dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), null);
-
-                    dialogBuilder.setTitle(Html.fromHtml("<b>" + mContext.getString(R.string.pilot_availability_title) + "</b>"));
-                    dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-
-                    final AlertDialog alertDialog = dialogBuilder.create();
-                    alertDialog.getWindow().setLayout(600, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    alertDialog.show();
-                    final ListView availablePilots = (ListView) view.findViewById(R.id.pilot_availability);
-
-                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_single_choice, sortedListItems) {
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent) {
-                            TextView textView = (TextView) super.getView(position, convertView, parent);
-                            if (sortedListItemsPilot.get(position).getPilotParentHub().equalsIgnoreCase(TFUtils.getStringFromSP(mContext, TFConst.HUB_NAME))) {
-                                textView.setTextColor(Color.parseColor("#006700"));
-                            } else {
-                                textView.setTextColor(Color.parseColor("#000000"));
-                            }
-                            return textView;
-                        }
-                    };
-
-                    availablePilots.setAdapter(adapter);
-
-                    final View footerView = ((LayoutInflater) mContext.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.pilot_availability_footer, null, false);
-                    Button more_pilots = (Button) footerView.findViewById(R.id.more_pilots);
-                    availablePilots.addFooterView(footerView);
-
-
-                    more_pilots.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            sortedListItems.clear();
-                            sortedListItems.addAll(listItems);
-                            sortedListItemsPilot.clear();
-                            sortedListItemsPilot.addAll(listItemsPilot);
-                            adapter.notifyDataSetChanged();
-                            availablePilots.removeFooterView(footerView);
-                        }
-                    });
-                    final PilotAvailability pilot = new PilotAvailability();
-                    availablePilots.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-//                            if (position == 0) {
-                            pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
-                            pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
-                            pilot.setPilotLastName(pilotAvailabilityList.get(position).getPilotLastName());
-                            pilot.setNextAvailabilityTime(pilotAvailabilityList.get(position).getNextAvailabilityTime());
-                            pilot.setAvailabilityStatus(pilotAvailabilityList.get(position).getAvailabilityStatus());
-                            pilot.setContactNumber(pilotAvailabilityList.get(position).getContactNumber());
-                            pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
-//                            } else {
-                               /* View view2 = LayoutInflater.from(mContext).inflate(R.layout.wrong_pilot_assignment, null, false);
-                                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
-                                dialogBuilder.setView(view2);
-                                TextView pilotName = (TextView) view2.findViewById(R.id.pilot_name);
-                                final EditText etReason = (EditText) view2.findViewById(R.id.reason_edt);
-                                final Spinner spinner = (Spinner) view2.findViewById(R.id.spinner);
-
-                                etReason.setHint(mContext.getResources().getString(R.string.pilot_selection_warning, "" + pilotAvailabilityList.get(0).getPilotFirstName()));
-                                pilotName.setText(pilotAvailabilityList.get(0).getPilotFirstName());
-                                dialogBuilder.setTitle(Html.fromHtml("<b>" + mContext.getString(R.string.warning) + "</b>"));
-                                dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                });
-                                dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        availablePilots.post(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                availablePilots.setItemChecked(position, false);
-                                            }
-                                        });
-                                    }
-                                });
-                                final AlertDialog alertDialog2 = dialogBuilder.create();
-                                alertDialog2.getWindow().setLayout(600, LinearLayout.LayoutParams.WRAP_CONTENT);
-                                alertDialog2.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                                alertDialog2.show();
-                                alertDialog2.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        spinnerText = spinner.getSelectedItem().toString();
-                                        if (spinnerText.equals("Others") && etReason.getText().toString().length() == 0) {
-                                            Toast.makeText(mContext, "Please enter the reason", Toast.LENGTH_SHORT).show();
-                                            return;
-                                        } else {
-                                            pilot.setPilotId(pilotAvailabilityList.get(position).getPilotId());
-                                            pilot.setPilotFirstName(pilotAvailabilityList.get(position).getPilotFirstName());
-                                            pilot.setPilotLastName(pilotAvailabilityList.get(position).getPilotLastName());
-                                            pilot.setNextAvailabilityTime(pilotAvailabilityList.get(position).getNextAvailabilityTime());
-                                            pilot.setAvailabilityStatus(pilotAvailabilityList.get(position).getAvailabilityStatus());
-                                            pilot.setContactNumber(pilotAvailabilityList.get(position).getContactNumber());
-                                            pilot.setPilotParentHub(pilotAvailabilityList.get(position).getPilotParentHub());
-                                            spinnerText = spinner.getSelectedItem().toString();
-                                            alertDialog2.dismiss();
-                                            try {
-                                                mWebServices.postSkippedPilotInfo(pilotAvailabilityList.get(0).getPilotId(), spinnerText, etReason.getText().toString());
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            } finally {
-                                                alertDialog.dismiss();
-                                                assignPilotAlertDialog(trucksPosition, obj, flag);
-                                            }
-                                        }
-                                    }
-                                });
-                            }*/
-                        }
-                    });
-                    alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (availablePilots.getCheckedItemPosition() == -1) {
-                                Toast.makeText(mContext, mContext.getResources().getString(R.string.no_pilot_selected), Toast.LENGTH_SHORT).show();
-                                return;
-                            } else {
-                                alertDialog.dismiss();
-                                TFUtils.showProgressBar(mContext, mContext.getResources().getString(R.string.please_wait));
-                                String existingPilotId = flag ? mDataSet.get(trucksPosition).getPilotId() : null;
-                                mDataSet.get(trucksPosition).setAssignedPilot(pilot.getPilotFirstName());
-                                mDataSet.get(trucksPosition).setContactNo(pilot.getContactNumber());
-                                mDataSet.get(trucksPosition).setPilotId(pilot.getPilotId());
-                                mDataSet.get(trucksPosition).setPilotAvailability(pilot);
-                                new WebServices().getChangePilot(mContext, obj, flag, existingPilotId, new ResultReceiver(null) {
-                                    @Override
-                                    protected void onReceiveResult(int resultCode, Bundle resultData) {
-                                        super.onReceiveResult(resultCode, resultData);
-                                        if (resultCode == TFConst.SUCCESS) {
-                                            String reportingTime = mDataSet.get(trucksPosition).getEta();
-                                            long reportingTimeMillis = Long.parseLong(reportingTime);
-                                            reportingTimeMillis -= 3600000l; // adjust time to get correct value
-                                            String dateTime[] = TFUtils.changeTime(Long.toString(reportingTimeMillis)).split("\\s+");
-                                            String reason = "Vehicle No: " + mDataSet.get(trucksPosition).getVehicleNumber() +
-                                                    "\nDate of Duty: " + dateTime[0] +
-                                                    "\nTime of Duty: " + dateTime[1] +
-                                                    "\nSource: " + TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME) +
-                                                    "\nDestination: " + mDataSet.get(trucksPosition).getNextHub();
-                                            TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(trucksPosition).getContactNo());
-                                            notifyItemChanged(trucksPosition);
-                                            TFTruckFragment.driverPlannedCount += 1;
-                                            TFTruckFragment.drivetNotPlannedCount -= 1;
-                                            TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned) + " " + TFTruckFragment.driverPlannedCount);
-                                            TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned) + " " + TFTruckFragment.drivetNotPlannedCount);
-                                            // Pilot has been assigned. Start delay tracking.
-                                            mActivity.startDelayTracking(mDataSet.get(trucksPosition).getAssignedPilot(), mDataSet.get(trucksPosition).getEta());
-                                        } else {
-                                            Toast.makeText(mContext, mContext.getResources().getString(R.string.problem_assign_pilot), Toast.LENGTH_SHORT).show();
-                                        }
-                                        TFUtils.hideProgressBar();
-                                    }
-                                });
-                            }
-                        }
-                    });
-
+                    ArrayList<PilotAvailability> pilotAvailabilityList = new Gson().fromJson(responseStr, listType);
+                    showAvailbalePilots(pos,td, change, pilotAvailabilityList, true);
                 } else {
+                    TFUtils.hideProgressBar();
                     Toast.makeText(mContext, "" + mContext.getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
                 }
-                TFUtils.hideProgressBar();
             }
         });
     }
 
-    public void assignWarehousePilotPTD(final int pos, final TruckDetails td, final boolean change) {
-        Toast.makeText(mContext, "Warehouse pilot at PTD not implemented", Toast.LENGTH_SHORT).show();
+    public void releaseWarehousePilotAlertDialog(final int position, TruckDetails obj) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(mContext);
+        dialogBuilder.setTitle(Html.fromHtml(String.format(mContext.getString(R.string.are_you_sure_release), obj.getAssignedPilot())));
+        dialogBuilder.setPositiveButton(mContext.getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                new WebServices().releasePilotWarehouse(mDataSet.get(position).getCurrentHub(), mDataSet.get(position).getPilotId(),
+                        mDataSet.get(position).getVehicleTrackingId(),
+                        new ResultReceiver(null) {
+                            @Override
+                            protected void onReceiveResult(int resultCode, Bundle resultData) {
+                                super.onReceiveResult(resultCode, resultData);
+                                if (resultCode == 200) {
+                                    String reportingTime = mDataSet.get(position).getEta();
+                                    long reportingTimeMillis = Long.parseLong(reportingTime);
+                                    reportingTimeMillis -= 3600000l; // adjust time to get correct value
+                                    String dateTime[] = TFUtils.changeTime(Long.toString(reportingTimeMillis)).split("\\s+");
+                                    String from = TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME);
+                                    if (TFUtils.hubCodeCityMap.containsKey(from))
+                                        from = TFUtils.hubCodeCityMap.get(from);
+                                    String reason = "Duty Cancelled..\nVehicle No: " + mDataSet.get(position).getVehicleNumber() +
+                                            "\nDate of Duty: " + dateTime[0] +
+                                            "\nTime of Duty: " + dateTime[1] +
+                                            "\nSource: " + from +
+                                            "\nDestination: " + mDataSet.get(position).getClient() + " warehouse";
+                                    TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(position).getContactNo());
+                                    //Pilot is released, stop delay tracking.
+                                    mActivity.stopDelayTracking(mDataSet.get(position).getAssignedPilot());
+
+                                    mDataSet.get(position).setAssignedPilot(null);
+                                    notifyItemChanged(position);
+                                    TFTruckFragment.driverPlannedCount -= 1;
+                                    TFTruckFragment.drivetNotPlannedCount += 1;
+                                    TFTruckFragment.mDriversPlanned.setText(mContext.getResources().getString(R.string.drivers_planned) + " " + TFTruckFragment.driverPlannedCount);
+                                    TFTruckFragment.mDriversNotPlanned.setText(mContext.getResources().getString(R.string.drivers_not_planned) + " " + TFTruckFragment.drivetNotPlannedCount);
+                                } else {
+                                    Toast.makeText(mContext, mContext.getResources().getString(R.string.error_releasing_pilot), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+            }
+        });
+        dialogBuilder.setNegativeButton(mContext.getResources().getString(R.string.no), null);
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
+        alertDialog.show();
     }
 
     public void releasePilotAlertDialog(final int position, TruckDetails obj) {
@@ -544,15 +600,17 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         if (resultCode == 200) {
                             String reportingTime = mDataSet.get(position).getEta();
                             long reportingTimeMillis = Long.parseLong(reportingTime);
-                            reportingTimeMillis -= 3600000l; // adjust time to get correct value
-                            String dateTime[] = TFUtils.changeTime(Long.toString(reportingTimeMillis)).split("\\s+");
-                            String reason = "Duty Cancelled..\nVehicle No: " + mDataSet.get(position).getVehicleNumber() +
-                                    "\nDate of Duty: " + dateTime[0] +
-                                    "\nTime of Duty: " + dateTime[1] +
-                                    "\nSource: " + TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME) +
-                                    "\nDestination: " + mDataSet.get(position).getNextHub();
-
-
+                            reportingTimeMillis-=3600000l; // adjust time to get correct value
+                            String dateTime[] =TFUtils.changeTime(Long.toString(reportingTimeMillis)).split("\\s+");
+                            String from = TFUtils.getStringFromSP(mActivity, TFConst.HUB_NAME);
+                            if (TFUtils.hubCodeCityMap.containsKey(from)) from = TFUtils.hubCodeCityMap.get(from);
+                            String to = mDataSet.get(position).getNextHub();
+                            if (TFUtils.hubCodeCityMap.containsKey(to)) to = TFUtils.hubCodeCityMap.get(to);
+                            String reason = "Duty Cancelled..\nVehicle No: "+ mDataSet.get(position).getVehicleNumber()+
+                                    "\nDate of Duty: "+dateTime[0]+
+                                    "\nTime of Duty: "+dateTime[1]+
+                                    "\nSource: "+from+
+                                    "\nDestination: "+to;
                             TFSOSFragment.sendSMS(mContext, reason, mDataSet.get(position).getContactNo());
                             //Pilot is released, stop delay tracking.
                             mActivity.stopDelayTracking(mDataSet.get(position).getAssignedPilot());
@@ -578,15 +636,14 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     private boolean isLastHub(TruckDetails td) {
-        if (td.getNextHub() == null || td.getNextHub().equals("null") || td.getNextHub().equals(""))
-            return true;
+        if (td.getNextHub() == null || td.getNextHub().equals("null") || td.getNextHub().equals("")) return true;
         else return false;
     }
 
-    private boolean isInPTDNoEntry(String eta) {
+    private boolean isInPTDNoEntry (String eta) {
         long etaMillis = Long.parseLong(eta);
         Calendar calendar = Calendar.getInstance();
-        etaMillis -= calendar.getTimeZone().getRawOffset();
+        etaMillis-=calendar.getTimeZone().getRawOffset();
         calendar.setTimeInMillis(etaMillis);
         int h = calendar.get(Calendar.HOUR_OF_DAY);
         if ((h >= 7 && h <= 10) || (h >= 16 && h <= 20)) return true;// 7 to 11 AM and 4 to 9 PM
@@ -598,7 +655,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private TruckDetails td;
         private ViewHolderWithPilot holder;
 
-        public VehicleInHubYesListener(TruckDetails td, ViewHolderWithPilot vp) {
+        public VehicleInHubYesListener(TruckDetails td, ViewHolderWithPilot vp){
             this.td = td;
             holder = vp;
         }
@@ -619,7 +676,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private TruckDetails td;
         private ViewHolderWithPilot holder;
 
-        public VehicleInHubNoListener(TruckDetails td, ViewHolderWithPilot vp) {
+        public VehicleInHubNoListener(TruckDetails td, ViewHolderWithPilot vp){
             this.td = td;
             holder = vp;
         }
@@ -640,7 +697,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private TruckDetails td;
         private ViewHolderWithPilot holder;
 
-        public PilotInHubYesListener(TruckDetails td, ViewHolderWithPilot vp) {
+        public PilotInHubYesListener (TruckDetails td, ViewHolderWithPilot vp) {
             this.td = td;
             holder = vp;
         }
@@ -662,7 +719,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private TruckDetails td;
         private int position;
 
-        public PilotInHubNoListener(TruckDetails td, int pos) {
+        public PilotInHubNoListener (TruckDetails td, int pos) {
             this.td = td;
             position = pos;
         }
@@ -680,7 +737,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private TruckDetails td;
         private int position;
 
-        public AssignedPilotListener(TruckDetails td, int pos) {
+        public AssignedPilotListener (TruckDetails td, int pos) {
             this.td = td;
             position = pos;
         }
@@ -688,11 +745,12 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         @Override
         public void onClick(View v) {
             if (td.getAssignedPilot() == null || td.getAssignedPilot().trim().equalsIgnoreCase("") || TextUtils.isEmpty(td.getAssignedPilot()) || td.getAssignedPilot().equalsIgnoreCase("null")) {
-                if (TFUtils.getStringFromSP(mContext, TFConst.HUB_NAME).equals("PTD") && isInPTDNoEntry(td.getEta())) {
+                if (TFUtils.getStringFromSP(mContext,TFConst.HUB_NAME).equals("PTD") && isInPTDNoEntry(td.getEta())) {
                     assignWarehousePilotPTD(position, td, false);
                     return;
-                } else if (isLastHub(td)) {
-                    Toast.makeText(mContext, mContext.getResources().getString(R.string.final_hub_no_need_toassign_pilot), Toast.LENGTH_SHORT).show();
+                }
+                else if(isLastHub(td)){
+                    Toast.makeText(mContext,mContext.getResources().getString(R.string.final_hub_no_need_toassign_pilot),Toast.LENGTH_SHORT).show();
                     return;
                 }
                 assignPilotAlertDialog(position, td, false);
@@ -704,50 +762,16 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private TruckDetails td;
         private ViewHolderWithPilot holder;
 
-        public ChecklistListener(TruckDetails td, ViewHolderWithPilot vp) {
+        public ChecklistListener (TruckDetails td, ViewHolderWithPilot vp) {
             this.td = td;
             holder = vp;
         }
-
         @Override
         public void onClick(View v) {
             Bundle bundle = new Bundle();
             bundle.putString("vehicle_number", holder.mVehicleNumber.getText().toString());
             bundle.putString("vehicleTrackingId", td.getVehicleTrackingId());
-            //  mTfTruckFragment.startFragment(R.layout.fragment_check_list, bundle);
-            TFUtils.showProgressBar(mContext, mContext.getResources().getString(R.string.please_wait));
-            WebServices mWebServices = new WebServices();
-            mWebServices.getChecklistDetailsNew(mContext, new ResultReceiver(null) {
-                @Override
-                protected void onReceiveResult(int resultCode, Bundle resultData) {
-                    if (resultCode == TFConst.SUCCESS) {
-
-                        String responseStr = resultData.getString("response");
-
-                        Toast.makeText(mContext, "Response: " + responseStr, Toast.LENGTH_SHORT).show();
-
-                        Log.e("Lucky Adapter",responseStr);
-//
-//                        NewChecklist newChecklist = new NewChecklist();
-//                        newChecklist = new Gson().fromJson(responseStr,NewChecklist.class);
-
-                        if(responseStr != null)
-                        {
-                            Toast.makeText(mContext,"Not Null",Toast.LENGTH_SHORT).show();
-                        }else
-                        {
-                            Toast.makeText(mContext,"Null",Toast.LENGTH_SHORT).show();
-                        }
-
-                    } else {
-                        Toast.makeText(mContext, "" + mContext.getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
-                    }
-                    TFUtils.hideProgressBar();
-
-                }
-            });
-
-
+            //mTfTruckFragment.startFragment(R.layout.fragment_check_list, bundle);
             mTfTruckFragment.startFragment(R.layout.fragment_base_checklist, bundle);
         }
     }
@@ -782,6 +806,11 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 }
             });*/
         }
+    }
+
+    @Override
+    public int getItemCount() {
+        return mDataSet.size();
     }
 
     public class ViewHolderWithButton extends RecyclerView.ViewHolder {
