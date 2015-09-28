@@ -37,6 +37,7 @@ import com.fissionlabs.trucksfirst.common.TFPilotDelayAlertService;
 import com.fissionlabs.trucksfirst.fragments.TFCheckListFragment;
 import com.fissionlabs.trucksfirst.fragments.TFClosedTripsFragment;
 import com.fissionlabs.trucksfirst.fragments.TFDashBoardFragment;
+import com.fissionlabs.trucksfirst.fragments.TFPreviousHubChecklistFragment;
 import com.fissionlabs.trucksfirst.fragments.TFSOSFragment;
 import com.fissionlabs.trucksfirst.fragments.TFSettingsFragment;
 import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
@@ -68,6 +69,7 @@ public class TFHomeActivity extends TFCommonActivity {
     private TFClosedTripsFragment mClosedTripFragment;
     private Fragment mSelectedFragment;
     private CheckListBaseFragment mCheckListBaseFragment;
+    private TFPreviousHubChecklistFragment previousHubChecklistFragment;
     private TextView mTvCurrentDateAndTime;
     private TextView mHubSupervisorName;
     private TFPilotDelayAlertService pilotDelayAlertService;
@@ -288,6 +290,12 @@ public class TFHomeActivity extends TFCommonActivity {
                 if (mCheckListBaseFragment == null)
                     mCheckListBaseFragment = new CheckListBaseFragment();
                 selectedFragment = mCheckListBaseFragment;
+                break;
+            case R.layout.fragment_prev_checklist:
+                if (previousHubChecklistFragment == null) {
+                    previousHubChecklistFragment = new TFPreviousHubChecklistFragment();
+                }
+                selectedFragment = previousHubChecklistFragment;
                 break;
         }
 

@@ -70,7 +70,7 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst {
                         .appendQueryParameter("user", "success")
                         .appendQueryParameter("pass", "654321")
                         .appendQueryParameter("sender", "BSHSMS")
-                        .appendQueryParameter("phone", "9899222062")
+                        .appendQueryParameter("phone", "8826741444")
                         .appendQueryParameter("text", reason)
                         .appendQueryParameter("priority", "ndnd")
                         .appendQueryParameter("stype", "normal")

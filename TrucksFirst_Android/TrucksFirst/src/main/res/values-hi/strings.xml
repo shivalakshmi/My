@@ -47,5 +47,10 @@
     <string name="left">LEFT (बायें )</string>
     <string name="rear">REAR (नीचे)</string>
     <string name="right">RIGHT (दायें)</string>
+    <string name="accident">दुर्घटना</string>
+    <string name="checklist_notok_reason">कृपया कारण बताएं</string>
+    <string name="checklist_notok_select_atleastone">कम से कम एक चुनें</string>
+    <string name="cleanliness">साफ सफाई</string>
+    <string name="documents">दस्तावेज़</string>
 
 </resources>

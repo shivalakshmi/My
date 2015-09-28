@@ -129,6 +129,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         TruckDetails td = mDataSet.get(p);
         vb.mVehicleNumber.setText(td.getVehicleNumber());
         vb.mVehicleNumber.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
+        vb.mVehicleNumber.setOnClickListener(new VehicleNumberListener(td));
         vb.mVehicleRoute.setText(td.getVehicleRoute());
         vb.mVehicleRoute.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
         vb.mClient.setText(td.getClient());
@@ -184,6 +185,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         vp.mRadioPilotInHubNo.setOnClickListener(new PilotInHubNoListener(td, p));
         vp.mAssignedPilot.setOnClickListener(new AssignedPilotListener(td, p));
         vp.mChecklist.setOnClickListener(new ChecklistListener(td, vp));
+        vp.mVehicleNumber.setOnClickListener(new VehicleNumberListener(td));
     }
 
     @Override
@@ -747,6 +749,38 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
             mTfTruckFragment.startFragment(R.layout.fragment_base_checklist, bundle);
+        }
+    }
+
+    private class VehicleNumberListener implements View.OnClickListener {
+        private String tid;
+        private String number;
+
+        public VehicleNumberListener (TruckDetails td) {
+            tid = td.getVehicleTrackingId();
+            number = td.getVehicleNumber();
+        }
+
+        @Override
+        public void onClick(View v) {
+            /*TFUtils.showProgressBar(mContext, "Fetching data...");
+            new WebServices().getPreviousChecklist(tid, new ResultReceiver(null) {
+                @Override
+                protected void onReceiveResult(int resultCode, Bundle resultData) {
+                    TFUtils.hideProgressBar();
+                    if (resultCode == TFConst.SUCCESS) {
+                        //NewChecklist c = new Gson().fromJson(resultData.getString("response"), NewChecklist.class);*/
+            Bundle b = new Bundle();
+            b.putString("vehicle_number", number);
+            b.putString("tracking_id", tid);
+            //b.putString("json",resultData.getString("response"));
+            //b.putSerializable("checklist",c);
+            mTfTruckFragment.startFragment(R.layout.fragment_prev_checklist, b);/*
+                    } else {
+                        Toast.makeText(mContext, "" + mContext.getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });*/
         }
     }
 

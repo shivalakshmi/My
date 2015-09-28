@@ -265,6 +265,7 @@ public class WebServices implements TFConst {
                 + "&currentHubEta=" + TFUtils.sendServerTime(obj.getEta()) + "&nextHub=" + obj.getNextHub()
                 + "&nextHubEta=" + TFUtils.sendServerTime(obj.getNextHubEta()) +
                 (flag ? "&existingPilotId=" + existingPilotId : "") + "&pilotId=" + obj.getPilotAvailability().getPilotId();
+        Log.v("Kanj",params + TFUtils.sendServerTime(Long.toString(Long.parseLong(obj.getEta()) - 19800000l)));
         params = params.replaceAll(" ", "%20");
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URL_CHANGE_PILOT + params,
@@ -740,7 +741,6 @@ public class WebServices implements TFConst {
         String params = "?vehicleTrackingId=" + obj.getVehicleTrackingId() + "&currentHub=" + obj.getCurrentHub()
                 + "&currentHubEta=" + TFUtils.sendServerTime(Long.toString(Long.parseLong(obj.getEta()) - 19800000l))+
                 (flag ? "&existingPilotId=" + existingPilotId : "") + "&pilotId=" + obj.getPilotAvailability().getPilotId();
-        Log.v("Kanj",params + TFUtils.changeTime(obj.getEta()));
         params = params.replaceAll(" ", "%20");
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URL_CHANGE_PILOT_WAREHOUSE + params,
@@ -914,5 +914,24 @@ public class WebServices implements TFConst {
             }
         };
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CLOSED_TRIP_POD);
+    }
+
+    public void getPreviousChecklist(String tid, final ResultReceiver r) {
+        StringRequest req = new StringRequest(Request.Method.GET,
+                URL_PREVIOUS_CHECKLIST + "?trackingId=" + tid,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+                        r.send(SUCCESS, bundle);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                r.send(ERROR, null);
+            }
+        });
+        Log.v("Kanj",URL_PREVIOUS_CHECKLIST + "?trackingId=" + tid);
     }
 }

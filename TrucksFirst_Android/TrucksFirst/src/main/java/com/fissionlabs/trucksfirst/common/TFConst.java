@@ -36,6 +36,7 @@ public interface TFConst {
     String URL_GET_TOLL_AMOUNT = "http://" + BASE_IP + "checklist/gettollamount";
     String URL_SAVE_VEHICLE_CHECKLIST_NEW = "http://" + BASE_IP + "checklist/savevehiclechecklist";
     String URL_GET_CHECKLIST_NEW = "http://" + BASE_IP + "checklist/getchecklist";
+    String URL_PREVIOUS_CHECKLIST = "http://" + BASE_IP + "checklist/getprevhubchecklist";
 
     String TAG_TRUCK_DETAILS = "TRUCK_DETAILS";
     String TAG_PILOT_DETAILS = "PILOT_DETAILS";
@@ -50,6 +51,7 @@ public interface TFConst {
     String TAG_RELEASE_PILOT_WAREHOUSE = "TAG_RELEASE_PILOT_WAREHOUSE";
     String TAG_CLOSED_TRIP_DETAILS = "TAG_CLOSED_TRIP_DETAILS";
     String TAG_CLOSED_TRIP_POD = "TAG_CLOSED_TRIP_POD";
+    String TAG_PREVIOUS_CHECKLIST = "TAG_PREVIOUS_CHECKLIST";
 
     int SUCCESS = 200;
     int ERROR = 100;

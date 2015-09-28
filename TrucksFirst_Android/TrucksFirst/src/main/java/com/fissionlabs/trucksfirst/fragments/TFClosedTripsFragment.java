@@ -164,7 +164,7 @@ public class TFClosedTripsFragment  extends TFCommonFragment implements TFConst 
             final int pos = getLayoutPosition();
             final ClosedTrip trip = closedTrips.get(pos);
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
-            dialogBuilder.setTitle("Are you sure POD is submitted for\n" + trip.getTripCode() + " ?");
+            dialogBuilder.setTitle("Are you sure POD is submitted for "+trip.getTruckNumber()+"\nTrip code: " + trip.getTripCode() + " ?");
             dialogBuilder.setPositiveButton("POD Submitted", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -192,6 +192,7 @@ public class TFClosedTripsFragment  extends TFCommonFragment implements TFConst 
             });
             final AlertDialog alertDialog = dialogBuilder.create();
             alertDialog.getWindow().setLayout(500, LinearLayout.LayoutParams.WRAP_CONTENT);
+            alertDialog.setCanceledOnTouchOutside(false);
             alertDialog.show();
         }
     }
