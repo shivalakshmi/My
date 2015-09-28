@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
 import com.fissionlabs.trucksfirst.model.checklist.Screen9;
 
 import java.util.Timer;
@@ -20,7 +21,6 @@ import java.util.TimerTask;
  */
 public class NinthScreenFragment extends CheckListCommonFragment {
 
-    private Screen9 s9;
     private Button btnNext;
     private TextView mTvTime;
     transient private int count = 10;
@@ -29,7 +29,7 @@ public class NinthScreenFragment extends CheckListCommonFragment {
 
     private RadioGroup radio_group_tempcheck,radio_group_leakageOil,radio_group_leakageSteeringOil,radio_group_leakageDieselTank,radio_group_coolantLevel,radio_group_visualInspection;
 
-
+    private NewChecklist newChecklist = FirstScreenFragment.newChecklist;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,56 +46,60 @@ public class NinthScreenFragment extends CheckListCommonFragment {
         radio_group_leakageDieselTank = (RadioGroup)view.findViewById(R.id.radio_group_leakageDieselTank);
         radio_group_coolantLevel = (RadioGroup)view.findViewById(R.id.radio_group_collantLevel);
 
-        s9 = checklist.data.screen9;
-        if (s9 == null) s9 = new Screen9();
 
-        if(s9.temperatureCheck) radio_group_tempcheck.check(R.id.rdHeadLighttick);
-        else radio_group_tempcheck.check(R.id.rdHeadlightcross);
+
+        if(newChecklist.data.screen9.temperatureCheck)
+            radio_group_tempcheck.check(R.id.rdHeadLighttick);
+        else
+            radio_group_tempcheck.check(R.id.rdHeadlightcross);
+
         radio_group_tempcheck.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId > -1 && checkedId == R.id.rdHeadLighttick) s9.temperatureCheck = true;
-                else if (checkedId > -1 && checkedId == R.id.rdHeadlightcross) s9.temperatureCheck = false;
+                if (checkedId > -1 && checkedId == R.id.rdHeadLighttick)
+                    newChecklist.data.screen9.temperatureCheck = true;
+                else if (checkedId > -1 && checkedId == R.id.rdHeadlightcross)
+                    newChecklist.data.screen9.temperatureCheck = false;
             }
         });
 
-        if(s9.engineOilLeakage) radio_group_leakageOil.check(R.id.cross);
+        if(newChecklist.data.screen9.engineOilLeakage) radio_group_leakageOil.check(R.id.cross);
         else radio_group_leakageOil.check(R.id.tick);
         radio_group_leakageOil.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId > -1 && checkedId == R.id.cross) s9.engineOilLeakage = true;
-                else if (checkedId > -1 && checkedId == R.id.tick) s9.engineOilLeakage = false;
+                if (checkedId > -1 && checkedId == R.id.cross) newChecklist.data.screen9.engineOilLeakage = true;
+                else if (checkedId > -1 && checkedId == R.id.tick) newChecklist.data.screen9.engineOilLeakage = false;
             }
         });
 
-        if(s9.steeringOilLeakage) radio_group_leakageSteeringOil.check(R.id.rdWipercross);
+        if(newChecklist.data.screen9.steeringOilLeakage) radio_group_leakageSteeringOil.check(R.id.rdWipercross);
         else radio_group_leakageSteeringOil.check(R.id.rdWipertick);
         radio_group_leakageSteeringOil.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId > -1 && checkedId == R.id.rdWipercross) s9.steeringOilLeakage = true;
-                else if (checkedId > -1 && checkedId == R.id.rdWipertick) s9.steeringOilLeakage = false;
+                if (checkedId > -1 && checkedId == R.id.rdWipercross) newChecklist.data.screen9.steeringOilLeakage = true;
+                else if (checkedId > -1 && checkedId == R.id.rdWipertick) newChecklist.data.screen9.steeringOilLeakage = false;
             }
         });
 
-        if(s9.fuelDieselLeakage) radio_group_leakageDieselTank.check(R.id.rdRHeadlightcross);
+        if(newChecklist.data.screen9.fuelDieselLeakage) radio_group_leakageDieselTank.check(R.id.rdRHeadlightcross);
         else radio_group_leakageDieselTank.check(R.id.rdRHeadLight);
         radio_group_leakageDieselTank.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId > -1 && checkedId == R.id.rdRHeadlightcross) s9.fuelDieselLeakage = true;
-                else if (checkedId > -1 && checkedId == R.id.rdRHeadLight) s9.fuelDieselLeakage = false;
+                if (checkedId > -1 && checkedId == R.id.rdRHeadlightcross) newChecklist.data.screen9.fuelDieselLeakage = true;
+                else if (checkedId > -1 && checkedId == R.id.rdRHeadLight) newChecklist.data.screen9.fuelDieselLeakage = false;
             }
         });
 
-        if(s9.coolantLevel) radio_group_coolantLevel.check(R.id.rdLslidetick);
+        if(newChecklist.data.screen9.coolantLevel) radio_group_coolantLevel.check(R.id.rdLslidetick);
         else radio_group_coolantLevel.check(R.id.rdLslidecross);
         radio_group_coolantLevel.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId > -1 && checkedId == R.id.rdLslidetick) s9.coolantLevel = true;
-                else if (checkedId > -1 && checkedId == R.id.rdLslidecross) s9.coolantLevel = false;
+                if (checkedId > -1 && checkedId == R.id.rdLslidetick) newChecklist.data.screen9.coolantLevel = true;
+                else if (checkedId > -1 && checkedId == R.id.rdLslidecross) newChecklist.data.screen9.coolantLevel = false;
             }
         });
 
@@ -106,8 +110,7 @@ public class NinthScreenFragment extends CheckListCommonFragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                s9.timeTaken = 10 - count;
-                checklist.data.screen9 = s9;
+                newChecklist.data.screen9.timeTaken = timeTaken;
                 CheckListBaseFragment.moveToNext();
             }
         });

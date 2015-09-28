@@ -108,8 +108,8 @@ public class SeventhScreenFragment extends CheckListCommonFragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                newChecklist.data.screen7.timeTaken = 10-count;
-                checklist.data.screen7 = newChecklist.data.screen7;
+                newChecklist.data.screen7.timeTaken = timeTaken;
+                //checklist.data.screen7.;
                 CheckListBaseFragment.moveToNext();
             }
         });

@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
 import com.fissionlabs.trucksfirst.model.checklist.Screen8;
 
 import java.util.Timer;
@@ -27,6 +28,8 @@ public class EighthScreenFragment extends CheckListCommonFragment {
     private int timeTaken = 0;
     private RadioGroup radioBtnGroup_cabincleanCondition;
 
+    private NewChecklist newChecklist = FirstScreenFragment.newChecklist;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,11 +40,8 @@ public class EighthScreenFragment extends CheckListCommonFragment {
         View view = inflater.inflate(R.layout.fragment_eight_screen_checklist, container, false);
         btnNext = (Button) view.findViewById(R.id.btnNext);
 
-        s8 = checklist.data.screen8;
-        if (s8 == null) s8 = new Screen8();
-
         radioBtnGroup_cabincleanCondition = (RadioGroup)view.findViewById(R.id.radioBtnGroup_cabincleanCondition);
-        if(s8.isCabinClean){
+        if(newChecklist.data.screen8.isCabinClean){
             radioBtnGroup_cabincleanCondition.check(R.id.radioBtn_driver_onboard_ok);
         } else{
             radioBtnGroup_cabincleanCondition.check(R.id.radioBtn_driver_onboard_notok);
@@ -50,10 +50,10 @@ public class EighthScreenFragment extends CheckListCommonFragment {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
                 if (checkedId > -1 && checkedId == R.id.radioBtn_driver_onboard_ok) {
-                    s8.isCabinClean = true;
+                    newChecklist.data.screen8.isCabinClean = true;
                 } else if (checkedId > -1 && checkedId == R.id.radioBtn_driver_onboard_notok) {
                     {
-                        s8.isCabinClean = false;
+                        newChecklist.data.screen8.isCabinClean = false;
                     }
                 }
             }
@@ -69,8 +69,8 @@ public class EighthScreenFragment extends CheckListCommonFragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                s8.timeTaken = 10 - count;
-                checklist.data.screen8 = s8;
+
+                newChecklist.data.screen8.timeTaken = timeTaken;
                 CheckListBaseFragment.moveToNext();
             }
         });
