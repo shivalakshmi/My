@@ -168,7 +168,7 @@ public class TFTruckFragment extends TFCommonFragment implements TFConst, View.O
                                 }
                             }
                         }
-                        
+
                         if(mTrucksList!=null) {
                             mVehicleCount.setText(getActivity().getResources().getString(R.string.vehicle_count) + " " + mTrucksList.size());
                         }
