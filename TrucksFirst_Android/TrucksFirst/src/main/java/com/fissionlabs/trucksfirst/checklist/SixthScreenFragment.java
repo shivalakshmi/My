@@ -77,7 +77,6 @@ public class SixthScreenFragment extends CheckListCommonFragment {
 
                     if (responseStr != null) {
                         mTollAmount = new Gson().fromJson(responseStr, TollAmount.class);
-                        ajcgfbshgfcbsh
                     }
                 } else {
                     Toast.makeText(getActivity(), "" + getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
