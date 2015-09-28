@@ -262,9 +262,8 @@ public class WebServices implements TFConst {
 
     public void getChangePilot(final Context context, TruckDetails obj, boolean flag, String existingPilotId, final ResultReceiver resultReceiver) {
         String params = "?vehicleTrackingId=" + obj.getVehicleTrackingId() + "&currentHub=" + obj.getCurrentHub()
-                + "&currentHubEta=" + TFUtils.sendServerTime(Long.toString(Long.parseLong(obj.getEta()) - 19800000l))
-                + "&nextHub=" + obj.getNextHub()
-                + "&nextHubEta=" + TFUtils.sendServerTime(Long.toString(Long.parseLong(obj.getNextHubEta()) - 19800000l)) +
+                + "&currentHubEta=" + TFUtils.sendServerTime(obj.getEta()) + "&nextHub=" + obj.getNextHub()
+                + "&nextHubEta=" + TFUtils.sendServerTime(obj.getNextHubEta()) +
                 (flag ? "&existingPilotId=" + existingPilotId : "") + "&pilotId=" + obj.getPilotAvailability().getPilotId();
         params = params.replaceAll(" ", "%20");
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
@@ -606,6 +605,102 @@ public class WebServices implements TFConst {
         TFApp.getInstance().addToRequestQueue(request, TAG_REPORT_TAMPER);
     }
 
+
+    public void getTollAmount(final Context context,final ResultReceiver resultReceiver) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                URL_GET_TOLL_AMOUNT + "/" + TFUtils.getStringFromSP(context,"vehicleTrackingId"),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Checklist details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Checklist details end ======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+
+                        resultReceiver.send(SUCCESS, bundle);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                resultReceiver.send(ERROR, null);
+            }
+        }) {
+
+           /* @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("vehicleNo", vehicleNumber);
+                return params;
+            }*/
+
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CHECKLIST_DETAILS);
+    }
+
+    public void postVehicleChecklistNew(JSONObject jsonObj) {
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                URL_SAVE_VEHICLE_CHECKLIST_NEW, jsonObj,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("A", "" + response);
+                        Log.e("Lucky Response", "" + response);
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("A", "Error");
+            }
+        }) {
+        };
+        TFApp.getInstance().addToRequestQueue(jsonObjReq, "TAG");
+    }
+
+    public void getChecklistDetailsNew(final Context context, final ResultReceiver resultReceiver) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_GET_CHECKLIST_NEW + "/" + TFUtils.getStringFromSP(context, "vehicleTrackingId"),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Truck details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Truck details end ======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+                        resultReceiver.send(SUCCESS, bundle);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                Toast.makeText(context, context.getResources().getString(R.string.server_not_responding), Toast.LENGTH_SHORT).show();
+                resultReceiver.send(ERROR, null);
+            }
+        }) {
+
+
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_TRUCK_DETAILS);
+
+    }
+
     public void getPilotsForWarehouse(final Context context, final String eta, final ResultReceiver resultReceiver) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URL_PILOT_AVAILABILITY_WAREHOUSE + "?currentHub=" + TFUtils.getStringFromSP(context, HUB_NAME) + "&ETA=" + eta,
@@ -821,6 +916,3 @@ public class WebServices implements TFConst {
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CLOSED_TRIP_POD);
     }
 }
-
-
-

@@ -1,8 +1,8 @@
 package com.fissionlabs.trucksfirst.common;
 
 import android.app.IntentService;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -17,14 +17,14 @@ public class TFCheckLockService extends IntentService {
 
     private Context context;
 
+    public TFCheckLockService() {
+        super("TFCheckLockService");
+    }
+
     public static void checkLockApp(Context context) {
         Intent intent = new Intent(context, TFCheckLockService.class);
         intent.setAction(ACTION_CHECK_LOCK);
         context.startService(intent);
-    }
-
-    public TFCheckLockService() {
-        super("TFCheckLockService");
     }
 
     @Override

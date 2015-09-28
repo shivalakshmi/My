@@ -11,10 +11,9 @@ class TFPilotAvailabilityPojo {
     private String eta;
     private String assignPilot;
 
-    public TFPilotAvailabilityPojo(String pilotAvailability,String vehicleNumber,
-                                   String vehicleRoute,String eta,
-                                   String assignPilot)
-    {
+    public TFPilotAvailabilityPojo(String pilotAvailability, String vehicleNumber,
+                                   String vehicleRoute, String eta,
+                                   String assignPilot) {
         this.pilotAvailability = pilotAvailability;
         this.vehicleNumber = vehicleNumber;
         this.vehicleRoute = vehicleRoute;

@@ -125,7 +125,7 @@
     <!-- Progressbar messages -->
     <string name="please_wait" tools:ignore="MissingTranslation">Please wait&#8230;</string>
     <string name="loading" tools:ignore="MissingTranslation">Loading&#8230;</string>
-    
+
     <!-- CheckList Status PopUp -->
     <string name="notification_send_to" tools:ignore="MissingTranslation">Notification send to</string>
     <string name="next_hub" tools:ignore="MissingTranslation">Next Hub</string>
@@ -148,7 +148,7 @@
     <string name="sos_email_success">Email sent successfully.</string>
     <string name="sos_email_failure">Email not sent.</string>
     <string name="sos_email_failure_problem">There is a problem sending the email.</string>
-    <string name="not_ok">Not Ok</string>
+    <string name="not_ok">Not OK</string>
 
     <string name="more_pilots">Load More Pilots...</string>
     <string name="no_pilot_selected">No Pilot is selected.</string>
@@ -182,6 +182,110 @@
     <string name="password_changed_sucess">Password Changed Successfully!!</string>
     <string name="worng_user_info_found">Wrong user information found, Please try again!!</string>
     <string name="no_updates_found">No updates found.</string>
+
+    <!-- TODO: Checklist strings or change this placeholder text -->
+
+
+    <string name="chk_status"> Status </string>
+    <string name="chk_itemtext">Checklist Item </string>
+    <string name="chkLeft_wiper">Wiper(L) </string>
+    <string name="chkRight_wiper">Wiper(R) </string>
+    <string name="chk_Lheadlight">HeadLight(L)</string>
+    <string name="chk_Rheadlight">HeadLight(R)</string>
+    <string name="chk_Lslide">Slide Indicator(L)</string>
+    <string name="chk_Rslide">Slide Indicator(R)</string>
+    <string name="chk_brakelight">BrakeLight</string>
+    <string name="chk_horn">Horn</string>
+    <string name="chk_next">Next</string>
+    <string name="walkarounddesc">Walk around screen</string>
+    <string name="truckchk_desc">Walk around the check to check</string>
+    <string name="truckchk">Any touching\/External damage</string>
+    <string name="truckchk_seal">Seal Intactness</string>
+    <string name="truckchk_stepheney">Stepeney in place</string>
+    <string name="truckchk_tyre">Tyre condition\/puncture</string>
+    <string name="truckchk_pressure">Tyre pressure</string>
+    <string name="checklist_technical_issues_description">Any Technical issues reported by incoming driver?</string>
+
+
+    <string name="checklist_technical_issues_">Stepeney in place</string>
+    <string name="changeover_complete_driver_onboard">Driver onboardeding with toolkit?</string>
+    <string name="changeover_complete_truck_mov">Truck is ready to move?</string>
+
+    <string name="changeover_complete_heading">Changeover Complete</string>
+
+    <string name="clean_condition">Has the incoming driver handed the cabin in clean condition ?</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--<string name="truckchk_tyre">Tyre condition\/puncture</string>
+
+    <string name="truckchk_pressure">Tyre pressure</string>
+-->
+    <string name="technical_issues_by_driver_desc">Any Technical issues reported by incoming driver?</string>
+    <string name="technical_issues_by_driver_dropdown">Dropdown for Issues</string>
+    <string name="technical_issues_by_driver_mechanical">Mechanical</string>
+    <string name="clutch">Clutch</string>
+    <string name="brake">Brake</string>
+    <string name="accelerator">Accelarator</string>
+    <string name="bodyandtoolrelated">Body Tool related</string>
+
+    <!--dropdown list items-->
+        <string name="tyre_condition">Tyre condition</string>
+        <string  name="stepeny">Stepeney condition</string>
+        <string name="panelboard">Panel board lights</string>
+        <string name="abnormal">Abnormal Sound</string>
+        <string name="gear">Gear operation</string>
+        <string name="steering">Steering related</string>
+        <string name="engine_heating">Engine heatingrelated</string>
+    <string name="rc">RC</string>
+    <string name="national_permit_check"> National Permit</string>
+    <string name="goods_tax">Goods Tax</string>
+    <string name="road_tax">Road Tax</string>
+    <string name="dharam_kaanta_parchi">Dharam Kaanta Parchi</string>
+    <string name="truck_docs">Truck Docs</string>
+    <string name="manifest">Manifest/ Invoice</string>
+    <string name="tp">TP/ Border Entry Forms</string>
+    <string name="lr">LR</string>
+    <string name="jack">Jack</string>
+    <string name="jackrod">Jock Rod</string>
+    <string name="tyelever">Tyre Lever</string>
+    <string name="stepeney_remover">Stepeney Remover</string>
+    <string name="trucktools">Truck Tools</string>
+    <string name="leakage_engineoil">Leakage - Engine Oil</string>
+    <string name="leakage_steeringoil">Leakage - Steering Oil</string>
+    <string name="leakage_diesel_tank">Leakage - Diesel Tank</string>
+    <string name="temp_check">Temperature Check</string>
+    <string name="coolant_level">Coolant level</string>
+    <string name="visual_inspection">Visual Inspection ok?</string>
+    <string name="tech_report">Technician Report</string>
+
+    <string name="final_approvalscreen">Final Approval Screen</string>
+    <string name="missingvalues">For all missing/ negative mandatory checklist items</string>
+    <string name="docs_available">Document available?*</string>
+    <string name="document_driver">Document given to the driver</string>
+    <string name="client_docs">Client Docs</string>
+    <string name="applicable">Applicable</string>
+    <string name="not_applicable">Not Applicable</string>
+
+    <!--checklist-->
+    <string name="page_number">%1$d/%2$d</string>
+    <string name="timer">%1$d s</string>
+    <string name="page_title">Title</string>
+    <string name="tollcash">Toll Cash Reconciliation</string>
+    <string name="isthe_tollcash">Is the toll cash with the driver Rs %1$s (e.g)?</string>
+    <string name="toll_receipt">Toll receipts of  Rs. %1$s (e.g) submitted?</string>
+    <string name="toll_receipt_note">If tally then finance gets an alert. Cut from driver s salary</string>
+    <string name="toll_reason">Reason for toll cash shortage, if any</string>
+    <string name="mechanical">Mechanical</string>
+    <string name="repair">Repair Expenses en route</string>
+    <string name="unapproved_rto">Unapproved RTO expense</string>
+    <string name="challan">Challan</string>
+    <string name="unapproved_expenses">Unapproved expenses</string>
+    <string name="toll_cash_topup">Toll cash top up done</string>
+
+    <string name="walk_aroundcheck">Walk around the truck to check</string>
+    <string name="no_entry">No Entry</string>
 
     <string name="app_ver">App version: 1.00</string>
 </resources>

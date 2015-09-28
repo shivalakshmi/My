@@ -9,8 +9,7 @@ public class Checklist {
     private String checklistItem;
     private boolean status;
 
-   public Checklist(String operational,String checklistItem,boolean status)
-    {
+    public Checklist(String operational, String checklistItem, boolean status) {
         this.operational = operational;
         this.checklistItem = checklistItem;
         this.status = status;

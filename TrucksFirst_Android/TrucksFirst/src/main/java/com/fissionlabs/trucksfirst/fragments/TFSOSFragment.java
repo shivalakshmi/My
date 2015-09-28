@@ -51,95 +51,6 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst {
     private Activity mActivity;
     ArrayList<String> list;
 
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_sos, container, false);
-
-        vehicleNumberList.clear();
-
-        mHomeActivity.isHomeFragment = false;
-        mHomeActivity.mActionBar.setDisplayShowTitleEnabled(true);
-        mHomeActivity.imageView.setVisibility(View.GONE);
-
-        mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_back);
-        mHomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mHomeActivity.isHomeFragment == false)
-                    mHomeActivity.onBackPressed();
-                else
-                    mHomeActivity.mDrawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
-
-//        mMail = new Mail("rivigodev@gmail.com", "fissionlabs");
-        mEtVehivleNo = (AutoCompleteTextView) view.findViewById(R.id.vehicle_number_edt);
-        mEtReason = (EditText) view.findViewById(R.id.reason_edt);
-        mRadioGroup = (RadioGroup) view.findViewById(R.id.sos_radiogroup);
-
-        view.findViewById(R.id.send_mail_sms).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mEtVehivleNo.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(mActivity, "" + getResources().getString(R.string.sos_vehicle_no), Toast.LENGTH_SHORT).show();
-                    return;
-                } else if (mEtReason.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(mActivity, "" + getResources().getString(R.string.sos_reason), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                int selectedId = mRadioGroup.getCheckedRadioButtonId();
-                RadioButton radioButton = (RadioButton) view.findViewById(selectedId);
-                String reason = "\nVehicleNo: " + mEtVehivleNo.getText().toString().trim() + "\nIncident: " + radioButton.getText() + "\nReason: " + mEtReason.getText().toString().trim();
-
-                sendEmailAndSMS(mActivity, reason, "SOS Issue");
-                mEtVehivleNo.setText("");
-                mEtReason.setText("");
-            }
-        });
-
-        TFUtils.showProgressBar(getActivity(), getResources().getString(R.string.please_wait));
-
-        new WebServices().getSOSTrucksList(getActivity(), new ResultReceiver(null) {
-            @Override
-            protected void onReceiveResult(int resultCode, Bundle resultData) {
-
-                TFUtils.hideProgressBar();
-
-                if (resultData != null && resultCode == TFConst.SUCCESS) {
-
-                    JSONArray jsonArray = null;
-
-                    try {
-                        jsonArray = new JSONArray(resultData.getString("response"));
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            vehicleNumberList.add(jsonArray.getString(i));
-                        }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(mActivity, android.R.layout.simple_list_item_1, vehicleNumberList);
-                    mEtVehivleNo.setThreshold(1);
-                    mEtVehivleNo.setAdapter(adapter);
-
-                }
-
-            }
-        });
-
-
-        return view;
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mActivity = activity;
-    }
-
     public static void sendEmailAndSMS(final Context context, final String reason, final String subject) {
         TFUtils.showProgressBar(context, context.getResources().getString(R.string.please_wait));
         mMail = new Mail("rivigodev@gmail.com", "fissionlabs");
@@ -258,6 +169,68 @@ public class TFSOSFragment extends TFCommonFragment implements TFConst {
         thread.start();
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.fragment_sos, container, false);
+
+        mHomeActivity.isHomeFragment = false;
+        mHomeActivity.mActionBar.setDisplayShowTitleEnabled(true);
+        mHomeActivity.imageView.setVisibility(View.GONE);
+
+        mHomeActivity.toolbar.setNavigationIcon(R.drawable.ic_back);
+        mHomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mHomeActivity.isHomeFragment == false)
+                    mHomeActivity.onBackPressed();
+                else
+                    mHomeActivity.mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+//        mMail = new Mail("rivigodev@gmail.com", "fissionlabs");
+        mEtVehivleNo = (AutoCompleteTextView) view.findViewById(R.id.vehicle_number_edt);
+        mEtReason = (EditText) view.findViewById(R.id.reason_edt);
+        mRadioGroup = (RadioGroup) view.findViewById(R.id.sos_radiogroup);
+
+        if (TFTruckFragment.mTrucksList != null && TFTruckFragment.mTrucksList.size() > 0) {
+            vehicleNumberList.clear();
+            for (int i = 0; i < TFTruckFragment.mTrucksList.size(); i++) {
+                vehicleNumberList.add(TFTruckFragment.mTrucksList.get(i).getVehicleNumber());
+            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(mActivity, android.R.layout.simple_list_item_1, vehicleNumberList);
+            mEtVehivleNo.setThreshold(1);
+            mEtVehivleNo.setAdapter(adapter);
+        }
+
+        view.findViewById(R.id.send_mail_sms).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mEtVehivleNo.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(mActivity, "" + getResources().getString(R.string.sos_vehicle_no), Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (mEtReason.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(mActivity, "" + getResources().getString(R.string.sos_reason), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                int selectedId = mRadioGroup.getCheckedRadioButtonId();
+                RadioButton radioButton = (RadioButton) view.findViewById(selectedId);
+                String reason = "\nVehicleNo: " + mEtVehivleNo.getText().toString().trim() + "\nIncident: " + radioButton.getText() + "\nReason: " + mEtReason.getText().toString().trim();
+
+                sendEmailAndSMS(mActivity, reason, "SOS Issue");
+                mEtVehivleNo.setText("");
+                mEtReason.setText("");
+            }
+        });
+        return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = activity;
+    }
 
     @Override
     public void onDestroyView() {

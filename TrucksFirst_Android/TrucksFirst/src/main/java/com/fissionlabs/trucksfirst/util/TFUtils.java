@@ -1,17 +1,16 @@
 package com.fissionlabs.trucksfirst.util;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
-import android.app.Activity;
-import android.content.SharedPreferences;
-
-import com.fissionlabs.trucksfirst.common.TFConst;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.common.TFConst;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,32 +20,34 @@ import java.util.HashMap;
 /**
  * Created by Ashok on 7/8/2015.
  */
-public class TFUtils implements TFConst{
+public class TFUtils implements TFConst {
 
-	private static ProgressDialog mProgressDialog;
     public static int SORT_ORDER = -1;
     public static int SORT_COLUMN_ENUM = -1;
     public static HashMap<String, String> hubCodeCityMap;
+    private static ProgressDialog mProgressDialog;
 
     /**
      * This method is used to get the {@link String} data from the {@link SharedPreferences}.
+     *
      * @param _activity {@link Activity} instance
-     * @param key key value
+     * @param key       key value
      * @return {@link String} value of the given key
      */
-    public static String getStringFromSP(Context _activity,String key) {
+    public static String getStringFromSP(Context _activity, String key) {
         SharedPreferences preferences = _activity.getSharedPreferences(SHARED_PREFERENCES_NAME, android.content.Context.MODE_PRIVATE);
         return preferences.getString(key, null);
     }//getFromSP()
 
     /**
      * This method is used to save the {@link String} data in the form of key - value pair.
+     *
      * @param _activity {@link Activity} instance
-     * @param key key name
-     * @param value value
+     * @param key       key name
+     * @param value     value
      * @see SharedPreferences
      */
-    public static void saveStringInSP(Activity _activity,String key, String value){
+    public static void saveStringInSP(Activity _activity, String key, String value) {
         SharedPreferences preferences = _activity.getSharedPreferences(SHARED_PREFERENCES_NAME, android.content.Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(key, value);
@@ -55,12 +56,13 @@ public class TFUtils implements TFConst{
 
     /**
      * This method is used to save the {@link Boolean} data in the form of key - value pair.
+     *
      * @param _activity {@link Activity} instance
-     * @param key key name
-     * @param value value
+     * @param key       key name
+     * @param value     value
      * @see SharedPreferences
      */
-    public static void saveBooleanInSP(Activity _activity,String key, boolean value){
+    public static void saveBooleanInSP(Activity _activity, String key, boolean value) {
         SharedPreferences preferences = _activity.getSharedPreferences(SHARED_PREFERENCES_NAME, android.content.Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putBoolean(key, value);
@@ -69,11 +71,12 @@ public class TFUtils implements TFConst{
 
     /**
      * This method is used to get the {@link Boolean} data from the {@link SharedPreferences}.
+     *
      * @param _activity {@link Activity} instance
-     * @param key key value
+     * @param key       key value
      * @return {@link Boolean} value of the given key
      */
-    public static boolean getBooleanFromSP(Activity _activity,String key) {
+    public static boolean getBooleanFromSP(Activity _activity, String key) {
         // TODO Auto-generated method stub
         SharedPreferences preferences = _activity.getSharedPreferences(SHARED_PREFERENCES_NAME, android.content.Context.MODE_PRIVATE);
         return preferences.getBoolean(key, false);
@@ -87,8 +90,9 @@ public class TFUtils implements TFConst{
 
     /**
      * This method is used to get the {@link Integer} data from the {@link SharedPreferences}.
+     *
      * @param _activity {@link Activity} instance
-     * @param key key value
+     * @param key       key value
      * @return {@link String} value of the given key
      */
     public static int getIntFromSP(Activity _activity, String key) {
@@ -99,19 +103,20 @@ public class TFUtils implements TFConst{
 
     /**
      * This method is used to save the {@link Integer} data in the form of key - value pair.
+     *
      * @param _activity {@link Activity} instance
-     * @param key key name
-     * @param value value
+     * @param key       key name
+     * @param value     value
      * @see SharedPreferences
      */
-    public static void saveIntInSP(Activity _activity, String key, int value){
+    public static void saveIntInSP(Activity _activity, String key, int value) {
         SharedPreferences preferences = _activity.getSharedPreferences(SHARED_PREFERENCES_NAME, android.content.Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(key, value);
         editor.apply();
     }//saveIntInSP()
-    
-    public static void deleteFromSP(Activity _activity,String key){
+
+    public static void deleteFromSP(Activity _activity, String key) {
         // TODO Auto-generated method stub
         SharedPreferences preferences = _activity.getSharedPreferences(SHARED_PREFERENCES_NAME, android.content.Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -119,7 +124,7 @@ public class TFUtils implements TFConst{
         editor.apply();
     }
 
-    
+
     public static ProgressDialog showProgressBar(Context context, String msg) {
         hideProgressBar();
 
@@ -173,23 +178,23 @@ public class TFUtils implements TFConst{
     }
 
     public static String changeTime(String etaInMills) {
-        if(etaInMills == null || etaInMills.equalsIgnoreCase("null")){
+        if (etaInMills == null || etaInMills.equalsIgnoreCase("null")) {
             return "";
         }
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        long milliSeconds= Long.parseLong(etaInMills);
+        long milliSeconds = Long.parseLong(etaInMills);
         Calendar calendar = Calendar.getInstance();
-        milliSeconds-=calendar.getTimeZone().getRawOffset();
+        milliSeconds -= calendar.getTimeZone().getRawOffset();
         calendar.setTimeInMillis(milliSeconds);
         return formatter.format(calendar.getTime());
     }
 
     public static String sendServerTime(String etaInMills) {
-        if(etaInMills == null || etaInMills.equalsIgnoreCase("null")){
+        if (etaInMills == null || etaInMills.equalsIgnoreCase("null")) {
             return "null";
         }
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        long milliSeconds= Long.parseLong(etaInMills);
+        long milliSeconds = Long.parseLong(etaInMills);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliSeconds);
         return formatter.format(calendar.getTime());
@@ -242,5 +247,4 @@ public class TFUtils implements TFConst{
         hubCodeCityMap.put("BPL","Bhopal");
         hubCodeCityMap.put("BHI","Bhiwani");
     }
-
 }

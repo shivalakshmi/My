@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tvPageNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/page_number"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/timer"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvScreenName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:text="@string/walk_aroundcheck"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <!--<RelativeLayout
+        android:id="@+id/newone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
+        android:gravity="center_horizontal|center_vertical"
+        >-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView5"
+            android:layout_marginTop="50dp"
+            android:gravity="center_horizontal">
+
+            <RadioGroup
+                android:id="@+id/radioBtnGroup_cabincleanCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- <RadioButton
+                     android:id="@+id/radioBtn_driver_onboard_ok"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:checked="false"
+
+                     android:text="ok" />
+
+                 <RadioButton
+                     android:id="@+id/radioBtn_driver_onboard_notok"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignBottom="@+id/radioBtn_driver_onboard_ok"
+                     android:layout_toEndOf="@+id/radioBtn_driver_onboard_ok"
+                     android:checked="false"
+                     android:text="Not ok" />-->
+
+                <RadioButton
+                    android:id="@+id/radioBtn_driver_onboard_ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/ok"
+                     />
+
+                <RadioButton
+                    android:id="@+id/radioBtn_driver_onboard_notok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/not_ok"
+                     />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView71"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="57dp"
+                android:layout_toEndOf="@+id/radioBtnGroup_cabincleanCondition"
+                android:text="@string/clean_condition"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:gravity="bottom|end">
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/button_roundcorner"
+            android:text="@string/chk_next"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+</LinearLayout>

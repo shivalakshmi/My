@@ -1,0 +1,621 @@
+<?xml version="1.0"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tvPageNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/page_number"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@string/timer"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvScreenName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/tollcash"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:id="@+id/main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvChecklistItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="80dp"
+                    android:text="@string/checklist_item"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/layout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_tollcash"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rbWiperLOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                             />
+
+                        <RadioButton
+                            android:id="@+id/rbWiperLNotOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                             />
+
+                    </RadioGroup>
+
+
+                    <TextView
+                        android:id="@+id/remaining_toll_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="80dp"
+                        android:layout_toEndOf="@+id/radio_group_tollcash"
+                        android:text="@string/isthe_tollcash"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_tollReceipt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rbWiperROk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                             />
+
+                        <RadioButton
+                            android:id="@+id/rbWiperRNotOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                             />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/toll_receipt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="80dp"
+                        android:layout_toEndOf="@+id/radio_group_tollReceipt"
+                        android:text="@string/toll_receipt"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_headlightL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="invisible">
+
+                        <RadioButton
+                            android:id="@+id/rbHeadLightLOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                             />
+
+                        <RadioButton
+                            android:id="@+id/rbHeadLightLNotOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                             />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/tvHeadLightL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="80dp"
+
+                        android:layout_toEndOf="@+id/radio_group_headlightL"
+                        android:text="@string/toll_receipt_note"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_headlightR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="invisible">
+
+                        <RadioButton
+                            android:id="@+id/rbHeadLightROk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                             />
+
+                        <RadioButton
+                            android:id="@+id/rbHeadLightRNotOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                             />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/tvHeadLightR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="80dp"
+                        android:layout_toEndOf="@+id/radio_group_headlightR"
+                        android:text="@string/toll_reason"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/new_radio_group_side_indicatorR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="invisible">
+
+                        <RadioButton
+                            android:id="@+id/new_rbSideIndicatorROk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/new_rbSideIndicatorRNotOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <CheckBox
+                        android:id="@+id/chkNoEntry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="80dp"
+                        android:layout_toEndOf="@+id/new_radio_group_side_indicatorR"
+                        android:text="@string/no_entry"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_side_indicatorL"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="invisible">
+
+                        <RadioButton
+                            android:id="@+id/rbSideIndicatorLOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbSideIndicatorLNotOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <CheckBox
+                        android:id="@+id/chkMechanical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="80dp"
+                        android:layout_toEndOf="@+id/radio_group_side_indicatorL"
+                        android:text="@string/mechanical"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_side_indicatorR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="invisible">
+
+                        <RadioButton
+                            android:id="@+id/rbSideIndicatorROk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbSideIndicatorRNotOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <CheckBox
+                        android:id="@+id/chkRepairExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="80dp"
+                        android:layout_toEndOf="@+id/radio_group_side_indicatorR"
+                        android:text="@string/repair"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout6"
+
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_brack_light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="invisible">
+
+                        <RadioButton
+                            android:id="@+id/rdBrakelighttick1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rdBrakelightcross1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <CheckBox
+                        android:id="@+id/chkUnapprovedRtoExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="80dp"
+                        android:layout_toEndOf="@+id/radio_group_brack_light"
+                        android:text="@string/unapproved_rto"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout81"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_horn11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="invisible">
+
+                        <RadioButton
+                            android:id="@+id/rbHornOk11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbHornNotOk11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <CheckBox
+                        android:id="@+id/chkChallan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="80dp"
+                        android:layout_toEndOf="@+id/radio_group_horn11"
+                        android:text="@string/challan"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_horn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="invisible">
+
+                        <RadioButton
+                            android:id="@+id/rbHornOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbHornNotOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <CheckBox
+                        android:id="@+id/chkUnapprovedExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="80dp"
+                        android:layout_toEndOf="@+id/radio_group_horn"
+                        android:text="@string/unapproved_expenses"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center">
+
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_tollcashtopup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rbHornOk1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbHornNotOk1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/tvHorn11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="80dp"
+                        android:layout_toEndOf="@+id/radio_group_tollcashtopup"
+                        android:text="@string/toll_cash_topup"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <EditText
+                        android:id="@+id/edittext_tollcash"
+                        android:layout_width="150dp"
+                        android:hint="Enter Value"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="150dp"
+                        android:inputType="number"
+                        android:layout_toEndOf="@+id/tvHorn11"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_margin="20dp"
+            android:gravity="bottom|end">
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:background="@drawable/button_roundcorner"
+                android:text="@string/chk_next"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!---->
+</ScrollView>

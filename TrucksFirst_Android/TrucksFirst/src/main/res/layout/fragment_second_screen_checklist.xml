@@ -1,0 +1,292 @@
+<?xml version="1.0"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tvPageNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/page_number"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/timer"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/tech_report"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/status"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvChecklistItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:text="@string/checklist_item"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+
+                <RadioGroup
+                    android:id="@+id/radio_group_wiperL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbWiperLOk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="@string/ok" />
+
+                    <RadioButton
+                        android:id="@+id/rbWiperLNotOk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/not_ok" />
+
+                </RadioGroup>
+
+
+                <TextView
+                    android:id="@+id/tvWiperL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="80dp"
+                    android:layout_toEndOf="@+id/radio_group_wiperL"
+                    android:text="@string/technical_issues_by_driver_desc"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </LinearLayout>
+
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:shrinkColumns="*"
+                android:stretchColumns="*">
+
+
+                <TableRow
+                    android:id="@+id/tableRow2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/TextView21"
+                        android:text="@string/technical_issues_by_driver_mechanical"
+                        android:textSize="20sp"
+                        android:textStyle="bold">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/TextView22"
+                        android:text="@string/tyre_oil"
+                        android:textSize="20sp"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/TextView23"
+                        android:text="@string/electrical"
+                        android:textSize="20sp"
+                        android:textStyle="bold"></TextView>
+
+                    <TextView
+                        android:id="@+id/TextView24"
+                        android:text="@string/engine_sound"
+                        android:textSize="20sp"
+                        android:textStyle="bold"></TextView>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <CheckBox
+                        android:id="@+id/chkBoxClutch"
+                        android:text="@string/clutch"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/chkBoxTyre_condition"
+                        android:text="@string/tyre_condition"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/chkBoxpanelboard_lights"
+                        android:text="@string/panelboard">
+
+                    </CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/chkBoxabnormal_sound"
+                        android:text="@string/abnormal"></CheckBox>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/chkBoxBrake"
+                        android:text="@string/brake"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/chkBoxStepeney"
+                        android:text="@string/stepeny"></CheckBox>
+
+                    <TextView
+                        android:id="@+id/textView43"
+                        android:text=""></TextView>
+
+                    <CheckBox
+                        android:id="@+id/chkBoxgear_operation"
+                        android:text="@string/gear"></CheckBox>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <CheckBox
+                        android:id="@+id/chkBoxAccelerator"
+                        android:text="@string/accelerator"></CheckBox>
+
+                    <TextView></TextView>
+
+                    <TextView></TextView>
+
+                    <CheckBox
+                        android:id="@+id/chkBoxsteering_related"
+                        android:text="@string/steering"></CheckBox>
+
+                    <TextView></TextView>
+
+                    <TextView></TextView>
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/chkBoxBodytollRelated"
+                        android:text="@string/bodyandtoolrelated"></CheckBox>
+
+                    <TextView></TextView>
+
+                    <TextView></TextView>
+
+                    <CheckBox
+                        android:id="@+id/chkBoxengine_heat_related"
+                        android:text="@string/engine_heating"></CheckBox>
+
+
+                    <TextView></TextView>
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_margin="20dp"
+        android:gravity="bottom|end">
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/button_roundcorner"
+            android:text="@string/chk_next"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+</LinearLayout>

@@ -7,10 +7,8 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.support.v4.view.GravityCompat;
-import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +25,6 @@ import com.fissionlabs.trucksfirst.common.TFCommonFragment;
 import com.fissionlabs.trucksfirst.common.TFConst;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
-import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -37,7 +34,7 @@ import java.util.Locale;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TFSettingsFragment extends TFCommonFragment implements TFConst{
+public class TFSettingsFragment extends TFCommonFragment implements TFConst {
     private Spinner mSpinner;
     private LinearLayout mLangSpinnerLayout;
     private Button mChangePasswordBtn;
@@ -68,7 +65,7 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
         });
 
         mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
-        mLangSpinnerLayout = (LinearLayout)rootView.findViewById(R.id.lang_spinner_layout);
+        mLangSpinnerLayout = (LinearLayout) rootView.findViewById(R.id.lang_spinner_layout);
         mChangePasswordBtn = (Button) rootView.findViewById(R.id.change_password_btn);
         mChangePasswordLayout = (LinearLayout) rootView.findViewById(R.id.change_password_layout);
         mOldPassword = (EditText) rootView.findViewById(R.id.old_password);
@@ -199,17 +196,13 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
                 mConfirmNewPassword.requestFocus();
             }
             return;
-        }
-       else if(!mOldPassword.getText().toString().trim().equals(TFUtils.getStringFromSP(getActivity(),EMP_USER_PASSWORD))){
-            Toast.makeText(getActivity(),"Old password is not matched.",Toast.LENGTH_SHORT).show();
+        } else if (!mOldPassword.getText().toString().trim().equals(TFUtils.getStringFromSP(getActivity(), EMP_USER_PASSWORD))) {
+            Toast.makeText(getActivity(), "Old password is not matched.", Toast.LENGTH_SHORT).show();
             return;
-        }
-       else if(!mNewPassword.getText().toString().trim().equals(mConfirmNewPassword.getText().toString().trim())){
-            Toast.makeText(getActivity(),"New password  and confirm password is not matched.",Toast.LENGTH_SHORT).show();
+        } else if (!mNewPassword.getText().toString().trim().equals(mConfirmNewPassword.getText().toString().trim())) {
+            Toast.makeText(getActivity(), "New password  and confirm password is not matched.", Toast.LENGTH_SHORT).show();
             return;
-        }
-        else
-        {
+        } else {
             HashMap<String, String> params = new HashMap<>();
             params.put("userName", TFUtils.getStringFromSP(getActivity(), HS_NAME));
             params.put("password", mNewPassword.getText().toString().trim());
@@ -220,7 +213,7 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
                     TFUtils.hideProgressBar();
 
                     String responseStr = resultData.getString("response");
-                    Toast.makeText(getActivity(),"Password Changed Successfully!!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Password Changed Successfully!!", Toast.LENGTH_SHORT).show();
 
                     if (resultData != null) {
                         TFUtils.saveStringInSP(getActivity(), EMP_USER_PASSWORD, mConfirmNewPassword.getText().toString().trim());
@@ -249,7 +242,6 @@ public class TFSettingsFragment extends TFCommonFragment implements TFConst{
                 }
             }
         });*/
-
 
 
     }

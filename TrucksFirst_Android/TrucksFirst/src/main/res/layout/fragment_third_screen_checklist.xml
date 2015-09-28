@@ -1,0 +1,594 @@
+<?xml version="1.0"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tvPageNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/page_number"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/timer"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tvScreenName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/truck_docs"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:id="@+id/lay_main_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/txtHeader"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="20dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/headingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/head1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/chk_status"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/head2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="@string/checklist_item"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/head3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/documents"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/layout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView2"
+                    android:layout_marginTop="40dp"
+                    android:orientation="horizontal">
+
+                    <RadioGroup
+                        android:id="@+id/radio_group_rc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/tick"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/cross"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <!-- <RadioButton android:id="@+id/radioButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="New RadioButton" /> <RadioButton android:id="@+id/radioButton2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignTop="@+id/radioButton" android:layout_toEndOf="@+id/radioButton" android:text="New RadioButton" />-->
+
+
+                    <TextView
+                        android:id="@+id/txtWiperLeft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerInParent="true"
+                        android:paddingRight="100dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="@string/rc"
+                         />
+
+                    <ImageView
+                        android:id="@+id/rc_doc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="40dp"
+
+                        android:background="@drawable/ic_assignment" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout1"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radioBtnNationalPermit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rdWipertick"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rdWipercross"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/txtRightWiper"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/national_permit"
+                         />
+
+                    <ImageView
+                        android:id="@+id/np_doc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="40dp"
+
+                        android:background="@drawable/ic_assignment" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout2"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radioBtnInsurance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rdHeadLighttick"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rdHeadlightcross"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/txt_HeadLightLeft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="50dp"
+                        android:text="@string/insurance"
+                         />
+
+                    <ImageView
+                        android:id="@+id/insurance_doc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="40dp"
+                        android:background="@drawable/ic_assignment" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout3"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radioBtnGoodsTax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioBtnGoodsTax1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rdRHeadlightcross"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/txtRheadlight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:paddingRight="35dp"
+                        android:text="@string/goods_tax"
+                         />
+
+                    <ImageView
+                        android:id="@+id/gt_docs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="40dp"
+
+                        android:background="@drawable/ic_assignment" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout4"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radioBtnRoadTax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rdLslidetick"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rdLslidecross"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/txtLslide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_centerInParent="true"
+                        android:paddingRight="45dp"
+                        android:text="@string/road_tax"
+                         />
+
+                    <ImageView
+                        android:id="@+id/rt_doc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="40dp"
+
+                        android:background="@drawable/ic_assignment" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout5"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radioBtnPollutionCerti"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/txtRslidetick"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rdRslidecross"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/txtRslide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="30dp"
+                        android:text="@string/pollution_certificate"
+
+                         />
+
+                    <ImageView
+                        android:id="@+id/pc_doc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="40dp"
+
+                        android:background="@drawable/ic_assignment" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout6"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+
+                    <RadioGroup
+                        android:id="@+id/radioBtnDharamKaat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rdBrakelighttick1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rdBrakelightcross1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/txtBrakelight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_centerInParent="true"
+                        android:paddingLeft="55dp"
+                        android:text="@string/dharam_kaanta_parchi"
+                         />
+
+                    <ImageView
+                        android:id="@+id/imageViewh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="40dp"
+                        android:background="@drawable/ic_assignment"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/layout8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout7"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+
+                    <RadioGroup
+                        android:id="@+id/radio_txtHomgroup1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rdHomtick1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rdHomcross1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/txtHom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/chk_horn"
+                        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                    <ImageView
+                        android:id="@+id/imageVieiw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="40dp"
+
+                        android:background="@drawable/ic_assignment" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_margin="20dp"
+        android:gravity="bottom|end">
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/button_roundcorner"
+            android:text="@string/chk_next"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+</LinearLayout>

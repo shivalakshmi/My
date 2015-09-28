@@ -1,0 +1,337 @@
+<?xml version="1.0"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tvPageNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/page_number"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@string/timer"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvScreenName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/walk_aroundcheck"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+
+            <RadioGroup
+                android:id="@+id/radio_group_anytouchExternaldamage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/tick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/ok"
+                     />
+
+                <RadioButton
+                    android:id="@+id/cross"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/not_ok"
+                     />
+
+            </RadioGroup>
+
+            <!-- <RadioButton android:id="@+id/radioButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="New RadioButton" /> <RadioButton android:id="@+id/radioButton2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignTop="@+id/radioButton" android:layout_toEndOf="@+id/radioButton" android:text="New RadioButton" />-->
+
+
+            <TextView
+                android:id="@+id/txtWiperLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="80dp"
+                android:layout_toEndOf="@+id/radio_group_anytouchExternaldamage"
+                android:text="@string/truckchk"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </RelativeLayout>
+
+
+        -
+
+        <RelativeLayout
+            android:id="@+id/layout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout1"
+            android:orientation="horizontal">
+
+
+            -
+
+            <RadioGroup
+                android:id="@+id/radio_group_sealIntact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rdWipertick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/ok"
+                     />
+
+                <RadioButton
+                    android:id="@+id/rdWipercross"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/not_ok"
+                     />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/txtRightWiper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="80dp"
+                android:layout_toEndOf="@+id/radio_group_sealIntact"
+                android:text="@string/truckchk_seal"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </RelativeLayout>
+
+
+        -
+
+        <RelativeLayout
+            android:id="@+id/layout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout2"
+            android:orientation="horizontal">
+
+
+            -
+
+            <RadioGroup
+                android:id="@+id/radio_group_stepeney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rdHeadLighttick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/ok"
+                     />
+
+                <RadioButton
+                    android:id="@+id/rdHeadlightcross"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/not_ok"
+                     />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/txt_HeadLightLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_toEndOf="@+id/radio_group_stepeney"
+                android:text="@string/truckchk_stepheney"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </RelativeLayout>
+
+
+        -
+
+        <RelativeLayout
+            android:id="@+id/layout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout3"
+            android:orientation="horizontal">
+
+
+            -
+
+            <RadioGroup
+                android:id="@+id/radio_group_tyreCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rdRHeadLight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/ok"
+                     />
+
+                <RadioButton
+                    android:id="@+id/rdRHeadlightcross"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/not_ok"
+                     />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/txtRheadlight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_toEndOf="@+id/radio_group_tyreCondition"
+                android:text="@string/truckchk_tyre"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </RelativeLayout>
+
+
+        -
+
+        <RelativeLayout
+            android:id="@+id/layout5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout4"
+            android:orientation="horizontal">
+
+
+            -
+
+            <RadioGroup
+                android:id="@+id/radio_group_tyrePressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rdLslidetick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/ok"
+                     />
+
+                <RadioButton
+                    android:id="@+id/rdLslidecross"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/not_ok"
+                     />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/txtLslide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_toEndOf="@+id/radio_group_tyrePressure"
+                android:text="@string/truckchk_pressure"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <!-- <TextView android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentStart="true" android:layout_alignParentTop="true" android:layout_marginStart="20dp" android:text="@string/status" android:textAppearance="?android:attr/textAppearanceMedium" />-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+
+            <!-- <RelativeLayout android:id="@+id/layout6" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/layout5" android:orientation="horizontal"> <RadioGroup android:id="@+id/radio_txtRslidegroup" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal"> <RadioButton android:id="@+id/txtRslidetick" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="@string/ok"  /> <RadioButton android:id="@+id/rdRslidecross" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/not_ok"  /> </RadioGroup> <TextView android:id="@+id/txtRslide" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="80dp" android:layout_toEndOf="@+id/radio_txtRslidegroup" android:text="@string/chk_Rslide" android:textAppearance="?android:attr/textAppearanceMedium" /> </RelativeLayout> <RelativeLayout android:id="@+id/layout7" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/layout6" android:orientation="horizontal"> <RadioGroup android:id="@+id/radio_txtBrakelightgroup1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal"> <RadioButton android:id="@+id/rdBrakelighttick1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="@string/ok"  /> <RadioButton android:id="@+id/rdBrakelightcross1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/not_ok"  /> </RadioGroup> <TextView android:id="@+id/txtBrakelight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="80dp" android:layout_toEndOf="@+id/radio_txtBrakelightgroup1" android:text="@string/chk_brakelight" android:textAppearance="?android:attr/textAppearanceMedium" /> </RelativeLayout> <RelativeLayout android:id="@+id/layout8" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/layout7" android:orientation="horizontal"> <RadioGroup android:id="@+id/radio_txtHomgroup1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal"> <RadioButton android:id="@+id/rdHomtick1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="false" android:text="@string/ok"  /> <RadioButton android:id="@+id/rdHomcross1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/not_ok"  /> </RadioGroup> <TextView android:id="@+id/txtHom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_marginStart="80dp" android:layout_toEndOf="@+id/radio_txtHomgroup1" android:text="@string/chk_hom" android:textAppearance="?android:attr/textAppearanceMedium" /> </RelativeLayout> -->
+
+
+            <!-- <TextView android:id="@+id/textView4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/checklist_item" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_alignParentTop="true" android:layout_toEndOf="@+id/textView2" android:layout_marginStart="120dp" />-->
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_margin="20dp"
+        android:gravity="bottom|end">
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/button_roundcorner"
+            android:text="@string/chk_next"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+</LinearLayout><!---->

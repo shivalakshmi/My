@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fissionlabs.trucksfirst.R;
+import com.fissionlabs.trucksfirst.checklist.CheckListBaseFragment;
 import com.fissionlabs.trucksfirst.common.TFCheckLockService;
 import com.fissionlabs.trucksfirst.common.TFCommonActivity;
 import com.fissionlabs.trucksfirst.common.TFPilotDelayAlertService;
@@ -51,8 +52,12 @@ import java.util.Date;
 public class TFHomeActivity extends TFCommonActivity {
 
     public static DrawerLayout mDrawerLayout;
+    public static boolean isChangesMade;
+    public static Toolbar toolbar;
+    public static boolean isHomeFragment = true;
+    public static ImageView imageView;
+    public ActionBar mActionBar;
     private NavigationView mNavigationView;
-
     private TFDashBoardFragment mTFDashBoardFragment;
     private TFTruckFragment mTFTruckFragment;
     private TFSettingsFragment mTFSettingsFragment;
@@ -62,15 +67,22 @@ public class TFHomeActivity extends TFCommonActivity {
     private TFpdfViewer mTFpdfViewer;
     private TFClosedTripsFragment mClosedTripFragment;
     private Fragment mSelectedFragment;
-
-    public ActionBar mActionBar;
+    private CheckListBaseFragment mCheckListBaseFragment;
     private TextView mTvCurrentDateAndTime;
-    public static boolean isChangesMade;
-    public static  Toolbar toolbar;
-    public static boolean isHomeFragment = true;
-    public static ImageView imageView;
     private TextView mHubSupervisorName;
     private TFPilotDelayAlertService pilotDelayAlertService;
+    private ServiceConnection mDelayServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            TFPilotDelayAlertService.PDASBinder binder = (TFPilotDelayAlertService.PDASBinder) service;
+            pilotDelayAlertService = binder.getService();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            pilotDelayAlertService = null;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,9 +116,9 @@ public class TFHomeActivity extends TFCommonActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mTvCurrentDateAndTime = (TextView) findViewById(R.id.tv_date_time);
-        mHubSupervisorName = (TextView)findViewById(R.id.hub_supervisor);
+        mHubSupervisorName = (TextView) findViewById(R.id.hub_supervisor);
 
-        mHubSupervisorName.setText(TFUtils.getStringFromSP(TFHomeActivity.this,HS_NAME));
+        mHubSupervisorName.setText(TFUtils.getStringFromSP(TFHomeActivity.this, HS_NAME));
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mNavigationView.getMenu().getItem(6).setTitle(R.string.app_ver);
@@ -272,6 +284,11 @@ public class TFHomeActivity extends TFCommonActivity {
                 }
                 selectedFragment = mClosedTripFragment;
                 break;
+            case R.layout.fragment_base_checklist:
+                if (mCheckListBaseFragment == null)
+                    mCheckListBaseFragment = new CheckListBaseFragment();
+                selectedFragment = mCheckListBaseFragment;
+                break;
         }
 
 
@@ -303,7 +320,7 @@ public class TFHomeActivity extends TFCommonActivity {
         FragmentManager manager = getSupportFragmentManager();
         boolean fragmentPopped = manager.popBackStackImmediate(backStateName, 0);
 
-        if(!fragment.isAdded()) {
+        if (!fragment.isAdded()) {
             fragment.setArguments(bundle);
         }
 
@@ -319,7 +336,7 @@ public class TFHomeActivity extends TFCommonActivity {
 
     private void goToLogin() {
         TFUtils.deleteFromSP(TFHomeActivity.this, LANG_SELECTION);
-        TFUtils.deleteFromSP(TFHomeActivity.this,IS_USER_EXISTS);
+        TFUtils.deleteFromSP(TFHomeActivity.this, IS_USER_EXISTS);
         TFUtils.deleteFromSP(TFHomeActivity.this, HUB_NAME);
         TFUtils.deleteFromSP(TFHomeActivity.this, EMP_ID);
         TFUtils.deleteFromSP(TFHomeActivity.this, EMP_USER_NAME);
@@ -341,7 +358,7 @@ public class TFHomeActivity extends TFCommonActivity {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
             finish();
         } else {
-            if(isChangesMade)
+            if (isChangesMade)
                 showConfirmationPopUp();
             else
                 super.onBackPressed();
@@ -367,37 +384,19 @@ public class TFHomeActivity extends TFCommonActivity {
         alertDialog.show();
     }
 
-
     private void doWork() {
         runOnUiThread(new Runnable() {
             public void run() {
                 try {
                     Date date = new Date();
                     CharSequence dateFormat = DateFormat.format("dd MMM yyyy", date.getTime());
-                    mTvCurrentDateAndTime.setText(Html.fromHtml("<b>"+TFUtils.getStringFromSP(TFHomeActivity.this, HUB_NAME)+"</b>   " + dateFormat));
+                    mTvCurrentDateAndTime.setText(Html.fromHtml("<b>" + TFUtils.getStringFromSP(TFHomeActivity.this, HUB_NAME) + "</b>   " + dateFormat));
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
-    }
-
-    private class CountDownRunner implements Runnable {
-
-        @Override
-        public void run() {
-            while (!Thread.currentThread().isInterrupted()) {
-                try {
-                    doWork();
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
     /**
@@ -429,31 +428,18 @@ public class TFHomeActivity extends TFCommonActivity {
         }
     }
 
-    private ServiceConnection mDelayServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            TFPilotDelayAlertService.PDASBinder binder = (TFPilotDelayAlertService.PDASBinder)service;
-            pilotDelayAlertService = binder.getService();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            pilotDelayAlertService = null;
-        }
-    };
-
     public void startDelayTracking(String pilot, String eta) {
         long etaMillis = Long.parseLong(eta);
-        etaMillis-=3000000;// Set alert for 50 mins before ETA
-        etaMillis-=(330*60*1000); // Date object will add 5h30min to time
+        etaMillis -= 3000000;// Set alert for 50 mins before ETA
+        etaMillis -= (330 * 60 * 1000); // Date object will add 5h30min to time
         Date d = new Date(etaMillis);
-        if (pilotDelayAlertService!=null) {
+        if (pilotDelayAlertService != null) {
             pilotDelayAlertService.startWaiting(pilot, d, true);
         }
     }
 
     public void stopDelayTracking(String pilot) {
-        if (pilotDelayAlertService!=null) {
+        if (pilotDelayAlertService != null) {
             pilotDelayAlertService.stopWaiting(pilot);
         }
     }
@@ -462,5 +448,22 @@ public class TFHomeActivity extends TFCommonActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbindService(mDelayServiceConnection);
+    }
+
+    private class CountDownRunner implements Runnable {
+
+        @Override
+        public void run() {
+            while (!Thread.currentThread().isInterrupted()) {
+                try {
+                    doWork();
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

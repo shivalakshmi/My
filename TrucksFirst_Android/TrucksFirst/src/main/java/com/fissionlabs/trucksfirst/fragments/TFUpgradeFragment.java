@@ -33,7 +33,7 @@ public class TFUpgradeFragment extends TFCommonFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_updates,container,false);
+        final View view = inflater.inflate(R.layout.fragment_updates, container, false);
         mHomeActivity.isHomeFragment = false;
         mHomeActivity.mActionBar.setDisplayShowTitleEnabled(true);
         mHomeActivity.imageView.setVisibility(View.GONE);
@@ -42,7 +42,7 @@ public class TFUpgradeFragment extends TFCommonFragment {
         mHomeActivity.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mHomeActivity.isHomeFragment == false)
+                if (mHomeActivity.isHomeFragment == false)
                     mHomeActivity.onBackPressed();
                 else
                     mHomeActivity.mDrawerLayout.openDrawer(GravityCompat.START);
@@ -52,7 +52,7 @@ public class TFUpgradeFragment extends TFCommonFragment {
         view.findViewById(R.id.send_mail_sms).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TFUtils.showProgressBar(mActivity,getResources().getString(R.string.downloading_wait));
+                TFUtils.showProgressBar(mActivity, getResources().getString(R.string.downloading_wait));
                 new SimpleTask().execute();
             }
         });
@@ -74,7 +74,8 @@ public class TFUpgradeFragment extends TFCommonFragment {
         super.onAttach(activity);
         mActivity = activity;
     }
-    class SimpleTask extends AsyncTask<Void,Void,Boolean> {
+
+    class SimpleTask extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... params) {
             if (!isUpdateAvailable()) {return  false;}
@@ -117,12 +118,12 @@ public class TFUpgradeFragment extends TFCommonFragment {
         protected void onPostExecute(Boolean flag) {
             super.onPostExecute(flag);
             TFUtils.hideProgressBar();
-            if(flag) {
+            if (flag) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/download/" + "app.apk")), "application/vnd.android.package-archive");
                 startActivity(intent);
             } else {
-                Toast.makeText(mActivity,getString(R.string.no_updates_found),Toast.LENGTH_LONG).show();
+                Toast.makeText(mActivity, getString(R.string.no_updates_found), Toast.LENGTH_LONG).show();
             }
         }
 

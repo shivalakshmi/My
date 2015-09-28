@@ -14,9 +14,9 @@ class TFTruckDetailsPojo {
     private String checklist;
 
     public TFTruckDetailsPojo(String vehicleNumber,
-                                   String vehicleRoute,String eta,
-                                   String assignedPilot,boolean pilotInHub,
-                                  boolean vehicleInHub, String checklist ){
+                              String vehicleRoute, String eta,
+                              String assignedPilot, boolean pilotInHub,
+                              boolean vehicleInHub, String checklist) {
         this.vehicleNumber = vehicleNumber;
         this.vehicleRoute = vehicleRoute;
         this.eta = eta;
