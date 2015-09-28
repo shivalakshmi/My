@@ -645,6 +645,28 @@ public class WebServices implements TFConst {
         TFApp.getInstance().addToRequestQueue(stringRequest, TAG_CHECKLIST_DETAILS);
     }
 
+    public void postVehicleChecklistNew(JSONObject jsonObj) {
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                URL_SAVE_VEHICLE_CHECKLIST_NEW, jsonObj,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.e("A", "" + response);
+                        Log.e("Lucky Response", "" + response);
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("A", "Error");
+            }
+        }) {
+        };
+        TFApp.getInstance().addToRequestQueue(jsonObjReq, "TAG");
+    }
+
 }
 
 

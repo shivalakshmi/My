@@ -44,8 +44,6 @@ public class SeventhScreenFragment extends CheckListCommonFragment {
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
 
         radio_group_anytouchExternaldamage =(RadioGroup)view.findViewById(R.id.radio_group_anytouchExternaldamage);
-        if (newChecklist.data.screen7.touchingDamage) radio_group_anytouchExternaldamage.check(R.id.cross);
-        radio_group_anytouchExternaldamage.check(R.id.tick);
         radio_group_anytouchExternaldamage.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -57,8 +55,7 @@ public class SeventhScreenFragment extends CheckListCommonFragment {
         });
 
         radio_group_sealIntact =(RadioGroup)view.findViewById(R.id.radio_group_sealIntact);
-        if (newChecklist.data.screen7.sealIntactness) radio_group_sealIntact.check(R.id.rdWipertick);
-        else radio_group_sealIntact.check(R.id.rdWipercross);
+
         radio_group_sealIntact.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -68,8 +65,7 @@ public class SeventhScreenFragment extends CheckListCommonFragment {
         });
 
         radio_group_stepeney =(RadioGroup)view.findViewById(R.id.radio_group_stepeney);
-        if (newChecklist.data.screen7.stepeneyInPlace) radio_group_stepeney.check(R.id.rdHeadLighttick);
-        else radio_group_stepeney.check(R.id.rdHeadlightcross);
+
         radio_group_stepeney.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -79,8 +75,7 @@ public class SeventhScreenFragment extends CheckListCommonFragment {
         });
 
         radio_group_tyreCondition =(RadioGroup)view.findViewById(R.id.radio_group_tyreCondition);
-        if (newChecklist.data.screen7.tyrePuncture) radio_group_tyreCondition.check(R.id.rdRHeadlightcross);
-        else radio_group_tyreCondition.check(R.id.rdRHeadLight);
+
         radio_group_tyreCondition.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -90,8 +85,7 @@ public class SeventhScreenFragment extends CheckListCommonFragment {
         });
 
         radio_group_tyrePressure = (RadioGroup)view.findViewById(R.id.radio_group_tyrePressure);
-        if (newChecklist.data.screen7.tyrePressure) radio_group_tyrePressure.check(R.id.rdLslidetick);
-        else radio_group_tyrePressure.check(R.id.rdLslidecross);
+
         radio_group_tyrePressure.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

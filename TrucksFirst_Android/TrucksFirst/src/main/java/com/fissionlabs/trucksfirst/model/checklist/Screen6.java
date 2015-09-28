@@ -10,6 +10,6 @@ public class Screen6 {
     public boolean isCashWithDriverOk;
     public String cashShortageReason;
     public boolean isTopUpDone;
-    public String inputAmount;
+    public int inputAmount;
     public int timeTaken;
 }

@@ -2,6 +2,7 @@ package com.fissionlabs.trucksfirst.checklist;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,11 @@ import android.widget.TextView;
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
 import com.fissionlabs.trucksfirst.model.checklist.Screen9;
+import com.fissionlabs.trucksfirst.webservices.WebServices;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -21,12 +27,12 @@ import java.util.TimerTask;
  */
 public class NinthScreenFragment extends CheckListCommonFragment {
 
-    private Button btnNext;
+    private Button btnNext,btnSave;
     private TextView mTvTime;
     transient private int count = 10;
     private boolean timeOver;
     private int timeTaken = 0;
-
+    private WebServices mWebServices;
     private RadioGroup radio_group_tempcheck,radio_group_leakageOil,radio_group_leakageSteeringOil,radio_group_leakageDieselTank,radio_group_coolantLevel,radio_group_visualInspection;
 
     private NewChecklist newChecklist = FirstScreenFragment.newChecklist;
@@ -36,6 +42,7 @@ public class NinthScreenFragment extends CheckListCommonFragment {
 
         View view = inflater.inflate(R.layout.fragment_ninth_screen_checklist, container, false);
         btnNext = (Button) view.findViewById(R.id.btnNext);
+        btnSave = (Button) view.findViewById(R.id.btnSave);
 
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
@@ -63,8 +70,7 @@ public class NinthScreenFragment extends CheckListCommonFragment {
             }
         });
 
-        if(newChecklist.data.screen9.engineOilLeakage) radio_group_leakageOil.check(R.id.cross);
-        else radio_group_leakageOil.check(R.id.tick);
+
         radio_group_leakageOil.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -73,8 +79,7 @@ public class NinthScreenFragment extends CheckListCommonFragment {
             }
         });
 
-        if(newChecklist.data.screen9.steeringOilLeakage) radio_group_leakageSteeringOil.check(R.id.rdWipercross);
-        else radio_group_leakageSteeringOil.check(R.id.rdWipertick);
+
         radio_group_leakageSteeringOil.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -83,8 +88,7 @@ public class NinthScreenFragment extends CheckListCommonFragment {
             }
         });
 
-        if(newChecklist.data.screen9.fuelDieselLeakage) radio_group_leakageDieselTank.check(R.id.rdRHeadlightcross);
-        else radio_group_leakageDieselTank.check(R.id.rdRHeadLight);
+
         radio_group_leakageDieselTank.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -93,8 +97,7 @@ public class NinthScreenFragment extends CheckListCommonFragment {
             }
         });
 
-        if(newChecklist.data.screen9.coolantLevel) radio_group_coolantLevel.check(R.id.rdLslidetick);
-        else radio_group_coolantLevel.check(R.id.rdLslidecross);
+
         radio_group_coolantLevel.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -105,6 +108,21 @@ public class NinthScreenFragment extends CheckListCommonFragment {
 
         tvPageNumber.setText(String.format(getResources().getString(R.string.page_number), 9, 11));
         mTvTime.setText(String.format(getResources().getString(R.string.timer), count));
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newChecklist.data.screen9.timeTaken = timeTaken;
+                String json = new Gson().toJson(newChecklist, NewChecklist.class);
+                Log.e("Lucky",json);
+                try {
+                    mWebServices = new WebServices();
+                    mWebServices.postVehicleChecklistNew(new JSONObject(json));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
 
         btnNext.setOnClickListener(new View.OnClickListener() {

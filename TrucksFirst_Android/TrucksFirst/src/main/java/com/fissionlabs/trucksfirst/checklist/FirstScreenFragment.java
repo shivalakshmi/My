@@ -40,7 +40,7 @@ public class FirstScreenFragment extends CheckListCommonFragment {
 
         View view = inflater.inflate(R.layout.fragment_first_screen_checklist, container, false);
         newChecklist.vehicleNumber = TFUtils.getStringFromSP(getActivity(), "vehicle_number");
-        newChecklist.trackingId = TFUtils.getStringFromSP(getActivity(),"vehicleTrackingId");
+        newChecklist.trackingId = Integer.parseInt(TFUtils.getStringFromSP(getActivity(),"vehicleTrackingId"));
         Button next = (Button) view.findViewById(R.id.btnNext);
 
         mTvTime = (TextView) view.findViewById(R.id.tvTime);

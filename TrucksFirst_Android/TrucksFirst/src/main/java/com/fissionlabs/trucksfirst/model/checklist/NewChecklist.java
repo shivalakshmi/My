@@ -8,7 +8,7 @@ import java.math.BigInteger;
 public class NewChecklist {
 
     public String vehicleNumber;
-    public String trackingId;
+    public long trackingId;
     public Data data = new Data();
 }
 
