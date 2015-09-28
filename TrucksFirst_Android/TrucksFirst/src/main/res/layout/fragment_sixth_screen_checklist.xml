@@ -172,7 +172,7 @@
                     </RadioGroup>
 
                     <TextView
-                        android:id="@+id/tvWiperR"
+                        android:id="@+id/toll_receipt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -273,12 +273,56 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/new_radio_group_side_indicatorR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="invisible">
+
+                        <RadioButton
+                            android:id="@+id/new_rbSideIndicatorROk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="@string/ok"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/new_rbSideIndicatorRNotOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/not_ok"
+                            android:textSize="15sp" />
+
+                    </RadioGroup>
+
+                    <CheckBox
+                        android:id="@+id/chkNoEntry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="80dp"
+                        android:layout_toEndOf="@+id/new_radio_group_side_indicatorR"
+                        android:text="@string/no_entry"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </RelativeLayout>
+
 
                 <RelativeLayout
                     android:id="@+id/layout5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
+
 
 
                     <RadioGroup

@@ -43,8 +43,6 @@ public class SeventhScreenFragment extends CheckListCommonFragment {
         mTvTime = (TextView) view.findViewById(R.id.tvTime);
         TextView tvPageNumber = (TextView) view.findViewById(R.id.tvPageNumber);
 
-     ;
-
         radio_group_anytouchExternaldamage =(RadioGroup)view.findViewById(R.id.radio_group_anytouchExternaldamage);
         if (newChecklist.data.screen7.touchingDamage) radio_group_anytouchExternaldamage.check(R.id.cross);
         radio_group_anytouchExternaldamage.check(R.id.tick);

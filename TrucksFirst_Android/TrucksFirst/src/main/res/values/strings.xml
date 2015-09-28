@@ -285,4 +285,5 @@
     <string name="toll_cash_topup">Toll cash top up done</string>
 
 <string name="walk_aroundcheck">Walk around the truck to check</string>
+    <string name="no_entry">No Entry</string>
 </resources>

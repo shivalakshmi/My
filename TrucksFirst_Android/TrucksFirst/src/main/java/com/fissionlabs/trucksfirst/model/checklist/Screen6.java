@@ -7,6 +7,7 @@ public class Screen6 {
 
     public int tollCashWithDriver;
     public boolean tollReceipts;
+    public boolean isCashWithDriverOk;
     public String cashShortageReason;
     public boolean isTopUpDone;
     public String inputAmount;

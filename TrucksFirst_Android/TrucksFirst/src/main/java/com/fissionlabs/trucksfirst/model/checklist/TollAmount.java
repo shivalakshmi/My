@@ -5,7 +5,7 @@ package com.fissionlabs.trucksfirst.model.checklist;
  */
 public class TollAmount {
 
-    int prevHubToCurrentHubTollAmount;
-    int remainingTollAmount;
-    int routeTollAmount;
+    public int prevHubToCurrentHubTollAmount;
+    public int remainingTollAmount;
+    public int routeTollAmount;
 }

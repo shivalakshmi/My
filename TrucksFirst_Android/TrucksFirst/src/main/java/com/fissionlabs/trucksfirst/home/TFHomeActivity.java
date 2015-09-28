@@ -274,10 +274,7 @@ public class TFHomeActivity extends TFCommonActivity {
                 break;
 
             case R.layout.fragment_base_checklist:
-                if (mCheckListBaseFragment == null) {
                     mCheckListBaseFragment = new CheckListBaseFragment();
-                }
-
                 selectedFragment = mCheckListBaseFragment;
 
                 break;
