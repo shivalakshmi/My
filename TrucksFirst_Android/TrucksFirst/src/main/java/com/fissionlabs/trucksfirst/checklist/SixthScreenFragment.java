@@ -224,7 +224,10 @@ public class SixthScreenFragment extends CheckListCommonFragment {
             public void onClick(View view) {
 
                 newChecklist.data.screen6.tollCashWithDriver = mTollAmount.remainingTollAmount;
-                newChecklist.data.screen6.inputAmount = Integer.parseInt(edittext_tollcash.getText().toString());
+                if(edittext_tollcash.getText().toString().length()>0)
+                    newChecklist.data.screen6.inputAmount = Integer.parseInt(edittext_tollcash.getText().toString());
+                else
+                    newChecklist.data.screen6.inputAmount = 0;
                 newChecklist.data.screen6.timeTaken = timeTaken;
                 if(mTollCashShortageList!=null) {
                     newChecklist.data.screen6.cashShortageReason = mTollCashShortageList.toString().replace("[", "").replace("]", "")

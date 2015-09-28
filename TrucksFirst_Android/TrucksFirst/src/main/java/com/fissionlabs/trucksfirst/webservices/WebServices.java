@@ -667,6 +667,39 @@ public class WebServices implements TFConst {
         TFApp.getInstance().addToRequestQueue(jsonObjReq, "TAG");
     }
 
+    public void getChecklistDetailsNew(final Context context, final ResultReceiver resultReceiver) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_GET_CHECKLIST_NEW + "/" + TFUtils.getStringFromSP(context, "vehicleTrackingId"),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (LogConfig.D) {
+                            Log.d(TAG, "================================ Truck details ==========================");
+                            Log.d(TAG, response);
+                            Log.d(TAG, "================================ Truck details end ======================");
+                        }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("response", response);
+
+                        resultReceiver.send(SUCCESS, bundle);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (LogConfig.D) {
+                    Log.d(TAG, "" + error.getMessage() + ", " + error.toString());
+                }
+                Toast.makeText(context, context.getResources().getString(R.string.server_not_responding), Toast.LENGTH_SHORT).show();
+                resultReceiver.send(ERROR, null);
+            }
+        }) {
+
+
+        };
+        TFApp.getInstance().addToRequestQueue(stringRequest, TAG_TRUCK_DETAILS);
+
+    }
 }
 
 

@@ -52,9 +52,6 @@ public class TenthScreenFragment extends CheckListCommonFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
-        // CheckListBaseFragment.moveToNext();
-
         view = inflater.inflate(R.layout.fragment_tenth_screen_checklist, container, false);
         btnNext = (Button) view.findViewById(R.id.btnNext);
 
@@ -75,33 +72,6 @@ public class TenthScreenFragment extends CheckListCommonFragment {
 
         return view;
     }
-
-    private void settingAdapter() {
-
-        ArrayAdapter<String> mechanical_adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, mechanical_issues_array);
-        ArrayAdapter<String> tyreoil_adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, tyreoil_issues_array);
-        ArrayAdapter<String> electrical_adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, electrical_issues_array);
-        ArrayAdapter<String> engine_adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, engine_issues_array);
-
-        sp_mechanical_issues.setAdapter(mechanical_adapter);
-        sp_tyre_oil_issues.setAdapter(tyreoil_adapter);
-        sp_electrical_issues.setAdapter(electrical_adapter);
-        sp_engine_issues.setAdapter(engine_adapter);
-
-    }
-
-
-   /* private void initUi() {
-
-        //relative_dropdown_layout = (RelativeLayout)view.findViewById(R.id.relative_dropdown_layout);
-        sp_mechanical_issues = (Spinner) view.findViewById(R.id.sp_mechnical_clutch);
-        sp_tyre_oil_issues = (Spinner) view.findViewById(R.id.sp_tyre);
-        sp_electrical_issues = (Spinner) view.findViewById(R.id.sp_electrical);
-        sp_engine_issues = (Spinner) view.findViewById(R.id.sp_engine);
-      //  radioGroup = (RadioGroup) view.findViewById(R.id.radio_group);
-
-
-    }*/
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {

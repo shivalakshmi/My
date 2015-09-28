@@ -90,7 +90,6 @@
                 android:id="@+id/layout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
 
@@ -125,160 +124,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_marginStart="80dp"
                     android:layout_toEndOf="@+id/radio_group_wiperL"
-                    android:text="For all missing/ negative mandatory checklist items
-"
+                    android:text="For all missing/ negative mandatory checklist items"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
             </LinearLayout>
 
 
-            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/tableLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:shrinkColumns="*"
-                android:stretchColumns="*">
-                <TextView
-                    android:id="@+id/TextView22"
-                    android:text="All notok fields will be displayed here in this field"
-                    android:textSize="20sp"
-                    android:textStyle="bold"></TextView>
-
-<!--
-                <TableRow
-                    android:id="@+id/tableRow2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-
-                    <TextView
-                        android:id="@+id/TextView21"
-                        android:text="@string/technical_issues_by_driver_mechanical"
-                        android:textSize="20sp"
-                        android:textStyle="bold">
-
-                    </TextView>
-
-                    <TextView
-                        android:id="@+id/TextView22"
-                        android:text="@string/tyre_oil"
-                        android:textSize="20sp"
-                        android:textStyle="bold"></TextView>
-
-                    <TextView
-                        android:id="@+id/TextView23"
-                        android:text="@string/electrical"
-                        android:textSize="20sp"
-                        android:textStyle="bold"></TextView>
-
-                    <TextView
-                        android:id="@+id/TextView24"
-                        android:text="@string/engine_sound"
-                        android:textSize="20sp"
-                        android:textStyle="bold"></TextView>
-
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
-
-                    <CheckBox
-                        android:id="@+id/textView31"
-                        android:text="@string/clutch"></CheckBox>
-
-                    <CheckBox
-                        android:id="@+id/textView32"
-                        android:text="@string/tyre_condition"></CheckBox>
-
-                    <CheckBox
-                        android:id="@+id/textView33"
-                        android:text="@string/panelboard">
-
-                    </CheckBox>
-
-                    <CheckBox
-                        android:id="@+id/textView34"
-                        android:text="@string/abnormal"></CheckBox>
-
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <CheckBox
-                        android:id="@+id/textView41"
-                        android:text="@string/brake"></CheckBox>
-
-                    <CheckBox
-                        android:id="@+id/textView42"
-                        android:text="@string/stepeny"></CheckBox>
-
-                    <TextView
-                        android:id="@+id/textView43"
-                        android:text=""></TextView>
-
-                    <CheckBox
-                        android:id="@+id/textView44"
-                        android:text="@string/gear"></CheckBox>
-
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
-
-                    <CheckBox
-                        android:id="@+id/textView8"
-                        android:text="@string/accelerator"></CheckBox>
-
-                    <TextView></TextView>
-
-                    <TextView></TextView>
-
-                    <CheckBox android:text="@string/steering"></CheckBox>
-
-                    <TextView></TextView>
-
-                    <TextView></TextView>
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/tableRow6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <CheckBox android:text="@string/bodyandtoolrelated"></CheckBox>
-
-                    <TextView></TextView>
-
-                    <TextView></TextView>
-
-                    <CheckBox
-                        android:id="@+id/imageView3"
-                        android:text="@string/engine_heating"></CheckBox>
-
-
-                    <TextView></TextView>
-                </TableRow>-->
-
-            </TableLayout>
-
         </LinearLayout>
     </LinearLayout>
-
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

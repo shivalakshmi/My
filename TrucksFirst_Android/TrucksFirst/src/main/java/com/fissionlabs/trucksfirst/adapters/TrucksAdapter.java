@@ -11,6 +11,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,7 @@ import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
 import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.model.PilotAvailability;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
+import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
 import com.fissionlabs.trucksfirst.pojo.DriverChecklist;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
@@ -43,6 +46,8 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -708,6 +713,39 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             bundle.putString("vehicle_number", holder.mVehicleNumber.getText().toString());
             bundle.putString("vehicleTrackingId", td.getVehicleTrackingId());
             //  mTfTruckFragment.startFragment(R.layout.fragment_check_list, bundle);
+            TFUtils.showProgressBar(mContext, mContext.getResources().getString(R.string.please_wait));
+            WebServices mWebServices = new WebServices();
+            mWebServices.getChecklistDetailsNew(mContext, new ResultReceiver(null) {
+                @Override
+                protected void onReceiveResult(int resultCode, Bundle resultData) {
+                    if (resultCode == TFConst.SUCCESS) {
+
+                        String responseStr = resultData.getString("response");
+
+                        Toast.makeText(mContext, "Response: " + responseStr, Toast.LENGTH_SHORT).show();
+
+                        Log.e("Lucky Adapter",responseStr);
+//
+//                        NewChecklist newChecklist = new NewChecklist();
+//                        newChecklist = new Gson().fromJson(responseStr,NewChecklist.class);
+
+                        if(responseStr != null)
+                        {
+                            Toast.makeText(mContext,"Not Null",Toast.LENGTH_SHORT).show();
+                        }else
+                        {
+                            Toast.makeText(mContext,"Null",Toast.LENGTH_SHORT).show();
+                    }
+
+                    } else {
+                        Toast.makeText(mContext, "" + mContext.getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
+                    }
+                    TFUtils.hideProgressBar();
+
+                }
+            });
+
+
             mTfTruckFragment.startFragment(R.layout.fragment_base_checklist, bundle);
         }
     }
