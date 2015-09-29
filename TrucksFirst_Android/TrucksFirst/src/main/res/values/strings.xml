@@ -290,4 +290,106 @@
     <string name="previous_checklist_header">Checklist Data of %1$s at Previous Hub</string>
 
     <string name="app_ver">App version: 1.00</string>
+    <string name="title_screen1">Screen 1</string>
+    <string name="item_l_wiper">Left Wiper</string>
+    <string name="item_r_wiper">Right Wiper</string>
+    <string name="item_l_headlight">Low Beam Headlight</string>
+    <string name="item_r_headlight">High Beam Headlight</string>
+    <string name="item_left_indicator">Left Side Indicator</string>
+    <string name="item_right_indicator">Right Side Indicator</string>
+    <string name="item_brake_light">Brake Light</string>
+    <string name="item_horn">Horn</string>
+    <string name="title_screen_2">Screen 2</string>
+    <string name="item_mech_issue">Mechanical issue</string>
+    <string name="item_tyre_oil_issue">Tyre/oil issue</string>
+    <string name="item_elec_issue">Electrical issue</string>
+    <string name="item_engine_issue">Engine issue</string>
+    <string name="title_screen_3">Screen 3</string>
+    <string name="item_reg_cert">Registration Certificate</string>
+    <string name="item_nat_perm">National Permit</string>
+    <string name="item_insurance">Insurance</string>
+    <string name="item_poll_cert">Pollution Certificate</string>
+    <string name="item_good_tax">Goods Tax Receipt</string>
+    <string name="item_d_parch">Dharamkaanta Parchi</string>
+    <string name="title_screen_4">Screen 4</string>
+    <string name="item_invoice">Invoice</string>
+    <string name="item_lr">LR</string>
+    <string name="item_tp">TP</string>
+    <string name="item_gat_doc">Gati Documents Bag</string>
+    <string name="item_docs">Are documents available?</string>
+    <string name="item_docs_driver">Documents given to driver?</string>
+    <string name="title_screen_5">Screen 5</string>
+    <string name="item_jack">Is jack in order?</string>
+    <string name="item_jackrod">Is jackrod in order?</string>
+    <string name="item_tyre_lever">Is tyre lever in order?</string>
+    <string name="item_step_remo">Is stepney remover in order?</string>
+    <string name="title_screen_6">Screen 6</string>
+    <string name="item_toll_cash">Toll cash with Pilot</string>
+    <string name="item_toll_rece">Are toll receipts in order?</string>
+    <string name="item_cash_short_reason">"Cash shortage reason: "</string>
+    <string name="item_topup">Is top up done?</string>
+    <string name="item_topup_amount_label">"Amount: "</string>
+    <string name="title_screen_7">Screen 7</string>
+    <string name="item_touc_dama">Touching Damage</string>
+    <string name="item_seal">Seal Intact</string>
+    <string name="item_stepney">Is stepney in place?</string>
+    <string name="item_puncture">Tyre Puncture</string>
+    <string name="item_tyre_pres">Tyre Pressure</string>
+    <string name="title_screen_8">Screen 8</string>
+    <string name="item_cabin">Is cabin clean?</string>
+    <string name="title_screen_9">Screen 9</string>
+    <string name="item_engi_oil_leak">Engine Oil Leakage</string>
+    <string name="item_stee_oil_leak">Steering Oil Leakage</string>
+    <string name="item_temp">Temperature Check</string>
+    <string name="item_coolant">Coolant Level</string>
+    <string name="item_visual">Visual Inspection</string>
+    <string name="title_screen_10">Screen 10</string>
+    <string name="item_driver_on_board">Driver on board?</string>
+    <string name="item_ready_move">Ready to move</string>
+
+    <array name="item_array">
+        <item>@string/item_l_wiper</item>
+        <item>@string/item_r_wiper</item>
+        <item>@string/item_l_headlight</item>
+        <item>@string/item_r_headlight</item>
+        <item>@string/item_left_indicator</item>
+        <item>@string/item_right_indicator</item>
+        <item>@string/item_brake_light</item>
+        <item>@string/item_horn</item>
+        <item>@string/item_mech_issue</item>
+        <item>@string/item_tyre_oil_issue</item>
+        <item>@string/item_elec_issue</item>
+        <item>@string/item_engine_issue</item>
+        <item>@string/item_reg_cert</item>
+        <item>@string/item_nat_perm</item>
+        <item>@string/item_insurance</item>
+        <item>@string/item_poll_cert</item>
+        <item>@string/item_good_tax</item>
+        <item>@string/item_d_parch</item>
+        <item>@string/item_invoice</item>
+        <item>@string/item_lr</item>
+        <item>@string/item_tp</item>
+        <item>@string/item_gat_doc</item>
+        <item>@string/item_docs</item>
+        <item>@string/item_docs_driver</item>
+        <item>@string/item_jack</item>
+        <item>@string/item_jackrod</item>
+        <item>@string/item_tyre_lever</item>
+        <item>@string/item_step_remo</item>
+        <item>@string/item_toll_rece</item>
+        <item>@string/item_topup</item>
+        <item>@string/item_touc_dama</item>
+        <item>@string/item_seal</item>
+        <item>@string/item_stepney</item>
+        <item>@string/item_puncture</item>
+        <item>@string/item_tyre_pres</item>
+        <item>@string/item_cabin</item>
+        <item>@string/item_engi_oil_leak</item>
+        <item>@string/item_stee_oil_leak</item>
+        <item>@string/item_temp</item>
+        <item>@string/item_coolant</item>
+        <item>@string/item_visual</item>
+        <item>@string/item_driver_on_board</item>
+        <item>@string/item_ready_move</item>
+    </array>
 </resources>

@@ -671,21 +671,21 @@ public class WebServices implements TFConst {
     public void getChecklistDetailsNew(final Context context, final ResultReceiver resultReceiver) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_GET_CHECKLIST_NEW + "/" + TFUtils.getStringFromSP(context, "vehicleTrackingId"),
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if (LogConfig.D) {
-                            Log.d(TAG, "================================ Truck details ==========================");
-                            Log.d(TAG, response);
-                            Log.d(TAG, "================================ Truck details end ======================");
-                        }
-                        Bundle bundle = new Bundle();
-                        bundle.putString("response", response);
-
-                        resultReceiver.send(SUCCESS, bundle);
-
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if (LogConfig.D) {
+                        Log.d(TAG, "================================ Truck details ==========================");
+                        Log.d(TAG, response);
+                        Log.d(TAG, "================================ Truck details end ======================");
                     }
-                }, new Response.ErrorListener() {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("response", response);
+
+                    resultReceiver.send(SUCCESS, bundle);
+
+                }
+            }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (LogConfig.D) {
@@ -932,7 +932,6 @@ public class WebServices implements TFConst {
                 r.send(ERROR, null);
             }
         });
-        Log.v("Kanj",URL_PREVIOUS_CHECKLIST + "?trackingId=" + tid);
         TFApp.getInstance().addToRequestQueue(req, TAG_PREVIOUS_CHECKLIST);
     }
 }

@@ -799,7 +799,6 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         Bundle b = new Bundle();
                         b.putString("vehicle_number", number);
                         b.putString("tracking_id", tid);
-                        b.putString("json",resultData.getString("response"));
                         b.putSerializable("checklist",c);
                         mTfTruckFragment.startFragment(R.layout.fragment_prev_checklist, b);
                     } else {

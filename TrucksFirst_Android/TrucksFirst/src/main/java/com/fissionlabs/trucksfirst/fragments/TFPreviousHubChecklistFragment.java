@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,10 @@ import android.widget.TextView;
 import com.fissionlabs.trucksfirst.R;
 import com.fissionlabs.trucksfirst.common.TFCommonFragment;
 import com.fissionlabs.trucksfirst.common.TFConst;
+import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 /**
  * Created by Kanj on 28-09-2015.
@@ -42,16 +42,14 @@ public class TFPreviousHubChecklistFragment  extends TFCommonFragment implements
         Bundle args = getArguments();
         String vehNumber = args.getString("vehicle_number");
         String tid = args.getString("tracking_id");
-        //String json = args.getString("json");
-        //Log.v("Kanj", json);
-        //NewChecklist c = args.getSerializable("checklist");
+        NewChecklist c = (NewChecklist) args.getSerializable("checklist");
 
         View view = inflater.inflate(R.layout.fragment_prev_checklist, container, false);
         header = (TextView) view.findViewById(R.id.header);
         header.setText(String.format(getResources().getString(R.string.previous_checklist_header),vehNumber));
         listView = (RecyclerView) view.findViewById(R.id.list);
         listView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        listView.setAdapter(new ListAdapter(makeMapFromChecklist()));
+        listView.setAdapter(new ListAdapter(makeMapFromChecklist(c)));
         return view;
     }
 
@@ -89,7 +87,6 @@ public class TFPreviousHubChecklistFragment  extends TFCommonFragment implements
         private ChecklistStringData data;
 
         public ListAdapter(ChecklistStringData data) {
-            Log.v("Kanj", "adapter constuctor - size="+data.size);
             this.data = data;
         }
 
@@ -166,142 +163,130 @@ public class TFPreviousHubChecklistFragment  extends TFCommonFragment implements
         }
     }
 
-    ChecklistStringData makeMapFromChecklist() {
-        ChecklistStringData ret = new ChecklistStringData();
-        ret.add("Screen 1", "");
-        ret.add("Driver", "OK");
-        ret.add("Deisel", "OK");
-        ret.add("Screen 2", "");
-        ret.add("License", "OK");
-        ret.add("","License is damaged.");
-        return ret;
-    }
-
-    /*    ChecklistStringData makeMapFromChecklist(NewChecklist c) {
+    ChecklistStringData makeMapFromChecklist(NewChecklist c) {
         ChecklistStringData ret = new ChecklistStringData();
         String s;
-        ret.add("Screen 1", "");
+        ret.add(mHomeActivity.getString(R.string.title_screen1), "");
         s = ((c.data.screen1.leftWiper)?"OK":"Not OK");
-        ret.add("Left Wiper", s);
+        ret.add(mHomeActivity.getString(R.string.item_l_wiper), s);
         s = ((c.data.screen1.rightWiper)?"OK":"Not OK");
-        ret.add("Right Wiper", s);
+        ret.add(mHomeActivity.getString(R.string.item_r_wiper), s);
         s = ((c.data.screen1.lowBeamHeadlight)?"OK":"Not OK");
-        ret.add("Low Beam Headlight", s);
+        ret.add(mHomeActivity.getString(R.string.item_l_headlight), s);
         s = ((c.data.screen1.highBeamHeadlight)?"OK":"Not OK");
-        ret.add("High Beam Headlight", s);
+        ret.add(mHomeActivity.getString(R.string.item_r_headlight), s);
         s = ((c.data.screen1.leftSideIndicator)?"OK":"Not OK");
-        ret.add("Left Side Indicator", s);
+        ret.add(mHomeActivity.getString(R.string.item_left_indicator), s);
         s = ((c.data.screen1.rightSideIndicator)?"OK":"Not OK");
-        ret.add("Right Side Indicator", s);
+        ret.add(mHomeActivity.getString(R.string.item_right_indicator), s);
         s = ((c.data.screen1.brakeLight)?"OK":"Not OK");
-        ret.add("Brake Light", s);
+        ret.add(mHomeActivity.getString(R.string.item_brake_light), s);
         s = ((c.data.screen1.horn)?"OK":"Not OK");
-        ret.add("Horn", s);
+        ret.add(mHomeActivity.getString(R.string.item_horn), s);
 
-        ret.add("Screen 2", "");
+        ret.add(mHomeActivity.getString(R.string.title_screen_2), "");
         if (c.data.screen2.mechanicalIssue) {
-            ret.add("Mechanical issue", "Yes");
+            ret.add(mHomeActivity.getString(R.string.item_mech_issue), "Yes");
             ret.add("",c.data.screen2.mechanicalIssueList);
-        } else ret.add("Mechanical issue", "No");
+        } else ret.add(mHomeActivity.getString(R.string.item_mech_issue), "No");
         if (c.data.screen2.tyreOilIssue) {
-            ret.add("Tyre/oil issue", "Yes");
+            ret.add(mHomeActivity.getString(R.string.item_tyre_oil_issue), "Yes");
             ret.add("",c.data.screen2.tyreOilIssueList);
-        } else ret.add("Tyre/oil issue", "No");
+        } else ret.add(mHomeActivity.getString(R.string.item_tyre_oil_issue), "No");
         if (c.data.screen2.electricalIssue) {
-            ret.add("Electrical issue", "Yes");
+            ret.add(mHomeActivity.getString(R.string.item_elec_issue), "Yes");
             ret.add("",c.data.screen2.electricalIssueList);
-        } else ret.add("Electrical issue", "No");
+        } else ret.add(mHomeActivity.getString(R.string.item_elec_issue), "No");
         if (c.data.screen2.engineIssue) {
-            ret.add("Engine issue", "Yes");
+            ret.add(mHomeActivity.getString(R.string.item_engine_issue), "Yes");
             ret.add("",c.data.screen2.engineIssueList);
-        } else ret.add("Engine issue", "No");
+        } else ret.add(mHomeActivity.getString(R.string.item_engine_issue), "No");
 
-        ret.add("Screen 3","");
+        ret.add(mHomeActivity.getString(R.string.title_screen_3),"");
         s = ((c.data.screen3.registrationCertificate)?"Yes":"No");
-        ret.add("Registration Certificate", s);
+        ret.add(mHomeActivity.getString(R.string.item_reg_cert), s);
         s = ((c.data.screen3.nationalPermit)?"Yes":"No");
-        ret.add("National Permit", s);
+        ret.add(mHomeActivity.getString(R.string.item_nat_perm), s);
         s = ((c.data.screen3.insurance)?"Yes":"No");
-        ret.add("Insurance", s);
+        ret.add(mHomeActivity.getString(R.string.item_insurance), s);
         s = ((c.data.screen3.pollutionCertificate)?"Yes":"No");
-        ret.add("Pollution Certificate", s);
+        ret.add(mHomeActivity.getString(R.string.item_poll_cert), s);
         s = ((c.data.screen3.goodsTaxRecipiet)?"Yes":"No");
-        ret.add("Goods Tax Receipt", s);
+        ret.add(mHomeActivity.getString(R.string.item_good_tax), s);
         s = ((c.data.screen3.dharamKaantaParchi)?"Yes":"No");
-        ret.add("Dharamkaanta Parchi", s);
+        ret.add(mHomeActivity.getString(R.string.item_d_parch), s);
 
-        ret.add("Screen 4", "");
+        ret.add(mHomeActivity.getString(R.string.title_screen_4), "");
         s = ((c.data.screen4.invoice)?"Yes":"No");
-        ret.add("Invoice", s);
+        ret.add(mHomeActivity.getString(R.string.item_invoice), s);
         s = ((c.data.screen4.lr)?"Yes":"No");
-        ret.add("LR", s);
+        ret.add(mHomeActivity.getString(R.string.item_lr), s);
         s = ((c.data.screen4.tp)?"Yes":"No");
-        ret.add("TP", s);
+        ret.add(mHomeActivity.getString(R.string.item_tp), s);
         s = ((c.data.screen4.gatiDocBag)?"Yes":"No");
-        ret.add("Gati Documents Bag", s);
+        ret.add(mHomeActivity.getString(R.string.item_gat_doc), s);
         s = ((c.data.screen4.areDocsAvailable)?"Yes":"No");
-        ret.add("Are documents available?", s);
+        ret.add(mHomeActivity.getString(R.string.item_docs), s);
         s = ((c.data.screen4.docsGivenToDriver)?"Yes":"No");
-        ret.add("Documents given to driver?", s);
+        ret.add(mHomeActivity.getString(R.string.item_docs_driver), s);
 
-        ret.add("Screen 5","");
+        ret.add(mHomeActivity.getString(R.string.title_screen_5),"");
         s = ((c.data.screen5.jack)?"Yes":"No");
-        ret.add("Is jack in order?", s);
+        ret.add(mHomeActivity.getString(R.string.item_jack), s);
         s = ((c.data.screen5.jackRod)?"Yes":"No");
-        ret.add("Is jackrod in order?", s);
+        ret.add(mHomeActivity.getString(R.string.item_jackrod), s);
         s = ((c.data.screen5.tyreLever)?"Yes":"No");
-        ret.add("Is tyre lever in order?", s);
+        ret.add(mHomeActivity.getString(R.string.item_tyre_lever), s);
         s = ((c.data.screen5.stepeneyRemover)?"Yes":"No");
-        ret.add("Is stepney remover in order?", s);
+        ret.add(mHomeActivity.getString(R.string.item_step_remo), s);
 
-        ret.add("Screen 6","");
-        ret.add("Toll cash with Pilot",c.data.screen6.tollCashWithDriver);
+        ret.add(mHomeActivity.getString(R.string.title_screen_6),"");
+        ret.add(mHomeActivity.getString(R.string.item_toll_cash),""+c.data.screen6.tollCashWithDriver);
         s = ((c.data.screen6.tollReceipts)?"Yes":"No");
-        ret.add("Are toll receipts in order?", s);
-        if (!c.data.screen6.cashShortageReason.equals("")) ret.add("", "Cash shortage reason: "
+        ret.add(mHomeActivity.getString(R.string.item_toll_rece), s);
+        if (!c.data.screen6.cashShortageReason.equals("")) ret.add("", mHomeActivity.getString(R.string.item_cash_short_reason)
                 +c.data.screen6.cashShortageReason);
         s = ((c.data.screen6.isTopUpDone)?"Yes":"No");
-        ret.add("Is top up done?", s);
-        if (!c.data.screen6.inputAmount.equals("")) ret.add("", "Amount: "
+        ret.add(mHomeActivity.getString(R.string.item_topup), s);
+        if (c.data.screen6.inputAmount > 0) ret.add("", mHomeActivity.getString(R.string.item_topup_amount_label)
                 +c.data.screen6.inputAmount);
 
-        ret.add("Screen 7","");
+        ret.add(mHomeActivity.getString(R.string.title_screen_7),"");
         s = ((c.data.screen7.touchingDamage)?"Yes":"No");
-        ret.add("Touching Damage", s);
+        ret.add(mHomeActivity.getString(R.string.item_touc_dama), s);
         s = ((c.data.screen7.sealIntactness)?"Yes":"No");
-        ret.add("Seat Intact", s);
+        ret.add(mHomeActivity.getString(R.string.item_seal), s);
         s = ((c.data.screen7.stepeneyInPlace)?"Yes":"No");
-        ret.add("Is stepney in place?", s);
+        ret.add(mHomeActivity.getString(R.string.item_stepney), s);
         s = ((c.data.screen7.tyrePuncture)?"Yes":"No");
-        ret.add("Tyre Puncture", s);
+        ret.add(mHomeActivity.getString(R.string.item_puncture), s);
         s = ((c.data.screen7.tyrePressure)?"OK":"Not OK");
-        ret.add("Tyre Pressure", s);
+        ret.add(mHomeActivity.getString(R.string.item_tyre_pres), s);
 
-        ret.add("Screen 8","");
+        ret.add(mHomeActivity.getString(R.string.title_screen_8),"");
         s = ((c.data.screen8.isCabinClean)?"Yes":"No");
-        ret.add("Is cabin clean?", s);
+        ret.add(mHomeActivity.getString(R.string.item_cabin), s);
 
-        ret.add("Screen 9","");
+        ret.add(mHomeActivity.getString(R.string.title_screen_9),"");
         s = ((c.data.screen9.engineOilLeakage)?"Yes":"No");
-        ret.add("Engine Oil Leakage", s);
+        ret.add(mHomeActivity.getString(R.string.item_engi_oil_leak), s);
         s = ((c.data.screen9.steeringOilLeakage)?"Yes":"No");
-        ret.add("Steering Oil Leakage", s);
+        ret.add(mHomeActivity.getString(R.string.item_stee_oil_leak), s);
         s = ((c.data.screen9.temperatureCheck)?"OK":"Not OK");
-        ret.add("Temperature Check", s);
+        ret.add(mHomeActivity.getString(R.string.item_temp), s);
         s = ((c.data.screen9.coolantLevel)?"OK":"Not OK");
-        ret.add("Coolant Level", s);
+        ret.add(mHomeActivity.getString(R.string.item_coolant), s);
         s = ((c.data.screen9.visualInspection)?"OK":"Not OK");
-        ret.add("Visual Inspection", s);
+        ret.add(mHomeActivity.getString(R.string.item_visual), s);
 
-        ret.add("Screen 10","");
+        ret.add(mHomeActivity.getString(R.string.title_screen_10),"");
         s = ((c.data.screen10.driverOnBoarded)?"Yes":"No");
-        ret.add("Driver on board?", s);
+        ret.add(mHomeActivity.getString(R.string.item_driver_on_board), s);
         s = ((c.data.screen10.readyToMove)?"Yes":"No");
-        ret.add("Ready to move", s);
+        ret.add(mHomeActivity.getString(R.string.item_ready_move), s);
 
         return ret;
     }
-    */
 
     @Override
     public void onDestroyView() {
