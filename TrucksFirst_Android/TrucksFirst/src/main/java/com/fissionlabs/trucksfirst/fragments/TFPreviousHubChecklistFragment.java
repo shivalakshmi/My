@@ -140,7 +140,6 @@ public class TFPreviousHubChecklistFragment  extends TFCommonFragment implements
 
         @Override
         public int getItemCount() {
-            //return 69; items+screen titles
             return data.size;
         }
     }

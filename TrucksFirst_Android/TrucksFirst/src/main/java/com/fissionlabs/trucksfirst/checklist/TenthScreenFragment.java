@@ -9,13 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,7 +64,13 @@ public class TenthScreenFragment extends CheckListCommonFragment {
             protected void onReceiveResult(int resultCode, Bundle resultData) {
                 if (resultCode == TFConst.SUCCESS) {
                     String responseStr = resultData.getString("response");
+                    Log.v("Kanj", responseStr);
                     NewChecklist nc = new Gson().fromJson(responseStr, NewChecklist.class);
+                    if (nc == null) {
+                        Log.v("Kanj", "10 - checklist is null");
+                        TFUtils.hideProgressBar();
+                        return;
+                    }
                     ArrayList<Boolean> b = getBooleansFromChecklist(nc);
                     ArrayList<String> s = getItemStrings();
                     tsa = new TenthScreenAdapter(b, s);
@@ -134,7 +136,7 @@ public class TenthScreenFragment extends CheckListCommonFragment {
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
             FalseItemHolder fih = (FalseItemHolder) holder;
-            if (!bools.get(position)) {
+            if (bools.get(position)) {
                 fih.tv.setVisibility(View.GONE);
                 fih.cb.setVisibility(View.GONE);
             } else {
