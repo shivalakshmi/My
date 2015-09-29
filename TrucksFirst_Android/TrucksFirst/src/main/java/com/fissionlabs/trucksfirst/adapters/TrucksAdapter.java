@@ -33,6 +33,7 @@ import com.fissionlabs.trucksfirst.fragments.TFTruckFragment;
 import com.fissionlabs.trucksfirst.home.TFHomeActivity;
 import com.fissionlabs.trucksfirst.model.PilotAvailability;
 import com.fissionlabs.trucksfirst.model.TruckDetails;
+import com.fissionlabs.trucksfirst.model.checklist.NewChecklist;
 import com.fissionlabs.trucksfirst.pojo.DriverChecklist;
 import com.fissionlabs.trucksfirst.util.TFUtils;
 import com.fissionlabs.trucksfirst.webservices.WebServices;
@@ -124,6 +125,7 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         TruckDetails td = mDataSet.get(p);
         vb.mVehicleNumber.setText(td.getVehicleNumber());
         vb.mVehicleNumber.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
+        vb.mVehicleNumber.setOnClickListener(new VehicleNumberListener(td));
         vb.mAssignPilot.setOnClickListener(new AssignedPilotListener(td, p));
         vb.mVehicleRoute.setText(td.getVehicleRoute());
         vb.mVehicleRoute.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_dark));
@@ -300,16 +302,16 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
         });
         modifyPilot.findViewById(R.id.change_pilot).setOnClickListener(new View.OnClickListener() {
-                                                                           @Override
-                                                                           public void onClick(View v) {
-                                                                               alertDialog.dismiss();
-                                                                               if (TFUtils.getStringFromSP(mContext, TFConst.HUB_NAME).equals("PTD") && isInPTDNoEntry(obj.getEta())) {
-                                                                                   assignWarehousePilotPTD(position, obj, true);
-                                                                                   return;
-                                                                               }
-                                                                               assignPilotAlertDialog(position, obj, true);
-                                                                           }
-                                                                       }
+               @Override
+               public void onClick(View v) {
+                   alertDialog.dismiss();
+                   if (TFUtils.getStringFromSP(mContext, TFConst.HUB_NAME).equals("PTD") && isInPTDNoEntry(obj.getEta())) {
+                       assignWarehousePilotPTD(position, obj, true);
+                       return;
+                   }
+                   assignPilotAlertDialog(position, obj, true);
+               }
+           }
         );
     }
 
@@ -787,24 +789,24 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         @Override
         public void onClick(View v) {
-            /*TFUtils.showProgressBar(mContext, "Fetching data...");
+            TFUtils.showProgressBar(mContext, "Fetching data...");
             new WebServices().getPreviousChecklist(tid, new ResultReceiver(null) {
                 @Override
                 protected void onReceiveResult(int resultCode, Bundle resultData) {
                     TFUtils.hideProgressBar();
                     if (resultCode == TFConst.SUCCESS) {
-                        //NewChecklist c = new Gson().fromJson(resultData.getString("response"), NewChecklist.class);*/
-            Bundle b = new Bundle();
-            b.putString("vehicle_number", number);
-            b.putString("tracking_id", tid);
-            //b.putString("json",resultData.getString("response"));
-            //b.putSerializable("checklist",c);
-            mTfTruckFragment.startFragment(R.layout.fragment_prev_checklist, b);/*
+                        NewChecklist c = new Gson().fromJson(resultData.getString("response"), NewChecklist.class);
+                        Bundle b = new Bundle();
+                        b.putString("vehicle_number", number);
+                        b.putString("tracking_id", tid);
+                        b.putString("json",resultData.getString("response"));
+                        b.putSerializable("checklist",c);
+                        mTfTruckFragment.startFragment(R.layout.fragment_prev_checklist, b);
                     } else {
                         Toast.makeText(mContext, "" + mContext.getResources().getString(R.string.issue_parsing_data), Toast.LENGTH_SHORT).show();
                     }
                 }
-            });*/
+            });
         }
     }
 
