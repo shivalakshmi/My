@@ -244,6 +244,8 @@ public class TFPreviousHubChecklistFragment  extends TFCommonFragment implements
         ret.add(mHomeActivity.getString(R.string.item_toll_cash),""+c.data.screen6.tollCashWithDriver);
         s = ((c.data.screen6.tollReceipts)?"Yes":"No");
         ret.add(mHomeActivity.getString(R.string.item_toll_rece), s);
+        s = ((c.data.screen6.isCashWithDriverOk)?"Yes":"No");
+        ret.add(mHomeActivity.getString(R.string.item_cash_ok), s);
         if (!c.data.screen6.cashShortageReason.equals("")) ret.add("", mHomeActivity.getString(R.string.item_cash_short_reason)
                 +c.data.screen6.cashShortageReason);
         s = ((c.data.screen6.isTopUpDone)?"Yes":"No");

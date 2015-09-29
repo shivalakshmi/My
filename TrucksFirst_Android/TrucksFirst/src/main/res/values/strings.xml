@@ -346,6 +346,7 @@
     <string name="title_screen_10">Screen 10</string>
     <string name="item_driver_on_board">Driver on board?</string>
     <string name="item_ready_move">Ready to move</string>
+    <string name="item_cash_ok">Is cash with driver OK?</string>
 
     <array name="item_array">
         <item>@string/item_l_wiper</item>
@@ -377,6 +378,7 @@
         <item>@string/item_tyre_lever</item>
         <item>@string/item_step_remo</item>
         <item>@string/item_toll_rece</item>
+        <item>@string/item_cash_ok</item>
         <item>@string/item_topup</item>
         <item>@string/item_touc_dama</item>
         <item>@string/item_seal</item>

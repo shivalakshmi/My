@@ -796,6 +796,10 @@ public class TrucksAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     TFUtils.hideProgressBar();
                     if (resultCode == TFConst.SUCCESS) {
                         NewChecklist c = new Gson().fromJson(resultData.getString("response"), NewChecklist.class);
+                        if (c == null) {
+                            Toast.makeText(mContext, "Checklist not filled at previous hub", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         Bundle b = new Bundle();
                         b.putString("vehicle_number", number);
                         b.putString("tracking_id", tid);
