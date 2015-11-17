@@ -298,7 +298,6 @@ public class TFHomeActivity extends TFCommonActivity {
                 break;
         }
 
-
         Assert.assertTrue(selectedFragment != null);
         loadFragment(selectedFragment, bundle);
     }
